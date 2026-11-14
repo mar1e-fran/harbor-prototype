@@ -57,13 +57,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
     </a>
   </div>
   <sc-if value="{{ ended }}" hint-placeholder-val="{{ false }}">
-    <div role="status" aria-live="polite" class="cs-pop" style="position:absolute;left:16px;right:16px;top:44px;z-index:20;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;background:#004256;border:1px solid rgba(38,178,220,0.55);box-shadow:0 10px 30px rgba(0,20,28,0.4)">
-      <span aria-hidden="true" style="width:10px;height:10px;flex-shrink:0;border-radius:5px;background:#c6feff"></span>
-      <span style="flex:1;min-width:0;display:flex;flex-direction:column;color:#fff">
-        <span style="font-weight:600;font-size:13px;line-height:18px">SCAD Career Fair has ended</span>
-        <span style="font-size:11px;line-height:16px;color:#c6feff">Land ho! Opening your voyage wrap-up…</span>
-      </span>
-    </div>
+    <dc-import name="EventEnded" on-close="{{ closeEnded }}" hint-size="390px,844px"></dc-import>
   </sc-if>
 </div>
 </x-dc>
@@ -80,25 +74,22 @@ class Component extends DCLogic {
     this.checkEnd();
   }
   componentWillUnmount() {
-    clearTimeout(this._endT); clearTimeout(this._goT);
+    clearTimeout(this._endT);
     try { window.removeEventListener('storage', this._sync); window.removeEventListener('harbor-profile', this._sync); window.removeEventListener('storage', this._end); window.removeEventListener('harbor-fair', this._end); } catch (e) {}
   }
   // Saving a note in the live notes flow (NoteEditor) sets harbor.fair.endAt a few seconds ahead.
-  // When it passes, every live tab shows "has ended", marks the fair done and opens Wrapped.
+  // When it passes, every live tab shows the "That’s a wrap" pop-up and marks the fair done.
   checkEnd() {
-    if (this._going) return;
-    clearTimeout(this._endT); clearTimeout(this._goT);
+    clearTimeout(this._endT);
     let fair = null, at = 0;
     try { fair = window.localStorage.getItem('harbor.fair'); at = Number(window.localStorage.getItem('harbor.fair.endAt')) || 0; } catch (e) {}
-    if (!at) { if (this.state.ended) this.setState({ ended: false }); return; }
+    if (!at) return;
     if (fair !== 'live' || Date.now() - at > 120000) { try { window.localStorage.removeItem('harbor.fair.endAt'); } catch (e) {} return; }
     this._endT = setTimeout(() => {
+      // The fair is over: show the wrap-up pop-up; its button opens the event recap.
+      try { window.localStorage.setItem('harbor.fair', 'done'); window.localStorage.removeItem('harbor.fair.endAt'); } catch (e) {}
       this.setState({ ended: true });
-      this._goT = setTimeout(() => {
-        this._going = true;
-        try { window.localStorage.setItem('harbor.fair', 'done'); window.localStorage.removeItem('harbor.fair.endAt'); window.dispatchEvent(new Event('harbor-fair')); } catch (e) {}
-        window.location.href = 'Wrapped.dc.html';
-      }, 2400);
+      try { window.dispatchEvent(new Event('harbor-fair')); } catch (e) {}
     }, Math.max(0, at - Date.now()));
   }
   firstName() {
@@ -112,7 +103,7 @@ class Component extends DCLogic {
     const bg = (t) => on(t) ? '#166a83' : 'transparent';
     const fg = (t) => on(t) ? '#ffffff' : '#80a0aa';
     return {
-      ended: !!this.state.ended,
+      ended: !!this.state.ended, closeEnded: () => this.setState({ ended: false }),
       isOverview: on('overview'), notOverview: !on('overview'),
       isNotes: on('notes'), notNotes: !on('notes'),
       isWellness: on('wellness'), notWellness: !on('wellness'),
