@@ -20,11 +20,11 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
     <sc-if value="{{ homeOff }}" hint-placeholder-val="{{ true }}"><span style="width:22px;height:24px;display:flex;align-items:center;justify-content:center"><img src="assets/960af.svg" alt="" style="width:17.685px;height:21px;transform:rotate(14.28deg);display:block"></span></sc-if>
     <span style="font-family:Poppins,sans-serif;font-size:12px;line-height:normal;white-space:nowrap;color:{{ homeColor }};font-weight:{{ homeWeight }}">Home</span>
   </a>
-  <button type="button" aria-current="{{ calCur }}" style="width:71.6px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0;border-radius:8px;box-sizing:border-box;border:none;font:inherit;cursor:pointer;background:{{ calBg }}">
+  <a href="#" data-proto-todo="Calendar" aria-current="{{ calCur }}" style="width:71.6px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0;border-radius:8px;box-sizing:border-box;border:none;font:inherit;cursor:pointer;background:{{ calBg }}">
     <sc-if value="{{ calOn }}" hint-placeholder-val="{{ false }}"><img src="assets/bc355.svg" alt="" style="width:24px;height:24px;display:block"></sc-if>
     <sc-if value="{{ calOff }}" hint-placeholder-val="{{ true }}"><img src="assets/69c70.svg" alt="" style="width:24px;height:24px;display:block"></sc-if>
     <span style="font-family:Poppins,sans-serif;font-size:12px;line-height:normal;white-space:nowrap;color:{{ calColor }};font-weight:{{ calWeight }}">Calendar</span>
-  </button>
+  </a>
   <a href="{{ liveHref }}" aria-current="{{ liveCur }}" style="width:71.6px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0;border-radius:8px;box-sizing:border-box;border:none;font:inherit;cursor:pointer;background:{{ liveBg }}">
     <sc-if value="{{ liveOn }}" hint-placeholder-val="{{ false }}"><img src="assets/c2b6f.svg" alt="" style="width:24px;height:24px;display:block"></sc-if>
     <sc-if value="{{ liveOff }}" hint-placeholder-val="{{ true }}"><img src="assets/f2471.svg" alt="" style="width:24px;height:24px;display:block"></sc-if>

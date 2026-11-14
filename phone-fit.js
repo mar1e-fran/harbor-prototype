@@ -133,6 +133,46 @@
   if (window.visualViewport) window.visualViewport.addEventListener('resize', fit);
   document.addEventListener('click', function () { setTimeout(fit, 60); }, true);
 
+  // Links to screens that aren't built yet show a short note instead of doing nothing.
+  var toastTimer = null;
+  function protoToast(msg) {
+    var t = document.querySelector('.fit-toast');
+    if (!t) {
+      t = el('div', 'fit-toast');
+      t.setAttribute('role', 'status');
+      t.style.cssText = 'position:fixed;z-index:6;left:50%;transform:translateX(-50%);max-width:300px;padding:10px 14px;border-radius:10px;' +
+        'background:#004256;color:#fff;font:500 13px Poppins,system-ui,sans-serif;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.25);transition:opacity .2s;pointer-events:none';
+      document.body.appendChild(t);
+    }
+    var root = document.getElementById('dc-root');
+    var r = root ? root.getBoundingClientRect() : { bottom: window.innerHeight };
+    t.style.top = Math.max(12, r.bottom - 150) + 'px';
+    t.textContent = msg;
+    t.style.opacity = '1';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.style.opacity = '0'; }, 1800);
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest && e.target.closest('#dc-root a[href="#"]');
+    if (!a) return;
+    e.preventDefault();
+    var inner = e.target.closest('button, input, textarea, select');
+    if (inner && a.contains(inner)) return;
+    var what = a.getAttribute('data-proto-todo');
+    protoToast((what ? what + ' isn’t' : 'This isn’t') + ' part of this prototype yet');
+  }, true);
+
+  // Back controls return to the screen the student came from, like a real app.
+  // Falls back to the link's own target when there is no previous prototype page.
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest && e.target.closest('a[aria-label]');
+    if (!a || !/^back\b/i.test(a.getAttribute('aria-label') || '')) return;
+    var ref = document.referrer;
+    var same = false;
+    try { same = !!ref && new URL(ref).origin === location.origin && new URL(ref).pathname !== location.pathname; } catch (err) {}
+    if (same && history.length > 1) { e.preventDefault(); history.back(); }
+  }, true);
+
   // The runtime mounts #dc-root asynchronously; fit once it appears.
   var tries = 0;
   (function wait() {

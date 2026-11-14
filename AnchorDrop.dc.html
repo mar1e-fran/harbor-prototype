@@ -149,7 +149,13 @@ body{margin:0}
       <div aria-live="polite" style="font-size: 34px; font-weight: 600; line-height: 1.2; color: #C9F5FF">{{label}}</div>
       <div style="font-size: 96px; font-weight: 600; line-height: 1.05; color: #E4FAFF; font-variant-numeric: tabular-nums">{{count}}</div>
     </div>
-    <div style="position: absolute; left: 0; right: 0; bottom: 26px; text-align: center; font-size: 15px; font-weight: 500; color: #24525F">Breath {{cycle}} of {{total}}</div>
+    <div style="position: absolute; left: 24px; right: 24px; bottom: 22px; display: flex; flex-direction: column; align-items: center; gap: 10px">
+      <div role="progressbar" aria-label="Session progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{pct}}" style="width: 100%; height: 4px; border-radius: 2px; background: rgba(36,82,95,.35); overflow: hidden"><div style="height: 4px; width: {{pct}}%; background: #24525F; transition: width 1s linear"></div></div>
+      <div style="display: flex; width: 100%; align-items: center; justify-content: space-between">
+        <span style="font-size: 15px; font-weight: 500; color: #24525F">Breath {{cycle}} of {{total}} · {{left}} left</span>
+        <button type="button" onClick="{{finish}}" style="height: 40px; padding: 0 16px; border: 1.5px solid #24525F; border-radius: 20px; background: rgba(228,250,255,.7); font: inherit; font-size: 14px; font-weight: 600; color: #013F55; cursor: pointer">Finish early</button>
+      </div>
+    </div>
   </sc-if>
 
   <sc-if value="{{isDone}}" hint-placeholder-val="{{false}}">
@@ -180,15 +186,15 @@ class Component extends DCLogic {
   stop() { if (this.timer) { clearInterval(this.timer); this.timer = null; } }
   begin() {
     this.stop();
-    this.setState({ screen: 'session', phase: 'out', count: this.sec(), cycle: 1 });
+    this.setState({ screen: 'session', phase: 'in', count: this.sec(), cycle: 1 });
     this.timer = setInterval(() => this.tick(), 1000);
   }
   tick() {
     const s = this.state;
     if (s.count > 1) { this.setState({ count: s.count - 1 }); return; }
-    if (s.phase === 'out') { this.setState({ phase: 'in', count: this.sec() }); return; }
+    if (s.phase === 'in') { this.setState({ phase: 'out', count: this.sec() }); return; }
     if (s.cycle >= this.cycles()) { this.stop(); this.setState({ screen: 'done' }); return; }
-    this.setState({ phase: 'out', count: this.sec(), cycle: s.cycle + 1 });
+    this.setState({ phase: 'in', count: this.sec(), cycle: s.cycle + 1 });
   }
   renderVals() {
     const mode = this.props.mode ?? 'live';
@@ -223,6 +229,9 @@ class Component extends DCLogic {
       count,
       cycle,
       total: this.cycles(),
+      pct: (() => { const per = 2 * this.sec(); const done = (cycle - 1) * per + (phase === 'out' ? this.sec() : 0) + (this.sec() - count); return Math.min(100, Math.round(100 * done / (this.cycles() * per))); })(),
+      left: (() => { const per = 2 * this.sec(); const done = (cycle - 1) * per + (phase === 'out' ? this.sec() : 0) + (this.sec() - count); const r = Math.max(0, this.cycles() * per - done); return Math.floor(r / 60) + ':' + String(r % 60).padStart(2, '0'); })(),
+      finish: () => { this.stop(); this.setState({ screen: 'done' }); },
       anchorY,
       farY: Math.round(-60 * t),
       nearY: Math.round(-44 * t),

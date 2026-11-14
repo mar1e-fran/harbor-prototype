@@ -76,7 +76,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
               <sc-for list="{{ s.cols }}" as="col" hint-placeholder-count="2">
                 <div style="width:166px;display:flex;flex-direction:column;gap:16px">
                   <sc-for list="{{ col }}" as="n" hint-placeholder-count="2">
-                    <a href="{{ n.href }}" style="box-sizing:border-box;width:166px;padding:12px;border-radius:10px;background:#ebfafe;display:flex;flex-direction:column;font-family:Inter,sans-serif;color:#1a1a1a">
+                    <a href="{{ n.href }}" onClick="{{ n.open }}" style="box-sizing:border-box;width:166px;padding:12px;border-radius:10px;background:#ebfafe;display:flex;flex-direction:column;font-family:Inter,sans-serif;color:#1a1a1a">
                       <sc-if value="{{ n.photo }}" hint-placeholder-val="{{ false }}">
                         <span style="display:block;height:110px;box-sizing:border-box;border:1px solid #c9c9c9;border-radius:8px;overflow:hidden;background:#166a83;margin-bottom:8px"><img src="assets/h-slide.png" alt="" style="width:145px;height:193px;margin:-29px 0 0 -3px;object-fit:cover;display:block"></span>
                       </sc-if>
@@ -103,9 +103,12 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"startTab": {"editor": "enum", "options": ["events", "notes"], "default": "events"}, "$preview": {"width": 390, "height": 844}}'>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { tab: props.startTab || 'events', q: '', draft: '', mine: [] }; }
+  constructor(props) { super(props); this.state = { tab: props.startTab || 'events', q: '', draft: '', saved: [] }; this._load = () => this.load(); }
+  componentDidMount() { this.load(); try { window.addEventListener('harbor-notes', this._load); window.addEventListener('storage', this._load); } catch (e) {} }
+  componentWillUnmount() { try { window.removeEventListener('harbor-notes', this._load); window.removeEventListener('storage', this._load); } catch (e) {} }
+  load() { let l = []; try { l = JSON.parse(window.localStorage.getItem('harbor.notes') || '[]'); } catch (e) {} this.setState({ saved: Array.isArray(l) ? l : [] }); }
   renderVals() {
-    const { tab, q, draft, mine } = this.state;
+    const { tab, q, draft, saved } = this.state;
     const isNotes = tab === 'notes';
     const groups = [
       { h: 'Today', items: [{ title: 'SCAD Career Fair', date: 'November 18, 2:00PM - 4:00pm', place: 'Poetter Hall', img: 'assets/h-fair.png', href: 'Wrapped.dc.html' }] },
@@ -121,7 +124,10 @@ class Component extends DCLogic {
         { title: 'Freelance 101: Contracts, Rates and Getting Paid', date: 'Sept. 29, 2026 from 5 p.m. to 6:30 p.m', place: 'Virtual', img: 'assets/h-freelance.png', href: '#' },
       ] },
     ];
-    const N = (o) => ({ mention: '', body: '', voice: false, photo: false, href: '#', ...o });
+    const N = (o) => ({ mention: '', body: '', voice: false, photo: false, href: '#', open: null, ...o });
+    // Notes written during the live event (and saved here) share one store: harbor.notes.
+    const mine = saved.map((n) => N({ title: n.title || 'Untitled Note', body: [n.body, n.photo ? 'Photo attached' : '', n.time ? 'Saved ' + n.time : ''].filter(Boolean).join('\n'),
+      href: 'NoteEditor.dc.html', open: () => { try { window.localStorage.setItem('harbor.notes.open', JSON.stringify({ id: n.id, at: Date.now() })); } catch (e) {} } }));
     const all = [
       { h: 'SCAD Career Fair', cols: [
         [N({ title: 'Coffee line with', mention: 'Priya Nair', body: 'Hiring design systems interns at Northwind. Portfolio by Fri.' }),
@@ -138,7 +144,7 @@ class Component extends DCLogic {
          N({ title: 'Portfolio tip', body: 'Lead with the problem, then 2–3 key decisions and the impact.' })],
       ] },
     ];
-    if (mine.length) all.unshift({ h: 'Just now', cols: [mine.filter((_, i) => i % 2 === 0), mine.filter((_, i) => i % 2 === 1)] });
+    if (mine.length) all.unshift({ h: 'SCAD Career Fair · your notes', cols: [mine.filter((_, i) => i % 2 === 0), mine.filter((_, i) => i % 2 === 1)] });
     const needle = q.trim().toLowerCase();
     const hit = (n) => !needle || [n.title, n.mention, n.body].join(' ').toLowerCase().includes(needle);
     const sections = all.map((s) => ({ h: s.h, cols: s.cols.map((c) => c.filter(hit).map((n) => ({ ...n, hasMention: !!n.mention, hasBody: !!n.body }))) }))
@@ -154,7 +160,14 @@ class Component extends DCLogic {
       toEvents: () => this.setState({ tab: 'events' }),
       onSearch: (e) => this.setState({ q: e.target.value }),
       onDraft: (e) => this.setState({ draft: e.target.value }),
-      saveDraft: () => { const t = draft.trim(); if (!t) return; const [first, ...rest] = t.split('\n'); this.setState({ draft: '', mine: [N({ title: first.slice(0, 40), body: rest.join('\n') || 'Saved just now' }), ...mine] }); },
+      saveDraft: () => {
+        const t = draft.trim(); if (!t) return;
+        const [first, ...rest] = t.split('\n');
+        const note = { id: 'n' + Date.now(), title: first.slice(0, 40), body: rest.join('\n'), photo: false, memos: [], time: new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) };
+        let list = []; try { list = JSON.parse(window.localStorage.getItem('harbor.notes') || '[]'); } catch (e) {}
+        try { window.localStorage.setItem('harbor.notes', JSON.stringify([note, ...list])); window.dispatchEvent(new Event('harbor-notes')); } catch (e) {}
+        this.setState({ draft: '' });
+      },
     };
   }
 }

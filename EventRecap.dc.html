@@ -62,7 +62,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
                     <sc-for list="{{ p.chips }}" as="c" hint-placeholder-count="3"><span style="background:#fff;border:1px solid #004256;border-radius:999px;padding:3px 10px;font-size:12px;color:#004256;white-space:nowrap">{{ c }}</span></sc-for>
                   </span>
                 </div>
-                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="font-weight:600">AI-drafted message</span><span>Edit</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="font-weight:600">AI-drafted message</span><a href="{{ p.chat }}" style="color:inherit;text-decoration:underline;padding:4px 0 4px 8px">Edit</a></div>
                 <div style="background:#fff;border:1.5px dashed #004256;border-radius:10px;padding:12px;font-size:{{ p.draftSize }};line-height:normal;color:#202124">{{ p.draft }}</div>
               </div>
               <div style="display:flex;gap:8px">
@@ -144,9 +144,9 @@ class Component extends DCLogic {
     const { reg, toast } = this.state;
     const dark = { fg: '#004256', boat: 'assets/r-boat-dark.svg', line: 'assets/r-line-dark.svg', draftSize: '12px' };
     const follow = [
-      { ...dark, bg: '#8cd69e', who: 'Jordan Newman', role: 'UX Researcher · Target', where: 'In your session · Room 204', photo: 'assets/r-jordan.png', pos: 'center', chips: ['Study HCI', 'Accessibility', 'Startup Panel'], draft: 'Hi Jordan, great meeting you at the career fair! Here’s the case study we talked about. Would love to hear more about the product designer role…', draftSize: '14px', chat: 'Chat.dc.html', profile: 'Crewmate.dc.html' },
-      { bg: '#1f92b4', fg: '#ebfeff', boat: 'assets/r-boat-light.svg', line: 'assets/r-line-light.svg', draftSize: '12px', who: 'Jenna Caldwell', role: 'Senior Graphic Designer · Gucci', where: 'In your session · Room 204', photo: 'assets/r-jenna.png', pos: 'center', chips: ['Luxury Apparel', 'Patterns', 'TikTok Shop'], draft: 'Hi Jenna it was lovely to talk about your project. I’ve looked into it and have a few suggestions, would you mind if we schedule a one on one?', chat: 'Chat.dc.html', profile: 'Crewmate.dc.html' },
-      { ...dark, bg: '#feace8', who: 'Adam Crews', role: 'Recruiter · Google', where: 'In your session · Room 204', photo: 'assets/r-adam.png', pos: '30% center', chips: ['Curious Applicants', 'IOS Slander', 'AI'], draft: 'Curiosity is my strong suit.', chat: 'Chat.dc.html', profile: 'Crewmate.dc.html' },
+      { ...dark, bg: '#8cd69e', who: 'Jordan Newman', role: 'UX Researcher · Target', where: 'In your session · Room 204', photo: 'assets/r-jordan.png', pos: 'center', chips: ['Study HCI', 'Accessibility', 'Startup Panel'], draft: 'Hi Jordan, great meeting you at the career fair! Here’s the case study we talked about. Would love to hear more about the product designer role…', draftSize: '14px', chat: 'Chat.dc.html?p=jordan', profile: 'Crewmate.dc.html' },
+      { bg: '#1f92b4', fg: '#ebfeff', boat: 'assets/r-boat-light.svg', line: 'assets/r-line-light.svg', draftSize: '12px', who: 'Jenna Caldwell', role: 'Senior Graphic Designer · Gucci', where: 'In your session · Room 204', photo: 'assets/r-jenna.png', pos: 'center', chips: ['Luxury Apparel', 'Patterns', 'TikTok Shop'], draft: 'Hi Jenna it was lovely to talk about your project. I’ve looked into it and have a few suggestions, would you mind if we schedule a one on one?', chat: 'Chat.dc.html?p=jenna', profile: '#' },
+      { ...dark, bg: '#feace8', who: 'Adam Crews', role: 'Recruiter · Google', where: 'In your session · Room 204', photo: 'assets/r-adam.png', pos: '30% center', chips: ['Curious Applicants', 'IOS Slander', 'AI'], draft: 'Curiosity is my strong suit.', chat: 'Chat.dc.html?p=adam', profile: '#' },
     ];
     const topics = [
       { n: 6, name: 'Career advice', sub: 'Lead with one in-depth case study' },

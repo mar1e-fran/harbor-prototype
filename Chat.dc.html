@@ -17,9 +17,9 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 <div style="position:relative;width:390px;height:844px;overflow:hidden;background:#fafeff;font-family:Inter,sans-serif;display:flex;flex-direction:column">
   <header style="box-sizing:border-box;padding:52px 14px 10px;background:#7ec6dc;border-bottom:1px solid #7ec6dc;display:flex;gap:8px;align-items:center;flex-shrink:0">
     <a href="EventRecap.dc.html" aria-label="Back" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><img src="assets/ch-back.svg" alt="" style="width:22px;height:22px;display:block"></a>
-    <img src="assets/ch-jordan.png" alt="" style="width:40px;height:40px;border-radius:20px;background:#e2e2e2;object-fit:cover;display:block">
-    <span style="flex:1;min-width:0;display:flex;flex-direction:column;color:#004256"><span style="font-weight:600;font-size:16px">Jordan Newman</span><span style="font-size:12px">In your session Room 204</span></span>
-    <a href="Crewmate.dc.html" aria-label="Crew details and notes" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><img src="assets/ch-info.svg" alt="" style="width:22px;height:22px;display:block"></a>
+    <img src="{{ who.photo }}" alt="" style="width:40px;height:40px;border-radius:20px;background:#e2e2e2;object-fit:cover;display:block">
+    <span style="flex:1;min-width:0;display:flex;flex-direction:column;color:#004256"><span style="font-weight:600;font-size:16px">{{ who.name }}</span><span style="font-size:12px">{{ who.where }}</span></span>
+    <a href="{{ who.profile }}" aria-label="Crew details and notes" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><img src="assets/ch-info.svg" alt="" style="width:22px;height:22px;display:block"></a>
   </header>
   <div class="ns" aria-live="polite" style="flex:1;min-height:0;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px">
     <p style="margin:0;text-align:center;font-size:12px;color:#6b6b6b">Nov 18</p>
@@ -41,7 +41,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
       </div>
     </sc-if>
     <div style="box-sizing:border-box;min-height:55px;border:1.5px solid #004256;border-radius:10px;background:#fff;display:flex;gap:8px;align-items:flex-end;padding:7px 6px 7px 18px">
-      <textarea value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onKey }}" placeholder="Message Jordan" aria-label="Message" rows="{{ rows }}" style="flex:1;min-width:0;align-self:center;border:none;outline:none;resize:none;background:none;padding:2px;font-family:{{ inputFont }};font-size:15px;line-height:20px;color:#004256"></textarea>
+      <textarea value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onKey }}" placeholder="{{ who.placeholder }}" aria-label="Message" rows="{{ rows }}" style="flex:1;min-width:0;align-self:center;border:none;outline:none;resize:none;background:none;padding:2px;font-family:{{ inputFont }};font-size:15px;line-height:20px;color:#004256"></textarea>
       <button type="button" onClick="{{ send }}" aria-label="Send" style="width:40px;height:40px;border:none;border-radius:10px;background:#004256;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0"><img src="assets/ch-send.svg" alt="" style="width:18px;height:18px;display:block"></button>
     </div>
   </div>
@@ -49,11 +49,28 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"startSent": {"editor": "boolean", "default": false}, "$preview": {"width": 390, "height": 844}}'>
 class Component extends DCLogic {
+  static PEOPLE = {
+    jordan: { name: 'Jordan Newman', photo: 'assets/ch-jordan.png', where: 'In your session Room 204', profile: 'Crewmate.dc.html', placeholder: 'Message Jordan',
+      draft: 'Hi Jordan, great meeting you at the career fair! Here’s the case study we talked about: evelynsharpe.com/case. Would love to hear more about the product designer role at Target…',
+      replies: ['Thanks for reaching out!', 'I will be sending it to HR for processing :)'],
+      chips: ['Want to grab coffee?', 'Would you need my CV?', 'Thanks for the intro to Emily'] },
+    jenna: { name: 'Jenna Caldwell', photo: 'assets/r-jenna.png', where: 'In your session Room 204', profile: '#', placeholder: 'Message Jenna',
+      draft: 'Hi Jenna it was lovely to talk about your project. I’ve looked into it and have a few suggestions, would you mind if we schedule a one on one?',
+      replies: ['I’d love that!', 'Does Thursday afternoon work for you?'],
+      chips: ['Thursday works', 'Want to grab coffee?', 'Can I share my portfolio?'] },
+    adam: { name: 'Adam Crews', photo: 'assets/r-adam.png', where: 'In your session Room 204', profile: '#', placeholder: 'Message Adam',
+      draft: 'Curiosity is my strong suit.',
+      replies: ['Ha, prove it!', 'What’s the last thing you went down a rabbit hole on?'],
+      chips: ['Typography history', 'Would you need my CV?', 'Want to grab coffee?'] },
+  };
   constructor(props) {
     super(props);
-    const DRAFT = 'Hi Jordan, great meeting you at the career fair! Here’s the case study we talked about: evelynsharpe.com/case. Would love to hear more about the product designer role at Target…';
+    let key = 'jordan';
+    try { key = new URLSearchParams(window.location.search).get('p') || 'jordan'; } catch (e) {}
+    this.who = Component.PEOPLE[key] || Component.PEOPLE.jordan;
+    const DRAFT = this.who.draft;
     this.state = props.startSent
-      ? { draft: '', typing: false, msgs: [{ me: true, text: DRAFT }, { me: false, text: 'Thanks for reaching out!' }, { me: false, text: 'I will be sending it to HR for processing :)' }] }
+      ? { draft: '', typing: false, msgs: [{ me: true, text: DRAFT }, ...this.who.replies.map((t) => ({ me: false, text: t }))] }
       : { draft: DRAFT, typing: false, msgs: [] };
     this._timers = [];
   }
@@ -65,7 +82,7 @@ class Component extends DCLogic {
     const first = this.state.msgs.length === 0;
     this.setState({ draft: '', msgs: [...this.state.msgs, { me: true, text: t }] });
     const replies = first
-      ? ['Thanks for reaching out!', 'I will be sending it to HR for processing :)']
+      ? this.who.replies
       : [/coffee/i.test(t) ? 'Coffee sounds great. Thursday at 10?' : /cv|resume/i.test(t) ? 'Yes please, send it over and I’ll pass it along.' : 'Happy to help. Let’s stay in touch!'];
     this.later(500, () => this.setState({ typing: true }));
     replies.forEach((r, i) => this.later(1300 + i * 1100, () => this.setState({ typing: i < replies.length - 1, msgs: [...this.state.msgs, { me: false, text: r }] })));
@@ -82,7 +99,8 @@ class Component extends DCLogic {
         ? { text: m.text, justify: 'flex-end', max: '297px', radius: '16px 16px 4px 16px', bg: '#004256', fg: '#fafeff', font: 'Poppins,sans-serif', size: '14px', lh: 'normal' }
         : { text: m.text, justify: 'flex-start', max: '212px', radius: '16px 16px 16px 4px', bg: '#bce7f3', fg: '#1a1a1a', font: 'Inter,sans-serif', size: '15px', lh: '21px' }),
       showChips: !composing && !typing,
-      chips: ['Want to grab coffee?', 'Would you need my CV?', 'Thanks for the intro to Emily'].filter((c) => !sent.includes(c)).map((c) => ({ text: c, send: () => this.push(c) })),
+      who: this.who,
+      chips: this.who.chips.filter((c) => !sent.includes(c)).map((c) => ({ text: c, send: () => this.push(c) })),
       onDraft: (e) => this.setState({ draft: e.target.value }),
       onKey: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.push(draft); } },
       send: () => this.push(draft),

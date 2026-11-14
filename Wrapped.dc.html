@@ -105,6 +105,10 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
     </button>
   </sc-if>
 
+  <!-- Tap the left edge to go back a slide, like stories -->
+  <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
+    <button type="button" onClick="{{ prev }}" aria-label="Previous slide" style="position:absolute;left:0;top:130px;bottom:0;width:30%;border:none;padding:0;background:transparent;cursor:w-resize"></button>
+  </sc-if>
   <!-- Story chrome (W1–W4): progress + close -->
   <sc-if value="{{ story }}" hint-placeholder-val="{{ true }}">
     <div style="position:absolute;left:24px;right:24px;top:56px;display:flex;gap:4px;pointer-events:none">
@@ -189,6 +193,8 @@ class Component extends DCLogic {
       shareLabel: shared ? 'Link copied' : 'Share',
       next: () => this.setState({ step: Math.min(5, step + 1) }),
       back: () => this.setState({ step: 4 }),
+      canBack: step > 1 && step < 5,
+      prev: () => this.setState({ step: Math.max(1, step - 1) }),
       save: () => this.setState({ saved: true }),
       share: () => this.setState({ shared: true }),
     };
