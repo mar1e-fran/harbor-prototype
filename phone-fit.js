@@ -33,7 +33,7 @@
   var css = document.createElement('style');
   css.textContent = [
     'html,body{margin:0;height:100%;overflow:hidden;background:var(--fit-bg,#0b2f3a);-webkit-text-size-adjust:100%;text-size-adjust:100%}',
-    '#dc-root{position:fixed;left:50%;top:50%;width:' + W + 'px;height:' + H + 'px;overflow:hidden;z-index:2;',
+    '#dc-root{position:fixed;left:50%;top:50%;width:' + W + 'px;height:var(--fit-h,' + H + 'px);overflow:hidden;z-index:2;',
     'transform:translate(-50%,calc(-50% - var(--fit-ky,0px))) scale(var(--fit-s,1));transform-origin:center center}',
     '#dc-root:not(.fit-ready){visibility:hidden}',
     // Desktop frame
@@ -84,6 +84,12 @@
     '.fit-sheet nav{display:grid;grid-template-columns:1fr 1fr;gap:6px}',
     '.fit-sheet nav a{padding:12px 10px;background:rgba(235,250,254,.06)}',
     '.fit-sheet .fit-actions a,.fit-sheet .fit-actions button{height:46px}',
+    // Phones: the screen fills the full width and the phone's real height.
+    'html:not(.fit-desk) [data-fit-chain]{height:100%!important}',
+    'html:not(.fit-desk) [data-fit-screen]{height:100%!important}',
+    // Screens laid out for a fixed 844px height scroll instead of being cut off on shorter phones.
+    'html.fit-tall:not(.fit-desk) [data-fit-screen]{height:' + H + 'px!important}',
+    'html.fit-tall:not(.fit-desk) #dc-root{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}',
     '@keyframes fitFade{from{opacity:0}}@keyframes fitRise{from{transform:translateY(100%)}}',
     '@media (prefers-reduced-motion:reduce){.fit-sheet .fit-backdrop,.fit-sheet .fit-panel{animation:none}}',
   ].join('');
@@ -213,6 +219,68 @@
     return h;
   }
 
+  // Mark the wrapper layers and the 390 × 844 screen so CSS can stretch them to the
+  // phone's height. Screens with bottom-anchored layouts (nav bar, scroll areas) adapt;
+  // screens whose content is placed for a full 844px are measured and scroll instead.
+  function screenChain() {
+    var root = document.getElementById('dc-root');
+    var e = root && root.firstElementChild, chain = [];
+    for (var i = 0; e && i < 8; i++) {
+      if (e.style && e.style.height === H + 'px') return { chain: chain, screen: e };
+      if (e.children.length !== 1) return null;
+      chain.push(e);
+      e = e.firstElementChild;
+    }
+    return null;
+  }
+  function unstretch() {
+    var marked = document.querySelectorAll('[data-fit-chain],[data-fit-screen]');
+    for (var i = 0; i < marked.length; i++) { marked[i].removeAttribute('data-fit-chain'); marked[i].removeAttribute('data-fit-screen'); }
+  }
+  function stretch() {
+    var c = screenChain();
+    if (!c) return;
+    for (var i = 0; i < c.chain.length; i++) if (!c.chain[i].hasAttribute('data-fit-chain')) c.chain[i].setAttribute('data-fit-chain', '');
+    if (!c.screen.hasAttribute('data-fit-screen')) c.screen.setAttribute('data-fit-screen', '');
+    // Measure with the screen stretched; if content reaches past the bottom, let it scroll.
+    var wasTall = doc.classList.contains('fit-tall');
+    if (wasTall) doc.classList.remove('fit-tall');
+    var tall = c.screen.scrollHeight > c.screen.clientHeight + 2 && cutOff(c.screen);
+    doc.classList.toggle('fit-tall', tall);
+    if (tall !== wasTall && !tall) { var r = document.getElementById('dc-root'); if (r) r.scrollTop = 0; }
+  }
+  // Would real content be cut off at this height? Ignores decorations that bleed past the
+  // 844px design anyway, and anything inside a scrolling or clipped area of the screen.
+  // Text, buttons, links and fields must stay reachable; pictures and shapes may be trimmed.
+  function isContent(e) {
+    if (/^(A|BUTTON|INPUT|TEXTAREA|SELECT|LABEL)$/.test(e.tagName)) return true;
+    for (var n = e.firstChild; n; n = n.nextSibling) if (n.nodeType === 3 && n.nodeValue.trim()) return true;
+    return false;
+  }
+  function cutOff(screen) {
+    var box = screen.getBoundingClientRect();
+    var k = box.height / screen.clientHeight || 1;            // css px per design px
+    var limit = screen.clientHeight + 2;
+    var stack = Array.prototype.slice.call(screen.children);
+    while (stack.length) {
+      var e = stack.pop();
+      var cs = getComputedStyle(e);
+      if (cs.display === 'none' || cs.visibility === 'hidden') continue;
+      var r = e.getBoundingClientRect();
+      var bottom = (r.bottom - box.top) / k;
+      if (r.height > 0 && bottom > limit && bottom <= H + 1 && isContent(e)) return true;
+      if (/(auto|scroll|hidden|clip)/.test(cs.overflowY) && e !== screen) continue;   // its own scroll/clip area
+      for (var i = 0; i < e.children.length; i++) stack.push(e.children[i]);
+    }
+    return false;
+  }
+  var restretchQueued = false;
+  function restretch() {
+    if (restretchQueued) return;
+    restretchQueued = true;
+    requestAnimationFrame(function () { restretchQueued = false; if (!doc.classList.contains('fit-desk')) stretch(); });
+  }
+
   function fit() {
     var vv = window.visualViewport;
     // Layout width is not affected by pinch zoom or the keyboard.
@@ -222,18 +290,25 @@
     if (isPhone(w)) {
       doc.classList.remove('fit-desk', 'fit-wide');
       h = phoneHeight(w, h);
-      s = Math.min(w / W, h / H);
+      s = w / W;                                   // always full width
+      doc.style.setProperty('--fit-h', (h / s).toFixed(2) + 'px');   // and the phone's full height
+      // How much shorter than the 844px design this phone is; fixed-layout screens use it to pull their bottom up.
+      doc.style.setProperty('--fit-short', Math.max(0, H - h / s).toFixed(2) + 'px');
       doc.style.setProperty('--fit-bg', screenBg());
     } else {
       doc.classList.add('fit-desk');
       doc.classList.toggle('fit-wide', w >= 900);
       doc.style.removeProperty('--fit-bg');
+      doc.style.removeProperty('--fit-h');
+      doc.style.removeProperty('--fit-short');
+      doc.classList.remove('fit-tall');
       if (vv) { w = vv.width; h = vv.height; }
       s = Math.min(1, (h - 48) / FH, (w - 48) / FW);
     }
     doc.style.setProperty('--fit-s', String(Math.max(s, 0.3)));
     var root = document.getElementById('dc-root');
     if (root) root.classList.add('fit-ready');
+    if (doc.classList.contains('fit-desk')) unstretch(); else stretch();
     reveal();
   }
 
@@ -328,7 +403,11 @@
   var tries = 0;
   (function wait() {
     if (document.body) buildChrome();
-    if (document.querySelector('#dc-root .sc-host')) { fit(); setTimeout(fit, 300); return; }
+    if (document.querySelector('#dc-root .sc-host')) {
+      fit(); setTimeout(fit, 300);
+      try { new MutationObserver(restretch).observe(document.getElementById('dc-root'), { childList: true, subtree: true }); } catch (e) {}
+      return;
+    }
     if (tries++ < 200) setTimeout(wait, 25); else fit();
   })();
 })();

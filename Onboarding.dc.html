@@ -14,15 +14,15 @@
 body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
 </style>
 </helmet>
-<div style="position:relative;width:390px;height:844px;overflow:hidden;background:{{ bg }};font-family:Poppins,sans-serif">
+<div style="--ob-a:min(var(--fit-short,0px),96px);position:relative;width:390px;height:844px;overflow:hidden;background:{{ bg }};font-family:Poppins,sans-serif">
 
   <sc-if value="{{ s.login }}" hint-placeholder-val="{{ true }}">
     
-    <div aria-hidden="true" style="position:absolute;left:117.43px;top:99px;width:119.788px;height:133.335px;display:flex;align-items:center;justify-content:center">
+    <div aria-hidden="true" style="position:absolute;left:117.43px;top:calc(99px - var(--ob-a));width:119.788px;height:133.335px;display:flex;align-items:center;justify-content:center">
       <img src="assets/dc3fc.svg" alt="" style="width:94.725px;height:113.476px;transform:rotate(14.28deg);display:block">
     </div>
-    <p style="position:absolute;left:36px;top:170.25px;width:317px;margin:0;font-family:'DM Sans',sans-serif;font-weight:800;font-size:93.064px;line-height:1.5;letter-spacing:-1.02px;color:#c6feff">Harbor</p>
-    <div role="form" aria-label="Log in" style="position:absolute;left:19px;top:371px;width:353px;display:flex;flex-direction:column;gap:24px;align-items:center">
+    <p style="position:absolute;left:36px;top:calc(170.25px - var(--ob-a));width:317px;margin:0;font-family:'DM Sans',sans-serif;font-weight:800;font-size:93.064px;line-height:1.5;letter-spacing:-1.02px;color:#c6feff">Harbor</p>
+    <div role="form" aria-label="Log in" style="position:absolute;left:19px;top:calc(371px - var(--ob-a));width:353px;display:flex;flex-direction:column;gap:24px;align-items:center">
       <div style="width:100%;display:flex;flex-direction:column;gap:12px;align-items:flex-end">
         <label style="width:100%;display:flex;flex-direction:column;gap:6px"><span style="font-family:Poppins,sans-serif;font-size:16px;line-height:normal;color:#fff">Email</span>
           <span style="width:353px;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:0 16px;height:56px;border:1px solid #1f92b4;border-radius:10px;background:#ebfeff"><input type="email" autocomplete="email" placeholder="Your email" value="{{ f.email }}" onChange="{{ set.email }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:Poppins,sans-serif;font-weight:300;font-size:14px;color:#004256;padding:0"></span></label>
@@ -47,11 +47,11 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 
   <sc-if value="{{ s.signup }}" hint-placeholder-val="{{ false }}">
     
-    <div aria-hidden="true" style="position:absolute;left:117.43px;top:99px;width:119.788px;height:133.335px;display:flex;align-items:center;justify-content:center">
+    <div aria-hidden="true" style="position:absolute;left:117.43px;top:calc(99px - var(--ob-a));width:119.788px;height:133.335px;display:flex;align-items:center;justify-content:center">
       <img src="assets/dc3fc.svg" alt="" style="width:94.725px;height:113.476px;transform:rotate(14.28deg);display:block">
     </div>
-    <p style="position:absolute;left:36px;top:170.25px;width:317px;margin:0;font-family:'DM Sans',sans-serif;font-weight:800;font-size:93.064px;line-height:1.5;letter-spacing:-1.02px;color:#c6feff">Harbor</p>
-    <div role="form" aria-label="Sign up" style="position:absolute;left:19px;top:392px;width:353px;display:flex;flex-direction:column;gap:12px;align-items:center">
+    <p style="position:absolute;left:36px;top:calc(170.25px - var(--ob-a));width:317px;margin:0;font-family:'DM Sans',sans-serif;font-weight:800;font-size:93.064px;line-height:1.5;letter-spacing:-1.02px;color:#c6feff">Harbor</p>
+    <div role="form" aria-label="Sign up" style="position:absolute;left:19px;top:calc(392px - var(--ob-a));width:353px;display:flex;flex-direction:column;gap:12px;align-items:center">
       <label style="width:100%;display:flex;flex-direction:column;gap:6px"><span style="font-family:Poppins,sans-serif;font-size:16px;line-height:normal;color:#fff">Your name</span>
         <span style="width:353px;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:0 16px;height:56px;border:1px solid #1f92b4;border-radius:10px;background:#ebfeff"><input autocomplete="name" placeholder="Your name" value="{{ f.name }}" onChange="{{ set.name }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:Poppins,sans-serif;font-weight:300;font-size:14px;color:#004256;padding:0"></span></label>
       <label style="width:100%;display:flex;flex-direction:column;gap:6px"><span style="font-family:Poppins,sans-serif;font-size:16px;line-height:normal;color:#fff">Email</span>
@@ -60,7 +60,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
         <span style="width:353px;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:0 16px;height:56px;border:1px solid #1f92b4;border-radius:10px;background:#ebfeff"><input type="{{ pwType }}" autocomplete="new-password" placeholder="Your password" value="{{ f.password }}" onChange="{{ set.password }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:Poppins,sans-serif;font-weight:300;font-size:14px;color:#004256;padding:0">
           <button type="button" aria-label="{{ pwLabel }}" onClick="{{ togglePw }}" style="border:none;background:none;padding:0;cursor:pointer;display:flex"><img src="assets/1c653.svg" alt="" style="width:17px;height:15px;opacity:{{ eyeOpacity }}"></button></span></label>
       <sc-if value="{{ signupError }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:0;align-self:flex-start;font-size:12px;color:#c6feff">Add your name, email and a password to continue.</p></sc-if>
-      <button type="button" onClick="{{ submitSignup }}" style="margin-top:12px;width:100%;height:56px;border:none;border-radius:10px;background:#004256;color:#fff;font-family:Urbanist,sans-serif;font-weight:700;font-size:16px;letter-spacing:.32px;cursor:pointer">Continue</button>
+      <button type="button" onClick="{{ submitSignup }}" aria-disabled="{{ signupNotReady }}" style="margin-top:12px;width:100%;height:56px;border:none;border-radius:10px;background:{{ signupBg }};color:{{ signupFg }};font-family:Urbanist,sans-serif;font-weight:700;font-size:16px;letter-spacing:.32px;cursor:pointer;transition:background-color .2s ease,color .2s ease">Continue</button>
       <p style="margin:12px 0 0;font-family:Urbanist,sans-serif;font-size:14px;letter-spacing:.32px;color:#fff">Already have an account? <button type="button" onClick="{{ toLogin }}" style="border:none;background:none;padding:0;font:inherit;font-weight:700;color:#fff;text-decoration:underline;cursor:pointer">Log in</button></p>
     </div>
   </sc-if>
@@ -73,15 +73,15 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
         <sc-for list="{{ bars }}" as="b" hint-placeholder-count="6"><span style="width:49px;height:4px;border-radius:61px;background:{{ b }}"></span></sc-for>
       </div>
     </div>
-    <div style="position:absolute;left:24px;top:173px;width:342px;display:flex;flex-direction:column;gap:8px">
+    <div style="position:absolute;left:24px;top:calc(173px - var(--ob-a));width:342px;display:flex;flex-direction:column;gap:8px">
       <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:40px;line-height:normal;color:#fff"><span style="color:#c6feff">Ahoy!</span> Welcome aboard, {{ first }}!</h1>
       <p style="margin:0;font-size:20px;line-height:normal;color:#c6feff">Help us chart your course with a few quick questions.</p>
     </div>
-    <div aria-hidden="true" style="position:absolute;left:103px;top:392px;width:184.32px;height:205.94px;display:flex;align-items:center;justify-content:center"><img src="assets/161aa.svg" alt="" style="width:167px;height:191px;transform:rotate(5.43deg)"></div>
-    <img src="assets/6df69.svg" alt="" style="position:absolute;left:0;top:598px;width:410px;height:40px">
-    <img src="assets/6df69.svg" alt="" style="position:absolute;left:-6px;top:635px;width:410px;height:40px">
-    <img src="assets/ec210.svg" alt="" style="position:absolute;left:8px;top:633px;width:396px;height:21px">
-    <button type="button" onClick="{{ next }}" style="position:absolute;left:24px;top:721px;width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:1">Continue</button>
+    <div aria-hidden="true" style="position:absolute;left:103px;top:calc(392px - var(--ob-a));width:184.32px;height:205.94px;display:flex;align-items:center;justify-content:center"><img src="assets/161aa.svg" alt="" style="width:167px;height:191px;transform:rotate(5.43deg)"></div>
+    <img src="assets/6df69.svg" alt="" style="position:absolute;left:0;top:calc(598px - var(--fit-short,0px));width:410px;height:40px">
+    <img src="assets/6df69.svg" alt="" style="position:absolute;left:-6px;top:calc(635px - var(--fit-short,0px));width:410px;height:40px">
+    <img src="assets/ec210.svg" alt="" style="position:absolute;left:8px;top:calc(633px - var(--fit-short,0px));width:396px;height:21px">
+    <button type="button" onClick="{{ next }}" style="position:absolute;left:24px;top:calc(721px - var(--fit-short,0px));width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:1">Continue</button>
   </sc-if>
 
   <sc-if value="{{ s.role }}" hint-placeholder-val="{{ false }}">
@@ -92,21 +92,21 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
         <sc-for list="{{ bars }}" as="b" hint-placeholder-count="6"><span style="width:49px;height:4px;border-radius:61px;background:{{ b }}"></span></sc-for>
       </div>
     </div>
-    <div style="position:absolute;left:24px;top:196px;width:281px;display:flex;flex-direction:column;gap:4px">
+    <div style="position:absolute;left:24px;top:calc(196px - var(--ob-a));width:281px;display:flex;flex-direction:column;gap:4px">
       <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal;color:#fff">What is your role?</h1><p style="margin:0;font-size:16px;line-height:normal;color:#c6feff">Pick one.</p>
     </div>
-    <div role="radiogroup" aria-label="Role" style="position:absolute;left:24px;top:290px;width:342px;display:flex;flex-direction:column;gap:12px">
+    <div role="radiogroup" aria-label="Role" style="position:absolute;left:24px;top:calc(290px - var(--ob-a));width:342px;display:flex;flex-direction:column;gap:12px">
       <sc-for list="{{ roles }}" as="o" hint-placeholder-count="4">
         <button type="button" role="radio" aria-checked="{{ o.checked }}" onClick="{{ o.pick }}" style="width:100%;height:56px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-radius:8px;background:{{ o.bg }};border:{{ o.border }};font-family:Inter,sans-serif;font-weight:500;font-size:16px;color:#004256;cursor:pointer;text-align:left;flex-shrink:0">{{ o.label }}<sc-if value="{{ o.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#004256" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 10.5 3.5 3.5 7.5-8"/></svg></sc-if></button>
       </sc-for>
     </div>
-    <img src="assets/86691.svg" alt="" style="position:absolute;left:224px;top:639px;width:48px;height:19px">
-    <img src="assets/86691.svg" alt="" style="position:absolute;left:81px;top:637px;width:48px;height:19px">
-    <img src="assets/0e120.svg" alt="" style="position:absolute;left:159px;top:656px;width:48px;height:21px">
-    <img src="assets/1fce8.svg" alt="" style="position:absolute;left:215px;top:684px;width:48px;height:28px">
-    <img src="assets/8b111.svg" alt="" style="position:absolute;left:272px;top:644px;width:137.9px;height:63.6px">
-    <img src="assets/af383.svg" alt="" style="position:absolute;left:-45px;top:648px;width:137.9px;height:63.6px;transform:scaleX(-1)">
-    <button type="button" onClick="{{ next }}" disabled="{{ noRole }}" style="position:absolute;left:24px;top:721px;width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:{{ canGo }}">Continue</button>
+    <img src="assets/86691.svg" alt="" style="position:absolute;left:224px;top:calc(639px - var(--fit-short,0px));width:48px;height:19px">
+    <img src="assets/86691.svg" alt="" style="position:absolute;left:81px;top:calc(637px - var(--fit-short,0px));width:48px;height:19px">
+    <img src="assets/0e120.svg" alt="" style="position:absolute;left:159px;top:calc(656px - var(--fit-short,0px));width:48px;height:21px">
+    <img src="assets/1fce8.svg" alt="" style="position:absolute;left:215px;top:calc(684px - var(--fit-short,0px));width:48px;height:28px">
+    <img src="assets/8b111.svg" alt="" style="position:absolute;left:272px;top:calc(644px - var(--fit-short,0px));width:137.9px;height:63.6px">
+    <img src="assets/af383.svg" alt="" style="position:absolute;left:-45px;top:calc(648px - var(--fit-short,0px));width:137.9px;height:63.6px;transform:scaleX(-1)">
+    <button type="button" onClick="{{ next }}" disabled="{{ noRole }}" style="position:absolute;left:24px;top:calc(721px - var(--fit-short,0px));width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:{{ canGo }}">Continue</button>
   </sc-if>
 
   <sc-if value="{{ s.grade }}" hint-placeholder-val="{{ false }}">
@@ -117,18 +117,18 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
         <sc-for list="{{ bars }}" as="b" hint-placeholder-count="6"><span style="width:49px;height:4px;border-radius:61px;background:{{ b }}"></span></sc-for>
       </div>
     </div>
-    <div style="position:absolute;left:24px;top:196px;width:266px;display:flex;flex-direction:column;gap:4px">
+    <div style="position:absolute;left:24px;top:calc(196px - var(--ob-a));width:266px;display:flex;flex-direction:column;gap:4px">
       <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal;color:#fff">What grade level are you?</h1><p style="margin:0;font-size:16px;line-height:normal;color:#c6feff">Pick one.</p>
     </div>
-    <div class="ns" role="radiogroup" aria-label="Grade level" style="position:absolute;left:24px;top:332px;width:333px;height:376px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-bottom:40px;box-sizing:border-box">
+    <div class="ns" role="radiogroup" aria-label="Grade level" style="position:absolute;left:24px;top:calc(332px - var(--ob-a));width:333px;height:calc(376px - max(0px, var(--fit-short,0px) - 96px));overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-bottom:40px;box-sizing:border-box">
       <sc-for list="{{ grades }}" as="o" hint-placeholder-count="6">
         <button type="button" role="radio" aria-checked="{{ o.checked }}" onClick="{{ o.pick }}" style="width:100%;height:56px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-radius:8px;background:{{ o.bg }};border:{{ o.border }};font-family:Inter,sans-serif;font-weight:500;font-size:16px;color:#004256;cursor:pointer;text-align:left;flex-shrink:0">{{ o.label }}<sc-if value="{{ o.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#004256" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 10.5 3.5 3.5 7.5-8"/></svg></sc-if></button>
       </sc-for>
     </div>
-    <span style="position:absolute;left:362px;top:332px;width:4px;height:358px;border-radius:21px;background:#166a83"></span>
-    <span style="position:absolute;left:362px;top:332px;width:4px;height:128px;border-radius:21px;background:#c6feff"></span>
+    <span style="position:absolute;left:362px;top:calc(332px - var(--ob-a));width:4px;height:calc(358px - max(0px, var(--fit-short,0px) - 96px));border-radius:21px;background:#166a83"></span>
+    <span style="position:absolute;left:362px;top:calc(332px - var(--ob-a));width:4px;height:128px;border-radius:21px;background:#c6feff"></span>
     <div style="position:absolute;left:0;bottom:0;width:390px;height:206px;background:linear-gradient(180deg, rgba(0,66,86,0) 0%, #004256 28%);pointer-events:none"></div>
-    <button type="button" onClick="{{ next }}" disabled="{{ noGrade }}" style="position:absolute;left:24px;top:721px;width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:{{ canGo }}">Continue</button>
+    <button type="button" onClick="{{ next }}" disabled="{{ noGrade }}" style="position:absolute;left:24px;top:calc(721px - var(--fit-short,0px));width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:{{ canGo }}">Continue</button>
   </sc-if>
 
   <sc-if value="{{ s.goals }}" hint-placeholder-val="{{ false }}">
@@ -139,20 +139,20 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
         <sc-for list="{{ bars }}" as="b" hint-placeholder-count="6"><span style="width:49px;height:4px;border-radius:61px;background:{{ b }}"></span></sc-for>
       </div>
     </div>
-    <div style="position:absolute;left:24px;top:196px;display:flex;flex-direction:column;gap:4px">
-      <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal;color:#fff">What are your goals?</h1><p style="margin:0;font-size:16px;line-height:normal;color:#c6feff">Pick 3.</p>
+    <div style="position:absolute;left:24px;top:calc(196px - var(--ob-a));display:flex;flex-direction:column;gap:4px">
+      <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal;color:#fff">What are your goals?</h1><p style="margin:0;font-size:16px;line-height:normal;color:#c6feff">Pick 3 or more.</p>
     </div>
-    <div role="group" aria-label="Goals" style="position:absolute;left:16px;top:290px;width:358px;display:flex;flex-wrap:wrap;gap:16px 10px">
+    <div role="group" aria-label="Goals" style="position:absolute;left:16px;top:calc(290px - var(--ob-a));width:358px;display:flex;flex-wrap:wrap;gap:16px 12px">
       <sc-for list="{{ goals }}" as="g" hint-placeholder-count="11">
-        <button type="button" aria-pressed="{{ g.checked }}" onClick="{{ g.pick }}" style="display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:55px;border:1.5px solid #1f92b4;background:{{ g.bg }};cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;line-height:16px;color:{{ g.fg }};white-space:nowrap">
+        <button type="button" aria-pressed="{{ g.checked }}" onClick="{{ g.pick }}" style="display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:55px;border:1.5px solid #1f92b4;background:{{ g.bg }};cursor:pointer;font-family:Poppins,sans-serif;font-weight:400;font-size:14px;line-height:normal;color:{{ g.fg }};white-space:nowrap">
           <img src="{{ g.icon }}" alt="" style="width:20px;height:20px;display:block;filter:{{ g.iconFilter }}">{{ g.label }}
         </button>
       </sc-for>
     </div>
-    <img src="assets/86817.svg" alt="" style="position:absolute;left:49px;top:588px;width:90px;height:81px">
-    <img src="assets/d7b9e.svg" alt="" style="position:absolute;left:-20px;top:649px;width:416px;height:78.5px">
-    <button type="button" onClick="{{ next }}" style="position:absolute;left:24px;top:721px;width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:1">Continue</button>
-    <button type="button" onClick="{{ skip }}" style="position:absolute;left:24px;top:797px;width:342px;border:none;background:none;padding:0;font-family:Inter,sans-serif;font-weight:500;font-size:15px;color:#c6feff;text-decoration:underline;cursor:pointer">Skip</button>
+    <img src="assets/86817.svg" alt="" style="position:absolute;left:49px;top:calc(588px - var(--fit-short,0px));width:90px;height:81px">
+    <img src="assets/d7b9e.svg" alt="" style="position:absolute;left:-20px;top:calc(649px - var(--fit-short,0px));width:416px;height:78.5px">
+    <button type="button" onClick="{{ next }}" style="position:absolute;left:24px;top:calc(721px - var(--fit-short,0px));width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:1">Continue</button>
+    <button type="button" onClick="{{ skip }}" style="position:absolute;left:24px;top:calc(797px - var(--fit-short,0px));width:342px;border:none;background:none;padding:0;font-family:Inter,sans-serif;font-weight:500;font-size:15px;color:#c6feff;text-decoration:underline;cursor:pointer">Skip</button>
   </sc-if>
 
   <sc-if value="{{ s.socials }}" hint-placeholder-val="{{ false }}">
@@ -163,11 +163,11 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
         <sc-for list="{{ bars }}" as="b" hint-placeholder-count="6"><span style="width:49px;height:4px;border-radius:61px;background:{{ b }}"></span></sc-for>
       </div>
     </div>
-    <div style="position:absolute;left:24px;top:196px;width:342px;display:flex;flex-direction:column;gap:4px">
+    <div style="position:absolute;left:24px;top:calc(196px - var(--ob-a));width:342px;display:flex;flex-direction:column;gap:4px">
       <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal;color:#fff">Connect your socials.</h1>
       <p style="margin:0;font-size:16px;line-height:normal;color:#c6feff">Users with socials are 75% more likely to find job opportunities.</p>
     </div>
-    <div style="position:absolute;left:24px;top:314px;width:342px;display:flex;flex-direction:column;gap:12px">
+    <div style="position:absolute;left:24px;top:calc(314px - var(--ob-a));width:342px;display:flex;flex-direction:column;gap:12px">
       <sc-for list="{{ socials }}" as="c" hint-placeholder-count="3">
         <div style="width:342px;box-sizing:border-box;border-radius:8px;background:#fff;border:1.5px solid #1f92b4;overflow:hidden">
           <button type="button" aria-expanded="{{ c.openStr }}" onClick="{{ c.toggle }}" style="width:100%;height:48px;border:none;background:none;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-family:Inter,sans-serif;font-weight:500;font-size:16px;color:#1f92b4">
@@ -182,11 +182,11 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
         </div>
       </sc-for>
     </div>
-    <img src="assets/3262d.svg" alt="" style="position:absolute;left:140px;top:622px;width:90.5px;height:50.5px">
-    <img src="assets/6df69.svg" alt="" style="position:absolute;left:-22px;top:660px;width:413px;height:40px">
-    <img src="assets/1aee5.svg" alt="" style="position:absolute;left:-12px;top:663px;width:401.6px;height:58.3px">
-    <button type="button" onClick="{{ next }}" style="position:absolute;left:24px;top:721px;width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:1">Continue</button>
-    <button type="button" onClick="{{ skip }}" style="position:absolute;left:24px;top:797px;width:342px;border:none;background:none;padding:0;font-family:Inter,sans-serif;font-weight:500;font-size:15px;color:#c6feff;text-decoration:underline;cursor:pointer">Skip</button>
+    <img src="assets/3262d.svg" alt="" style="position:absolute;left:140px;top:calc(622px - var(--fit-short,0px));width:90.5px;height:50.5px">
+    <img src="assets/6df69.svg" alt="" style="position:absolute;left:-22px;top:calc(660px - var(--fit-short,0px));width:413px;height:40px">
+    <img src="assets/1aee5.svg" alt="" style="position:absolute;left:-12px;top:calc(663px - var(--fit-short,0px));width:401.6px;height:58.3px">
+    <button type="button" onClick="{{ next }}" style="position:absolute;left:24px;top:calc(721px - var(--fit-short,0px));width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:1">Continue</button>
+    <button type="button" onClick="{{ skip }}" style="position:absolute;left:24px;top:calc(797px - var(--fit-short,0px));width:342px;border:none;background:none;padding:0;font-family:Inter,sans-serif;font-weight:500;font-size:15px;color:#c6feff;text-decoration:underline;cursor:pointer">Skip</button>
   </sc-if>
 
   <sc-if value="{{ s.review }}" hint-placeholder-val="{{ false }}">
@@ -197,7 +197,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
         <sc-for list="{{ bars }}" as="b" hint-placeholder-count="6"><span style="width:49px;height:4px;border-radius:61px;background:{{ b }}"></span></sc-for>
       </div>
     </div>
-    <article style="position:absolute;left:24px;right:24px;top:94px;height:659px;box-sizing:border-box;padding:20px;border-radius:12px;background:#bbe2ec;overflow-y:auto;display:flex;flex-direction:column;align-items:center;gap:9px;color:#004256" class="ns">
+    <article style="position:absolute;left:24px;right:24px;top:94px;height:calc(659px - var(--fit-short,0px));box-sizing:border-box;padding:20px;border-radius:12px;background:#bbe2ec;overflow-y:auto;display:flex;flex-direction:column;align-items:center;gap:9px;color:#004256" class="ns">
       <h1 style="margin:0;width:302px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal">Ready to set sail?</h1>
       <p style="margin:0;width:302px;font-size:20px">Here’s what you told us</p>
       <div style="width:302px;box-sizing:border-box;padding:10px 0;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid #7ec6dc"><span style="font-size:12px">Name</span>
@@ -231,7 +231,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
           <button type="button" onClick="{{ edit.socials }}" style="border:none;background:none;padding:0;font:inherit;font-size:12px;color:#004256;text-decoration:underline;cursor:pointer">Edit</button>
         </span></div>
     </article>
-    <button type="button" onClick="{{ confirm }}" style="position:absolute;left:24px;top:767px;width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:1">Confirm</button>
+    <button type="button" onClick="{{ confirm }}" style="position:absolute;left:24px;top:calc(767px - var(--fit-short,0px));width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:1">Confirm</button>
   </sc-if>
 
   <sc-if value="{{ s.tides }}" hint-placeholder-val="{{ false }}">
@@ -289,7 +289,7 @@ class Component extends DCLogic {
       pick: () => this.update({ [field]: label }) });
     const GOALS = [
       ['Find a job', 'assets/aa222.svg'], ['Find an internship', 'assets/82a05.svg'], ['Practice networking', 'assets/7cb3b.svg'], ['Gain confidence', 'assets/47a5f.svg'],
-      ['Discover events', 'assets/97950.svg'], ['Make more connections', 'assets/4c12d.svg'], ['Build professional relationships', 'assets/c30d9.svg'],
+      ['Discover events', 'assets/97950.svg'], ['Make connections', 'assets/4c12d.svg'], ['Build professional relationships', 'assets/c30d9.svg'],
       ['Find mentors', 'assets/d556a.svg'], ['Talk to recruiters', 'assets/47b6b.svg'], ['Explore career opportunities', 'assets/e3e91.svg'],
     ];
     const goalSet = new Set(f.goals || []);
@@ -317,6 +317,10 @@ class Component extends DCLogic {
       loginError: err === 'login', signupError: err === 'signup',
       submitLogin: (e) => { if (e && e.preventDefault) e.preventDefault(); if (!f.email || !f.password) { this.setState({ err: 'login' }); return; } this.go('tides'); },
       quickLogin: () => this.go('tides'),
+      // Like the Figma frame: Continue looks disabled until name, email and password are filled.
+      signupNotReady: (String(f.name || '').trim() && String(f.email || '').trim() && f.password) ? 'false' : 'true',
+      signupBg: (String(f.name || '').trim() && String(f.email || '').trim() && f.password) ? '#004256' : '#7ea3ad',
+      signupFg: (String(f.name || '').trim() && String(f.email || '').trim() && f.password) ? '#ffffff' : '#a9c4cb',
       submitSignup: (e) => { if (e && e.preventDefault) e.preventDefault(); if (!String(f.name || '').trim() || !String(f.email || '').trim() || !f.password) { this.setState({ err: 'signup' }); return; } this.go(returnToReview ? 'review' : 'welcome'); },
       toSignup: () => this.go('signup'), toLogin: () => this.go('login'),
       back: () => this.go(returnToReview ? 'review' : before(step)),
