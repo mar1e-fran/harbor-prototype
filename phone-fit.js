@@ -203,12 +203,13 @@
     return null;
   }
 
+  // Only hold the height while a text field is focused (that's when the keyboard is up).
+  // Otherwise always fit what is visible, so browser toolbars showing or hiding never
+  // push the nav bar off screen.
   function phoneHeight(w, h) {
     if (Math.abs(w - tallW) > 1) { tallW = w; tallH = h; return h; }
-    if (h >= tallH) { tallH = h; return h; }
-    var drop = tallH - h;
-    if (drop > KB_MIN || (editing() && drop > 0)) return tallH;   // keyboard is open (or closing)
-    tallH = h;                                                       // e.g. browser toolbar grew
+    if (editing() && tallH && h < tallH) return tallH;   // keyboard is open
+    tallH = h;
     return h;
   }
 
@@ -269,7 +270,7 @@
     setShift(Math.min(need, room));
   }
   document.addEventListener('focusin', function () { setTimeout(reveal, 60); setTimeout(reveal, 400); });
-  document.addEventListener('focusout', function () { setTimeout(reveal, 100); });
+  document.addEventListener('focusout', function () { setTimeout(fit, 100); setTimeout(fit, 450); });
 
   window.addEventListener('resize', fit);
   window.addEventListener('orientationchange', function () { tallW = 0; tallH = 0; setTimeout(fit, 250); });
