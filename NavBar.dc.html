@@ -71,9 +71,9 @@ class Component extends DCLogic {
       homeHref: this.props.homeHref ?? 'Main.dc.html',
       // Live opens the event only once the student has checked in. Before that it
       // sends them to the registered event (to check in) or to Search (to find one).
-      // 'done' (fair over, Wrapped seen) behaves like no event: Search.
+      // Otherwise it opens the Live tab's waiting screen (no event / starts soon / wrapped up).
       liveHref: (active === 'live' || liveEvent || this.state.fair === 'live') ? (this.props.liveHref ?? 'LiveOverview.dc.html')
-        : this.state.fair === 'upcoming' ? 'EventRegistered.dc.html' : 'Search.dc.html',
+        : 'LiveWaiting.dc.html',
       profHref: this.props.profileHref ?? 'OnboardingReview.dc.html',
       histHref: this.props.historyHref ?? 'VoyageLogbook.dc.html',
       moodIcon: m.icon, moodHalo: m.halo,

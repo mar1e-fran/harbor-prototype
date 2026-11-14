@@ -93,7 +93,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
     </div>
   </div>
   <div style="position:absolute;left:14px;right:14px;top:52px;display:flex;justify-content:space-between">
-    <a href="{{ backHref }}" aria-label="Back" style="width:44px;height:44px;border-radius:10px;background:#ebfafe;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;padding:0"><img src="assets/1f1e0.svg" alt="" style="width:22px;height:22px"></a>
+    <a href="{{ backHref }}" aria-label="Back" data-direct="{{ justRegStr }}" style="width:44px;height:44px;border-radius:10px;background:#ebfafe;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;padding:0"><img src="assets/1f1e0.svg" alt="" style="width:22px;height:22px"></a>
     <button type="button" aria-label="Share event" style="width:44px;height:44px;border-radius:10px;background:#ebfafe;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;padding:0"><img src="assets/320b0.svg" alt="" style="width:20px;height:20px"></button>
   </div>
   <sc-if value="{{ notPast }}" hint-placeholder-val="{{ true }}">
@@ -793,10 +793,12 @@ class Component extends DCLogic {
       checkW: fairDone ? '342px' : '214px',
       canUnreg: !fairDone,
       backHref: past ? 'VoyageLogbook.dc.html' : (reg ? e.regBack : e.back),
+      // Just registered: Back goes Home (where the event now shows as upcoming), not back through Search.
+      justRegStr: this.state.justReg && this.state.reg ? 'true' : 'false',
       toggleSave: () => this.setState({ saved: !saved }),
       // Tapping Register registers right away; the sheet only offers optional extras,
       // so closing it any way (backdrop, Add to calendar, Invite) keeps the registration.
-      openSheet: () => { this.setState({ sheet: true, reg: true }); this.saveReg(true); },
+      openSheet: () => { this.setState({ sheet: true, reg: true, justReg: true }); this.saveReg(true); },
       closeSheet: () => this.setState({ sheet: false }),
       confirm: () => this.setState({ sheet: false }),
       checkIn: () => { if (isFair && !fairDone) { try { window.localStorage.setItem('harbor.fair', 'live'); window.dispatchEvent(new Event('harbor-fair')); } catch (err) {} } },

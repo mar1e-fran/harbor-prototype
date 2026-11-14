@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Live</title>
+<script src="./support.js"></script>
+<script src="./phone-fit.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;background:#fafeff;font-family:Poppins,sans-serif">
+  <div class="ns" style="position:absolute;left:0;top:0;width:390px;bottom:78px;overflow-y:auto;overflow-x:hidden">
+    <div style="box-sizing:border-box;padding:40px 24px 32px;display:flex;flex-direction:column;gap:20px">
+      <div style="height:40px;display:flex;align-items:center;gap:2px;margin-left:-8px">
+        <img src="assets/8c126.svg" alt="" style="width:40px;height:40px;display:block">
+        <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:500;font-size:32px;line-height:normal;color:#004256">Live</h1>
+      </div>
+
+      <sc-if value="{{ isNone }}" hint-placeholder-val="{{ true }}">
+        <section class="cs-fade" style="position:relative;width:342px;height:204px;border-radius:16px;background:#ebfafe;overflow:hidden">
+          <img src="assets/5d50e.svg" alt="" style="position:absolute;left:85px;top:60px;width:172px;height:47.46px">
+          <p style="position:absolute;left:36px;top:118px;width:270px;margin:0;text-align:center;font-weight:600;font-size:16px;color:#004256">No live voyage right now</p>
+          <p style="position:absolute;left:36px;top:145px;width:270px;margin:0;text-align:center;font-size:12px;color:#1f92b4">Register for an event and it shows up here when it starts.</p>
+        </section>
+        <a href="Search.dc.html" style="height:48px;border-radius:8px;background:#004256;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px">Find an event</a>
+      </sc-if>
+
+      <sc-if value="{{ isUpcoming }}" hint-placeholder-val="{{ false }}">
+        <div class="cs-fade" style="display:flex;flex-direction:column;gap:12px">
+          <dc-import name="SessionHero" variant="upcoming" width="{{ 342 }}" href="EventRegistered.dc.html" hint-size="342px,200px"></dc-import>
+          <p role="status" style="margin:0;font-size:14px;line-height:20px;color:#166a83">You’re registered. This tab switches to the live event as soon as doors open.</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isLive }}" hint-placeholder-val="{{ false }}">
+        <div class="cs-fade" style="display:flex;flex-direction:column;gap:12px">
+          <dc-import name="SessionHero" variant="live" width="{{ 342 }}" href="LiveOverview.dc.html" hint-size="342px,200px"></dc-import>
+          <a href="LiveOverview.dc.html" style="height:48px;border-radius:8px;background:#004256;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px">Join the live event</a>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+        <section class="cs-fade" style="position:relative;width:342px;height:204px;border-radius:16px;background:#ebfafe;overflow:hidden">
+          <img src="assets/5d50e.svg" alt="" style="position:absolute;left:85px;top:60px;width:172px;height:47.46px">
+          <p style="position:absolute;left:36px;top:118px;width:270px;margin:0;text-align:center;font-weight:600;font-size:16px;color:#004256">That’s a wrap on SCAD Career Fair</p>
+          <p style="position:absolute;left:36px;top:145px;width:270px;margin:0;text-align:center;font-size:12px;color:#1f92b4">Your notes and new crewmates are saved.</p>
+        </section>
+        <a href="Wrapped.dc.html" style="height:48px;border-radius:8px;background:#004256;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px">See your wrap-up</a>
+        <a href="Search.dc.html" style="height:44px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#004256">Find your next event</a>
+      </sc-if>
+    </div>
+  </div>
+  <div style="position:absolute;left:0;bottom:0;width:390px">
+    <dc-import name="NavBar" active="live" live-href="LiveWaiting.dc.html" hint-size="390px,78px"></dc-import>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { fair: null }; }
+  read() { let f = null; try { f = window.localStorage.getItem('harbor.fair'); } catch (e) {} return f; }
+  componentDidMount() {
+    this._sync = () => { this.setState({ fair: this.read() }); this.arm(); };
+    this._sync();
+    try { window.addEventListener('storage', this._sync); window.addEventListener('harbor-fair', this._sync); } catch (e) {}
+  }
+  componentWillUnmount() {
+    clearTimeout(this._t);
+    try { window.removeEventListener('storage', this._sync); window.removeEventListener('harbor-fair', this._sync); } catch (e) {}
+  }
+  // Same shared start time as Home: once it passes, the fair goes live here too.
+  arm() {
+    clearTimeout(this._t);
+    if (this.read() !== 'upcoming') return;
+    let at = 0;
+    try { at = Number(window.localStorage.getItem('harbor.fair.liveAt')) || 0; if (!at) { at = Date.now() + 18000; window.localStorage.setItem('harbor.fair.liveAt', String(at)); } } catch (e) { at = Date.now() + 18000; }
+    this._t = setTimeout(() => {
+      if (this.read() !== 'upcoming') return;
+      try { window.localStorage.setItem('harbor.fair', 'live'); window.localStorage.removeItem('harbor.fair.liveAt'); window.dispatchEvent(new Event('harbor-fair')); } catch (e) {}
+    }, Math.max(1500, at - Date.now()));
+  }
+  renderVals() {
+    const f = this.state.fair;
+    return {
+      isLive: f === 'live', isUpcoming: f === 'upcoming', isDone: f === 'done',
+      isNone: f !== 'live' && f !== 'upcoming' && f !== 'done',
+    };
+  }
+}
+</script>
+</body>
+</html>

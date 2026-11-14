@@ -127,18 +127,22 @@ class Component extends DCLogic {
   // never navigate; the student taps into the live event themselves.
   arm(f) {
     const asked = this.props.mode ?? 'none';
+    if (f !== 'upcoming') { try { window.localStorage.removeItem('harbor.fair.liveAt'); } catch (e) {} }
     if (f !== 'upcoming' || asked !== 'none') { clearTimeout(this._live); this._live = null; return; }
     if (this._live) return; // already counting down; unrelated storage events must not restart it
+    // One shared start time (also used by the Live tab), so leaving Home doesn't restart the wait.
+    let at = 0;
+    try { at = Number(window.localStorage.getItem('harbor.fair.liveAt')) || 0; if (!at) { at = Date.now() + 18000; window.localStorage.setItem('harbor.fair.liveAt', String(at)); } } catch (e) { at = Date.now() + 18000; }
     this._live = setTimeout(() => {
       this._live = null;
       let cur = null; try { cur = window.localStorage.getItem('harbor.fair'); } catch (e) {}
       if (cur !== 'upcoming') return;
-      try { window.localStorage.setItem('harbor.fair', 'live'); } catch (e) {}
+      try { window.localStorage.setItem('harbor.fair', 'live'); window.localStorage.removeItem('harbor.fair.liveAt'); } catch (e) {}
       this.setState({ fair: 'live', toast: true, fresh: true });
       try { window.dispatchEvent(new Event('harbor-fair')); } catch (e) {}
       clearTimeout(this._hide);
       this._hide = setTimeout(() => this.setState({ toast: false }), 7000);
-    }, 18000); // ~18 s on Home before the fair starts
+    }, Math.max(1500, at - Date.now())); // ~18 s after registering; at least a moment on Home
   }
   renderVals() {
     const fair = this.state.fair;

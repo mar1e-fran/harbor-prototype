@@ -7,7 +7,7 @@
   var W = 390, H = 844, BEZEL = 14, RADIUS = 54;
   var FW = W + BEZEL * 2, FH = H + BEZEL * 2;
   var doc = document.documentElement;
-  var DATA_KEYS = ['harbor.profile', 'harbor.mood', 'harbor.notes', 'harbor.notes.open', 'harbor.fair', 'harbor.reg', 'harbor.crew.jordan', 'harbor.fair.endAt'];
+  var DATA_KEYS = ['harbor.profile', 'harbor.mood', 'harbor.notes', 'harbor.notes.open', 'harbor.fair', 'harbor.reg', 'harbor.crew.jordan', 'harbor.fair.endAt', 'harbor.fair.liveAt'];
   var FLOWS = [
     ['Onboarding', 'Onboarding.dc.html'],
     ['Home', 'Main.dc.html'],
@@ -272,6 +272,9 @@
   document.addEventListener('focusin', function () { setTimeout(reveal, 60); setTimeout(reveal, 400); });
   document.addEventListener('focusout', function () { setTimeout(fit, 100); setTimeout(fit, 450); });
 
+  // Going Back restores a frozen copy of the page (e.g. Home from before registering). Reload it so it shows current data.
+  window.addEventListener('pageshow', function (e) { if (e.persisted) location.reload(); });
+
   window.addEventListener('resize', fit);
   window.addEventListener('orientationchange', function () { tallW = 0; tallH = 0; setTimeout(fit, 250); });
   if (window.visualViewport) {
@@ -314,6 +317,7 @@
   document.addEventListener('click', function (e) {
     var a = e.target && e.target.closest && e.target.closest('a[aria-label]');
     if (!a || !/^back\b/i.test(a.getAttribute('aria-label') || '')) return;
+    if (a.getAttribute('data-direct') === 'true') return;   // the screen asked to go to its own Back target
     var ref = document.referrer;
     var same = false;
     try { same = !!ref && new URL(ref).origin === location.origin && new URL(ref).pathname !== location.pathname; } catch (err) {}
