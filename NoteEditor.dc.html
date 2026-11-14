@@ -14,7 +14,7 @@
 body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
 </style>
 </helmet>
-<div style="position:relative;width:390px;height:844px;overflow:hidden;font-family:Poppins,sans-serif;background:#fafeff">
+<div data-fit-flex style="position:relative;width:390px;height:844px;overflow:hidden;font-family:Poppins,sans-serif;background:#fafeff">
   <sc-if value="{{ isDraft }}" hint-placeholder-val="{{ true }}">
     <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between">
       <div style="display:flex;flex-direction:column;gap:24px;align-items:center">
