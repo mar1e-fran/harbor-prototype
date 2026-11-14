@@ -59,6 +59,31 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
           <img src="assets/h-search.svg" alt="" style="width:20px;height:20px;display:block">
           <input type="search" value="{{ q }}" onChange="{{ onSearch }}" placeholder="Search" aria-label="Search notes" style="flex:1;min-width:0;height:44px;border:none;background:none;outline:none;font-family:Inter,sans-serif;font-size:16px;color:#004256">
         </label>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:-4px">
+          <div class="ns" role="group" aria-label="Filter notes" style="display:flex;gap:8px;overflow-x:auto;margin:0 -24px;padding:0 24px">
+            <sc-for list="{{ filters }}" as="fl" hint-placeholder-count="3">
+              <button type="button" onClick="{{ fl.toggle }}" aria-expanded="{{ fl.openStr }}" aria-haspopup="listbox" style="flex-shrink:0;height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 10px 0 12px;border-radius:18px;border:none;background:{{ fl.bg }};font-family:Poppins,sans-serif;font-weight:600;font-size:14px;line-height:18px;color:{{ fl.fg }};cursor:pointer;white-space:nowrap">
+                <sc-if value="{{ fl.hasPhoto }}" hint-placeholder-val="{{ false }}"><img src="{{ fl.photo }}" alt="" style="width:22px;height:22px;border-radius:11px;object-fit:cover;display:block;margin-left:-4px"></sc-if>{{ fl.label }}
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform:rotate({{ fl.turn }});transition:transform .2s ease"><path d="M4 6l4 4 4-4"></path></svg>
+              </button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ false }}">
+            <div role="listbox" aria-label="{{ panelLabel }}" class="cs-pop" style="box-sizing:border-box;border-radius:16px;background:#ebfafe;padding:10px;display:flex;flex-wrap:wrap;gap:8px;box-shadow:0 8px 24px rgba(0,66,86,0.12)">
+              <sc-for list="{{ panelOpts }}" as="o" hint-placeholder-count="4">
+                <button type="button" role="option" aria-selected="{{ o.sel }}" onClick="{{ o.pick }}" style="height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 12px;border-radius:18px;border:1.5px solid {{ o.border }};background:{{ o.bg }};font-family:Poppins,sans-serif;font-size:14px;color:{{ o.fg }};cursor:pointer;white-space:nowrap">
+                  <sc-if value="{{ o.hasPhoto }}" hint-placeholder-val="{{ false }}"><img src="{{ o.photo }}" alt="" style="width:22px;height:22px;border-radius:11px;object-fit:cover;display:block;margin-left:-6px"></sc-if>{{ o.label }}<span style="font-size:12px;color:{{ o.countFg }}">{{ o.count }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </sc-if>
+          <div style="display:flex;justify-content:space-between;align-items:center;min-height:20px">
+            <span role="status" style="font-size:13px;color:#166a83">{{ countLabel }}</span>
+            <sc-if value="{{ anyFilter }}" hint-placeholder-val="{{ false }}">
+              <button type="button" onClick="{{ clearAll }}" style="border:none;background:none;padding:4px 0;font-family:Poppins,sans-serif;font-weight:600;font-size:13px;color:#004256;text-decoration:underline;cursor:pointer">Clear all</button>
+            </sc-if>
+          </div>
+        </div>
         <div style="margin:0 -6px;box-sizing:border-box;border:2px solid #1f92b4;border-radius:16px;background:#ebfeff;padding:14px;display:flex;flex-direction:column">
           <span style="font-weight:600;font-size:12px;color:#004256">New entry</span>
           <textarea value="{{ draft }}" onChange="{{ onDraft }}" placeholder="Drop a quick entry… who, company, what to remember" aria-label="New entry" style="height:{{ draftH }};resize:none;border:none;background:none;outline:none;padding:10px 0;font-family:Poppins,sans-serif;font-size:14px;line-height:normal;color:#004256"></textarea>
@@ -67,7 +92,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
           </sc-if>
         </div>
         <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
-          <p style="margin:8px 0;font-size:14px;color:#166a83">No notes match “{{ q }}”.</p>
+          <p style="margin:8px 0;font-size:14px;color:#166a83">{{ emptyMsg }}</p>
         </sc-if>
         <sc-for list="{{ sections }}" as="s" hint-placeholder-count="2">
           <section style="display:flex;flex-direction:column;gap:13px">
@@ -103,12 +128,12 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"startTab": {"editor": "enum", "options": ["events", "notes"], "default": "events"}, "$preview": {"width": 390, "height": 844}}'>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { tab: props.startTab || 'events', q: '', draft: '', saved: [] }; this._load = () => this.load(); }
+  constructor(props) { super(props); this.state = { tab: props.startTab || 'events', q: '', draft: '', saved: [], crew: [], who: '', ev: '', kind: '', open: null }; this._load = () => this.load(); }
   componentDidMount() { this.load(); try { window.addEventListener('harbor-notes', this._load); window.addEventListener('storage', this._load); } catch (e) {} }
   componentWillUnmount() { try { window.removeEventListener('harbor-notes', this._load); window.removeEventListener('storage', this._load); } catch (e) {} }
-  load() { let l = []; try { l = JSON.parse(window.localStorage.getItem('harbor.notes') || '[]'); } catch (e) {} this.setState({ saved: Array.isArray(l) ? l : [] }); }
+  load() { let l = [], c = []; try { l = JSON.parse(window.localStorage.getItem('harbor.notes') || '[]'); } catch (e) {} try { c = JSON.parse(window.localStorage.getItem('harbor.crew.jordan') || '[]'); } catch (e) {} this.setState({ saved: Array.isArray(l) ? l : [], crew: Array.isArray(c) ? c : [] }); }
   renderVals() {
-    const { tab, q, draft, saved } = this.state;
+    const { tab, q, draft, saved, crew, who, ev, kind, open } = this.state;
     const isNotes = tab === 'notes';
     const groups = [
       { h: 'Today', items: [{ title: 'SCAD Career Fair', date: 'November 18, 2:00PM - 4:00pm', place: 'Poetter Hall', img: 'assets/h-fair.png', href: 'Wrapped.dc.html' }] },
@@ -145,15 +170,67 @@ class Component extends DCLogic {
       ] },
     ];
     if (mine.length) all.unshift({ h: 'SCAD Career Fair · your notes', cols: [mine.filter((_, i) => i % 2 === 0), mine.filter((_, i) => i % 2 === 1)] });
+    // Notes added on Jordan's crew page show up here too, tagged with him.
+    const crewNotes = crew.map((c) => N({ title: 'Note about', mention: 'Jordan Newman', body: [c.text, c.where].filter(Boolean).join('\n'), href: 'Crewmate.dc.html' }));
+    if (crewNotes.length) all.splice(mine.length ? 1 : 0, 0, { h: 'Crew notes · Jordan Newman', event: 'SCAD Career Fair', cols: [crewNotes.filter((_, i) => i % 2 === 0), crewNotes.filter((_, i) => i % 2 === 1)] });
+
+    // Filters: person (anyone named in a note), event, and type.
+    const PEOPLE = [
+      { key: 'jordan', name: 'Jordan Newman', photo: 'assets/r-jordan.png', re: /jordan/i },
+      { key: 'priya', name: 'Priya Nair', photo: 'assets/w4-priya.png', re: /priya/i },
+      { key: 'bella', name: 'Bella Jean', photo: 'assets/r-bella.png', re: /bella/i },
+      { key: 'bradie', name: 'Bradie', photo: 'assets/r-bradie.png', re: /bradie/i },
+      { key: 'jenna', name: 'Jenna Caldwell', photo: 'assets/r-jenna.png', re: /jenna/i },
+      { key: 'adam', name: 'Adam Crews', photo: 'assets/r-adam.png', re: /\badam\b/i },
+    ];
+    const TYPES = [['text', 'Written'], ['voice', 'Voice memos'], ['photo', 'Photos']];
+    const eventOf = (sec) => sec.event || sec.h.replace(/ · your notes$/, '');
+    const tagged = all.map((sec) => ({ ...sec, cols: sec.cols.map((c) => c.map((n) => {
+      const text = [n.title, n.mention, n.body].join(' ');
+      return { ...n, people: PEOPLE.filter((p) => p.re.test(text)).map((p) => p.key), event: eventOf(sec), kind: n.photo ? 'photo' : n.voice ? 'voice' : 'text' };
+    })) }));
+    const flat = tagged.flatMap((sec) => sec.cols.flat());
     const needle = q.trim().toLowerCase();
-    const hit = (n) => !needle || [n.title, n.mention, n.body].join(' ').toLowerCase().includes(needle);
-    const sections = all.map((s) => ({ h: s.h, cols: s.cols.map((c) => c.filter(hit).map((n) => ({ ...n, hasMention: !!n.mention, hasBody: !!n.body }))) }))
-      .filter((s) => s.cols.some((c) => c.length));
+    const match = (n, skip) => (!needle || [n.title, n.mention, n.body].join(' ').toLowerCase().includes(needle))
+      && (skip === 'who' || !who || n.people.includes(who))
+      && (skip === 'ev' || !ev || n.event === ev)
+      && (skip === 'kind' || !kind || n.kind === kind);
+    const sections = tagged.map((sec) => ({ h: sec.h, cols: sec.cols.map((c) => c.filter((n) => match(n)).map((n) => ({ ...n, hasMention: !!n.mention, hasBody: !!n.body }))) }))
+      .filter((sec) => sec.cols.some((c) => c.length));
+    const shown = sections.reduce((t, sec) => t + sec.cols.reduce((a, c) => a + c.length, 0), 0);
+    const countFor = (field, value) => flat.filter((n) => match(n, field) && (field === 'who' ? n.people.includes(value) : n[field === 'ev' ? 'event' : 'kind'] === value)).length;
+    const person = PEOPLE.find((p) => p.key === who);
+    const events = [...new Set(flat.map((n) => n.event))];
+    const opt = (label, on, pick, count, photo) => ({ label, sel: on ? 'true' : 'false', bg: on ? '#166a83' : '#ffffff', fg: on ? '#ffffff' : '#166a83', border: on ? '#166a83' : '#bbe2ec',
+      countFg: on ? '#c6feff' : '#80a0aa', count: count == null ? '' : String(count), hasPhoto: !!photo, photo: photo || '', pick });
+    const close = { open: null };
+    const panels = {
+      who: [opt('Everyone', !who, () => this.setState({ who: '', ...close })),
+        ...PEOPLE.map((p) => ({ p, c: countFor('who', p.key) })).filter((x) => x.c > 0 || x.p.key === who)
+          .map(({ p, c }) => opt(p.name.split(' ')[0], who === p.key, () => this.setState({ who: who === p.key ? '' : p.key, ...close }), c, p.photo))],
+      ev: [opt('All events', !ev, () => this.setState({ ev: '', ...close })),
+        ...events.map((e) => opt(e, ev === e, () => this.setState({ ev: ev === e ? '' : e, ...close }), countFor('ev', e)))],
+      kind: [opt('All types', !kind, () => this.setState({ kind: '', ...close })),
+        ...TYPES.map(([k, l]) => opt(l, kind === k, () => this.setState({ kind: kind === k ? '' : k, ...close }), countFor('kind', k)))],
+    };
+    const chip = (id, label, active, photo) => ({ label, bg: active ? '#166a83' : '#ebfafe', fg: active ? '#ffffff' : '#166a83',
+      hasPhoto: !!photo, photo: photo || '', openStr: open === id ? 'true' : 'false', turn: open === id ? '180deg' : '0deg',
+      toggle: () => this.setState({ open: open === id ? null : id }) });
+    const filters = [
+      chip('who', person ? person.name.split(' ')[0] : 'Person', !!who, person && person.photo),
+      chip('ev', ev || 'Event', !!ev),
+      chip('kind', kind ? TYPES.find((t) => t[0] === kind)[1] : 'Type', !!kind),
+    ];
+    const anyFilter = !!(who || ev || kind);
     return {
       isNotes, isEvents: !isNotes, notesSel: isNotes ? 'true' : 'false', eventsSel: isNotes ? 'false' : 'true',
       notesBg: isNotes ? '#166a83' : '#ffffff', notesFg: isNotes ? '#fafeff' : '#80a0aa',
       eventsBg: isNotes ? '#ffffff' : '#166a83', eventsFg: isNotes ? '#80a0aa' : '#ffffff',
       groups, sections, empty: sections.length === 0, q, draft,
+      filters, panelOpen: !!open, panelOpts: open ? panels[open] : [], panelLabel: open === 'who' ? 'People' : open === 'ev' ? 'Events' : 'Note types',
+      anyFilter, countLabel: shown + (shown === 1 ? ' note' : ' notes') + (person ? ' with ' + person.name.split(' ')[0] : ''),
+      emptyMsg: needle ? 'No notes match “' + q + '”' + (anyFilter ? ' with these filters.' : '.') : 'No notes match these filters.',
+      clearAll: () => this.setState({ who: '', ev: '', kind: '', open: null }),
       draftH: draft ? '90px' : '150px', canSave: draft.trim().length > 0,
       wave: ['8px', '14px', '20px', '12px', '18px', '24px', '10px', '16px', '22px', '12px', '8px', '14px'],
       toNotes: () => this.setState({ tab: 'notes' }),
