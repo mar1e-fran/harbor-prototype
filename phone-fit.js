@@ -63,6 +63,25 @@
     '.fit-panel .fit-actions a:hover,.fit-panel .fit-actions button:hover{background:rgba(235,250,254,.1)}',
     '.fit-panel .fit-tip{margin:0;font-size:12px;line-height:1.5;color:#a0c3ce}',
     '.fit-panel :focus-visible{outline:2px solid #80fdff;outline-offset:2px}',
+    // Phones and narrow windows: a small tab on the right edge opens the same menu as a bottom sheet.
+    '.fit-fab,.fit-sheet{display:none}',
+    'html:not(.fit-wide) .fit-fab{display:flex;position:fixed;right:0;top:var(--fab-y,42%);z-index:7;width:30px;height:60px;padding:0 0 0 2px;box-sizing:border-box;',
+    'border:1px solid rgba(235,250,254,.35);border-right:none;border-radius:14px 0 0 14px;background:rgba(0,48,63,.88);color:#ebfafe;',
+    'align-items:center;justify-content:center;cursor:grab;touch-action:none;box-shadow:0 4px 14px rgba(0,0,0,.3);-webkit-tap-highlight-color:transparent}',
+    'html:not(.fit-wide) .fit-fab:focus-visible{outline:2px solid #80fdff;outline-offset:2px}',
+    '.fit-sheet.open{display:block;position:fixed;inset:0;z-index:8}',
+    '.fit-sheet .fit-backdrop{position:absolute;inset:0;background:rgba(0,20,28,.55);border:none;padding:0;width:100%;cursor:pointer;animation:fitFade .2s ease both}',
+    '.fit-sheet .fit-panel{display:flex;position:absolute;left:0;right:0;bottom:0;max-height:85%;overflow:auto;flex-direction:column;gap:16px;',
+    'padding:10px 20px calc(20px + env(safe-area-inset-bottom));box-sizing:border-box;border-radius:20px 20px 0 0;background:#0b2f3a;',
+    'border:1px solid rgba(235,250,254,.14);border-bottom:none;color:#ebfafe;font-family:Poppins,system-ui,sans-serif;animation:fitRise .28s cubic-bezier(.2,.8,.2,1) both}',
+    '.fit-sheet .fit-grab{align-self:center;width:40px;height:5px;border-radius:3px;background:rgba(235,250,254,.3);flex-shrink:0}',
+    '.fit-sheet .fit-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}',
+    '.fit-sheet .fit-close{width:44px;height:44px;margin:-6px -10px 0 0;border:none;background:none;color:#ebfafe;font-size:26px;line-height:1;cursor:pointer;flex-shrink:0}',
+    '.fit-sheet nav{display:grid;grid-template-columns:1fr 1fr;gap:6px}',
+    '.fit-sheet nav a{padding:12px 10px;background:rgba(235,250,254,.06)}',
+    '.fit-sheet .fit-actions a,.fit-sheet .fit-actions button{height:46px}',
+    '@keyframes fitFade{from{opacity:0}}@keyframes fitRise{from{transform:translateY(100%)}}',
+    '@media (prefers-reduced-motion:reduce){.fit-sheet .fit-backdrop,.fit-sheet .fit-panel{animation:none}}',
   ].join('');
   document.head.appendChild(css);
 
@@ -74,25 +93,82 @@
     document.body.appendChild(el('div', 'fit-island'));
     document.body.appendChild(el('div', 'fit-home'));
 
-    var here = (location.pathname.split('/').pop() || '').replace(/\.html$/, '');
     var panel = el('aside', 'fit-panel');
     panel.setAttribute('aria-label', 'Prototype controls');
+    panel.innerHTML = '<div><h1>Harbor</h1><p class="fit-sub">UXD 370 · Hi-fi prototype</p></div>' + panelBody(
+      'Click, type and scroll inside the phone like a real app. Restart clears your name, mood, notes and registration.');
+    wire(panel);
+    document.body.appendChild(panel);
+    buildSheet();
+  }
+
+  function panelBody(tip) {
+    var here = (location.pathname.split('/').pop() || '').replace(/\.html$/, '');
     var links = FLOWS.map(function (f) {
       var cur = f[1].replace(/\.html$/, '') === here ? ' aria-current="page"' : '';
       return '<a href="' + f[1] + '"' + cur + '>' + f[0] + '</a>';
     }).join('');
-    panel.innerHTML =
-      '<div><h1>Harbor</h1><p class="fit-sub">UXD 370 · Hi-fi prototype</p></div>' +
-      '<div><p class="fit-label">Now viewing</p><p class="fit-now"></p></div>' +
+    return '<div><p class="fit-label">Now viewing</p><p class="fit-now"></p></div>' +
       '<div><p class="fit-label">Jump to a flow</p><nav>' + links + '</nav></div>' +
       '<div class="fit-actions"><button type="button" class="fit-restart">Restart</button><a href="screens.html">All screens</a></div>' +
-      '<p class="fit-tip">Click, type and scroll inside the phone like a real app. Restart clears your name, mood, notes and registration.</p>';
-    panel.querySelector('.fit-now').textContent = document.title || 'Harbor';
-    panel.querySelector('.fit-restart').addEventListener('click', function () {
+      '<p class="fit-tip">' + tip + '</p>';
+  }
+
+  function wire(root) {
+    root.querySelector('.fit-now').textContent = document.title || 'Harbor';
+    root.querySelector('.fit-restart').addEventListener('click', function () {
       try { DATA_KEYS.forEach(function (k) { localStorage.removeItem(k); }); } catch (e) {}
       location.href = 'Onboarding.dc.html';
     });
-    document.body.appendChild(panel);
+  }
+
+  // Mobile menu: an edge tab that can be dragged up or down, opening a bottom sheet.
+  function buildSheet() {
+    var fab = el('button', 'fit-fab');
+    fab.type = 'button';
+    fab.setAttribute('aria-label', 'Open prototype menu');
+    fab.setAttribute('aria-haspopup', 'dialog');
+    fab.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4h10M3 8h10M3 12h10"/></svg>';
+    try { var y = localStorage.getItem('proto.fabY'); if (y) doc.style.setProperty('--fab-y', y + 'px'); } catch (e) {}
+
+    var sheet = el('div', 'fit-sheet');
+    sheet.setAttribute('role', 'dialog');
+    sheet.setAttribute('aria-modal', 'true');
+    sheet.setAttribute('aria-label', 'Prototype menu');
+    sheet.innerHTML = '<button type="button" class="fit-backdrop" aria-label="Close menu" tabindex="-1"></button>' +
+      '<div class="fit-panel"><span class="fit-grab" aria-hidden="true"></span>' +
+      '<div class="fit-head"><div><h1>Harbor</h1><p class="fit-sub">UXD 370 · Hi-fi prototype</p></div>' +
+      '<button type="button" class="fit-close" aria-label="Close menu">×</button></div>' +
+      panelBody('Use the tab on the right edge to open this menu from any screen. Drag it up or down if it covers something. Restart clears your name, mood, notes and registration.') +
+      '</div>';
+    wire(sheet);
+
+    function open() { sheet.classList.add('open'); fab.setAttribute('aria-expanded', 'true'); var c = sheet.querySelector('.fit-close'); if (c) c.focus(); }
+    function close() { sheet.classList.remove('open'); fab.setAttribute('aria-expanded', 'false'); fab.focus(); }
+    sheet.querySelector('.fit-backdrop').addEventListener('click', close);
+    sheet.querySelector('.fit-close').addEventListener('click', close);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && sheet.classList.contains('open')) close(); });
+
+    var startY = 0, startTop = 0, dragged = false, down = false;
+    fab.addEventListener('pointerdown', function (e) {
+      down = true; dragged = false; startY = e.clientY; startTop = fab.getBoundingClientRect().top;
+      try { fab.setPointerCapture(e.pointerId); } catch (err) {}
+    });
+    fab.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      var dy = e.clientY - startY;
+      if (!dragged && Math.abs(dy) < 6) return;
+      dragged = true;
+      var top = Math.max(8, Math.min(window.innerHeight - fab.offsetHeight - 8, startTop + dy));
+      doc.style.setProperty('--fab-y', top + 'px');
+      try { localStorage.setItem('proto.fabY', String(Math.round(top))); } catch (err) {}
+    });
+    fab.addEventListener('pointerup', function () { down = false; });
+    fab.addEventListener('pointercancel', function () { down = false; });
+    fab.addEventListener('click', function (e) { if (dragged) { e.preventDefault(); dragged = false; return; } open(); });
+
+    document.body.appendChild(fab);
+    document.body.appendChild(sheet);
   }
 
   function isPhone(w) { return w <= 600 || (window.matchMedia && window.matchMedia('(pointer:coarse)').matches && w <= 1024); }
