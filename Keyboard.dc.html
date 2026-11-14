@@ -14,6 +14,7 @@
 body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
 </style>
 </helmet>
+<sc-if value="{{ drawn }}" hint-placeholder-val="{{ true }}">
 <div style="width:390px;height:354px;box-sizing:border-box;background:#d5d9de;border-radius:26px 26px 0 0;padding:6px 3px 0;display:flex;flex-direction:column;font-family:Inter,sans-serif">
   <div style="height:44px;display:flex;align-items:center">
     <button type="button" onClick="{{ sugg1 }}" style="flex:1;border:none;background:none;font-size:16px;cursor:pointer;color:#000">“The”</button>
@@ -51,13 +52,20 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#50555c" stroke-width="1.8" stroke-linecap="round" role="img" aria-label="Dictation"><rect x="10" y="3" width="8" height="14" rx="4"/><path d="M6 13a8 8 0 0 0 16 0M14 21v4"/></svg>
   </div>
 </div>
+</sc-if>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"onKey": {"editor": null}, "onDelete": {"editor": null}, "onReturn": {"editor": null}, "$preview": {"width": 390, "height": 354}}'>
 class Component extends DCLogic {
   renderVals() {
     const fire = (name, arg) => () => { if (typeof this.props[name] === 'function') this.props[name](arg); };
     const row = (s) => s.split('').map((ch) => ({ ch, press: fire('onKey', ch) }));
+    // On a touch phone the real keyboard opens when a field is tapped, so drawing
+    // this one too would stack two keyboards (and tapping it steals focus, closing
+    // the real one). Only draw it where there is no on-screen keyboard: desktop.
+    let touchPhone = false;
+    try { touchPhone = window.matchMedia('(hover: none) and (pointer: coarse)').matches; } catch (e) {}
     return {
+      drawn: !touchPhone,
       row1: row('qwertyuiop'), row2: row('asdfghjkl'), row3: row('zxcvbnm'),
       del: fire('onDelete'), space: fire('onKey', ' '), ret: fire('onReturn'),
       sugg1: fire('onKey', 'The '), sugg2: fire('onKey', 'the '), sugg3: fire('onKey', 'to '),

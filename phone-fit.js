@@ -7,7 +7,7 @@
   var W = 390, H = 844, BEZEL = 14, RADIUS = 54;
   var FW = W + BEZEL * 2, FH = H + BEZEL * 2;
   var doc = document.documentElement;
-  var DATA_KEYS = ['harbor.profile', 'harbor.mood', 'harbor.notes', 'harbor.notes.open', 'harbor.fair', 'harbor.reg'];
+  var DATA_KEYS = ['harbor.profile', 'harbor.mood', 'harbor.notes', 'harbor.notes.open', 'harbor.fair', 'harbor.reg', 'harbor.crew.jordan', 'harbor.fair.endAt'];
   var FLOWS = [
     ['Onboarding', 'Onboarding.dc.html'],
     ['Home', 'Main.dc.html'],
@@ -16,13 +16,17 @@
     ['Live · Notes', 'LiveNotes.dc.html'],
     ['Live · Wellness', 'LiveWellness.dc.html'],
     ['After the event', 'VoyageLogbook.dc.html'],
-    ['Event recap', 'EventRecap.dc.html'],
+    ['Event recap', 'Wrapped.dc.html'],
   ];
 
   if (!document.querySelector('meta[name="viewport"]')) {
     var m = document.createElement('meta');
     m.name = 'viewport';
-    m.content = 'width=device-width, initial-scale=1, viewport-fit=cover';
+    // iOS Safari zooms the page in when a field under 16px gets focus (the
+    // onboarding inputs are 14px) and leaves it zoomed. maximum-scale stops that
+    // auto-zoom; iOS still lets people pinch-zoom, so it is only set there.
+    var iOS = /iP(hone|od|ad)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    m.content = 'width=device-width, initial-scale=1, viewport-fit=cover' + (iOS ? ', maximum-scale=1' : '');
     document.head.appendChild(m);
   }
 
@@ -30,7 +34,7 @@
   css.textContent = [
     'html,body{margin:0;height:100%;overflow:hidden;background:var(--fit-bg,#0b2f3a);-webkit-text-size-adjust:100%;text-size-adjust:100%}',
     '#dc-root{position:fixed;left:50%;top:50%;width:' + W + 'px;height:' + H + 'px;overflow:hidden;z-index:2;',
-    'transform:translate(-50%,-50%) scale(var(--fit-s,1));transform-origin:center center}',
+    'transform:translate(-50%,calc(-50% - var(--fit-ky,0px))) scale(var(--fit-s,1));transform-origin:center center}',
     '#dc-root:not(.fit-ready){visibility:hidden}',
     // Desktop frame
     'html.fit-desk{--fit-bg:radial-gradient(120% 90% at 50% 0%,#14576b 0%,#0b2f3a 55%,#071f27 100%)}',
@@ -184,29 +188,95 @@
     return '#fafeff';
   }
 
+  // On phones the on-screen keyboard shrinks the visual viewport. A native app
+  // keeps its size and the keyboard slides over it, so the scale is based on
+  // the tallest height seen at the current width; it only resets when the width
+  // changes (rotation, split view) or the height drop is clearly not a keyboard.
+  var KB_MIN = 120;      // a height drop bigger than this is treated as the keyboard
+  var tallH = 0, tallW = 0;
+
+  function editing() {
+    var a = document.activeElement;
+    if (!a || a === document.body) return null;
+    if (a.isContentEditable || a.tagName === 'TEXTAREA') return a;
+    if (a.tagName === 'INPUT' && !/^(button|submit|reset|checkbox|radio|range|color|file|image|hidden)$/i.test(a.type)) return a;
+    return null;
+  }
+
+  function phoneHeight(w, h) {
+    if (Math.abs(w - tallW) > 1) { tallW = w; tallH = h; return h; }
+    if (h >= tallH) { tallH = h; return h; }
+    var drop = tallH - h;
+    if (drop > KB_MIN || (editing() && drop > 0)) return tallH;   // keyboard is open (or closing)
+    tallH = h;                                                       // e.g. browser toolbar grew
+    return h;
+  }
+
   function fit() {
     var vv = window.visualViewport;
-    var w = vv ? vv.width : window.innerWidth;
-    var h = vv ? vv.height : window.innerHeight;
+    // Layout width is not affected by pinch zoom or the keyboard.
+    var w = doc.clientWidth || window.innerWidth;
+    var h = vv ? vv.height * (vv.scale || 1) : window.innerHeight;
     var s;
     if (isPhone(w)) {
       doc.classList.remove('fit-desk', 'fit-wide');
+      h = phoneHeight(w, h);
       s = Math.min(w / W, h / H);
       doc.style.setProperty('--fit-bg', screenBg());
     } else {
       doc.classList.add('fit-desk');
       doc.classList.toggle('fit-wide', w >= 900);
       doc.style.removeProperty('--fit-bg');
+      if (vv) { w = vv.width; h = vv.height; }
       s = Math.min(1, (h - 48) / FH, (w - 48) / FW);
     }
     doc.style.setProperty('--fit-s', String(Math.max(s, 0.3)));
     var root = document.getElementById('dc-root');
     if (root) root.classList.add('fit-ready');
+    reveal();
   }
 
+  // While the keyboard is up, slide the screen up just enough that the focused
+  // field sits above it (like iOS does in apps). When it closes, slide back and
+  // undo any scrolling the browser did on its own so nothing stays offset.
+  var shift = 0;
+  function setShift(px) {
+    px = Math.max(0, Math.round(px));
+    if (px === shift) return;
+    shift = px;
+    doc.style.setProperty('--fit-ky', px + 'px');
+  }
+  function resetScroll() {
+    if (window.scrollX || window.scrollY) window.scrollTo(0, 0);
+    var se = document.scrollingElement;
+    if (se && se.scrollTop) se.scrollTop = 0;
+    if (document.body.scrollTop) document.body.scrollTop = 0;
+  }
+  function reveal() {
+    var vv = window.visualViewport;
+    var field = editing();
+    var kbOpen = vv && doc.classList.contains('fit-desk') === false && tallH - vv.height * (vv.scale || 1) > KB_MIN;
+    if (!kbOpen || !field || !field.closest('#dc-root')) {
+      if (shift) setShift(0);
+      if (!kbOpen) resetScroll();
+      return;
+    }
+    var r = field.getBoundingClientRect();
+    var top0 = r.top + shift, bottom0 = r.bottom + shift;   // where the field sits unshifted
+    var visTop = vv.offsetTop, visBottom = vv.offsetTop + vv.height;
+    var need = bottom0 + 16 - visBottom;
+    var room = top0 - (visTop + 12);                          // never push the field's top out of view
+    setShift(Math.min(need, room));
+  }
+  document.addEventListener('focusin', function () { setTimeout(reveal, 60); setTimeout(reveal, 400); });
+  document.addEventListener('focusout', function () { setTimeout(reveal, 100); });
+
   window.addEventListener('resize', fit);
-  window.addEventListener('orientationchange', fit);
-  if (window.visualViewport) window.visualViewport.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', function () { tallW = 0; tallH = 0; setTimeout(fit, 250); });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', fit);
+    window.visualViewport.addEventListener('scroll', function () { if (shift || editing()) reveal(); else resetScroll(); });
+  }
   document.addEventListener('click', function () { setTimeout(fit, 60); }, true);
 
   // Links to screens that aren't built yet show a short note instead of doing nothing.

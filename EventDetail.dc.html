@@ -106,8 +106,10 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
       </button>
     </sc-if>
     <sc-if value="{{ reg }}" hint-placeholder-val="{{ false }}">
+      <sc-if value="{{ canUnreg }}" hint-placeholder-val="{{ true }}">
       <button type="button" onClick="{{ unregister }}" style="height:52px;padding:0 14px;border-radius:8px;border:none;background:#ebfafe;display:flex;align-items:center;gap:6px;font:inherit;font-weight:600;font-size:14px;color:#80a0aa;cursor:pointer">Unregister<img src="assets/a86c4.svg" alt="" style="width:14px;height:14px"></button>
-      <a href="{{ e.checkin }}" onClick="{{ checkIn }}" style="width:214px;height:52px;box-sizing:border-box;border-radius:8px;border:1.5px solid #fafeff;background:#26b2dc;color:#fafeff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;line-height:18px">{{ checkLabel }}</a>
+      </sc-if>
+      <a href="{{ checkHref }}" onClick="{{ checkIn }}" style="width:{{ checkW }};height:52px;box-sizing:border-box;border-radius:8px;border:1.5px solid #fafeff;background:#26b2dc;color:#fafeff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;line-height:18px">{{ checkLabel }}</a>
     </sc-if>
   </div>
   </sc-if>
@@ -135,7 +137,9 @@ class Component extends DCLogic {
     try {
       if (id === 'EventDetail') {
         const f = window.localStorage.getItem('harbor.fair');
-        if (f === 'upcoming' || f === 'live') return true;
+        // 'done' = the fair is over. The user went, so they still count as registered
+        // (the bottom bar then offers the recap instead of Check In / Unregister).
+        if (f === 'upcoming' || f === 'live' || f === 'done') return true;
         if (f === 'none') return false;
       } else {
         const list = JSON.parse(window.localStorage.getItem('harbor.reg') || '[]');
@@ -776,19 +780,26 @@ class Component extends DCLogic {
     const e = EVENTS[this.props.eventId] || EVENTS.EventDetail;
     const isFair = (this.props.eventId || 'EventDetail') === 'EventDetail';
     const past = !!this.props.past;
+    let fairDone = false;
+    if (isFair) { try { fairDone = window.localStorage.getItem('harbor.fair') === 'done'; } catch (err) {} }
     return {
       days: ['Mon', 'Tue', 'Wed'].map((d) => { const on = (this.state.day || 'Mon') === d; return { label: d, sel: on ? 'true' : 'false', line: on ? '#1a1a1a' : 'transparent', color: on ? '#1a1a1a' : '#6b6b6b', pick: () => this.setState({ day: d }) }; }),
       past, notPast: !past, scrollBottom: past ? '78px' : '95px',
       e, saved, unsaved: !saved, savedStr: saved ? 'true' : 'false', sheet, reg, notReg: !reg,
       padX: reg ? '24px' : '16px',
       attendeesTitle: (reg ? 'Who’s going · ' : 'Attendees · ') + e.count + ' people',
-      checkLabel: e.virtual ? 'Join session' : 'Check In - QR',
+      checkLabel: fairDone ? 'View recap' : (e.virtual ? 'Join session' : 'Check In - QR'),
+      checkHref: fairDone ? 'EventRecap.dc.html' : e.checkin,
+      checkW: fairDone ? '342px' : '214px',
+      canUnreg: !fairDone,
       backHref: past ? 'VoyageLogbook.dc.html' : (reg ? e.regBack : e.back),
       toggleSave: () => this.setState({ saved: !saved }),
-      openSheet: () => this.setState({ sheet: true }),
+      // Tapping Register registers right away; the sheet only offers optional extras,
+      // so closing it any way (backdrop, Add to calendar, Invite) keeps the registration.
+      openSheet: () => { this.setState({ sheet: true, reg: true }); this.saveReg(true); },
       closeSheet: () => this.setState({ sheet: false }),
-      confirm: () => { this.setState({ sheet: false, reg: true }); this.saveReg(true); },
-      checkIn: () => { if (isFair) { try { window.localStorage.setItem('harbor.fair', 'live'); window.dispatchEvent(new Event('harbor-fair')); } catch (err) {} } },
+      confirm: () => this.setState({ sheet: false }),
+      checkIn: () => { if (isFair && !fairDone) { try { window.localStorage.setItem('harbor.fair', 'live'); window.dispatchEvent(new Event('harbor-fair')); } catch (err) {} } },
       unregister: () => { this.setState({ reg: false }); this.saveReg(false); },
     };
   }

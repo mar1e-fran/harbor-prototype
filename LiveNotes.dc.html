@@ -63,7 +63,7 @@ class Component extends DCLogic {
     const mine = this.state.saved.map((n) => {
       const text = String(n.body || '').replace(/\s+/g, ' ').trim();
       const extra = (n.memos || []).length ? ' · ' + n.memos.length + ' voice memo' + (n.memos.length > 1 ? 's' : '') : '';
-      return { id: n.id, kind: n.photo ? 'photo' : 'followup', title: n.title || 'Untitled Note', time: n.time || '',
+      return { id: n.id, from: 'live', kind: n.photo ? 'photo' : 'followup', title: n.title || 'Untitled Note', time: n.time || '',
         body: text.length > 90 ? text.slice(0, 90) + '…' : text, meta: (n.photo ? 'Photo note' : 'Your note') + extra + ' · Tap to edit', href: 'NoteEditor.dc.html' };
     });
     const base = [

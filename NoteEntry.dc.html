@@ -47,7 +47,7 @@ class Component extends DCLogic {
       photo: { bg: '#8cd69e', fg: '#004256', meta: '#166a83', photo: true },
     };
     const s = { mic: false, pad: false, duo: false, photo: false, ...(styles[e.kind] || styles.transcribed) };
-    const open = () => { if (!e.id) return; try { window.localStorage.setItem('harbor.notes.open', JSON.stringify({ id: e.id, at: Date.now() })); } catch (err) {} };
+    const open = () => { if (!e.id) return; try { window.localStorage.setItem('harbor.notes.open', JSON.stringify({ id: e.id, at: Date.now(), from: e.from })); } catch (err) {} };
     return { e, s, hasBody: !!e.body, href: e.href ?? '#', open };
   }
 }

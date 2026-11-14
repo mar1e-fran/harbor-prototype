@@ -20,10 +20,10 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
     <div class="ns" style="position:absolute;left:0;top:0;width:390px;bottom:78px;overflow-y:auto;overflow-x:hidden">
       <div style="padding:56px 24px 24px;display:flex;flex-direction:column">
         <div style="display:flex;align-items:center;gap:8px;height:48px">
-          <button type="button" onClick="{{ focus }}" style="flex:1;height:48px;box-sizing:border-box;border:1.5px solid #004256;border-radius:24px;background:transparent;display:flex;align-items:center;gap:8px;padding:0 8px 0 16px;cursor:text;font:inherit">
+          <label style="flex:1;height:48px;box-sizing:border-box;border:1.5px solid #004256;border-radius:24px;background:transparent;display:flex;align-items:center;gap:8px;padding:0 8px 0 16px;cursor:text;font:inherit">
             <img src="assets/aea40.svg" alt="" style="width:20px;height:20px;display:block">
-            <span style="font-family:Inter,sans-serif;font-size:16px;color:#80a0aa">Search</span>
-          </button>
+            <input type="search" aria-label="Search" placeholder="Search" onClick="{{ focus }}" onFocus="{{ focus }}" value="" onChange="{{ focusType }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;padding:0;font-family:Inter,sans-serif;font-size:16px;color:#004256;cursor:text">
+          </label>
           <a href="Main.dc.html" style="padding-left:4px;font-size:14px;color:#004256">Cancel</a>
         </div>
         <p style="margin:20px 0 10px;font-size:12px;color:#80a0aa">Recent</p>
@@ -105,12 +105,20 @@ class Component extends DCLogic {
     const q = props.startQuery ?? '';
     this.state = { focused: !!props.startFocused || q.length > 0, q };
   }
+  componentDidUpdate() {
+    // The runtime doesn't pass prevState, so remember the last value here.
+    const was = this._wasFocused; this._wasFocused = this.state.focused;
+    if (this.state.focused && !was) {
+      setTimeout(() => { const f = document.querySelector('#dc-root input[aria-label^="Search events"]'); if (f && document.activeElement !== f) { f.focus(); const n = f.value.length; try { f.setSelectionRange(n, n); } catch (e) {} } }, 0);
+    }
+  }
   renderVals() {
     const { focused, q } = this.state;
     const goto = (text) => () => this.setState({ focused: true, q: text });
     return {
       idle: !focused, focused, q, hasQ: q.trim().length > 0,
       focus: () => this.setState({ focused: true }),
+      focusType: (e) => this.setState({ focused: true, q: e.target.value }),
       cancel: () => this.setState({ focused: false, q: '' }),
       clear: () => this.setState({ q: '' }),
       onInput: (e) => this.setState({ q: e.target.value }),

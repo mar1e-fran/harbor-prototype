@@ -89,7 +89,12 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 844}}'>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { draft: '', extra: [], toast: '' }; }
+  constructor(props) { super(props); this.state = { draft: '', extra: Component.loadNotes(), toast: '' }; }
+  // Notes the user adds are kept in localStorage so they survive leaving to Chat or a reload.
+  static loadNotes() {
+    try { const v = JSON.parse(window.localStorage.getItem('harbor.crew.jordan') || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+  }
+  saveNotes(list) { try { window.localStorage.setItem('harbor.crew.jordan', JSON.stringify(list)); } catch (e) {} }
   flash(msg) { this.setState({ toast: msg }); clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: '' }), 1800); }
   renderVals() {
     const { draft, extra, toast } = this.state;
@@ -99,7 +104,7 @@ class Component extends DCLogic {
       { mention: false, text: 'Asked a sharp question about portfolio depth during Q&A', where: 'Portfolio Day › Panel Q&A' },
     ];
     const notes = [...extra, ...base];
-    const add = () => { const t = draft.trim(); if (!t) return; this.setState({ draft: '', extra: [{ mention: false, text: t, where: 'Just now' }, ...extra] }); this.flash('Note saved'); };
+    const add = () => { const t = draft.trim(); if (!t) return; const next = [{ mention: false, text: t, where: 'Added by you' }, ...extra]; this.setState({ draft: '', extra: next }); this.saveNotes(next); this.flash('Note saved'); };
     const soc = (label, icon) => ({ label, icon, tap: () => this.flash(label + ' opened') });
     return {
       toast,

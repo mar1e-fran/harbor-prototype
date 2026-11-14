@@ -27,7 +27,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
           <button type="button" aria-label="Notifications" style="width:40px;height:40px;border:none;background:none;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer"><img src="assets/e1513.svg" alt="" style="width:24px;height:24px;display:block"></button>
         </div>
       </div>
-      <div style="padding:{{ heroPad }} 24px 0">
+      <div class="{{ heroCls }}" style="padding:{{ heroPad }} 24px 0">
         <sc-if value="{{ calm }}" hint-placeholder-val="{{ true }}">
           <section style="position:relative;width:342px;height:204px;border-radius:16px;background:#ebfafe;overflow:hidden">
             <img src="assets/5d50e.svg" alt="" style="position:absolute;left:85px;top:60px;width:172px;height:47.46px">
@@ -92,8 +92,8 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
     <div role="status" aria-live="polite" class="cs-pop" style="position:absolute;left:16px;right:16px;top:44px;z-index:5;display:flex;align-items:center;gap:10px;padding:10px 8px 10px 14px;border-radius:12px;background:#004256;box-shadow:0 10px 30px rgba(0,30,40,0.25)">
       <span aria-hidden="true" style="position:relative;width:10px;height:10px;flex-shrink:0"><span class="harbor-pulse" style="position:absolute;inset:-4px;border-radius:9px;background:rgba(38,178,220,0.45)"></span><span style="position:absolute;inset:0;border-radius:5px;background:#26b2dc"></span></span>
       <span style="flex:1;min-width:0;display:flex;flex-direction:column;color:#fff">
-        <span style="font-weight:600;font-size:13px;line-height:18px">SCAD Career Fair is live</span>
-        <span style="font-size:11px;line-height:16px;color:#c6feff">Doors are open · check in when you arrive</span>
+        <span style="font-weight:600;font-size:13px;line-height:18px">SCAD Career Fair has started</span>
+        <span style="font-size:11px;line-height:16px;color:#c6feff">Doors are open at Poetter Hall</span>
       </span>
       <a href="LiveOverview.dc.html" style="height:36px;padding:0 14px;border-radius:8px;background:#26b2dc;color:#fff;display:flex;align-items:center;font-weight:600;font-size:13px">Join</a>
       <button type="button" aria-label="Dismiss" onClick="{{ hideToast }}" style="width:36px;height:36px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 2l8 8M10 2 2 10"/></svg></button>
@@ -103,16 +103,8 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"mode": {"editor": "enum", "options": ["none", "upcoming", "live"], "default": "none"}, "$preview": {"width": 390, "height": 844}}'>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { profile: null, fair: null, toast: false }; }
+  constructor(props) { super(props); this.state = { profile: null, fair: null, toast: false, fresh: false }; }
 
-  componentDidMount() {
-    this._sync = () => { let p = null; try { p = JSON.parse(window.localStorage.getItem('harbor.profile') || 'null'); } catch (e) {} this.setState({ profile: p }); };
-    this._sync();
-    try { window.addEventListener('storage', this._sync); window.addEventListener('harbor-profile', this._sync); } catch (e) {}
-  }
-  componentWillUnmount() {
-    try { window.removeEventListener('storage', this._sync); window.removeEventListener('harbor-profile', this._sync); } catch (e) {}
-  }
   firstName() {
     const p = (this.state && this.state.profile) || null;
     const n = p && p.name ? String(p.name).trim().split(/\s+/)[0] : '';
@@ -126,28 +118,44 @@ class Component extends DCLogic {
       window.addEventListener('storage', this._fair); window.addEventListener('harbor-fair', this._fair); } catch (e) {}
   }
   componentWillUnmount() {
-    clearTimeout(this._live); clearTimeout(this._hide);
+    clearTimeout(this._live); clearTimeout(this._hide); this._live = null;
     try { window.removeEventListener('storage', this._sync); window.removeEventListener('harbor-profile', this._sync);
       window.removeEventListener('storage', this._fair); window.removeEventListener('harbor-fair', this._fair); } catch (e) {}
   }
-  arm() {
-    // Live mode starts only when the student checks in on the event page (EventDetail).
-    clearTimeout(this._live);
+  // Once registered (harbor.fair === 'upcoming'), the fair "starts" after a short
+  // while on Home: flip to live, tell other screens, and show a calm notice. We
+  // never navigate; the student taps into the live event themselves.
+  arm(f) {
+    const asked = this.props.mode ?? 'none';
+    if (f !== 'upcoming' || asked !== 'none') { clearTimeout(this._live); this._live = null; return; }
+    if (this._live) return; // already counting down; unrelated storage events must not restart it
+    this._live = setTimeout(() => {
+      this._live = null;
+      let cur = null; try { cur = window.localStorage.getItem('harbor.fair'); } catch (e) {}
+      if (cur !== 'upcoming') return;
+      try { window.localStorage.setItem('harbor.fair', 'live'); } catch (e) {}
+      this.setState({ fair: 'live', toast: true, fresh: true });
+      try { window.dispatchEvent(new Event('harbor-fair')); } catch (e) {}
+      clearTimeout(this._hide);
+      this._hide = setTimeout(() => this.setState({ toast: false }), 7000);
+    }, 18000); // ~18 s on Home before the fair starts
   }
   renderVals() {
     const fair = this.state.fair;
     const asked = this.props.mode ?? 'none';
     const mode = asked === 'live' || fair === 'live' && asked !== 'none' ? 'live'
       : asked === 'upcoming' ? 'upcoming'
-      : fair === 'live' ? 'live' : fair === 'upcoming' ? 'upcoming' : 'none';
+      : fair === 'live' ? 'live' : fair === 'upcoming' ? 'upcoming' : 'none'; // 'done' / 'none' / null: no current event
     return {
       first: this.firstName(),
       mode, calm: mode === 'none', hasEvent: mode !== 'none', liveEvent: mode === 'live',
       heroPad: mode === 'none' ? '26px' : '36px',
       heroHref: mode === 'live' ? 'LiveOverview.dc.html' : 'EventRegistered.dc.html',
-      toast: this.state.toast && mode === 'live', hideToast: () => this.setState({ toast: false }),
+      toast: this.state.toast && mode === 'live', hideToast: () => { clearTimeout(this._hide); this.setState({ toast: false }); },
+      heroCls: this.state.fresh && mode === 'live' ? 'cs-fade' : '',
       picked: [{ title: 'Meet Designers Across Majors', date: 'Nov 10 · 4 pm to 6 pm', place: 'Haymans Hall', img: 'assets/10e4f.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '12 crewmates going', going: false, saved: false, href: 'EventMeetDesigners.dc.html' },
       { title: 'SCAD Alumni Reception', date: 'Nov 11 · 6 pm to 8 pm', place: 'Deloitte', img: 'assets/e3589.webp', faces: ['assets/d15eb.webp','assets/db34d.webp'], crew: '2 crewmates going', going: false, saved: false, href: '#' },
+      { title: 'SCAD Career Fair', date: 'Nov 18 · 12:30 pm to 4 pm', place: 'Poetter Hall', img: 'assets/4264d.webp', faces: ['assets/fc4c0.webp','assets/66a9e.webp','assets/8dc47.webp'], crew: '43 going', going: fair === 'upcoming' || fair === 'live', saved: false, href: fair === 'upcoming' ? 'EventRegistered.dc.html' : 'EventDetail.dc.html' },
       { title: 'Peer Portfolio Critique', date: 'Nov 3 · 7 pm to 8 pm', place: 'Arnold Hall', img: 'assets/3fabf.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '6 crewmates going', going: false, saved: false, href: '#' },
       { title: 'Social Speed Dating', date: 'Nov 15 · 6 pm to 8 pm', place: 'Adler Hall', img: 'assets/de965.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '4 crewmates going', going: false, saved: false, href: '#' },
       { title: 'Portfolio Review', date: 'Nov 8 · 2 pm to 5 pm', place: 'The Shed', img: 'assets/3cdd8.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '8 crewmates going', going: false, saved: false, href: '#' },

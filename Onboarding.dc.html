@@ -259,7 +259,7 @@ class Component extends DCLogic {
     if (p) this.setState({ f: { ...this.state.f, ...p, password: '' } });
     this.armTimer();
   }
-  componentDidUpdate(prev, prevState) { if (prevState.step !== this.state.step) this.armTimer(); }
+  componentDidUpdate() { if (this._lastStep !== this.state.step) { this._lastStep = this.state.step; this.armTimer(); } }
   componentWillUnmount() { clearTimeout(this._t); clearTimeout(this._t2); }
   armTimer() {
     clearTimeout(this._t);
