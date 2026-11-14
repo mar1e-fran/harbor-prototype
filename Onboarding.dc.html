@@ -14,15 +14,17 @@
 body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
 </style>
 </helmet>
-<div style="--ob-a:min(var(--fit-short,0px),96px);position:relative;width:390px;height:844px;overflow:hidden;background:{{ bg }};font-family:Poppins,sans-serif">
+<div style="--ob-a:min(var(--fit-short,0px),96px);--ob-aw:min(var(--fit-short,0px),73px);--ob-sn:calc(844 - var(--fit-hn, 844));--ob-an:min(var(--ob-sn), 96);--ob-awn:min(var(--ob-sn), 73);position:relative;width:390px;height:844px;overflow:hidden;background:{{ bg }};font-family:Poppins,sans-serif">
 
   <sc-if value="{{ s.login }}" hint-placeholder-val="{{ true }}">
     
-    <div aria-hidden="true" style="position:absolute;left:117.43px;top:calc(99px - var(--ob-a));width:119.788px;height:133.335px;display:flex;align-items:center;justify-content:center">
-      <img src="assets/dc3fc.svg" alt="" style="width:94.725px;height:113.476px;transform:rotate(14.28deg);display:block">
+    <div aria-hidden="true" style="position:absolute;left:0;right:0;top:0;bottom:473px;padding-top:40px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;pointer-events:none">
+      <div style="position:relative;flex-shrink:0;width:390px;height:211px;transform:scale(max(0.4, min(1, calc((var(--fit-hn, 844) - 473 - 60) / 211))));transform-origin:center center">
+        <div style="position:absolute;left:117.43px;top:0;width:119.788px;height:133.335px;display:flex;align-items:center;justify-content:center"><img src="assets/dc3fc.svg" alt="" style="width:94.725px;height:113.476px;transform:rotate(14.28deg);display:block"></div>
+        <p style="position:absolute;left:0;right:0;top:71.25px;margin:0;text-align:center;font-family:'DM Sans',sans-serif;font-weight:800;font-size:93.064px;line-height:1.5;letter-spacing:-1.02px;color:#c6feff">Harbor</p>
+      </div>
     </div>
-    <p style="position:absolute;left:36px;top:calc(170.25px - var(--ob-a));width:317px;margin:0;font-family:'DM Sans',sans-serif;font-weight:800;font-size:93.064px;line-height:1.5;letter-spacing:-1.02px;color:#c6feff">Harbor</p>
-    <div role="form" aria-label="Log in" style="position:absolute;left:19px;top:calc(371px - var(--ob-a));width:353px;display:flex;flex-direction:column;gap:24px;align-items:center">
+    <div role="form" aria-label="Log in" style="position:absolute;left:19px;bottom:30px;width:353px;display:flex;flex-direction:column;gap:24px;align-items:center">
       <div style="width:100%;display:flex;flex-direction:column;gap:12px;align-items:flex-end">
         <label style="width:100%;display:flex;flex-direction:column;gap:6px"><span style="font-family:Poppins,sans-serif;font-size:16px;line-height:normal;color:#fff">Email</span>
           <span style="width:353px;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:0 16px;height:56px;border:1px solid #1f92b4;border-radius:10px;background:#ebfeff"><input type="email" autocomplete="email" placeholder="Your email" value="{{ f.email }}" onChange="{{ set.email }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:Poppins,sans-serif;font-weight:300;font-size:14px;color:#004256;padding:0"></span></label>
@@ -47,11 +49,13 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 
   <sc-if value="{{ s.signup }}" hint-placeholder-val="{{ false }}">
     
-    <div aria-hidden="true" style="position:absolute;left:117.43px;top:calc(99px - var(--ob-a));width:119.788px;height:133.335px;display:flex;align-items:center;justify-content:center">
-      <img src="assets/dc3fc.svg" alt="" style="width:94.725px;height:113.476px;transform:rotate(14.28deg);display:block">
+    <div aria-hidden="true" style="position:absolute;left:0;right:0;top:0;bottom:452px;padding-top:40px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;pointer-events:none">
+      <div style="position:relative;flex-shrink:0;width:390px;height:211px;transform:scale(max(0.4, min(1, calc((var(--fit-hn, 844) - 452 - 60) / 211))));transform-origin:center center">
+        <div style="position:absolute;left:117.43px;top:0;width:119.788px;height:133.335px;display:flex;align-items:center;justify-content:center"><img src="assets/dc3fc.svg" alt="" style="width:94.725px;height:113.476px;transform:rotate(14.28deg);display:block"></div>
+        <p style="position:absolute;left:0;right:0;top:71.25px;margin:0;text-align:center;font-family:'DM Sans',sans-serif;font-weight:800;font-size:93.064px;line-height:1.5;letter-spacing:-1.02px;color:#c6feff">Harbor</p>
+      </div>
     </div>
-    <p style="position:absolute;left:36px;top:calc(170.25px - var(--ob-a));width:317px;margin:0;font-family:'DM Sans',sans-serif;font-weight:800;font-size:93.064px;line-height:1.5;letter-spacing:-1.02px;color:#c6feff">Harbor</p>
-    <div role="form" aria-label="Sign up" style="position:absolute;left:19px;top:calc(392px - var(--ob-a));width:353px;display:flex;flex-direction:column;gap:12px;align-items:center">
+    <div role="form" aria-label="Sign up" style="position:absolute;left:19px;bottom:49px;width:353px;display:flex;flex-direction:column;gap:12px;align-items:center">
       <label style="width:100%;display:flex;flex-direction:column;gap:6px"><span style="font-family:Poppins,sans-serif;font-size:16px;line-height:normal;color:#fff">Your name</span>
         <span style="width:353px;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:0 16px;height:56px;border:1px solid #1f92b4;border-radius:10px;background:#ebfeff"><input autocomplete="name" placeholder="Your name" value="{{ f.name }}" onChange="{{ set.name }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:Poppins,sans-serif;font-weight:300;font-size:14px;color:#004256;padding:0"></span></label>
       <label style="width:100%;display:flex;flex-direction:column;gap:6px"><span style="font-family:Poppins,sans-serif;font-size:16px;line-height:normal;color:#fff">Email</span>
@@ -73,14 +77,16 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
         <sc-for list="{{ bars }}" as="b" hint-placeholder-count="6"><span style="width:49px;height:4px;border-radius:61px;background:{{ b }}"></span></sc-for>
       </div>
     </div>
-    <div style="position:absolute;left:24px;top:calc(173px - var(--ob-a));width:342px;display:flex;flex-direction:column;gap:8px">
+    <div style="position:absolute;left:24px;top:calc(173px - var(--ob-aw));width:342px;display:flex;flex-direction:column;gap:8px">
       <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:40px;line-height:normal;color:#fff"><span style="color:#c6feff">Ahoy!</span> Welcome aboard, {{ first }}!</h1>
       <p style="margin:0;font-size:20px;line-height:normal;color:#c6feff">Help us chart your course with a few quick questions.</p>
     </div>
-    <div aria-hidden="true" style="position:absolute;left:103px;top:calc(392px - var(--ob-a));width:184.32px;height:205.94px;display:flex;align-items:center;justify-content:center"><img src="assets/161aa.svg" alt="" style="width:167px;height:191px;transform:rotate(5.43deg)"></div>
-    <img src="assets/6df69.svg" alt="" style="position:absolute;left:0;top:calc(598px - var(--fit-short,0px));width:410px;height:40px">
-    <img src="assets/6df69.svg" alt="" style="position:absolute;left:-6px;top:calc(635px - var(--fit-short,0px));width:410px;height:40px">
-    <img src="assets/ec210.svg" alt="" style="position:absolute;left:8px;top:calc(633px - var(--fit-short,0px));width:396px;height:21px">
+    <div aria-hidden="true" style="--k:clamp(0, calc((675 - var(--ob-sn) - 345 + var(--ob-awn) - 12) / 283), 1);position:absolute;left:0;width:390px;height:283px;top:calc(392px - var(--fit-short,0px));transform:scale(var(--k));transform-origin:50% 100%;opacity:clamp(0, calc((var(--k) - 0.35) * 8), 1);pointer-events:none">
+      <div aria-hidden="true" style="position:absolute;left:103px;top:0px;width:184.32px;height:205.94px;display:flex;align-items:center;justify-content:center"><img src="assets/161aa.svg" alt="" style="width:167px;height:191px;transform:rotate(5.43deg)"></div>
+      <img src="assets/6df69.svg" alt="" style="position:absolute;left:0;top:206px;width:410px;height:40px">
+      <img src="assets/6df69.svg" alt="" style="position:absolute;left:-6px;top:243px;width:410px;height:40px">
+      <img src="assets/ec210.svg" alt="" style="position:absolute;left:8px;top:241px;width:396px;height:21px">
+    </div>
     <button type="button" onClick="{{ next }}" style="position:absolute;left:24px;top:calc(721px - var(--fit-short,0px));width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:1">Continue</button>
   </sc-if>
 
@@ -100,12 +106,14 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
         <button type="button" role="radio" aria-checked="{{ o.checked }}" onClick="{{ o.pick }}" style="width:100%;height:56px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-radius:8px;background:{{ o.bg }};border:{{ o.border }};font-family:Inter,sans-serif;font-weight:500;font-size:16px;color:#004256;cursor:pointer;text-align:left;flex-shrink:0">{{ o.label }}<sc-if value="{{ o.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#004256" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 10.5 3.5 3.5 7.5-8"/></svg></sc-if></button>
       </sc-for>
     </div>
-    <img src="assets/86691.svg" alt="" style="position:absolute;left:224px;top:calc(639px - var(--fit-short,0px));width:48px;height:19px">
-    <img src="assets/86691.svg" alt="" style="position:absolute;left:81px;top:calc(637px - var(--fit-short,0px));width:48px;height:19px">
-    <img src="assets/0e120.svg" alt="" style="position:absolute;left:159px;top:calc(656px - var(--fit-short,0px));width:48px;height:21px">
-    <img src="assets/1fce8.svg" alt="" style="position:absolute;left:215px;top:calc(684px - var(--fit-short,0px));width:48px;height:28px">
-    <img src="assets/8b111.svg" alt="" style="position:absolute;left:272px;top:calc(644px - var(--fit-short,0px));width:137.9px;height:63.6px">
-    <img src="assets/af383.svg" alt="" style="position:absolute;left:-45px;top:calc(648px - var(--fit-short,0px));width:137.9px;height:63.6px;transform:scaleX(-1)">
+    <div aria-hidden="true" style="--k:clamp(0, calc((712 - var(--ob-sn) - 550 + var(--ob-an) - 12) / 75), 1);position:absolute;left:0;width:390px;height:75px;top:calc(637px - var(--fit-short,0px));transform:scale(var(--k));transform-origin:50% 100%;opacity:clamp(0, calc((var(--k) - 0.35) * 8), 1);pointer-events:none">
+      <img src="assets/86691.svg" alt="" style="position:absolute;left:224px;top:2px;width:48px;height:19px">
+      <img src="assets/86691.svg" alt="" style="position:absolute;left:81px;top:0px;width:48px;height:19px">
+      <img src="assets/0e120.svg" alt="" style="position:absolute;left:159px;top:19px;width:48px;height:21px">
+      <img src="assets/1fce8.svg" alt="" style="position:absolute;left:215px;top:47px;width:48px;height:28px">
+      <img src="assets/8b111.svg" alt="" style="position:absolute;left:272px;top:7px;width:137.9px;height:63.6px">
+      <img src="assets/af383.svg" alt="" style="position:absolute;left:-45px;top:11px;width:137.9px;height:63.6px;transform:scaleX(-1)">
+    </div>
     <button type="button" onClick="{{ next }}" disabled="{{ noRole }}" style="position:absolute;left:24px;top:calc(721px - var(--fit-short,0px));width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:{{ canGo }}">Continue</button>
   </sc-if>
 
@@ -149,8 +157,10 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
         </button>
       </sc-for>
     </div>
-    <img src="assets/86817.svg" alt="" style="position:absolute;left:49px;top:calc(588px - var(--fit-short,0px));width:90px;height:81px">
-    <img src="assets/d7b9e.svg" alt="" style="position:absolute;left:-20px;top:calc(649px - var(--fit-short,0px));width:416px;height:78.5px">
+    <div aria-hidden="true" style="--k:clamp(0, calc((728 - var(--ob-sn) - 562 + var(--ob-an) - 12) / 140), 1);position:absolute;left:0;width:390px;height:140px;top:calc(588px - var(--fit-short,0px));transform:scale(var(--k));transform-origin:50% 100%;opacity:clamp(0, calc((var(--k) - 0.35) * 8), 1);pointer-events:none">
+      <img src="assets/86817.svg" alt="" style="position:absolute;left:49px;top:0px;width:90px;height:81px">
+      <img src="assets/d7b9e.svg" alt="" style="position:absolute;left:-20px;top:61px;width:416px;height:78.5px">
+    </div>
     <button type="button" onClick="{{ next }}" style="position:absolute;left:24px;top:calc(721px - var(--fit-short,0px));width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:1">Continue</button>
     <button type="button" onClick="{{ skip }}" style="position:absolute;left:24px;top:calc(797px - var(--fit-short,0px));width:342px;border:none;background:none;padding:0;font-family:Inter,sans-serif;font-weight:500;font-size:15px;color:#c6feff;text-decoration:underline;cursor:pointer">Skip</button>
   </sc-if>
@@ -182,9 +192,11 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
         </div>
       </sc-for>
     </div>
-    <img src="assets/3262d.svg" alt="" style="position:absolute;left:140px;top:calc(622px - var(--fit-short,0px));width:90.5px;height:50.5px">
-    <img src="assets/6df69.svg" alt="" style="position:absolute;left:-22px;top:calc(660px - var(--fit-short,0px));width:413px;height:40px">
-    <img src="assets/1aee5.svg" alt="" style="position:absolute;left:-12px;top:calc(663px - var(--fit-short,0px));width:401.6px;height:58.3px">
+    <div aria-hidden="true" style="--k:clamp(0, calc((721 - var(--ob-sn) - {{ socialsEnd }} + var(--ob-an) - 12) / 99), 1);position:absolute;left:0;width:390px;height:99px;top:calc(622px - var(--fit-short,0px));transform:scale(var(--k));transform-origin:50% 100%;opacity:clamp(0, calc((var(--k) - 0.35) * 8), 1);pointer-events:none">
+      <img src="assets/3262d.svg" alt="" style="position:absolute;left:140px;top:0px;width:90.5px;height:50.5px">
+      <img src="assets/6df69.svg" alt="" style="position:absolute;left:-22px;top:38px;width:413px;height:40px">
+      <img src="assets/1aee5.svg" alt="" style="position:absolute;left:-12px;top:41px;width:401.6px;height:58.3px">
+    </div>
     <button type="button" onClick="{{ next }}" style="position:absolute;left:24px;top:calc(721px - var(--fit-short,0px));width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:1">Continue</button>
     <button type="button" onClick="{{ skip }}" style="position:absolute;left:24px;top:calc(797px - var(--fit-short,0px));width:342px;border:none;background:none;padding:0;font-family:Inter,sans-serif;font-weight:500;font-size:15px;color:#c6feff;text-decoration:underline;cursor:pointer">Skip</button>
   </sc-if>
@@ -309,7 +321,9 @@ class Component extends DCLogic {
     const pickedSocials = SOC.filter((c) => f[c.key]).map((c) => ({ icon: c.small, text: c.fmt(f[c.key]) }));
     const editTo = (target) => () => this.setState({ step: target, returnToReview: true, err: '' });
     const stepNo = Math.max(1, idx + 1);
+    const socialsEnd = 491 + 58 * ['linkedin', 'instagram', 'website'].filter((k) => f[k]).length;
     return {
+      socialsEnd,
       s, f, set, first, bg: (step === 'login' || step === 'signup') ? '#166a83' : '#004256',
       stepNo, bars: ORDER.map((_, i) => (i === idx ? '#c6feff' : '#166a83')),
       pwType: showPw ? 'text' : 'password', pwLabel: showPw ? 'Hide password' : 'Show password', eyeOpacity: showPw ? 0.5 : 1,

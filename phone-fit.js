@@ -85,6 +85,8 @@
     '.fit-sheet nav a{padding:12px 10px;background:rgba(235,250,254,.06)}',
     '.fit-sheet .fit-actions a,.fit-sheet .fit-actions button{height:46px}',
     // Phones: the screen fills the full width and the phone's real height.
+    // Phones: pin the screen to the top-left of the visible area (iOS Safari's layout viewport can be taller than what you see).
+    'html:not(.fit-desk) #dc-root{left:0;top:0;transform-origin:0 0;transform:translateY(calc(0px - var(--fit-ky,0px))) scale(var(--fit-s,1))}',
     'html:not(.fit-desk) [data-fit-chain]{height:100%!important}',
     'html:not(.fit-desk) [data-fit-screen]{height:100%!important}',
     // Screens laid out for a fixed 844px height scroll instead of being cut off on shorter phones.
@@ -245,12 +247,26 @@
     // Measure with the screen stretched; if content reaches past the bottom, let it scroll.
     var wasTall = doc.classList.contains('fit-tall');
     if (wasTall) doc.classList.remove('fit-tall');
-    var tall = c.screen.scrollHeight > c.screen.clientHeight + 2 && cutOff(c.screen);
+    var tall = c.screen.scrollHeight > c.screen.clientHeight + 2 && !bottomAnchored(c.screen) && cutOff(c.screen);
     doc.classList.toggle('fit-tall', tall);
     if (tall !== wasTall && !tall) { var r = document.getElementById('dc-root'); if (r) r.scrollTop = 0; }
   }
   // Would real content be cut off at this height? Ignores decorations that bleed past the
   // 844px design anyway, and anything inside a scrolling or clipped area of the screen.
+  // A screen with something pinned to its bottom edge (nav bar, composer, action bar) is built
+  // to stretch, so it should always fill the phone rather than scroll.
+  function bottomAnchored(screen) {
+    var stack = Array.prototype.slice.call(screen.children);
+    while (stack.length) {
+      var e = stack.pop();
+      var cs = getComputedStyle(e);
+      if (cs.display === 'none') continue;
+      if (cs.position === 'absolute' && parseFloat(cs.bottom) === 0 && e.getBoundingClientRect().height > 0) return true;
+      if (/(auto|scroll)/.test(cs.overflowY)) continue;
+      for (var i = 0; i < e.children.length; i++) stack.push(e.children[i]);
+    }
+    return false;
+  }
   // Text, buttons, links and fields must stay reachable; pictures and shapes may be trimmed.
   function isContent(e) {
     if (/^(A|BUTTON|INPUT|TEXTAREA|SELECT|LABEL)$/.test(e.tagName)) return true;
@@ -294,6 +310,7 @@
       doc.style.setProperty('--fit-h', (h / s).toFixed(2) + 'px');   // and the phone's full height
       // How much shorter than the 844px design this phone is; fixed-layout screens use it to pull their bottom up.
       doc.style.setProperty('--fit-short', Math.max(0, H - h / s).toFixed(2) + 'px');
+      doc.style.setProperty('--fit-hn', (h / s).toFixed(2));   // same height as a plain number, for scaling
       doc.style.setProperty('--fit-bg', screenBg());
     } else {
       doc.classList.add('fit-desk');
@@ -301,6 +318,7 @@
       doc.style.removeProperty('--fit-bg');
       doc.style.removeProperty('--fit-h');
       doc.style.removeProperty('--fit-short');
+      doc.style.removeProperty('--fit-hn');
       doc.classList.remove('fit-tall');
       if (vv) { w = vv.width; h = vv.height; }
       s = Math.min(1, (h - 48) / FH, (w - 48) / FW);

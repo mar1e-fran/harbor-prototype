@@ -23,11 +23,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
       </div>
 
       <sc-if value="{{ isNone }}" hint-placeholder-val="{{ true }}">
-        <section class="cs-fade" style="position:relative;width:342px;height:204px;border-radius:16px;background:#ebfafe;overflow:hidden">
-          <img src="assets/5d50e.svg" alt="" style="position:absolute;left:85px;top:60px;width:172px;height:47.46px">
-          <p style="position:absolute;left:36px;top:118px;width:270px;margin:0;text-align:center;font-weight:600;font-size:16px;color:#004256">No live voyage right now</p>
-          <p style="position:absolute;left:36px;top:145px;width:270px;margin:0;text-align:center;font-size:12px;color:#1f92b4">Register for an event and it shows up here when it starts.</p>
-        </section>
+        <section class="cs-fade" style="width:342px;min-height:204px;box-sizing:border-box;padding:56px 28px 28px;border-radius:16px;background:#ebfafe;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center"><img src="assets/5d50e.svg" alt="" style="width:172px;height:47.46px;display:block;margin-bottom:6px"><p style="margin:0;font-weight:600;font-size:16px;line-height:22px;color:#004256;text-wrap:balance">No live voyage right now</p><p style="margin:0;font-size:12px;line-height:17px;color:#1f92b4;text-wrap:balance">Register for an event and it shows up here when it starts.</p></section>
         <a href="Search.dc.html" style="height:48px;border-radius:8px;background:#004256;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px">Find an event</a>
       </sc-if>
 
@@ -46,11 +42,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
       </sc-if>
 
       <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
-        <section class="cs-fade" style="position:relative;width:342px;height:204px;border-radius:16px;background:#ebfafe;overflow:hidden">
-          <img src="assets/5d50e.svg" alt="" style="position:absolute;left:85px;top:60px;width:172px;height:47.46px">
-          <p style="position:absolute;left:36px;top:118px;width:270px;margin:0;text-align:center;font-weight:600;font-size:16px;color:#004256">That’s a wrap on SCAD Career Fair</p>
-          <p style="position:absolute;left:36px;top:145px;width:270px;margin:0;text-align:center;font-size:12px;color:#1f92b4">Your notes and new crewmates are saved.</p>
-        </section>
+        <section class="cs-fade" style="width:342px;min-height:204px;box-sizing:border-box;padding:56px 28px 28px;border-radius:16px;background:#ebfafe;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center"><img src="assets/5d50e.svg" alt="" style="width:172px;height:47.46px;display:block;margin-bottom:6px"><p style="margin:0;font-weight:600;font-size:16px;line-height:22px;color:#004256;text-wrap:balance">That’s a wrap on SCAD Career Fair</p><p style="margin:0;font-size:12px;line-height:17px;color:#1f92b4;text-wrap:balance">Your notes and new crewmates are saved.</p></section>
         <a href="Wrapped.dc.html" style="height:48px;border-radius:8px;background:#004256;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px">See your wrap-up</a>
         <a href="Search.dc.html" style="height:44px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#004256">Find your next event</a>
       </sc-if>

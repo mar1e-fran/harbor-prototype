@@ -20,27 +20,27 @@ body{margin:0}a{text-decoration:none}[style*="DM Sans"]{font-variation-settings:
 </style>
 </helmet>
 <div style="position:relative;width:390px;height:844px;overflow:hidden;background:#004256;font-family:Poppins,sans-serif">
-  <img src="assets/cw-waves.svg" alt="" style="position:absolute;left:0;top:792px;width:390px;height:52px;display:block">
+  <img src="assets/cw-waves.svg" alt="" style="position:absolute;left:0;top:calc(792px - var(--fit-short,0px));width:390px;height:52px;display:block">
 
   <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
-    <img src="assets/cw-scene-intro.svg" alt="" style="position:absolute;left:0;top:76px;width:390px;height:360px;display:block">
-    <div class="cw-fade" style="position:absolute;left:24px;top:440px;width:342px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;line-height:normal">
+    <img src="assets/cw-scene-intro.svg" alt="" style="position:absolute;left:0;top:76px;width:390px;height:max(140px, calc(360px - var(--fit-short,0px)));object-fit:contain;object-position:center bottom;display:block">
+    <div class="cw-fade" style="position:absolute;left:24px;top:calc(440px - var(--fit-short,0px));width:342px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;line-height:normal">
       <h1 style="margin:0;width:342px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:40px;color:#c6feff">Calm Waters Check-In</h1>
       <p style="margin:0;width:322px;font-size:16px;color:#a0c3ce">Take a moment to orient yourself. Like a sailor finding their bearings, we’ll use your senses to reconnect with the present.</p>
       <p style="margin:0;font-size:14px;color:#7ec6dc;white-space:nowrap">5 senses · about 3 minutes</p>
     </div>
-    <button type="button" class="cw-btn" onClick="{{ begin }}" style="position:absolute;left:32px;top:708px;width:326px;height:56px;border:none;border-radius:28px;background:#80fdff;color:#004256;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px;cursor:pointer">Begin</button>
+    <button type="button" class="cw-btn" onClick="{{ begin }}" style="position:absolute;left:32px;top:calc(708px - var(--fit-short,0px));width:326px;height:56px;border:none;border-radius:28px;background:#80fdff;color:#004256;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px;cursor:pointer">Begin</button>
   </sc-if>
 
   <sc-if value="{{ isSense }}" hint-placeholder-val="{{ false }}">
-    <img src="{{ s.scene }}" alt="" style="position:absolute;left:0;top:76px;width:390px;height:324px;display:block">
-    <div class="cw-fade" style="position:absolute;left:40px;top:392px;width:310px;display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center">
+    <img src="{{ s.scene }}" alt="" style="position:absolute;left:0;top:76px;width:390px;height:max(120px, calc(324px - var(--fit-short,0px)));object-fit:contain;object-position:center bottom;display:block">
+    <div class="cw-fade" style="position:absolute;left:40px;top:calc(392px - var(--fit-short,0px));width:310px;display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center">
       <span aria-hidden="true" style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:80px;line-height:1;color:#c6feff">{{ s.n }}</span>
       <h1 aria-live="polite" style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:24px;line-height:normal;color:#acfec0;white-space:nowrap">{{ s.title }}</h1>
       <p style="margin:0;width:310px;font-size:20px;line-height:normal;color:#c6feff">{{ s.prompt }}</p>
       <p style="margin:0;width:310px;font-size:14px;line-height:normal;color:#7ec6dc">{{ s.hint }}</p>
     </div>
-    <div style="position:absolute;left:0;right:0;top:640px;display:flex;gap:12px;justify-content:center">
+    <div style="position:absolute;left:0;right:0;top:calc(640px - var(--fit-short,0px));display:flex;gap:12px;justify-content:center">
       <sc-for list="{{ obs }}" as="o" hint-placeholder-count="5">
         <button type="button" class="cw-obs" onClick="{{ o.tap }}" aria-pressed="{{ o.pressed }}" aria-label="{{ o.label }}" style="width:56px;height:56px;padding:0;border:none;border-radius:28px;background:none;cursor:pointer;position:relative">
           <sc-if value="{{ o.open }}" hint-placeholder-val="{{ true }}"><img src="assets/cw-open.svg" alt="" style="width:56px;height:56px;display:block"></sc-if>
@@ -48,18 +48,18 @@ body{margin:0}a{text-decoration:none}[style*="DM Sans"]{font-variation-settings:
         </button>
       </sc-for>
     </div>
-    <p role="status" style="position:absolute;left:0;right:0;top:704px;margin:0;text-align:center;font-size:14px;line-height:normal;color:#a0c3ce">{{ count }} of {{ s.n }} noticed</p>
-    <button type="button" class="cw-btn" onClick="{{ next }}" aria-disabled="{{ notReadyStr }}" style="position:absolute;left:32px;top:732px;width:326px;height:56px;box-sizing:border-box;border-radius:28px;border:{{ btnBorder }};background:{{ btnBg }};color:{{ btnColor }};font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px;cursor:{{ btnCursor }}">{{ nextLabel }}</button>
+    <p role="status" style="position:absolute;left:0;right:0;top:calc(704px - var(--fit-short,0px));margin:0;text-align:center;font-size:14px;line-height:normal;color:#a0c3ce">{{ count }} of {{ s.n }} noticed</p>
+    <button type="button" class="cw-btn" onClick="{{ next }}" aria-disabled="{{ notReadyStr }}" style="position:absolute;left:32px;top:calc(732px - var(--fit-short,0px));width:326px;height:56px;box-sizing:border-box;border-radius:28px;border:{{ btnBorder }};background:{{ btnBg }};color:{{ btnColor }};font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px;cursor:{{ btnCursor }}">{{ nextLabel }}</button>
     <button type="button" onClick="{{ skip }}" style="position:absolute;left:321px;top:40px;height:48px;padding:0 14px;border:none;background:none;font-family:Poppins,sans-serif;font-size:16px;color:#a0c3ce;cursor:pointer">Skip</button>
   </sc-if>
 
   <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
-    <img src="assets/cw-scene-done.svg" alt="" style="position:absolute;left:0;top:76px;width:390px;height:324px;display:block">
-    <div class="cw-fade" style="position:absolute;left:24px;top:412px;width:342px;display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center;line-height:normal">
+    <img src="assets/cw-scene-done.svg" alt="" style="position:absolute;left:0;top:76px;width:390px;height:max(120px, calc(324px - var(--fit-short,0px)));object-fit:contain;object-position:center bottom;display:block">
+    <div class="cw-fade" style="position:absolute;left:24px;top:calc(412px - var(--fit-short,0px));width:342px;display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center;line-height:normal">
       <h1 style="margin:0;width:342px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:40px;color:#c6feff">You’ve Found Your Bearings</h1>
       <p style="margin:0;width:322px;font-size:16px;color:#a0c3ce">You’ve reconnected with your surroundings and returned to the present moment. Take a deep breath and continue your journey.</p>
     </div>
-    <a href="LiveOverview.dc.html" class="cw-btn" style="position:absolute;left:32px;top:708px;width:326px;height:56px;border-radius:28px;background:#80fdff;color:#004256;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px">Return to Voyage</a>
+    <a href="LiveOverview.dc.html" class="cw-btn" style="position:absolute;left:32px;top:calc(708px - var(--fit-short,0px));width:326px;height:56px;border-radius:28px;background:#80fdff;color:#004256;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px">Return to Voyage</a>
   </sc-if>
 
   <sc-if value="{{ showSteps }}" hint-placeholder-val="{{ false }}">
