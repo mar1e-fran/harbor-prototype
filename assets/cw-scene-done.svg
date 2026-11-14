@@ -1,0 +1,16 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="390" height="324" viewBox="0 0 390 324" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Scene" clip-path="url(#clip0_0_13)">
+<path id="Compass ring" d="M291 170C291 223.019 248.019 266 195 266C141.981 266 99 223.019 99 170C99 116.981 141.981 74 195 74C248.019 74 291 116.981 291 170Z" stroke-width="3" stroke="#26B2DC"/>
+<path id="Compass inner ring" d="M269 170C269 210.869 235.869 244 195 244C154.131 244 121 210.869 121 170C121 129.131 154.131 96 195 96C235.869 96 269 129.131 269 170Z" stroke-width="1.5" stroke="#7EC6DC"/>
+<path id="Ordinal points" d="M237.426 127.574L206.314 170L237.426 212.426L195 181.314L152.574 212.426L183.686 170L152.574 127.574L195 158.686L237.426 127.574Z" fill="#26B2DC"/>
+<path id="Cardinal points" d="M195 74L208 157L291 170L208 183L195 266L182 183L99 170L182 157L195 74Z" fill="#C6FEFF"/>
+<path id="North" d="M195 74L208 157L195 170L182 157L195 74Z" fill="#ACFEC0"/>
+<path id="Pivot" d="M195 177C198.866 177 202 173.866 202 170C202 166.134 198.866 163 195 163C191.134 163 188 166.134 188 170C188 173.866 191.134 177 195 177Z" fill="#004256" stroke-width="3" stroke="#ACFEC0"/>
+<path id="Swell" d="M0 304C21.6667 300 43.3333 300 65 304C86.6667 308 108.333 308 130 304C151.667 300 173.333 300 195 304C216.667 308 238.333 308 260 304C281.667 300 303.333 300 325 304C346.667 308 368.333 308 390 304" stroke-width="2" stroke="#7EC6DC"/>
+</g>
+<defs>
+<clipPath id="clip0_0_13">
+<rect width="390" height="324" fill="white"/>
+</clipPath>
+</defs>
+</svg>

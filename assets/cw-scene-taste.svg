@@ -1,0 +1,47 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="390" height="324" viewBox="0 0 390 324" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Scene" clip-path="url(#clip0_0_17)">
+<path id="Moon glow" d="M195 148C223.719 148 247 124.719 247 96C247 67.2812 223.719 44 195 44C166.281 44 143 67.2812 143 96C143 124.719 166.281 148 195 148Z" fill="#C6FEFF"/>
+<path id="Moon" d="M195 126C211.569 126 225 112.569 225 96C225 79.4315 211.569 66 195 66C178.431 66 165 79.4315 165 96C165 112.569 178.431 126 195 126Z" fill="#C6FEFF"/>
+<path id="Sea" d="M390 176H0V324H390V176Z" fill="#166A83"/>
+<path id="Horizon swell" d="M0 176C21.6667 173.333 43.3333 173.333 65 176C86.6667 178.667 108.333 178.667 130 176C151.667 173.333 173.333 173.333 195 176C216.667 178.667 238.333 178.667 260 176C281.667 173.333 303.333 173.333 325 176C346.667 178.667 368.333 178.667 390 176" stroke-width="2" stroke="#7EC6DC"/>
+<g id="Reflection">
+<g id="Shimmer 1">
+<path d="M163 192H227Z" fill="black"/>
+<path d="M163 192H227" stroke-width="3" stroke-linecap="round" stroke="#C6FEFF"/>
+</g>
+<g id="Shimmer 2">
+<path d="M170 205H220Z" fill="black"/>
+<path d="M170 205H220" stroke-width="3" stroke-linecap="round" stroke="#C6FEFF"/>
+</g>
+<g id="Shimmer 3">
+<path d="M167 218H223Z" fill="black"/>
+<path d="M167 218H223" stroke-width="3" stroke-linecap="round" stroke="#C6FEFF"/>
+</g>
+<g id="Shimmer 4">
+<path d="M176 231H214Z" fill="black"/>
+<path d="M176 231H214" stroke-width="3" stroke-linecap="round" stroke="#C6FEFF"/>
+</g>
+<g id="Shimmer 5">
+<path d="M174 244H216Z" fill="black"/>
+<path d="M174 244H216" stroke-width="3" stroke-linecap="round" stroke="#C6FEFF"/>
+</g>
+<g id="Shimmer 6">
+<path d="M182 257H208Z" fill="black"/>
+<path d="M182 257H208" stroke-width="3" stroke-linecap="round" stroke="#C6FEFF"/>
+</g>
+<g id="Shimmer 7">
+<path d="M180 270H210Z" fill="black"/>
+<path d="M180 270H210" stroke-width="3" stroke-linecap="round" stroke="#C6FEFF"/>
+</g>
+<g id="Shimmer 8">
+<path d="M188 283H202Z" fill="black"/>
+<path d="M188 283H202" stroke-width="3" stroke-linecap="round" stroke="#C6FEFF"/>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_17">
+<rect width="390" height="324" fill="white"/>
+</clipPath>
+</defs>
+</svg>

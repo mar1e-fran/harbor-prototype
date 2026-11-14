@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="390" height="24" viewBox="0 0 390 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Route">
+<path id="Route_2" d="M48 12H342" stroke-width="3" stroke-linecap="round" stroke="#7EC6DC"/>
+<path id="Route walked" d="M48 12H71.5" stroke-width="3" stroke-linecap="round" stroke="#166A83"/>
+<path id="Vector" d="M48 16C50.2091 16 52 14.2091 52 12C52 9.79086 50.2091 8 48 8C45.7909 8 44 9.79086 44 12C44 14.2091 45.7909 16 48 16Z" fill="#166A83"/>
+<path id="Vector_2" d="M121.5 16C123.709 16 125.5 14.2091 125.5 12C125.5 9.79086 123.709 8 121.5 8C119.291 8 117.5 9.79086 117.5 12C117.5 14.2091 119.291 16 121.5 16Z" fill="#FEEAF9" stroke-width="2" stroke="#166A83"/>
+<path id="Vector_3" d="M195 16C197.209 16 199 14.2091 199 12C199 9.79086 197.209 8 195 8C192.791 8 191 9.79086 191 12C191 14.2091 192.791 16 195 16Z" fill="#FEEAF9" stroke-width="2" stroke="#166A83"/>
+<path id="Vector_4" d="M268.5 16C270.709 16 272.5 14.2091 272.5 12C272.5 9.79086 270.709 8 268.5 8C266.291 8 264.5 9.79086 264.5 12C264.5 14.2091 266.291 16 268.5 16Z" fill="#FEEAF9" stroke-width="2" stroke="#166A83"/>
+<path id="Overlook flag" d="M342 12V2L351 5.5L342 9" fill="#166A83" stroke-width="2" stroke-linejoin="round" stroke="#166A83"/>
+<path id="You" d="M71.5 19C75.366 19 78.5 15.866 78.5 12C78.5 8.13401 75.366 5 71.5 5C67.634 5 64.5 8.13401 64.5 12C64.5 15.866 67.634 19 71.5 19Z" fill="#004256" stroke-width="3" stroke="#FEEAF9"/>
+</g>
+</svg>

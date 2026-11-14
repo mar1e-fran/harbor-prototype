@@ -1,0 +1,33 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="390" height="324" viewBox="0 0 390 324" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Scene" clip-path="url(#clip0_0_20)">
+<path id="Sea" d="M390 214H0V324H390V214Z" fill="#166A83"/>
+<path id="Swell" d="M0 214C21.6667 210 43.3333 210 65 214C86.6667 218 108.333 218 130 214C151.667 210 173.333 210 195 214C216.667 218 238.333 218 260 214C281.667 210 303.333 210 325 214C346.667 218 368.333 218 390 214" stroke-width="2" stroke="#7EC6DC"/>
+<path id="Ripple 1" opacity="0.2" d="M257 216C257 222.627 229.242 228 195 228C160.758 228 133 222.627 133 216C133 209.373 160.758 204 195 204C229.242 204 257 209.373 257 216Z" stroke-width="2" stroke="#7EC6DC"/>
+<path id="Ripple 2" opacity="0.2" d="M299 218C299 229.046 252.438 238 195 238C137.562 238 91 229.046 91 218C91 206.954 137.562 198 195 198C252.438 198 299 206.954 299 218Z" stroke-width="2" stroke="#7EC6DC"/>
+<path id="Ripple 3" opacity="0.2" d="M341 220C341 235.464 275.634 248 195 248C114.366 248 49 235.464 49 220C49 204.536 114.366 192 195 192C275.634 192 341 204.536 341 220Z" stroke-width="2" stroke="#7EC6DC"/>
+<g id="Sound 1" opacity="0">
+<path id="Vector" d="M168 136C161.333 145.333 161.333 154.667 168 164" stroke-width="3" stroke-linecap="round" stroke="#ACFEC0"/>
+<path id="Vector_2" d="M222 136C228.667 145.333 228.667 154.667 222 164" stroke-width="3" stroke-linecap="round" stroke="#ACFEC0"/>
+</g>
+<g id="Sound 2" opacity="0">
+<path id="Vector_3" d="M152 124C141.333 141.333 141.333 158.667 152 176" stroke-width="3" stroke-linecap="round" stroke="#ACFEC0"/>
+<path id="Vector_4" d="M238 124C248.667 141.333 248.667 158.667 238 176" stroke-width="3" stroke-linecap="round" stroke="#ACFEC0"/>
+</g>
+<g id="Sound 3" opacity="0">
+<path id="Vector_5" d="M136 112C121.333 137.333 121.333 162.667 136 188" stroke-width="3" stroke-linecap="round" stroke="#ACFEC0"/>
+<path id="Vector_6" d="M254 112C268.667 137.333 268.667 162.667 254 188" stroke-width="3" stroke-linecap="round" stroke="#ACFEC0"/>
+</g>
+<g id="Bell buoy">
+<path id="Vector_7" d="M182 164L195 122L208 164" stroke-width="4" stroke-linejoin="round" stroke="#7EC6DC"/>
+<path id="Vector_8" d="M195 122C198.314 122 201 119.314 201 116C201 112.686 198.314 110 195 110C191.686 110 189 112.686 189 116C189 119.314 191.686 122 195 122Z" fill="#FEACE8"/>
+<path id="Vector_9" d="M195 157C198.866 157 202 153.866 202 150C202 146.134 198.866 143 195 143C191.134 143 188 146.134 188 150C188 153.866 191.134 157 195 157Z" fill="#C6FEFF"/>
+<path id="Vector_10" d="M174 212H216L208 164H182L174 212Z" fill="#26B2DC"/>
+<path id="Vector_11" d="M211 186H179V194H211V186Z" fill="#C6FEFF"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_20">
+<rect width="390" height="324" fill="white"/>
+</clipPath>
+</defs>
+</svg>

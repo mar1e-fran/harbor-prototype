@@ -126,7 +126,36 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { day: 'Mon', saved: !!props.startSaved, sheet: !!props.startSheet, reg: !!props.startRegistered };
+    this.state = { day: 'Mon', saved: !!props.startSaved, sheet: !!props.startSheet, reg: this.storedReg(props) };
+  }
+  // Registration is remembered, so leaving and coming back still shows Unregister.
+  storedReg(props) {
+    const id = props.eventId || 'EventDetail';
+    if (props.past) return !!props.startRegistered;
+    try {
+      if (id === 'EventDetail') {
+        const f = window.localStorage.getItem('harbor.fair');
+        if (f === 'upcoming' || f === 'live') return true;
+        if (f === 'none') return false;
+      } else {
+        const list = JSON.parse(window.localStorage.getItem('harbor.reg') || '[]');
+        if (list.includes(id)) return true;
+      }
+    } catch (e) {}
+    return !!props.startRegistered;
+  }
+  saveReg(on) {
+    const id = this.props.eventId || 'EventDetail';
+    try {
+      if (id === 'EventDetail') {
+        window.localStorage.setItem('harbor.fair', on ? 'upcoming' : 'none');
+        window.dispatchEvent(new Event('harbor-fair'));
+      } else {
+        const list = JSON.parse(window.localStorage.getItem('harbor.reg') || '[]').filter((x) => x !== id);
+        if (on) list.push(id);
+        window.localStorage.setItem('harbor.reg', JSON.stringify(list));
+      }
+    } catch (e) {}
   }
   renderVals() {
     const { saved, sheet, reg } = this.state;
@@ -758,9 +787,9 @@ class Component extends DCLogic {
       toggleSave: () => this.setState({ saved: !saved }),
       openSheet: () => this.setState({ sheet: true }),
       closeSheet: () => this.setState({ sheet: false }),
-      confirm: () => { this.setState({ sheet: false, reg: true }); if (isFair) { try { window.localStorage.setItem('harbor.fair', 'upcoming'); window.dispatchEvent(new Event('harbor-fair')); } catch (err) {} } },
+      confirm: () => { this.setState({ sheet: false, reg: true }); this.saveReg(true); },
       checkIn: () => { if (isFair) { try { window.localStorage.setItem('harbor.fair', 'live'); window.dispatchEvent(new Event('harbor-fair')); } catch (err) {} } },
-      unregister: () => { this.setState({ reg: false }); if (isFair) { try { window.localStorage.removeItem('harbor.fair'); window.dispatchEvent(new Event('harbor-fair')); } catch (err) {} } },
+      unregister: () => { this.setState({ reg: false }); this.saveReg(false); },
     };
   }
 }

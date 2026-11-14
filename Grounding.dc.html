@@ -2,25 +2,122 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Wellness – 5-4-3-2-1 Grounding</title>
+<title>Wellness – Calm Waters Check-In</title>
 <script src="./support.js"></script>
 <script src="./phone-fit.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&amp;family=Poppins:wght@400;600&amp;display=swap">
 <style>
-body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+body{margin:0}a{text-decoration:none}[style*="DM Sans"]{font-variation-settings:"opsz" 14}
+@keyframes cwFade{from{opacity:0;transform:translateY(6px)}}.cw-fade{animation:cwFade .35s ease-out both}
+@keyframes cwPop{0%{transform:scale(.8)}60%{transform:scale(1.08)}100%{transform:none}}.cw-pop{animation:cwPop .25s ease-out both}
+.cw-btn{transition:background-color .2s ease,border-color .2s ease,color .2s ease}
+.cw-btn:active,.cw-obs:active{transform:scale(.97)}
+@media (prefers-reduced-motion:reduce){.cw-fade,.cw-pop{animation:none}}
 </style>
 </helmet>
-<dc-import name="ResetActivity" kind="grounding" hint-size="390px,844px"></dc-import>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;background:#004256;font-family:Poppins,sans-serif">
+  <img src="assets/cw-waves.svg" alt="" style="position:absolute;left:0;top:792px;width:390px;height:52px;display:block">
+
+  <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+    <img src="assets/cw-scene-intro.svg" alt="" style="position:absolute;left:0;top:76px;width:390px;height:360px;display:block">
+    <div class="cw-fade" style="position:absolute;left:24px;top:440px;width:342px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;line-height:normal">
+      <h1 style="margin:0;width:342px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:40px;color:#c6feff">Calm Waters Check-In</h1>
+      <p style="margin:0;width:322px;font-size:16px;color:#a0c3ce">Take a moment to orient yourself. Like a sailor finding their bearings, we’ll use your senses to reconnect with the present.</p>
+      <p style="margin:0;font-size:14px;color:#7ec6dc;white-space:nowrap">5 senses · about 3 minutes</p>
+    </div>
+    <button type="button" class="cw-btn" onClick="{{ begin }}" style="position:absolute;left:32px;top:708px;width:326px;height:56px;border:none;border-radius:28px;background:#80fdff;color:#004256;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px;cursor:pointer">Begin</button>
+  </sc-if>
+
+  <sc-if value="{{ isSense }}" hint-placeholder-val="{{ false }}">
+    <img src="{{ s.scene }}" alt="" style="position:absolute;left:0;top:76px;width:390px;height:324px;display:block">
+    <div class="cw-fade" style="position:absolute;left:40px;top:392px;width:310px;display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center">
+      <span aria-hidden="true" style="font-family:'DM Sans',sans-serif;font-weight:700;font-size:80px;line-height:1;color:#c6feff">{{ s.n }}</span>
+      <h1 aria-live="polite" style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:24px;line-height:normal;color:#acfec0;white-space:nowrap">{{ s.title }}</h1>
+      <p style="margin:0;width:310px;font-size:20px;line-height:normal;color:#c6feff">{{ s.prompt }}</p>
+      <p style="margin:0;width:310px;font-size:14px;line-height:normal;color:#7ec6dc">{{ s.hint }}</p>
+    </div>
+    <div style="position:absolute;left:0;right:0;top:640px;display:flex;gap:12px;justify-content:center">
+      <sc-for list="{{ obs }}" as="o" hint-placeholder-count="5">
+        <button type="button" class="cw-obs" onClick="{{ o.tap }}" aria-pressed="{{ o.pressed }}" aria-label="{{ o.label }}" style="width:56px;height:56px;padding:0;border:none;border-radius:28px;background:none;cursor:pointer;position:relative">
+          <sc-if value="{{ o.open }}" hint-placeholder-val="{{ true }}"><img src="assets/cw-open.svg" alt="" style="width:56px;height:56px;display:block"></sc-if>
+          <sc-if value="{{ o.found }}" hint-placeholder-val="{{ false }}"><span class="cw-pop" style="width:56px;height:56px;border-radius:28px;background:#acfec0;display:flex;align-items:center;justify-content:center"><img src="assets/cw-check.svg" alt="" style="width:24px;height:24px;display:block"></span></sc-if>
+        </button>
+      </sc-for>
+    </div>
+    <p role="status" style="position:absolute;left:0;right:0;top:704px;margin:0;text-align:center;font-size:14px;line-height:normal;color:#a0c3ce">{{ count }} of {{ s.n }} noticed</p>
+    <button type="button" class="cw-btn" onClick="{{ next }}" aria-disabled="{{ notReadyStr }}" style="position:absolute;left:32px;top:732px;width:326px;height:56px;box-sizing:border-box;border-radius:28px;border:{{ btnBorder }};background:{{ btnBg }};color:{{ btnColor }};font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px;cursor:{{ btnCursor }}">{{ nextLabel }}</button>
+    <button type="button" onClick="{{ skip }}" style="position:absolute;left:321px;top:40px;height:48px;padding:0 14px;border:none;background:none;font-family:Poppins,sans-serif;font-size:16px;color:#a0c3ce;cursor:pointer">Skip</button>
+  </sc-if>
+
+  <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+    <img src="assets/cw-scene-done.svg" alt="" style="position:absolute;left:0;top:76px;width:390px;height:324px;display:block">
+    <div class="cw-fade" style="position:absolute;left:24px;top:412px;width:342px;display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center;line-height:normal">
+      <h1 style="margin:0;width:342px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:40px;color:#c6feff">You’ve Found Your Bearings</h1>
+      <p style="margin:0;width:322px;font-size:16px;color:#a0c3ce">You’ve reconnected with your surroundings and returned to the present moment. Take a deep breath and continue your journey.</p>
+    </div>
+    <a href="LiveOverview.dc.html" class="cw-btn" style="position:absolute;left:32px;top:708px;width:326px;height:56px;border-radius:28px;background:#80fdff;color:#004256;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px">Return to Voyage</a>
+  </sc-if>
+
+  <sc-if value="{{ showSteps }}" hint-placeholder-val="{{ false }}">
+    <div role="progressbar" aria-label="Senses" aria-valuemin="1" aria-valuemax="5" aria-valuenow="{{ stepNo }}" style="position:absolute;left:0;right:0;top:40px;height:48px;display:flex;gap:8px;align-items:center;justify-content:center">
+      <sc-for list="{{ steps }}" as="p" hint-placeholder-count="5">
+        <span style="width:{{ p.size }};height:{{ p.size }};box-sizing:border-box;border-radius:999px;border:{{ p.border }};background:{{ p.bg }};display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;line-height:normal;color:{{ p.color }};transition:all .25s ease">{{ p.n }}</span>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <a href="LiveWellness.dc.html" aria-label="Back to wellness" style="position:absolute;left:10px;top:40px;width:48px;height:48px;display:flex;align-items:center;justify-content:center"><img src="assets/cw-back.svg" alt="" style="width:28px;height:28px;display:block"></a>
+</div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 844}}'>
 class Component extends DCLogic {
-renderVals() {
-return {};
-}
+  static SENSES = [
+    { n: 5, title: 'Things you can see', prompt: 'Find 5 things you can see around you.', hint: 'Tap a circle each time you spot something.', scene: 'assets/cw-scene-see.svg' },
+    { n: 4, title: 'Things you can touch', prompt: 'Notice 4 things you can physically feel.', hint: 'Perhaps your feet on the floor.', scene: 'assets/cw-scene-touch.svg' },
+    { n: 3, title: 'Things you can hear', prompt: 'Listen for 3 sounds around you.', hint: 'Near or far, loud or soft, each sound counts.', scene: 'assets/cw-scene-hear.svg' },
+    { n: 2, title: 'Things you can smell', prompt: 'Notice 2 scents nearby.', hint: 'If nothing stands out, notice the air itself.', scene: 'assets/cw-scene-smell.svg' },
+    { n: 1, title: 'Thing you can taste', prompt: 'Notice 1 taste present right now.', hint: 'Take a slow breath. Continue when you’re ready.', scene: 'assets/cw-scene-taste.svg' },
+  ];
+  constructor(props) { super(props); this.state = { screen: 'intro', i: 0, marks: [] }; }
+  go(i) {
+    if (i >= Component.SENSES.length) { this.setState({ screen: 'done', i: Component.SENSES.length, marks: [] }); return; }
+    this.setState({ screen: 'sense', i, marks: [] });
+  }
+  renderVals() {
+    const { screen, i, marks } = this.state;
+    const S = Component.SENSES;
+    const s = S[Math.min(i, S.length - 1)];
+    const count = marks.filter(Boolean).length;
+    const ready = count >= s.n;
+    const done = screen === 'done';
+    return {
+      isIntro: screen === 'intro', isSense: screen === 'sense', isDone: done, showSteps: screen !== 'intro',
+      s, count, stepNo: Math.min(i + 1, S.length),
+      obs: Array.from({ length: s.n }, (_, k) => {
+        const f = !!marks[k];
+        return { open: !f, found: f, pressed: f ? 'true' : 'false', label: 'Noticed ' + (k + 1) + ' of ' + s.n,
+          tap: () => { const m = marks.slice(); m[k] = !f; this.setState({ marks: m }); } };
+      }),
+      steps: S.map((x, k) => {
+        const state = done || k < i ? 'done' : k === i ? 'current' : 'next';
+        return { n: x.n, size: state === 'current' ? '34px' : '28px',
+          bg: state === 'done' ? '#acfec0' : state === 'current' ? '#80fdff' : 'transparent',
+          border: state === 'next' ? '1.5px solid #7ec6dc' : 'none',
+          color: state === 'next' ? '#a0c3ce' : '#004256' };
+      }),
+      notReadyStr: ready ? 'false' : 'true',
+      btnBg: ready ? '#80fdff' : 'transparent', btnBorder: ready ? 'none' : '1.5px solid #166a83',
+      btnColor: ready ? '#004256' : '#7ec6dc', btnCursor: ready ? 'pointer' : 'default',
+      nextLabel: i >= S.length - 1 ? 'Finish' : 'Continue',
+      begin: () => this.go(0),
+      next: () => { if (ready) this.go(i + 1); },
+      skip: () => this.go(i + 1),
+    };
+  }
 }
 </script>
 </body>

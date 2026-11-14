@@ -1,0 +1,45 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="390" height="360" viewBox="0 0 390 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Scene" clip-path="url(#clip0_0_8)">
+<path id="Sun glow" d="M276 176C308.033 176 334 150.033 334 118C334 85.9675 308.033 60 276 60C243.967 60 218 85.9675 218 118C218 150.033 243.967 176 276 176Z" fill="#C6FEFF"/>
+<path id="Sun" d="M276 152C294.778 152 310 136.778 310 118C310 99.2223 294.778 84 276 84C257.222 84 242 99.2223 242 118C242 136.778 257.222 152 276 152Z" fill="#C6FEFF"/>
+<path id="Gull 1" d="M84 96C89.3333 90.6667 94.6667 90.6667 100 96C105.333 90.6667 110.667 90.6667 116 96" stroke-width="2.5" stroke-linecap="round" stroke="#A0C3CE"/>
+<path id="Gull 2" d="M126 70C130 66 134 66 138 70C142 66 146 66 150 70" stroke-width="2.5" stroke-linecap="round" stroke="#A0C3CE"/>
+<path id="Sea" d="M390 212H0V360H390V212Z" fill="#166A83"/>
+<path id="Swell 1" d="M0 212C21.6667 207.333 43.3333 207.333 65 212C86.6667 216.667 108.333 216.667 130 212C151.667 207.333 173.333 207.333 195 212C216.667 216.667 238.333 216.667 260 212C281.667 207.333 303.333 207.333 325 212C346.667 216.667 368.333 216.667 390 212" stroke-width="2" stroke="#7EC6DC"/>
+<path id="Swell 2" d="M0 246C32.5 240.667 65 240.667 97.5 246C130 251.333 162.5 251.333 195 246C227.5 240.667 260 240.667 292.5 246C325 251.333 357.5 251.333 390 246" stroke-width="2" stroke="#7EC6DC"/>
+<path id="Swell 3" d="M0 284C21.6667 280 43.3333 280 65 284C86.6667 288 108.333 288 130 284C151.667 280 173.333 280 195 284C216.667 288 238.333 288 260 284C281.667 280 303.333 280 325 284C346.667 288 368.333 288 390 284" stroke-width="2" stroke="#7EC6DC"/>
+<g id="Sun reflection" opacity="0.7">
+<g id="Vector">
+<path d="M252 230H300Z" fill="black"/>
+<path d="M252 230H300" stroke-width="3" stroke-linecap="round" stroke="#C6FEFF"/>
+</g>
+<g id="Vector_2">
+<path d="M260 246H292Z" fill="black"/>
+<path d="M260 246H292" stroke-width="3" stroke-linecap="round" stroke="#C6FEFF"/>
+</g>
+<g id="Vector_3">
+<path d="M266 262H286Z" fill="black"/>
+<path d="M266 262H286" stroke-width="3" stroke-linecap="round" stroke="#C6FEFF"/>
+</g>
+<g id="Vector_4">
+<path d="M271 276H281Z" fill="black"/>
+<path d="M271 276H281" stroke-width="3" stroke-linecap="round" stroke="#C6FEFF"/>
+</g>
+</g>
+<g id="Sailboat">
+<g id="Vector_5">
+<path d="M152 210V116Z" fill="black"/>
+<path d="M152 210V116" stroke-width="3" stroke-linecap="round" stroke="#C6FEFF"/>
+</g>
+<path id="Vector_6" d="M152 116L167 121L152 126V116Z" fill="#FEACE8"/>
+<path id="Vector_7" d="M156 124V202H200L156 124Z" fill="#C6FEFF"/>
+<path id="Vector_8" d="M148 134V202H112L148 134Z" fill="#80FDFF"/>
+<path id="Vector_9" d="M106 208H198L184 225H120L106 208Z" fill="#26B2DC"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_8">
+<rect width="390" height="360" fill="white"/>
+</clipPath>
+</defs>
+</svg>

@@ -9,18 +9,141 @@
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700&amp;family=Poppins:wght@400;600&amp;display=swap">
 <style>
-body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+body{margin:0}a{text-decoration:none}[style*="DM Sans"]{font-variation-settings:"opsz" 14}
+.rw-pan{transition:transform 1s linear}
+@keyframes rwFade{from{opacity:0;transform:translateY(6px)}}.rw-fade{animation:rwFade .45s ease-out both}
+@keyframes rwBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}.rw-bob{animation:rwBob .6s ease-in-out infinite}
+.rw-paused .rw-bob{animation-play-state:paused}
+.rw-btn:active{transform:scale(.97)}
+@media (prefers-reduced-motion:reduce){.rw-pan{transition:none}.rw-fade,.rw-bob{animation:none}}
 </style>
 </helmet>
-<dc-import name="ResetActivity" kind="walk" hint-size="390px,844px"></dc-import>
+<div class="{{ rootClass }}" style="position:relative;width:390px;height:844px;overflow:hidden;background:#004256;font-family:Poppins,sans-serif">
+
+  <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+    <img src="assets/rw-scene-intro.svg" alt="" style="position:absolute;left:-0.5px;top:0;width:390.5px;height:844px;display:block">
+    <div class="rw-fade" style="position:absolute;left:32px;top:104px;width:326px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;line-height:normal">
+      <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:40px;color:#c6feff;white-space:nowrap">Reset Walk</h1>
+      <p style="margin:0;width:310px;font-size:16px;color:#a0c3ce">Take a short walk to clear your mind, settle your thoughts, and return refreshed.</p>
+      <p style="margin:0;width:326px;font-size:14px;color:#7ec6dc">Walk in place or around the room · about 1 minute</p>
+    </div>
+    <button type="button" class="rw-btn" onClick="{{ begin }}" style="position:absolute;left:32px;top:744px;width:326px;height:56px;border:none;border-radius:28px;background:#80fdff;color:#004256;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px;cursor:pointer">Begin Walking</button>
+  </sc-if>
+
+  <sc-if value="{{ isScene }}" hint-placeholder-val="{{ false }}">
+    <img src="assets/rw-horizon.svg" alt="" class="rw-pan" style="position:absolute;left:0;top:0;width:1073px;height:440px;max-width:none;display:block;transform:translateX({{ horizonX }})">
+    <img src="assets/rw-sea.svg" alt="" style="position:absolute;left:0;top:430px;width:390px;height:220px;display:block">
+    <svg aria-hidden="true" width="390" height="110" viewBox="0 0 390 110" fill="none" style="position:absolute;left:0;top:300px;opacity:{{ birds }};transition:opacity 1.5s ease">
+      <path d="M60 50C64.6667 45.3333 69.3333 45.3333 74 50C78.6667 45.3333 83.3333 45.3333 88 50" stroke-width="2.5" stroke-linecap="round" stroke="#A0C3CE"></path>
+      <path d="M98 30C101.333 26.6667 104.667 26.6667 108 30C111.333 26.6667 114.667 26.6667 118 30" stroke-width="2.5" stroke-linecap="round" stroke="#A0C3CE"></path>
+      <path d="M290 70C294 66 298 66 302 70C306 66 310 66 314 70" stroke-width="2.5" stroke-linecap="round" stroke="#A0C3CE"></path>
+    </svg>
+    <div style="position:absolute;left:0;top:688px;width:390px;height:156px;background:#feeaf9"></div>
+    <img src="assets/rw-boardwalk.svg" alt="" class="rw-pan" style="position:absolute;left:0;top:0;width:2340px;height:844px;max-width:none;display:block;transform:translateX({{ boardX }})">
+    <div class="rw-pan" style="position:absolute;left:0;top:584px;width:28px;height:58px;transform:translateX({{ walkerX }})">
+      <img src="assets/rw-walker.svg" alt="" class="{{ walkerClass }}" style="width:28px;height:58px;display:block">
+    </div>
+
+    <sc-if value="{{ walking }}" hint-placeholder-val="{{ true }}">
+      <div class="rw-fade" aria-live="polite" style="position:absolute;left:32px;top:100px;width:326px;display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center">
+        <span style="font-weight:600;font-size:14px;line-height:18px;color:#acfec0;white-space:nowrap">{{ stage.place }}</span>
+        <h1 style="margin:0;width:326px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal;color:#c6feff">{{ stage.cue }}</h1>
+      </div>
+      <svg role="img" aria-label="{{ routeLabel }}" width="390" height="24" viewBox="0 0 390 24" fill="none" style="position:absolute;left:0;top:752px;display:block">
+        <path d="M48 12H342" stroke-width="3" stroke-linecap="round" stroke="#7EC6DC"></path>
+        <path d="{{ walkedPath }}" stroke-width="3" stroke-linecap="round" stroke="#166A83"></path>
+        <circle cx="48" cy="12" r="4" fill="#166A83"></circle>
+        <sc-for list="{{ stops }}" as="p" hint-placeholder-count="3">
+          <circle cx="{{ p.x }}" cy="12" r="4" fill="{{ p.fill }}" stroke-width="2" stroke="#166A83"></circle>
+        </sc-for>
+        <path d="M342 12V2L351 5.5L342 9" fill="#166A83" stroke-width="2" stroke-linejoin="round" stroke="#166A83"></path>
+        <circle cx="{{ youX }}" cy="12" r="7" fill="#004256" stroke-width="3" stroke="#FEEAF9"></circle>
+      </svg>
+      <p role="timer" style="position:absolute;left:0;right:0;top:786px;margin:0;text-align:center;font-size:14px;line-height:normal;color:#004256">{{ remaining }}</p>
+      <button type="button" onClick="{{ togglePause }}" style="position:absolute;right:15px;top:40px;height:48px;padding:0 14px;border:none;background:none;font-family:Poppins,sans-serif;font-size:16px;color:#a0c3ce;cursor:pointer">{{ pauseLabel }}</button>
+    </sc-if>
+
+    <sc-if value="{{ atOverlook }}" hint-placeholder-val="{{ false }}">
+      <div class="rw-fade" style="position:absolute;left:32px;top:100px;width:326px;display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center">
+        <span style="font-weight:600;font-size:14px;line-height:18px;color:#acfec0">The overlook</span>
+        <h1 style="margin:0;width:326px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal;color:#c6feff">You’ve arrived with a clearer mind.</h1>
+      </div>
+      <button type="button" class="rw-btn" onClick="{{ finish }}" style="position:absolute;left:32px;top:744px;width:326px;height:56px;border:none;border-radius:28px;background:#80fdff;color:#004256;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px;cursor:pointer">Finish walk</button>
+    </sc-if>
+
+    <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+      <div class="rw-fade" style="position:absolute;left:37px;top:100px;width:316px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;line-height:normal">
+        <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:40px;color:#c6feff;white-space:nowrap">Reset Complete</h1>
+        <p style="margin:0;width:316px;font-size:16px;color:#a0c3ce">You took a moment to pause, reset, and reconnect. Carry that clarity into your next conversation.</p>
+      </div>
+      <a href="LiveOverview.dc.html" class="rw-btn" style="position:absolute;left:32px;top:744px;width:326px;height:56px;border-radius:28px;background:#80fdff;color:#004256;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px">Return to Event</a>
+    </sc-if>
+  </sc-if>
+
+  <a href="LiveWellness.dc.html" aria-label="Back to wellness" style="position:absolute;left:10px;top:40px;width:48px;height:48px;display:flex;align-items:center;justify-content:center"><img src="assets/cw-back.svg" alt="" style="width:28px;height:28px;display:block"></a>
+</div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 844}}'>
 class Component extends DCLogic {
-renderVals() {
-return {};
-}
+  // Four stops along the boardwalk, 15 seconds each, then the overlook.
+  static STAGES = [
+    { place: 'Shoreline', cue: 'Notice your pace.' },
+    { place: 'Open water', cue: 'Release any tension you’re carrying.' },
+    { place: 'Lighthouse point', cue: 'Notice what feels steady and grounded.' },
+    { place: 'Harbor bend', cue: 'Focus on the next step, not the next task.' },
+  ];
+  // Layer positions from the mid-fi frames: one per stop, the last is the overlook.
+  static HORIZON = [-55, -205, -355, -505, -682];
+  static BOARD = [-156, -585, -1014, -1443, -1950];
+  static WALKER = [92, 125, 158, 191, 230];
+  static TOTAL = 60;
+  constructor(props) { super(props); this.state = { screen: 'intro', t: 0, paused: false }; }
+  componentWillUnmount() { clearInterval(this._timer); }
+  run() {
+    clearInterval(this._timer);
+    this._timer = setInterval(() => {
+      const t = this.state.t + 1;
+      if (t >= Component.TOTAL) { clearInterval(this._timer); this.setState({ t: Component.TOTAL, screen: 'overlook' }); return; }
+      this.setState({ t });
+    }, 1000);
+  }
+  renderVals() {
+    const { screen, t, paused } = this.state;
+    const C = Component;
+    const seg = C.TOTAL / C.STAGES.length;
+    const pos = Math.min(t / seg, C.STAGES.length);
+    const k = Math.min(Math.floor(pos), C.STAGES.length - 1);
+    const f = pos - Math.floor(pos);
+    const at = (arr) => (pos >= C.STAGES.length ? arr[arr.length - 1] : arr[k] + (arr[k + 1] - arr[k]) * f);
+    const youX = 48 + 294 * Math.min(t / C.TOTAL, 1);
+    const left = Math.max(0, C.TOTAL - t);
+    const walking = screen === 'walk';
+    return {
+      isIntro: screen === 'intro', isScene: screen !== 'intro',
+      walking, atOverlook: screen === 'overlook', isDone: screen === 'done',
+      rootClass: paused ? 'rw-paused' : '',
+      walkerClass: walking ? 'rw-bob' : '',
+      horizonX: at(C.HORIZON).toFixed(1) + 'px',
+      boardX: at(C.BOARD).toFixed(1) + 'px',
+      walkerX: at(C.WALKER).toFixed(1) + 'px',
+      birds: walking && t >= seg ? 1 : 0,
+      stage: C.STAGES[k],
+      youX: youX.toFixed(1),
+      walkedPath: 'M48 12H' + youX.toFixed(1),
+      stops: [121.5, 195, 268.5].map((x) => ({ x, fill: x <= youX ? '#166A83' : '#FEEAF9' })),
+      routeLabel: 'Stop ' + (k + 1) + ' of 4 on the walk',
+      remaining: (paused ? 'Paused · ' : '') + Math.floor(left / 60) + ':' + String(left % 60).padStart(2, '0') + ' remaining',
+      pauseLabel: paused ? 'Resume' : 'Pause',
+      begin: () => { this.setState({ screen: 'walk', t: 0, paused: false }); this.run(); },
+      togglePause: () => {
+        if (paused) { this.setState({ paused: false }); this.run(); }
+        else { clearInterval(this._timer); this.setState({ paused: true }); }
+      },
+      finish: () => this.setState({ screen: 'done' }),
+    };
+  }
 }
 </script>
 </body>

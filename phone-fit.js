@@ -7,7 +7,7 @@
   var W = 390, H = 844, BEZEL = 14, RADIUS = 54;
   var FW = W + BEZEL * 2, FH = H + BEZEL * 2;
   var doc = document.documentElement;
-  var DATA_KEYS = ['harbor.profile', 'harbor.mood', 'harbor.notes', 'harbor.notes.open', 'harbor.fair'];
+  var DATA_KEYS = ['harbor.profile', 'harbor.mood', 'harbor.notes', 'harbor.notes.open', 'harbor.fair', 'harbor.reg'];
   var FLOWS = [
     ['Onboarding', 'Onboarding.dc.html'],
     ['Home', 'Main.dc.html'],

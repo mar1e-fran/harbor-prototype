@@ -1,0 +1,11 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="28" height="58" viewBox="0 0 28 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Walker">
+<path id="Shadow" opacity="0.4" d="M14 58C19.5228 58 24 57.1046 24 56C24 54.8954 19.5228 54 14 54C8.47715 54 4 54.8954 4 56C4 57.1046 8.47715 58 14 58Z" fill="#004256"/>
+<path id="Head" d="M14 17C18.4183 17 22 13.4183 22 9C22 4.58172 18.4183 1 14 1C9.58172 1 6 4.58172 6 9C6 13.4183 9.58172 17 14 17Z" fill="#80FDFF"/>
+<path id="Body" d="M23 29C23 24.0294 18.9706 20 14 20C9.02944 20 5 24.0294 5 29V45C5 49.9706 9.02944 54 14 54C18.9706 54 23 49.9706 23 45V29Z" fill="#80FDFF"/>
+<g id="Scarf">
+<path d="M8 27H20Z" fill="black"/>
+<path d="M8 27H20" stroke-width="4" stroke-linecap="round" stroke="#ACFEC0"/>
+</g>
+</g>
+</svg>
