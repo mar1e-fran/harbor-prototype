@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;background:#fafeff;font-family:Poppins,sans-serif">
+  <div class="ns" style="position:absolute;left:0;top:0;width:390px;bottom:78px;overflow-y:auto;overflow-x:hidden">
+    <div style="display:flex;flex-direction:column;padding:40px 0 32px">
+      <div style="width:390px;box-sizing:border-box;padding:0 16px;display:flex;align-items:center;justify-content:space-between">
+        <div style="display:flex;align-items:center;gap:2px">
+          <img src="assets/8c126.svg" alt="" style="width:40px;height:40px;display:block">
+          <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:500;font-size:32px;line-height:normal;color:#004256">Hi {{ first }}</h1>
+        </div>
+        <div style="display:flex;gap:10px">
+          <a href="Search.dc.html" aria-label="Search" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center"><img src="assets/08071.svg" alt="" style="width:24px;height:24px;display:block"></a>
+          <button type="button" aria-label="Notifications" style="width:40px;height:40px;border:none;background:none;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer"><img src="assets/e1513.svg" alt="" style="width:24px;height:24px;display:block"></button>
+        </div>
+      </div>
+      <div style="padding:{{ heroPad }} 24px 0">
+        <sc-if value="{{ calm }}" hint-placeholder-val="{{ true }}">
+          <section style="position:relative;width:342px;height:204px;border-radius:16px;background:#ebfafe;overflow:hidden">
+            <img src="assets/5d50e.svg" alt="" style="position:absolute;left:85px;top:60px;width:172px;height:47.46px">
+            <p style="position:absolute;left:72px;top:118px;width:199px;margin:0;text-align:center;font-weight:600;font-size:16px;color:#004256">Calm seas today</p>
+            <p style="position:absolute;left:45px;top:145px;width:253px;margin:0;text-align:center;font-size:12px;color:#1f92b4">Find your next voyage below!</p>
+          </section>
+        </sc-if>
+        <sc-if value="{{ hasEvent }}" hint-placeholder-val="{{ false }}">
+          <dc-import name="SessionHero" variant="{{ mode }}" width="{{ 342 }}" href="{{ heroHref }}" hint-size="342px,200px"></dc-import>
+        </sc-if>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:24px;padding:30px 0 0 24px">
+        <dc-import name="EventCarousel" heading="Picked for you" items="{{ picked }}" hint-size="366px,270px"></dc-import>
+        <dc-import name="EventCarousel" heading="Your crew is going" items="{{ crew }}" hint-size="366px,270px"></dc-import>
+        <section style="width:342px;box-sizing:border-box;background:#acfec0;border-radius:14px;padding:26px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;justify-content:space-between;min-height:32px">
+            <h2 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:400;font-size:24px;color:#004256">Top events</h2>
+            <a href="#" style="font-size:16px;color:#004256">See all</a>
+          </div>
+          <a href="EventDetail.dc.html" style="display:flex;align-items:center;gap:12px;color:#004256">
+            <span style="width:28px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:40px;line-height:1">1</span>
+            <img src="assets/4264d.webp" alt="" style="width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid #c9c9c9;box-sizing:border-box">
+            <span style="display:flex;flex-direction:column"><span style="font-weight:600;font-size:14px">Career Fair</span><span style="font-size:12px;color:#166a83">Nov 18 · 412 going</span></span>
+          </a>
+          <a href="EventAlumniPanel.dc.html" style="display:flex;align-items:center;gap:12px;color:#004256">
+            <span style="width:28px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:40px;line-height:1">2</span>
+            <img src="assets/b87d7.webp" alt="" style="width:56px;height:56px;border-radius:8px;object-fit:cover;object-position:left center;border:1px solid #c9c9c9;box-sizing:border-box">
+            <span style="display:flex;flex-direction:column"><span style="font-weight:600;font-size:14px">Alumni Panel</span><span style="font-size:12px;color:#166a83">Nov 16 · 168 going</span></span>
+          </a>
+          <a href="EventMeetDesigners.dc.html" style="display:flex;align-items:center;gap:12px;color:#004256">
+            <span style="width:28px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:40px;line-height:1">3</span>
+            <img src="assets/10e4f.webp" alt="" style="width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid #c9c9c9;box-sizing:border-box">
+            <span style="display:flex;flex-direction:column"><span style="font-weight:600;font-size:14px">Sketch and Connect</span><span style="font-size:12px;color:#166a83">Dec 1 · 48 going</span></span>
+          </a>
+        </section>
+        <dc-import name="EventCarousel" heading="My List" items="{{ mylist }}" hint-size="366px,270px"></dc-import>
+        <dc-import name="EventCarousel" heading="Because you..." sub="Want to build connections" items="{{ because }}" hint-size="366px,300px"></dc-import>
+        <section style="width:342px;box-sizing:border-box;background:#feace8;border-radius:15px;padding:26px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;justify-content:space-between;min-height:32px">
+            <h2 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:400;font-size:24px;color:#004256">Organizers for you</h2>
+            <a href="#" style="font-size:16px;color:#004256">See all</a>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:16px 4px">
+            <sc-for list="{{ orgs }}" as="o" hint-placeholder-count="6">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font-size:12px;line-height:normal;color:#166a83">
+                <img src="{{ o.photo }}" alt="" style="width:56px;height:56px;border-radius:28px;object-fit:cover;object-position:center top;display:block;background:#fff">
+                <span style="font-weight:600;color:#166a83;white-space:nowrap">{{ o.who }}</span>
+                <span>{{ o.events }}</span>
+                <span>{{ o.org }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+        <dc-import name="EventCarousel" heading="Filling up fast" items="{{ filling }}" hint-size="366px,270px"></dc-import>
+      </div>
+    </div>
+  </div>
+  <div style="position:absolute;left:0;bottom:0;width:390px;height:78px">
+    <dc-import name="NavBar" active="home" live-event="{{ liveEvent }}" live-href="LiveOverview.dc.html" hint-size="390px,78px"></dc-import>
+  </div>
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" aria-live="polite" class="cs-pop" style="position:absolute;left:16px;right:16px;top:44px;z-index:5;display:flex;align-items:center;gap:10px;padding:10px 8px 10px 14px;border-radius:12px;background:#004256;box-shadow:0 10px 30px rgba(0,30,40,0.25)">
+      <span aria-hidden="true" style="position:relative;width:10px;height:10px;flex-shrink:0"><span class="harbor-pulse" style="position:absolute;inset:-4px;border-radius:9px;background:rgba(38,178,220,0.45)"></span><span style="position:absolute;inset:0;border-radius:5px;background:#26b2dc"></span></span>
+      <span style="flex:1;min-width:0;display:flex;flex-direction:column;color:#fff">
+        <span style="font-weight:600;font-size:13px;line-height:18px">SCAD Career Fair is live</span>
+        <span style="font-size:11px;line-height:16px;color:#c6feff">Doors are open · check in when you arrive</span>
+      </span>
+      <a href="LiveOverview.dc.html" style="height:36px;padding:0 14px;border-radius:8px;background:#26b2dc;color:#fff;display:flex;align-items:center;font-weight:600;font-size:13px">Join</a>
+      <button type="button" aria-label="Dismiss" onClick="{{ hideToast }}" style="width:36px;height:36px;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M2 2l8 8M10 2 2 10"/></svg></button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"mode": {"editor": "enum", "options": ["none", "upcoming", "live"], "default": "none"}, "$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { profile: null, fair: null, toast: false }; }
+
+  componentDidMount() {
+    this._sync = () => { let p = null; try { p = JSON.parse(window.localStorage.getItem('harbor.profile') || 'null'); } catch (e) {} this.setState({ profile: p }); };
+    this._sync();
+    try { window.addEventListener('storage', this._sync); window.addEventListener('harbor-profile', this._sync); } catch (e) {}
+  }
+  componentWillUnmount() {
+    try { window.removeEventListener('storage', this._sync); window.removeEventListener('harbor-profile', this._sync); } catch (e) {}
+  }
+  firstName() {
+    const p = (this.state && this.state.profile) || null;
+    const n = p && p.name ? String(p.name).trim().split(/\s+/)[0] : '';
+    return n || 'Evelyn';
+  }
+  componentDidMount() {
+    this._sync = () => { let p = null; try { p = JSON.parse(window.localStorage.getItem('harbor.profile') || 'null'); } catch (e) {} this.setState({ profile: p }); };
+    this._fair = () => { let f = null; try { f = window.localStorage.getItem('harbor.fair'); } catch (e) {} this.setState({ fair: f }); this.arm(f); };
+    this._sync(); this._fair();
+    try { window.addEventListener('storage', this._sync); window.addEventListener('harbor-profile', this._sync);
+      window.addEventListener('storage', this._fair); window.addEventListener('harbor-fair', this._fair); } catch (e) {}
+  }
+  componentWillUnmount() {
+    clearTimeout(this._live); clearTimeout(this._hide);
+    try { window.removeEventListener('storage', this._sync); window.removeEventListener('harbor-profile', this._sync);
+      window.removeEventListener('storage', this._fair); window.removeEventListener('harbor-fair', this._fair); } catch (e) {}
+  }
+  arm(f) {
+    clearTimeout(this._live);
+    const upcoming = this.props.mode === 'upcoming' || ((this.props.mode ?? 'none') === 'none' && f === 'upcoming');
+    if (!upcoming || f === 'live') return;
+    this._live = setTimeout(() => {
+      if (f === 'upcoming') { try { window.localStorage.setItem('harbor.fair', 'live'); } catch (e) {} }
+      this.setState({ fair: 'live', toast: true });
+      clearTimeout(this._hide); this._hide = setTimeout(() => this.setState({ toast: false }), 6000);
+    }, 4000);
+  }
+  renderVals() {
+    const fair = this.state.fair;
+    const asked = this.props.mode ?? 'none';
+    const mode = asked === 'live' || fair === 'live' && asked !== 'none' ? 'live'
+      : asked === 'upcoming' ? 'upcoming'
+      : fair === 'live' ? 'live' : fair === 'upcoming' ? 'upcoming' : 'none';
+    return {
+      first: this.firstName(),
+      mode, calm: mode === 'none', hasEvent: mode !== 'none', liveEvent: mode === 'live',
+      heroPad: mode === 'none' ? '26px' : '36px',
+      heroHref: mode === 'live' ? 'LiveOverview.dc.html' : 'EventRegistered.dc.html',
+      toast: this.state.toast && mode === 'live', hideToast: () => this.setState({ toast: false }),
+      picked: [{ title: 'Meet Designers Across Majors', date: 'Nov 10 · 4 pm to 6 pm', place: 'Haymans Hall', img: 'assets/10e4f.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '12 crewmates going', going: false, saved: false, href: 'EventMeetDesigners.dc.html' },
+      { title: 'SCAD Alumni Reception', date: 'Nov 11 · 6 pm to 8 pm', place: 'Deloitte', img: 'assets/e3589.webp', faces: ['assets/d15eb.webp','assets/db34d.webp'], crew: '2 crewmates going', going: false, saved: false, href: '#' },
+      { title: 'Peer Portfolio Critique', date: 'Nov 3 · 7 pm to 8 pm', place: 'Arnold Hall', img: 'assets/3fabf.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '6 crewmates going', going: false, saved: false, href: '#' },
+      { title: 'Social Speed Dating', date: 'Nov 15 · 6 pm to 8 pm', place: 'Adler Hall', img: 'assets/de965.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '4 crewmates going', going: false, saved: false, href: '#' },
+      { title: 'Portfolio Review', date: 'Nov 8 · 2 pm to 5 pm', place: 'The Shed', img: 'assets/3cdd8.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '8 crewmates going', going: false, saved: false, href: '#' },
+      { title: 'Dance Company Networking', date: 'Nov 5 · 5 pm to 7 pm', place: 'Virtual', img: 'assets/3b5b3.webp', faces: ['assets/7748d.webp'], crew: '1 crewmate going', going: false, saved: false, href: '#' }],
+      crew: [{ title: 'La Bola Negra: Conversation', date: 'Nov 1 · 12 - 2 pm', place: 'Hamilton Hall', img: 'assets/d2e85.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '3 crewmates going', going: false, saved: false, href: '#' },
+      { title: 'Coffee With a Creative Director', date: 'Nov 6 · 10 am to 11 am', place: 'Gulfstream, Room 112', img: 'assets/298a3.webp', faces: ['assets/7748d.webp','assets/db34d.webp'], crew: '2 crewmates going', going: false, saved: false, href: 'EventCoffeeCD.dc.html' },
+      { title: 'Beyond UX: Talk with BobaTalks', date: 'Nov 14 · 3 pm to 4 pm', place: 'Virtual', img: 'assets/5f0a9.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '5 crewmates going', going: false, saved: false, href: '#' },
+      { title: 'AI Summit', date: 'Nov 8 · 2 pm to 3 pm', place: 'The Shed', img: 'assets/2a300.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '8 crewmates going', going: false, saved: false, href: '#' },
+      { title: 'Portfolio Day', date: 'Oct 8-9', place: 'Poetter Hall', img: 'assets/08525.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '12 crewmates going', going: false, saved: false, href: 'EventPortfolioDay.dc.html' }],
+      mylist: [{ title: 'Career Decoder: Marketing', date: 'Nov 3 · 2 pm to 3 pm', place: 'Virtual', img: 'assets/1a0e4.webp', faces: ['assets/d89c0.webp','assets/2a623.webp','assets/f89e2.webp'], crew: '5 crewmates going', going: true, saved: true, href: 'EventCareerDecoder.dc.html' },
+      { title: 'Explore UX careers at Delta', date: 'Nov 3 · 5 pm to 6 pm', place: 'Virtual', img: 'assets/aed05.webp', faces: ['assets/50c28.webp','assets/b3e18.webp','assets/3650d.webp'], crew: '5 crewmates going', going: true, saved: true, href: 'EventDeltaUX.dc.html' },
+      { title: 'CIA Information Session', date: 'Nov 4 · 5 pm to 6 pm', place: 'River Event Space', img: 'assets/69908.webp', faces: ['assets/d89c0.webp','assets/2a623.webp','assets/f89e2.webp'], crew: '5 crewmates going', going: true, saved: true, href: 'EventCIASession.dc.html' },
+      { title: 'SCAD Virtual Career Day', date: 'Nov 6 · 12 pm to 4 pm', place: 'Virtual, SCAD 12twenty', img: 'assets/81e36.webp', faces: ['assets/d89c0.webp','assets/2a623.webp','assets/f89e2.webp'], crew: '6 crewmates going', going: true, saved: true, href: '#' },
+      { title: 'Accelerator Info Session', date: 'Nov 6 · 12 pm to 1 pm', place: 'Virtual, SCAD 12twenty', img: 'assets/0026b.webp', faces: ['assets/50c28.webp','assets/b3e18.webp','assets/3650d.webp'], crew: '1 crewmate going', going: true, saved: true, href: '#' },
+      { title: 'Network with Employers', date: 'Nov 12 · 3 pm to 5:30 pm', place: 'Virtual, SCAD 12twenty', img: 'assets/609ce.webp', faces: ['assets/50c28.webp','assets/b3e18.webp','assets/3650d.webp'], crew: '2 crewmates going', going: true, saved: true, href: '#' }],
+      because: [{ title: 'Collaborate with other students', date: 'Nov 19 · 2 pm to 5 pm', place: 'Arnold Hall', img: 'assets/973ad.webp', faces: ['assets/fc4c0.webp','assets/66a9e.webp','assets/8dc47.webp'], crew: '4 crewmates going', going: true, saved: false, href: '#' },
+      { title: 'Accelerator Info Session', date: 'Nov 6 · 12 pm to 1 pm', place: 'Virtual, SCAD 12twenty', img: 'assets/0026b.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '2 crewmates going', going: false, saved: true, href: '#' },
+      { title: 'Network with Employers', date: 'Nov 12 · 3 pm to 5:30 pm', place: 'Virtual, SCAD 12twenty', img: 'assets/609ce.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '2 crewmates going', going: false, saved: false, href: '#' },
+      { title: 'Coffee With a Creative Director', date: 'Nov 6 · 10 am to 11 am', place: 'Gulfstream, Room 112', img: 'assets/298a3.webp', faces: ['assets/7748d.webp','assets/db34d.webp'], crew: '2 crewmates going', going: false, saved: false, href: 'EventCoffeeCD.dc.html' },
+      { title: 'Social Speed Dating', date: 'Nov 15 · 6 pm to 8 pm', place: 'Adler Hall', img: 'assets/de965.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '4 crewmates going', going: false, saved: false, href: '#' },
+      { title: 'Meet Designers Across Majors', date: 'Nov 10 · 4 pm to 6 pm', place: 'Haymans Hall', img: 'assets/10e4f.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '12 crewmates going', going: false, saved: false, href: 'EventMeetDesigners.dc.html' }],
+      filling: [{ title: 'Portfolio Day', date: 'Oct 8-9', place: 'Poetter Hall', img: 'assets/08525.webp', faces: ['assets/d89c0.webp','assets/2a623.webp','assets/f89e2.webp'], crew: '14 crewmates going', going: true, saved: true, href: 'EventPortfolioDay.dc.html' },
+      { title: 'Tech Conference', date: 'Nov 7 · 2 pm to 3 pm', place: 'Poetter Hall', img: 'assets/40b5c.webp', faces: ['assets/d89c0.webp','assets/f89e2.webp'], crew: '9 crewmates going', going: true, saved: true, href: 'EventTechConference.dc.html' },
+      { title: 'Career Decoder: Marketing', date: 'Nov 3 · 2 pm to 3 pm', place: 'Virtual', img: 'assets/1a0e4.webp', faces: ['assets/d89c0.webp','assets/2a623.webp'], crew: '5 crewmates going', going: true, saved: true, href: 'EventCareerDecoder.dc.html' },
+      { title: 'CIA Information Session', date: 'Nov 4 · 5 pm to 6 pm', place: 'River Event Space', img: 'assets/69908.webp', faces: ['assets/d89c0.webp','assets/2a623.webp','assets/f89e2.webp'], crew: '5 crewmates going', going: false, saved: true, href: 'EventCIASession.dc.html' },
+      { title: 'Social Speed Dating', date: 'Nov 15 · 6 pm to 8 pm', place: 'Adler Hall', img: 'assets/de965.webp', faces: ['assets/d15eb.webp','assets/7748d.webp','assets/db34d.webp'], crew: '4 crewmates going', going: false, saved: false, href: '#' },
+      { title: 'SCAD Virtual Career Day', date: 'Nov 6 · 12 pm to 4 pm', place: 'Virtual, SCAD 12twenty', img: 'assets/81e36.webp', faces: ['assets/d89c0.webp','assets/2a623.webp','assets/f89e2.webp'], crew: '6 crewmates going', going: false, saved: true, href: '#' }],
+      orgs: [
+        { who: 'Adam Crews', events: '2 events', org: 'Google', photo: 'assets/91aac.webp' },
+        { who: 'Jamie Lopez', events: '6 events', org: 'Amazon', photo: 'assets/0a355.webp' },
+        { who: 'Jenna Caldwell', events: '8 events', org: 'Gucci', photo: 'assets/ba9ae.webp' },
+        { who: 'Brooke Sullivan', events: '4 events', org: 'Arts & Letters', photo: 'assets/1de59.webp' },
+        { who: 'Sophie Pearson', events: '1 events', org: 'CIA', photo: 'assets/c2351.webp' },
+        { who: 'Caleb Foster', events: '2 events', org: 'Delta', photo: 'assets/31b98.webp' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

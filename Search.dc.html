@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Search</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;background:#fafeff;font-family:Poppins,sans-serif">
+  <sc-if value="{{ idle }}" hint-placeholder-val="{{ true }}">
+    <img src="assets/c24e9.webp" alt="" style="position:absolute;left:-155.6px;top:525.4px;width:583.6px;height:475.5px;object-fit:fill">
+    <div class="ns" style="position:absolute;left:0;top:0;width:390px;bottom:78px;overflow-y:auto;overflow-x:hidden">
+      <div style="padding:56px 24px 24px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:8px;height:48px">
+          <button type="button" onClick="{{ focus }}" style="flex:1;height:48px;box-sizing:border-box;border:1.5px solid #004256;border-radius:24px;background:transparent;display:flex;align-items:center;gap:8px;padding:0 8px 0 16px;cursor:text;font:inherit">
+            <img src="assets/aea40.svg" alt="" style="width:20px;height:20px;display:block">
+            <span style="font-family:Inter,sans-serif;font-size:16px;color:#80a0aa">Search</span>
+          </button>
+          <a href="Main.dc.html" style="padding-left:4px;font-size:14px;color:#004256">Cancel</a>
+        </div>
+        <p style="margin:20px 0 10px;font-size:12px;color:#80a0aa">Recent</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;width:342px">
+          <button type="button" onClick="{{ recent1 }}" style="height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 12px;border-radius:18px;background:#fafeff;border:1.5px solid #80a0aa;font:inherit;font-size:14px;color:#166a83;cursor:pointer;white-space:nowrap"><img src="assets/cab2d.svg" alt="" style="width:16px;height:16px">Portfolio Review</button>
+          <button type="button" onClick="{{ recent2 }}" style="height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 12px;border-radius:18px;background:#fafeff;border:1.5px solid #80a0aa;font:inherit;font-size:14px;color:#166a83;cursor:pointer;white-space:nowrap"><img src="assets/cab2d.svg" alt="" style="width:16px;height:16px">Conferences</button>
+          <button type="button" onClick="{{ recent3 }}" style="height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 12px;border-radius:18px;background:#fafeff;border:1.5px solid #80a0aa;font:inherit;font-size:14px;color:#166a83;cursor:pointer;white-space:nowrap"><img src="assets/cab2d.svg" alt="" style="width:16px;height:16px">Networking</button>
+        </div>
+        <div style="margin-top:34px">
+          <dc-import name="EventCarousel" heading="Most Popular" items="{{ popular }}" hint-size="366px,270px"></dc-import>
+        </div>
+        <h2 style="margin:56px 0 16px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px;color:#004256">Based on your interests</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:12px 12px;width:342px">
+          <button type="button" style="height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 12px;border-radius:18px;background:#fff;border:1.5px solid #1f92b4;font:inherit;font-weight:600;font-size:14px;color:#166a83;cursor:pointer;white-space:nowrap"><img src="assets/47a5f.svg" alt="" style="width:20px;height:20px">Workshops</button>
+          <button type="button" style="height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 12px;border-radius:18px;background:#fff;border:1.5px solid #1f92b4;font:inherit;font-weight:600;font-size:14px;color:#166a83;cursor:pointer;white-space:nowrap"><img src="assets/aa222.svg" alt="" style="width:20px;height:20px">Career Fairs</button>
+          <button type="button" style="height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 12px;border-radius:18px;background:#fff;border:1.5px solid #1f92b4;font:inherit;font-weight:600;font-size:14px;color:#166a83;cursor:pointer;white-space:nowrap"><img src="assets/82a05.svg" alt="" style="width:20px;height:20px">Internships</button>
+          <button type="button" style="height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 12px;border-radius:18px;background:#fff;border:1.5px solid #1f92b4;font:inherit;font-weight:600;font-size:14px;color:#166a83;cursor:pointer;white-space:nowrap"><img src="assets/97950.svg" alt="" style="width:20px;height:20px">Business Advice</button>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;left:0;bottom:0;width:390px;height:78px">
+      <dc-import name="NavBar" active="home" hint-size="390px,78px"></dc-import>
+    </div>
+  </sc-if>
+  <sc-if value="{{ focused }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:24px;right:24px;top:67.5px;height:48px;display:flex;align-items:center;gap:8px">
+      <label style="flex:1;height:48px;box-sizing:border-box;border:1.5px solid #004256;border-radius:24px;display:flex;align-items:center;gap:8px;padding:0 6px 0 16px">
+        <img src="assets/252d0.svg" alt="" style="width:20px;height:20px;display:block">
+        <input type="search" aria-label="Search events, people and organizers" autofocus value="{{ q }}" onChange="{{ onInput }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:Inter,sans-serif;font-size:16px;color:#004256;caret-color:#004256">
+        <sc-if value="{{ hasQ }}" hint-placeholder-val="{{ false }}">
+          <button type="button" aria-label="Clear search" onClick="{{ clear }}" style="width:36px;height:36px;border:none;background:none;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer"><img src="assets/185f7.svg" alt="" style="width:20px;height:20px"></button>
+        </sc-if>
+      </label>
+      <button type="button" onClick="{{ cancel }}" style="border:none;background:none;padding:0 0 0 4px;font:inherit;font-size:14px;color:#004256;cursor:pointer">Cancel</button>
+    </div>
+    <sc-if value="{{ hasQ }}" hint-placeholder-val="{{ false }}">
+      <div class="ns" style="position:absolute;left:24px;top:115.5px;width:342px;bottom:354px;overflow-y:auto">
+        <a href="SearchResults.dc.html" style="height:64px;box-sizing:border-box;padding-top:8px;display:flex;align-items:center;gap:12px;color:#004256;font-family:Inter,sans-serif;font-size:15px">
+          <span style="width:40px;display:flex;justify-content:center"><img src="assets/8aed2.svg" alt="" style="width:20px;height:20px"></span>
+          <span>See all results for "<strong>{{ q }}</strong>"</span>
+        </a>
+        <p style="margin:0;padding:12px 0 2px;font-size:14px;color:#004256">Events</p>
+        <a href="EventDetail.dc.html" style="width:342px;height:56px;display:flex;align-items:center;gap:12px;color:#004256">
+          <img src="assets/4264d.webp" alt="" style="width:40px;height:40px;border-radius:8px;border:1px solid #c9c9c9;object-fit:cover;box-sizing:border-box">
+          <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;line-height:18px">SCAD <strong style="font-weight:600">Career fair</strong></span><span style="font-family:Inter,sans-serif;font-size:12px;color:#166a83">Nov 18 · Poetter Hall · 43 going</span></span>
+        </a>
+        <a href="EventCareerDecoder.dc.html" style="width:342px;height:56px;display:flex;align-items:center;gap:12px;color:#004256">
+          <img src="assets/1a0e4.webp" alt="" style="width:40px;height:40px;border-radius:8px;border:1px solid #c9c9c9;object-fit:cover;box-sizing:border-box">
+          <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;line-height:18px"><strong style="font-weight:600">Career</strong> Decoder</span><span style="font-family:Inter,sans-serif;font-size:12px;color:#166a83">Nov 20 · Poetter Hall ·6 crew going</span></span>
+        </a>
+        <a href="EventPortfolioDay.dc.html" style="width:342px;height:56px;display:flex;align-items:center;gap:12px;color:#004256">
+          <span style="width:40px;height:40px;border-radius:8px;border:1px solid #c9c9c9;box-sizing:border-box;overflow:hidden;background:#fd0156;display:flex;align-items:center"><img src="assets/08525.webp" alt="" style="width:116.93%;height:70%;margin-left:-8.19%;object-fit:cover"></span>
+          <span style="display:flex;flex-direction:column;gap:2px"><span style="font-family:Inter,sans-serif;font-size:15px">SCAD Portfolio Day</span><span style="font-family:Inter,sans-serif;font-size:12px;color:#166a83">Nov 20 · Poetter Hall · 8 crew going</span></span>
+        </a>
+        <p style="margin:0;padding:12px 0 2px;font-size:14px;color:#004256">People</p>
+        <sc-for list="{{ people }}" as="p" hint-placeholder-count="4">
+          <a href="#" style="width:342px;height:56px;display:flex;align-items:center;gap:12px;color:#004256">
+            <img src="{{ p.photo }}" alt="" style="width:43px;height:43px;border-radius:21.5px;border:0.77px solid #b5b5b5;object-fit:cover;object-position:center top;box-sizing:border-box">
+            <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14px">{{ p.who }}</span><span style="font-size:12px;color:#166a83">Works in <strong style="font-weight:600">{{ p.field }}</strong></span></span>
+          </a>
+        </sc-for>
+        <p style="margin:0;padding:12px 0 2px;font-size:14px;color:#004256">Organizers</p>
+        <a href="#" style="width:342px;height:56px;display:flex;align-items:center;gap:12px;color:#004256">
+          <img src="assets/e200f.webp" alt="" style="width:40px;height:40px;border-radius:10px;border:1px solid #b5b5b5;object-fit:cover;box-sizing:border-box">
+          <span style="display:flex;flex-direction:column;gap:2px"><span style="font-family:Inter,sans-serif;font-size:15px">CAS</span><span style="font-family:Inter,sans-serif;font-size:12px;color:#6b6b6b">SCAD Career Fair</span></span>
+        </a>
+      </div>
+    </sc-if>
+    <div style="position:absolute;left:0;bottom:0;width:390px;height:354px">
+      <dc-import name="Keyboard" on-key="{{ type }}" on-delete="{{ backspace }}" hint-size="390px,354px"></dc-import>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startFocused": {"editor": "boolean", "default": false}, "startQuery": {"editor": "text", "default": ""}, "$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const q = props.startQuery ?? '';
+    this.state = { focused: !!props.startFocused || q.length > 0, q };
+  }
+  renderVals() {
+    const { focused, q } = this.state;
+    const goto = (text) => () => this.setState({ focused: true, q: text });
+    return {
+      idle: !focused, focused, q, hasQ: q.trim().length > 0,
+      focus: () => this.setState({ focused: true }),
+      cancel: () => this.setState({ focused: false, q: '' }),
+      clear: () => this.setState({ q: '' }),
+      onInput: (e) => this.setState({ q: e.target.value }),
+      type: (ch) => this.setState({ q: this.state.q + ch }),
+      backspace: () => this.setState({ q: this.state.q.slice(0, -1) }),
+      recent1: goto('portfolio review'), recent2: goto('conferences'), recent3: goto('networking'),
+      popular: [
+        { title: 'Tech Conference', date: 'Nov 7 · 2 pm to 3 pm', place: 'Poetter Hall', img: 'assets/40b5c.webp', faces: ['assets/d89c0.webp','assets/f89e2.webp'], crew: '9 crewmates going', going: true, saved: true, href: 'EventTechConference.dc.html' },
+        { title: 'Portfolio Day', date: 'Oct 8-9', place: 'Poetter Hall', img: 'assets/08525.webp', faces: ['assets/50c28.webp','assets/b3e18.webp','assets/3650d.webp'], crew: '14 crewmates going', going: true, saved: true, href: 'EventPortfolioDay.dc.html' },
+        { title: 'Career Decoder: Marketing', date: 'Nov 3 · 2 pm to 3 pm', place: 'Virtual', img: 'assets/1a0e4.webp', faces: ['assets/d89c0.webp','assets/2a623.webp'], crew: '5 crewmates going', going: true, saved: true, href: 'EventCareerDecoder.dc.html' },
+      ],
+      people: [
+        { who: 'Adam Crews', field: 'tech', photo: 'assets/91aac.webp' },
+        { who: 'Jamie Lopez', field: 'merchandizing', photo: 'assets/0a355.webp' },
+        { who: 'Jenna Caldwell', field: 'fashion', photo: 'assets/ba9ae.webp' },
+        { who: 'Brooke Sullivan', field: 'design', photo: 'assets/1de59.webp' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

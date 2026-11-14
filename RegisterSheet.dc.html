@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Registration bottom sheet</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div role="dialog" aria-label="You're going" style="width:390px;box-sizing:border-box;display:flex;flex-direction:column;gap:4px;align-items:flex-start;padding:10px 24px 34px;background:#fff;border-radius:20px 20px 0 0;font-family:Poppins,sans-serif;box-shadow:0 -8px 30px rgba(0,30,40,0.18)">
+  <div style="width:100%;display:flex;justify-content:center"><span style="width:40px;height:5px;border-radius:3px;background:#cfcfcf"></span></div>
+  <div style="height:52px;padding-top:8px;box-sizing:border-box;display:flex;align-items:center">
+    <h2 style="margin:0;font-weight:400;font-size:20px;line-height:normal;color:#004256">You’re going!</h2>
+  </div>
+  <button type="button" onClick="{{ add }}" style="width:335px;height:52px;border-radius:8px;border:1.5px solid #fafeff;background:#26b2dc;color:#fafeff;font:inherit;font-weight:600;font-size:14px;line-height:18px;cursor:pointer">Add to calendar</button>
+  <button type="button" onClick="{{ invite }}" style="width:335px;height:52px;border-radius:8px;border:1.5px solid #fafeff;background:#ebfafe;color:#004256;font:inherit;font-weight:600;font-size:14px;line-height:18px;cursor:pointer">Invite a friend</button>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"onAdd": {"editor": null}, "onInvite": {"editor": null}, "$preview": {"width": 390, "height": 217}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const fire = (name) => () => { if (typeof this.props[name] === 'function') this.props[name](); };
+    return { add: fire('onAdd'), invite: fire('onInvite') };
+  }
+}
+</script>
+</body>
+</html>

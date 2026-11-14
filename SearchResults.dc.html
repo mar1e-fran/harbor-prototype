@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Search results</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;background:#fafeff;font-family:Poppins,sans-serif">
+  <div class="ns" style="position:absolute;left:0;top:0;width:390px;bottom:78px;overflow-y:auto;overflow-x:hidden">
+    <div style="padding:56px 24px 24px">
+      <div style="display:flex;align-items:center;gap:8px;height:48px">
+        <a href="SearchSuggestions.dc.html" style="flex:1;height:48px;box-sizing:border-box;border:1.5px solid #004256;border-radius:24px;display:flex;align-items:center;gap:8px;padding:0 6px 0 16px">
+          <img src="assets/252d0.svg" alt="" style="width:20px;height:20px">
+          <span style="flex:1;font-family:Inter,sans-serif;font-size:16px;color:#004256">career fair</span>
+          <span style="width:36px;height:36px;display:flex;align-items:center;justify-content:center"><img src="assets/185f7.svg" alt="Clear search" style="width:20px;height:20px"></span>
+        </a>
+        <a href="Main.dc.html" style="padding-left:4px;font-size:14px;color:#004256">Cancel</a>
+      </div>
+      <div role="tablist" style="margin-top:14px;height:30px;box-sizing:border-box;border-bottom:1px solid #e0e0e0;display:flex;gap:20px;align-items:flex-end">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+          <button type="button" role="tab" aria-selected="{{ t.sel }}" onClick="{{ t.pick }}" style="border:none;background:none;padding:0 0 10px;font:inherit;font-weight:600;font-size:14px;line-height:18px;cursor:pointer;white-space:nowrap;margin-bottom:-1px;color:{{ t.color }};border-bottom:2px solid {{ t.line }}">{{ t.label }}</button>
+        </sc-for>
+      </div>
+      <div style="position:relative;margin-top:14px;height:36px;z-index:6">
+        <div class="ns" style="display:flex;gap:8px;overflow-x:auto;width:366px;height:36px;align-items:flex-start">
+          <sc-for list="{{ dropdowns }}" as="dd" hint-placeholder-count="2">
+            <div style="flex-shrink:0;width:{{ dd.w }};height:36px;border-radius:18px;background:#ebfafe">
+              <button type="button" onClick="{ dd.toggle }" aria-expanded="{ dd.openStr }" aria-haspopup="listbox" style="width:100%;height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 12px;border:none;background:none;font:inherit;font-weight:600;font-size:14px;line-height:18px;color:#166a83;cursor:pointer;white-space:nowrap">
+                  <img src="{ dd.icon }" alt="" style="width:24px;height:24px">{ dd.label }
+                  <img src="assets/cd8f7.svg" alt="" style="width:16px;height:16px;margin-left:auto;transform:rotate({ dd.turn })">
+                </button>
+            </div>
+          </sc-for>
+          <button type="button" onClick="{{ toggleSpots }}" aria-pressed="{{ spotsStr }}" style="height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 12px;border-radius:18px;background:#ebfafe;border:none;font:inherit;font-weight:600;font-size:14px;line-height:18px;color:#166a83;cursor:pointer;white-space:nowrap;flex-shrink:0;background:{{ spotsBg }};color:{{ spotsFg }}"><img src="assets/d15fb.svg" alt="" style="width:24px;height:24px;filter:{{ spotsFilter }}">Spots Available</button>
+        </div>
+        <sc-for list="{{ dropdowns }}" as="dd" hint-placeholder-count="2">
+          <sc-if value="{{ dd.open }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;left:{{ dd.left }};top:0;width:{{ dd.w }};box-sizing:border-box;border-radius:18px;background:#ebfafe;box-shadow:0 8px 24px rgba(0,66,86,0.16)">
+              <button type="button" onClick="{ dd.toggle }" aria-expanded="{ dd.openStr }" aria-haspopup="listbox" style="width:100%;height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 12px;border:none;background:none;font:inherit;font-weight:600;font-size:14px;line-height:18px;color:#166a83;cursor:pointer;white-space:nowrap">
+                  <img src="{ dd.icon }" alt="" style="width:24px;height:24px">{ dd.label }
+                  <img src="assets/cd8f7.svg" alt="" style="width:16px;height:16px;margin-left:auto;transform:rotate({ dd.turn })">
+                </button>
+              <div role="listbox" style="display:flex;flex-direction:column;padding:2px 16px 12px">
+                <sc-for list="{{ dd.options }}" as="o" hint-placeholder-count="5">
+                  <button type="button" role="option" aria-selected="{{ o.sel }}" onClick="{{ o.pick }}" style="height:30px;display:flex;align-items:center;justify-content:space-between;border:none;background:none;padding:0;font:inherit;font-size:12px;color:{{ o.color }};cursor:pointer;text-align:left">
+                    {{ o.label }}
+                    <sc-if value="{{ o.on }}" hint-placeholder-val="{{ false }}"><span style="width:4px;height:4px;border-radius:2px;background:#fe8ee0"></span></sc-if>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+        </sc-for>
+      </div>
+      <sc-if value="{{ isEvents }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-top:14px;display:flex;justify-content:space-between;font-family:Inter,sans-serif;font-size:13px;color:#166a83">
+          <span>{{ count }} results</span><span>Sort: {{ sort }}</span>
+        </div>
+        <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;color:#004256">
+            <img src="assets/5d50e.svg" alt="" style="width:172px;height:47px">
+            <p style="margin:0;font-weight:600;font-size:16px">No events match these filters</p>
+            <button type="button" onClick="{{ clearFilters }}" style="height:44px;padding:0 20px;border-radius:8px;border:none;background:#ebfafe;font:inherit;font-weight:600;font-size:14px;color:#166a83;cursor:pointer">Clear filters</button>
+          </div>
+        </sc-if>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:24px">
+          <sc-for list="{{ results }}" as="r" hint-placeholder-count="3">
+            <dc-import name="ResultCard" result="{{ r }}" hint-size="342px,300px"></dc-import>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isPeople }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:14px;display:flex;flex-direction:column">
+          <sc-for list="{{ people }}" as="a" hint-placeholder-count="4">
+            <dc-import name="AttendeeRow" attendee="{{ a }}" hint-size="342px,64px"></dc-import>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isOrgs }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:14px;display:flex;align-items:center;gap:12px;height:56px;color:#004256">
+          <img src="assets/e200f.webp" alt="" style="width:40px;height:40px;border-radius:10px;border:1px solid #b5b5b5;box-sizing:border-box;object-fit:cover">
+          <span style="display:flex;flex-direction:column;gap:2px"><span style="font-family:Inter,sans-serif;font-size:15px">CAS</span><span style="font-family:Inter,sans-serif;font-size:12px;color:#6b6b6b">SCAD Career Fair</span></span>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+  <div style="position:absolute;left:0;bottom:0;width:390px;height:78px">
+    <dc-import name="NavBar" active="home" hint-size="390px,78px"></dc-import>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startDay": {"editor": "enum", "options": ["Any Day", "Starting Soon", "Today", "Tomorrow", "This Week", "Next Week"], "default": "Any Day"}, "$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { tab: 'events', day: props.startDay ?? 'Any Day', loc: 'Any', open: null, spots: false }; }
+  renderVals() {
+    const { tab, day, loc, open, spots } = this.state;
+    const today = day === 'Today' || day === 'Starting Soon';
+    const career = { title: 'SCAD Career Fair', img: 'assets/4264d.webp', when: 'Nov 18 · 12:30pm to 4pm', where: today ? 'Poetter Hall' : '', going: '43 going', faces: ['assets/fc4c0.webp', 'assets/66a9e.webp', 'assets/8dc47.webp'], href: 'EventDetail.dc.html', virtual: false };
+    const decoder = { title: today ? 'Career Decoder' : 'Career Decoder: Marketing', img: 'assets/1a0e4.webp', when: 'Nov 3 · 2pm to 3pm', where: 'Virtual', going: '43 going', faces: ['assets/50c28.webp', 'assets/b3e18.webp', 'assets/3650d.webp'], href: 'EventCareerDecoder.dc.html', virtual: true };
+    const alumni = { title: 'Alumni Panel', img: 'assets/b87d7.webp', when: 'Nov. 16 · 5pm to 7pm', where: 'River Event Space', going: '86 going', faces: ['assets/50c28.webp', 'assets/b3e18.webp', 'assets/3650d.webp'], href: 'EventAlumniPanel.dc.html', saved: true, virtual: false };
+    const portfolio = { title: 'SCAD Portfolio Day', img: 'assets/08525.webp', when: 'OCt. 8-9 · 2pm to 5pm', where: 'Poetter Hall', going: '86 going', faces: ['assets/50c28.webp', 'assets/b3e18.webp', 'assets/3650d.webp'], href: 'EventPortfolioDay.dc.html', virtual: false };
+    const byDay = { 'Any Day': [alumni, portfolio, career, decoder], 'Starting Soon': [career, decoder], 'Today': [career, decoder],
+      'Tomorrow': [alumni], 'This Week': [alumni, career, decoder], 'Next Week': [] };
+    let results = byDay[day] || byDay['Any Day'];
+    if (loc === 'Savannah') results = results.filter((r) => !r.virtual);
+    if (loc === 'Virtual') results = results.filter((r) => r.virtual);
+    if (loc === 'Atlanta' || loc === 'Lacoste') results = [];
+    const peopleCount = today ? 14 : 22;
+    const tabDefs = [['events', 'Events · ' + results.length], ['people', 'People · ' + peopleCount], ['organizers', 'Organizers · 1']];
+    const tabs = tabDefs.map(([id, label]) => ({ label, sel: tab === id ? 'true' : 'false', color: tab === id ? '#166a83' : '#80a0aa', line: tab === id ? '#166a83' : 'transparent', pick: () => this.setState({ tab: id }) }));
+    const mk = (id, icon, label, left, w, opts, value, key) => {
+      const isOpen = open === id;
+      return { icon, label, left, w, open: isOpen, openStr: isOpen ? 'true' : 'false', turn: isOpen ? '180deg' : '0deg', z: isOpen ? 6 : 1,
+        shadow: isOpen ? '0 8px 24px rgba(0,66,86,0.16)' : 'none',
+        toggle: () => this.setState({ open: isOpen ? null : id }),
+        options: opts.map((o) => ({ label: o, on: o === value, sel: o === value ? 'true' : 'false', color: o === value ? '#fe8ee0' : '#166a83',
+          pick: () => this.setState({ [key]: o, open: null }) })) };
+    };
+    const dropdowns = [
+      mk('day', 'assets/f5ff9.svg', day, '0px', '144px', ['Any Day', 'Starting Soon', 'Today', 'Tomorrow', 'This Week', 'Next Week'], day, 'day'),
+      mk('loc', 'assets/e2b16.svg', loc === 'Any' ? 'Any Location' : loc, '152px', loc === 'Any' ? '176px' : '150px', ['Any', 'Savannah', 'Atlanta', 'Lacoste', 'Virtual'], loc, 'loc'),
+    ];
+    const people = [
+      { who: 'Adam Crews', tag: 'Hiring', tagBg: '#acfec0', sub: 'Recruiter @ Google', photo: 'assets/91aac.webp' },
+      { who: 'Jamie Lopez', tag: 'Hiring', tagBg: '#acfec0', sub: 'Talent Aquisition @ Amazon', photo: 'assets/0a355.webp' },
+      { who: 'Jenna Caldwell', tag: 'Match', tagBg: '#feace8', sub: 'Senior Graphic Designer @ Gucci', photo: 'assets/ba9ae.webp' },
+      { who: 'Brooke Sullivan', tag: 'Crew', tagBg: '#80fdff', sub: 'Design @ Arts & Letters', photo: 'assets/1de59.webp' },
+    ];
+    return {
+      tabs, dropdowns, results, people, count: results.length, empty: results.length === 0, hasResults: results.length > 0,
+      sort: today ? 'Nearest Date' : 'Relevance',
+      isEvents: tab === 'events', isPeople: tab === 'people', isOrgs: tab === 'organizers',
+      spotsStr: spots ? 'true' : 'false', spotsBg: spots ? '#1f92b4' : '#ebfafe', spotsFg: spots ? '#ffffff' : '#166a83',
+      spotsFilter: spots ? 'brightness(0) invert(1)' : 'none',
+      toggleSpots: () => this.setState({ spots: !spots }),
+      clearFilters: () => this.setState({ day: 'Any Day', loc: 'Any', spots: false, open: null }),
+    };
+  }
+}
+</script>
+</body>
+</html>

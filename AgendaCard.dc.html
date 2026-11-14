@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Agenda</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<section style="width:358px;display:flex;flex-direction:column;gap:16px;font-family:Poppins,sans-serif">
+  <div style="display:flex;align-items:center;justify-content:space-between;color:#004256;white-space:nowrap">
+    <h2 style="margin:0;font-weight:600;font-size:14px;line-height:18px">Agenda</h2>
+    <span style="font-size:12px">4 Events left</span>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+    <div style="width:100%;display:flex;flex-direction:column;gap:4px">
+      <div style="width:100%;box-sizing:border-box;display:flex;align-items:center;gap:9px;padding:12px;border-radius:8px;background:#1f92b4;color:#fff;white-space:nowrap">
+        <span style="width:55px;text-align:center;font-weight:600;font-size:16px">Now</span>
+        <span style="display:flex;flex-direction:column"><span style="font-weight:600;font-size:16px">Breaking into Product Design</span><span style="font-family:Inter,sans-serif;font-size:13px">Jenna Caldwell · Room 204</span></span>
+      </div>
+      <div style="width:100%;box-sizing:border-box;display:flex;align-items:center;gap:16px;padding:12px;border:1.5px solid #26b2dc;border-radius:8px;color:#004256;white-space:nowrap">
+        <span style="font-size:12px;text-align:center">2:45 PM</span>
+        <span style="display:flex;flex-direction:column"><span style="font-size:12px">Startup Employer Panel</span><span style="font-family:'DM Sans',sans-serif;font-size:10px;line-height:1">Elena Brooks · Room 110</span></span>
+      </div>
+      <div style="width:100%;box-sizing:border-box;display:flex;align-items:center;gap:16px;padding:12px;border:1.5px solid #26b2dc;border-radius:8px;color:#004256;white-space:nowrap">
+        <span style="font-size:12px;text-align:center">3:30 PM</span>
+        <span style="display:flex;flex-direction:column"><span style="font-size:12px">Break</span><span style="font-family:'DM Sans',sans-serif;font-size:10px;line-height:1">1st Floor</span></span>
+      </div>
+    </div>
+    <a href="#" style="font-size:12px;text-decoration:underline;color:#004256">Full agenda</a>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 358, "height": 250}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

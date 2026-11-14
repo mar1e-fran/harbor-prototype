@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Event carousel section</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<section style="width:366px;display:flex;flex-direction:column;gap:12px;font-family:Poppins,sans-serif">
+  <div style="width:342px;display:flex;align-items:center;justify-content:space-between;min-height:32px">
+    <h2 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:400;font-size:24px;line-height:normal;color:#004256">{{ heading }}</h2>
+    <a href="#" style="font-size:16px;color:#004256">View more</a>
+  </div>
+  <sc-if value="{{ hasSub }}" hint-placeholder-val="{{ false }}">
+    <p style="margin:-8px 0 0;font-size:16px;color:#004256">{{ sub }}</p>
+  </sc-if>
+  <div class="ns" style="width:366px;display:flex;gap:12px;overflow-x:auto;padding-right:24px;box-sizing:border-box;scroll-snap-type:x proximity">
+    <sc-for list="{{ items }}" as="it" hint-placeholder-count="3">
+      <div style="scroll-snap-align:start;flex-shrink:0">
+        <dc-import name="EventTile" ev="{{ it }}" hint-size="150px,226px"></dc-import>
+      </div>
+    </sc-for>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"heading": {"editor": "text", "default": "Picked for you"}, "sub": {"editor": "text", "default": ""}, "items": {"editor": null}, "$preview": {"width": 366, "height": 270}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const items = this.props.items ?? [{ title: 'Meet Designers Across Majors', date: 'Nov 10 · 4 pm to 6 pm', place: 'Haymans Hall', img: 'assets/10e4f.webp', going: false, saved: false, crew: '12 crewmates going', faces: ['assets/d15eb.webp', 'assets/7748d.webp', 'assets/db34d.webp'], href: '#' }, { title: 'SCAD Alumni Reception', date: 'Nov 10 · 4 pm to 6 pm', place: 'Haymans Hall', img: 'assets/e3589.webp', going: false, saved: false, crew: '12 crewmates going', faces: ['assets/d15eb.webp', 'assets/7748d.webp', 'assets/db34d.webp'], href: '#' }];
+    const sub = this.props.sub ?? '';
+    return { heading: this.props.heading ?? 'Picked for you', sub, hasSub: !!sub, items };
+  }
+}
+</script>
+</body>
+</html>

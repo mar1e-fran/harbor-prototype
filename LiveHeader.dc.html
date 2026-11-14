@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Live event header</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="position:relative;width:390px;height:273px;font-family:Poppins,sans-serif">
+  <div style="position:absolute;left:0;right:0;top:0;height:247px;background:#004256"></div>
+  <div style="position:absolute;left:0;top:80px;width:390px;height:167px;overflow:hidden">
+    <sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
+      <img src="assets/f0391.svg" alt="" style="position:absolute;left:-6px;top:10px;width:385px;height:232px;transform:scaleX(-1);">
+      <img src="assets/fc23d.svg" alt="" style="position:absolute;left:162px;top:82px;width:229px;height:97.5px;transform:scaleX(-1);">
+      <p style="position:absolute;left:16px;top:26px;width:358px;margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal;color:#fff">Making waves, {{ first }}.<br>Keep going!</p>
+    </sc-if>
+    <sc-if value="{{ isWellness }}" hint-placeholder-val="{{ false }}">
+      <img src="assets/f0391.svg" alt="" style="position:absolute;left:-6px;top:10px;width:385px;height:232px;transform:scaleX(-1);">
+      <img src="assets/b3f8f.svg" alt="" style="position:absolute;left:250.8px;top:82px;width:140.19px;height:97.5px;transform:scaleX(-1);">
+      <img src="assets/2fce8.svg" alt="" style="position:absolute;left:162px;top:137.1px;width:149.13px;height:41.38px;transform:scaleX(-1);">
+      <p style="position:absolute;left:16px;top:26px;width:358px;margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal;color:#fff">Drop the anchor<br>and take a breath.</p>
+    </sc-if>
+    <sc-if value="{{ isNotes }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;left:190px;top:3.77px;width:157.556px;height:184.05px;display:flex;align-items:center;justify-content:center">
+        <img src="assets/7802b.svg" alt="" style="width:86.751px;height:162.538px;transform:rotate(-30.69deg);display:block">
+      </div>
+      <p style="position:absolute;left:16px;top:26px;width:358px;margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal;color:#fff">Captain’s log<br>in progress...</p>
+    </sc-if>
+  </div>
+  <div style="position:absolute;left:0;right:0;top:60px;padding:0 16px;display:flex;align-items:center;justify-content:space-between">
+    <span style="font-size:12px;color:#fff">Fall Career Expo 2026</span>
+    <img src="assets/10a23.svg" alt="Map and messages" style="width:54.952px;height:20px;display:block">
+  </div>
+  <div role="tablist" style="position:absolute;left:16px;top:221px;width:358px;height:52px;box-sizing:border-box;background:#fff;border-radius:12px;padding:4px;display:flex">
+    <a href="{{ overviewHref }}" role="tab" style="flex:1;min-width:0;height:44px;display:flex;align-items:center;justify-content:center;gap:4px;padding:1px 6px;border-radius:8px;box-sizing:border-box;font-family:Poppins,sans-serif;font-weight:600;font-size:14px;line-height:18px;white-space:nowrap;background:{{ ovBg }};color:{{ ovColor }}">
+      <sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}"><img src="assets/90fb5.svg" alt="" style="width:20px;height:20px;display:block"></sc-if>
+      <sc-if value="{{ notOverview }}" hint-placeholder-val="{{ false }}"><img src="assets/ed921.svg" alt="" style="width:20px;height:20px;display:block"></sc-if>
+      Overview
+    </a>
+    <a href="{{ notesHref }}" role="tab" style="flex:1;min-width:0;height:44px;display:flex;align-items:center;justify-content:center;gap:4px;padding:1px 6px;border-radius:8px;box-sizing:border-box;font-family:Poppins,sans-serif;font-weight:600;font-size:14px;line-height:18px;white-space:nowrap;background:{{ ntBg }};color:{{ ntColor }}">
+      <sc-if value="{{ isNotes }}" hint-placeholder-val="{{ false }}"><img src="assets/90c4a.svg" alt="" style="width:20px;height:20px;display:block"></sc-if>
+      <sc-if value="{{ notNotes }}" hint-placeholder-val="{{ true }}"><img src="assets/83d36.svg" alt="" style="width:20px;height:20px;display:block"></sc-if>
+      Notes
+    </a>
+    <a href="{{ wellnessHref }}" role="tab" style="flex:1;min-width:0;height:44px;display:flex;align-items:center;justify-content:center;gap:4px;padding:1px 6px;border-radius:8px;box-sizing:border-box;font-family:Poppins,sans-serif;font-weight:600;font-size:14px;line-height:18px;white-space:nowrap;background:{{ wlBg }};color:{{ wlColor }}">
+      <sc-if value="{{ isWellness }}" hint-placeholder-val="{{ false }}"><img src="assets/ae81e.svg" alt="" style="width:20px;height:20px;display:block"></sc-if>
+      <sc-if value="{{ notWellness }}" hint-placeholder-val="{{ true }}"><img src="assets/f58f0.svg" alt="" style="width:20px;height:20px;display:block"></sc-if>
+      Wellness
+    </a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"tab": {"editor": "enum", "options": ["overview", "notes", "wellness"], "default": "overview"}, "overviewHref": {"editor": null}, "notesHref": {"editor": null}, "wellnessHref": {"editor": null}, "$preview": {"width": 390, "height": 273}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { profile: null }; }
+
+  componentDidMount() {
+    this._sync = () => { let p = null; try { p = JSON.parse(window.localStorage.getItem('harbor.profile') || 'null'); } catch (e) {} this.setState({ profile: p }); };
+    this._sync();
+    try { window.addEventListener('storage', this._sync); window.addEventListener('harbor-profile', this._sync); } catch (e) {}
+  }
+  componentWillUnmount() {
+    try { window.removeEventListener('storage', this._sync); window.removeEventListener('harbor-profile', this._sync); } catch (e) {}
+  }
+  firstName() {
+    const p = (this.state && this.state.profile) || null;
+    const n = p && p.name ? String(p.name).trim().split(/\s+/)[0] : '';
+    return n || 'Evelyn';
+  }
+  renderVals() {
+    const tab = this.props.tab ?? 'overview';
+    const on = (t) => tab === t;
+    const bg = (t) => on(t) ? '#166a83' : 'transparent';
+    const fg = (t) => on(t) ? '#ffffff' : '#80a0aa';
+    return {
+      isOverview: on('overview'), notOverview: !on('overview'),
+      isNotes: on('notes'), notNotes: !on('notes'),
+      isWellness: on('wellness'), notWellness: !on('wellness'),
+      ovBg: bg('overview'), ovColor: fg('overview'),
+      ntBg: bg('notes'), ntColor: fg('notes'),
+      wlBg: bg('wellness'), wlColor: fg('wellness'),
+      overviewHref: this.props.overviewHref ?? 'LiveOverview.dc.html',
+      notesHref: this.props.notesHref ?? 'LiveNotes.dc.html',
+      wellnessHref: this.props.wellnessHref ?? 'LiveWellness.dc.html',
+      first: this.firstName(),
+    };
+  }
+}
+</script>
+</body>
+</html>

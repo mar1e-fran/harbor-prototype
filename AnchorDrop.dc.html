@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Anchor Drop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+.ad-sway{animation:adSway 6.5s ease-in-out infinite}
+@keyframes adSway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(4deg)}}
+.ad-bub{position:absolute;border-radius:50%;border:2px solid rgba(170,232,250,.75);background:rgba(170,232,250,.14);opacity:0}
+@keyframes adRiseA{0%{transform:translate(0,0) scale(.5);opacity:0}15%{opacity:.9}55%{transform:translate(10px,-130px) scale(.85)}100%{transform:translate(-4px,-260px) scale(1);opacity:0}}
+@keyframes adRiseB{0%{transform:translate(0,0) scale(.5);opacity:0}15%{opacity:.85}55%{transform:translate(-12px,-120px) scale(.8)}100%{transform:translate(6px,-240px) scale(1);opacity:0}}
+.ad-weed{transform-origin:50% 100%;animation:adWeed 7s ease-in-out infinite}
+@keyframes adWeed{0%,100%{transform:skewX(-5deg)}50%{transform:skewX(5deg)}}
+.ad-fish{animation:adFish 22s ease-in-out infinite alternate}
+@keyframes adFish{from{transform:translateX(-8px)}to{transform:translateX(36px)}}
+.ad-rays{animation:adRays 14s ease-in-out infinite alternate}
+@keyframes adRays{from{transform:translateX(-14px)}to{transform:translateX(14px)}}
+.ad-wave1{animation:adWave1 16s linear infinite}
+@keyframes adWave1{from{transform:translateX(0)}to{transform:translateX(-390px)}}
+.ad-wave2{animation:adWave2 22s linear infinite}
+@keyframes adWave2{from{transform:translateX(-390px)}to{transform:translateX(0)}}
+@media (prefers-reduced-motion: reduce){.ad-sway,.ad-weed,.ad-fish,.ad-rays,.ad-wave1,.ad-wave2{animation:none}.ad-bub{display:none}}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #013F55; font-family: 'Lexend', system-ui, sans-serif; color: #E4FAFF">
+
+  <div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; transform: translateY({{farY}}px); transition: transform {{dur}}s cubic-bezier(.37,0,.63,1)">
+    <div style="position: absolute; left: 0; top: 0; width: 390px; height: 560px; opacity: {{raysOpacity}}; transition: opacity {{dur}}s cubic-bezier(.37,0,.63,1)">
+      <svg class="ad-rays" width="390" height="560" viewBox="0 0 390 560" style="position: absolute; left: 0; top: 0">
+        <defs>
+          <linearGradient id="adRay" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#8FDCEB" stop-opacity=".16"></stop>
+            <stop offset="1" stop-color="#8FDCEB" stop-opacity="0"></stop>
+          </linearGradient>
+        </defs>
+        <path d="M110 0 L178 0 L104 540 L28 540 Z" fill="url(#adRay)"></path>
+        <path d="M222 0 L264 0 L252 470 L190 470 Z" fill="url(#adRay)"></path>
+        <path d="M300 0 L366 0 L392 420 L318 420 Z" fill="url(#adRay)"></path>
+      </svg>
+    </div>
+    <svg class="ad-wave2" width="780" height="90" viewBox="0 0 780 90" style="position: absolute; left: 0; top: 92px">
+      <path d="M0 34 Q32.5 18 65 34 T130 34 T195 34 T260 34 T325 34 T390 34 T455 34 T520 34 T585 34 T650 34 T715 34 T780 34 L780 70 Q747.5 82 715 70 T650 70 T585 70 T520 70 T455 70 T390 70 T325 70 T260 70 T195 70 T130 70 T65 70 T0 70 Z" fill="#5C97A3" fill-opacity=".55"></path>
+    </svg>
+    <svg class="ad-wave1" width="780" height="90" viewBox="0 0 780 90" style="position: absolute; left: 0; top: 72px">
+      <path d="M0 30 Q48.75 8 97.5 30 T195 30 T292.5 30 T390 30 T487.5 30 T585 30 T682.5 30 T780 30 L780 58 Q731.25 72 682.5 58 T585 58 T487.5 58 T390 58 T292.5 58 T195 58 T97.5 58 T0 58 Z" fill="#7FB4B9" fill-opacity=".6"></path>
+    </svg>
+    <svg class="ad-fish" width="180" height="110" viewBox="0 0 180 110" style="position: absolute; left: 4px; top: 214px">
+      <g fill="#5E9A8F" fill-opacity=".85" transform="rotate(-12 90 55)">
+        <ellipse cx="146" cy="14" rx="18" ry="9"></ellipse>
+        <ellipse cx="112" cy="20" rx="12" ry="6"></ellipse>
+        <ellipse cx="82" cy="24" rx="11" ry="5.5"></ellipse>
+        <ellipse cx="156" cy="40" rx="12" ry="6"></ellipse>
+        <ellipse cx="126" cy="44" rx="13" ry="7"></ellipse>
+        <ellipse cx="94" cy="48" rx="13" ry="7"></ellipse>
+        <ellipse cx="62" cy="50" rx="10" ry="5.5"></ellipse>
+        <ellipse cx="146" cy="66" rx="15" ry="8"></ellipse>
+        <ellipse cx="108" cy="70" rx="16" ry="8"></ellipse>
+        <ellipse cx="68" cy="74" rx="14" ry="7"></ellipse>
+        <ellipse cx="32" cy="72" rx="11" ry="5.5"></ellipse>
+        <ellipse cx="128" cy="94" rx="15" ry="7.5"></ellipse>
+        <ellipse cx="86" cy="96" rx="12" ry="6"></ellipse>
+        <ellipse cx="46" cy="98" rx="13" ry="6.5"></ellipse>
+        <ellipse cx="14" cy="94" rx="10" ry="5"></ellipse>
+      </g>
+    </svg>
+  </div>
+
+  <div aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 390px; height: 844px; transform: translateY({{nearY}}px); transition: transform {{dur}}s cubic-bezier(.37,0,.63,1)">
+    <svg width="390" height="260" viewBox="0 0 390 260" style="position: absolute; left: 0; top: 572px">
+      <g fill="none" stroke="#3B6D7C" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".9">
+        <path d="M44 240 V160 M44 186 L22 150 V112 M22 140 L6 122 M44 160 L66 124 V92 M66 118 L86 98 V78 M44 206 L70 190"></path>
+        <path d="M200 250 V200 M200 220 L182 196 V172 M200 202 L218 180 V162 M218 190 L234 180"></path>
+        <path d="M342 246 V172 M342 198 L362 168 V140 M362 160 L380 148 M342 180 L320 150 V124 M320 140 L304 128"></path>
+      </g>
+      <g fill="none" stroke="#2C5E6C" stroke-width="8" stroke-linecap="round">
+        <path class="ad-weed" d="M112 250 C 100 214, 124 190, 112 156 C 102 128, 120 108, 114 86"></path>
+        <path class="ad-weed" style="animation-delay: -2.5s" d="M276 250 C 288 218, 266 196, 278 166 C 288 140, 270 122, 276 104"></path>
+      </g>
+    </svg>
+    <svg width="390" height="150" viewBox="0 0 390 150" style="position: absolute; left: 0; top: 770px">
+      <path d="M0 26 Q195 -8 390 26 V150 H0 Z" fill="#FCE8F3"></path>
+    </svg>
+  </div>
+
+  <div aria-hidden="true" style="position: absolute; left: 50%; top: 0; width: 96px; height: 120px; margin-left: -48px; transform: translateY({{anchorY}}px); transition: transform {{dur}}s cubic-bezier(.37,0,.63,1); will-change: transform">
+    <svg width="220" height="760" viewBox="0 0 220 760" style="position: absolute; left: 0; top: -748px; overflow: visible">
+      <defs>
+        <linearGradient id="adRope" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="{{accent}}" stop-opacity="0"></stop>
+          <stop offset=".3" stop-color="{{accent}}" stop-opacity="1"></stop>
+          <stop offset="1" stop-color="{{accent}}" stop-opacity="1"></stop>
+        </linearGradient>
+      </defs>
+      <path d="M48 760 C 48 520, 62 260, 204 0" fill="none" stroke="url(#adRope)" stroke-width="4" stroke-linecap="round"></path>
+    </svg>
+    <div style="position: absolute; left: 36px; top: 4px; width: 24px; height: 24px; opacity: {{bubbleOpacity}}; transition: opacity 1.2s ease-in-out">
+      <span class="ad-bub" style="left: 2px; top: 0; width: 12px; height: 12px; animation: adRiseA 4.4s ease-in 0s infinite"></span>
+      <span class="ad-bub" style="left: 12px; top: 6px; width: 8px; height: 8px; animation: adRiseB 3.8s ease-in .9s infinite"></span>
+      <span class="ad-bub" style="left: -6px; top: 8px; width: 7px; height: 7px; animation: adRiseB 4.8s ease-in 1.7s infinite"></span>
+      <span class="ad-bub" style="left: 8px; top: 2px; width: 14px; height: 14px; animation: adRiseA 5.2s ease-in 2.4s infinite"></span>
+      <span class="ad-bub" style="left: -2px; top: 10px; width: 6px; height: 6px; animation: adRiseA 3.6s ease-in 3.1s infinite"></span>
+      <span class="ad-bub" style="left: 16px; top: 4px; width: 9px; height: 9px; animation: adRiseB 4.2s ease-in 3.8s infinite"></span>
+    </div>
+    <div class="ad-sway" style="position: relative; width: 96px; height: 120px; transform-origin: 50% 10%">
+      <svg width="96" height="120" viewBox="0 0 120 150">
+        <rect x="51" y="28" width="18" height="96" rx="4" fill="{{accent}}"></rect>
+        <rect x="28" y="46" width="64" height="16" rx="5" fill="{{accent}}"></rect>
+        <path d="M4 84 L22 80 Q60 128 98 80 L116 84 Q106 146 60 146 Q14 146 4 84 Z" fill="{{accent}}"></path>
+        <circle cx="60" cy="18" r="16" fill="{{accent}}"></circle>
+        <circle cx="60" cy="18" r="5.5" fill="#013F55"></circle>
+      </svg>
+    </div>
+  </div>
+
+  <a href="LiveWellness.dc.html" aria-label="Back to wellness" style="position: absolute; left: 10px; top: 44px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 24px; color: #E4FAFF">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M20 12H4"></path>
+      <path d="M10 6l-6 6 6 6"></path>
+    </svg>
+  </a>
+
+  <sc-if value="{{isIntro}}" hint-placeholder-val="{{true}}">
+    <div style="position: absolute; left: 32px; right: 32px; top: 318px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center">
+      <h1 style="margin: 0; font-size: 40px; line-height: 1.1; font-weight: 600; color: #C9F5FF; letter-spacing: -0.01em">Anchor Drop</h1>
+      <p style="margin: 0; max-width: 290px; font-size: 18px; line-height: 1.5; font-weight: 400; color: #A8D8E2">Use your breath to gently lower and raise the anchor.</p>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 18px">
+        <span id="ad-len" style="font-size: 14px; font-weight: 500; color: #A8D8E2">Session length</span>
+        <div role="group" aria-labelledby="ad-len" style="display: flex; gap: 10px">
+          <sc-for list="{{chips}}" as="c" hint-placeholder-count="3">
+            <button type="button" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" style="min-width: 72px; height: 44px; padding: 0 16px; border-radius: 22px; border: 1.5px solid {{c.border}}; background: {{c.bg}}; color: {{c.fg}}; font-family: inherit; font-size: 15px; font-weight: 500; cursor: pointer">{{c.label}}</button>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <button type="button" onClick="{{begin}}" style="position: absolute; left: 32px; right: 32px; bottom: 116px; height: 56px; border: none; border-radius: 28px; background: {{accent}}; color: #00334A; font-family: inherit; font-size: 18px; font-weight: 600; cursor: pointer">Begin</button>
+  </sc-if>
+
+  <sc-if value="{{isSession}}" hint-placeholder-val="{{false}}">
+    <div style="position: absolute; left: 0; right: 0; top: 352px; display: flex; flex-direction: column; align-items: center; text-align: center; text-shadow: 0 2px 16px rgba(1,46,63,.55)">
+      <div aria-live="polite" style="font-size: 34px; font-weight: 600; line-height: 1.2; color: #C9F5FF">{{label}}</div>
+      <div style="font-size: 96px; font-weight: 600; line-height: 1.05; color: #E4FAFF; font-variant-numeric: tabular-nums">{{count}}</div>
+    </div>
+    <div style="position: absolute; left: 0; right: 0; bottom: 26px; text-align: center; font-size: 15px; font-weight: 500; color: #24525F">Breath {{cycle}} of {{total}}</div>
+  </sc-if>
+
+  <sc-if value="{{isDone}}" hint-placeholder-val="{{false}}">
+    <div style="position: absolute; left: 32px; right: 32px; top: 330px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center">
+      <h1 style="margin: 0; font-size: 40px; line-height: 1.1; font-weight: 600; color: #C9F5FF">Nicely done</h1>
+      <p style="margin: 0; max-width: 290px; font-size: 18px; line-height: 1.5; color: #A8D8E2">Your breath found a steady rhythm. Carry that calm with you.</p>
+    </div>
+    <div style="position: absolute; left: 32px; right: 32px; bottom: 116px; display: flex; flex-direction: column; gap: 12px">
+      <button type="button" onClick="{{begin}}" style="height: 56px; border: none; border-radius: 28px; background: {{accent}}; color: #00334A; font-family: inherit; font-size: 18px; font-weight: 600; cursor: pointer">Breathe again</button>
+      <a href="LiveWellness.dc.html" style="height: 52px; box-sizing: border-box; border: 1.5px solid rgba(201,245,255,.55); border-radius: 26px; background: #013F55; color: #C9F5FF; font-size: 17px; font-weight: 500; display: flex; align-items: center; justify-content: center">Finish</a>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"mode":{"editor":"enum","options":["live","intro","out","in","done"],"default":"live","section":"Prototype"},"phaseSeconds":{"editor":"int","min":3,"max":8,"step":1,"default":5,"unit":"s","section":"Prototype"},"accent":{"editor":"color","default":"#2BB5E3","options":["#2BB5E3","#5FD3C4","#8EC5FF"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(...args) {
+    super(...args);
+    this.state = { screen: 'intro', phase: 'in', count: 5, cycle: 1, minutes: 1 };
+    this.timer = null;
+  }
+  componentWillUnmount() { this.stop(); }
+  sec() {
+    const s = Number(this.props.phaseSeconds ?? 5);
+    return Math.min(8, Math.max(3, Math.round(isNaN(s) ? 5 : s)));
+  }
+  cycles() { return Math.max(1, Math.round((this.state.minutes * 60) / (2 * this.sec()))); }
+  stop() { if (this.timer) { clearInterval(this.timer); this.timer = null; } }
+  begin() {
+    this.stop();
+    this.setState({ screen: 'session', phase: 'out', count: this.sec(), cycle: 1 });
+    this.timer = setInterval(() => this.tick(), 1000);
+  }
+  tick() {
+    const s = this.state;
+    if (s.count > 1) { this.setState({ count: s.count - 1 }); return; }
+    if (s.phase === 'out') { this.setState({ phase: 'in', count: this.sec() }); return; }
+    if (s.cycle >= this.cycles()) { this.stop(); this.setState({ screen: 'done' }); return; }
+    this.setState({ phase: 'out', count: this.sec(), cycle: s.cycle + 1 });
+  }
+  renderVals() {
+    const mode = this.props.mode ?? 'live';
+    const accent = this.props.accent ?? '#2BB5E3';
+    let screen = this.state.screen, phase = this.state.phase, count = this.state.count, cycle = this.state.cycle;
+    let anchorY = null;
+    if (mode === 'intro') { screen = 'intro'; phase = 'in'; }
+    if (mode === 'out') { screen = 'session'; phase = 'out'; count = 3; cycle = 2; }
+    if (mode === 'in') { screen = 'session'; phase = 'in'; count = 2; cycle = 2; anchorY = 330; }
+    if (mode === 'done') { screen = 'done'; phase = 'in'; }
+    const deep = screen === 'session' && phase === 'out';
+    if (anchorY === null) anchorY = deep ? 590 : 150;
+    const t = (anchorY - 150) / 440;
+    const live = mode === 'live';
+    const chips = [1, 2, 3].map((m) => {
+      const on = this.state.minutes === m;
+      return {
+        label: m + ' min',
+        pressed: on ? 'true' : 'false',
+        bg: on ? accent : 'transparent',
+        fg: on ? '#00334A' : '#CDEFF7',
+        border: on ? accent : 'rgba(205,239,247,.5)',
+        pick: () => { if (live) this.setState({ minutes: m }); }
+      };
+    });
+    return {
+      accent,
+      isIntro: screen === 'intro',
+      isSession: screen === 'session',
+      isDone: screen === 'done',
+      label: phase === 'out' ? 'Breathe Out' : 'Breathe In',
+      count,
+      cycle,
+      total: this.cycles(),
+      anchorY,
+      farY: Math.round(-60 * t),
+      nearY: Math.round(-44 * t),
+      raysOpacity: (1 - 0.5 * t).toFixed(2),
+      bubbleOpacity: deep ? 1 : 0,
+      dur: this.sec(),
+      chips,
+      begin: () => { if (live) this.begin(); }
+    };
+  }
+}
+</script>
+</body>
+</html>

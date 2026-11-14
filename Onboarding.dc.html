@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Onboarding</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;background:{{ bg }};font-family:Poppins,sans-serif">
+
+  <sc-if value="{{ s.login }}" hint-placeholder-val="{{ true }}">
+    
+    <div aria-hidden="true" style="position:absolute;left:117.43px;top:99px;width:119.788px;height:133.335px;display:flex;align-items:center;justify-content:center">
+      <img src="assets/dc3fc.svg" alt="" style="width:94.725px;height:113.476px;transform:rotate(14.28deg);display:block">
+    </div>
+    <p style="position:absolute;left:36px;top:170.25px;width:317px;margin:0;font-family:'DM Sans',sans-serif;font-weight:800;font-size:93.064px;line-height:1.5;letter-spacing:-1.02px;color:#c6feff">Harbor</p>
+    <div role="form" aria-label="Log in" style="position:absolute;left:19px;top:371px;width:353px;display:flex;flex-direction:column;gap:24px;align-items:center">
+      <div style="width:100%;display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+        <label style="width:100%;display:flex;flex-direction:column;gap:6px"><span style="font-family:Poppins,sans-serif;font-size:16px;line-height:normal;color:#fff">Email</span>
+          <span style="width:353px;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:0 16px;height:56px;border:1px solid #1f92b4;border-radius:10px;background:#ebfeff"><input type="email" autocomplete="email" placeholder="Your email" value="{{ f.email }}" onChange="{{ set.email }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:Poppins,sans-serif;font-weight:300;font-size:14px;color:#004256;padding:0"></span></label>
+        <label style="width:100%;display:flex;flex-direction:column;gap:6px"><span style="font-family:Poppins,sans-serif;font-size:16px;line-height:normal;color:#fff">Password</span>
+          <span style="width:353px;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:0 16px;height:56px;border:1px solid #1f92b4;border-radius:10px;background:#ebfeff"><input type="{{ pwType }}" autocomplete="current-password" placeholder="Your password" value="{{ f.password }}" onChange="{{ set.password }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:Poppins,sans-serif;font-weight:300;font-size:14px;color:#004256;padding:0">
+            <button type="button" aria-label="{{ pwLabel }}" onClick="{{ togglePw }}" style="border:none;background:none;padding:0;cursor:pointer;display:flex"><img src="assets/1c653.svg" alt="" style="width:17px;height:15px;opacity:{{ eyeOpacity }}"></button></span></label>
+        <button type="button" style="border:none;background:none;padding:0;font-family:Urbanist,sans-serif;font-size:14px;letter-spacing:.28px;color:#fff;cursor:pointer">Forgot password?</button>
+      </div>
+      <sc-if value="{{ loginError }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:-12px 0 0;align-self:flex-start;font-size:12px;color:#c6feff">Enter your email and password to log in.</p></sc-if>
+      <div style="width:100%;display:flex;flex-direction:column;gap:20px;align-items:center">
+        <button type="button" onClick="{{ submitLogin }}" style="width:100%;height:56px;border:none;border-radius:10px;background:#004256;color:#fff;font-family:Urbanist,sans-serif;font-weight:700;font-size:16px;letter-spacing:.32px;cursor:pointer">Log in</button>
+        <div style="width:100%;display:flex;align-items:center;gap:10px"><img src="assets/09044.svg" alt="" style="width:122px;height:1px"><span style="font-family:Urbanist,sans-serif;font-size:14px;color:#fff;white-space:nowrap">Or Login with</span><img src="assets/09044.svg" alt="" style="width:122px;height:1px"></div>
+        <div style="display:flex;gap:16px">
+          <button type="button" aria-label="Log in with Google" onClick="{{ quickLogin }}" style="width:52px;height:52px;border-radius:51px;background:#fff;border:1px solid #1f92b4;display:flex;align-items:center;justify-content:center;cursor:pointer"><img src="assets/62365.svg" alt="" style="width:18.17px;height:19px"></button>
+          <button type="button" aria-label="Log in with Microsoft" onClick="{{ quickLogin }}" style="width:52px;height:52px;border-radius:40px;background:#fff;border:1px solid #1f92b4;display:flex;align-items:center;justify-content:center;cursor:pointer"><img src="assets/e1e8d.svg" alt="" style="width:20px;height:20px"></button>
+          <button type="button" aria-label="Log in with SSO" onClick="{{ quickLogin }}" style="width:52px;height:52px;border-radius:40px;background:#fff;border:1px solid #1f92b4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;padding:0"><img src="assets/7b2da.svg" alt="" style="width:15px;height:15px"><span style="font-weight:600;font-size:12px;line-height:12px;color:#1f92b4">SSO</span></button>
+        </div>
+      </div>
+      <p style="margin:0;font-family:Urbanist,sans-serif;font-size:14px;letter-spacing:.32px;color:#fff">Don’t have an account? <button type="button" onClick="{{ toSignup }}" style="border:none;background:none;padding:0;font:inherit;font-weight:700;color:#fff;text-decoration:underline;cursor:pointer">Sign up</button></p>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ s.signup }}" hint-placeholder-val="{{ false }}">
+    
+    <div aria-hidden="true" style="position:absolute;left:117.43px;top:99px;width:119.788px;height:133.335px;display:flex;align-items:center;justify-content:center">
+      <img src="assets/dc3fc.svg" alt="" style="width:94.725px;height:113.476px;transform:rotate(14.28deg);display:block">
+    </div>
+    <p style="position:absolute;left:36px;top:170.25px;width:317px;margin:0;font-family:'DM Sans',sans-serif;font-weight:800;font-size:93.064px;line-height:1.5;letter-spacing:-1.02px;color:#c6feff">Harbor</p>
+    <div role="form" aria-label="Sign up" style="position:absolute;left:19px;top:392px;width:353px;display:flex;flex-direction:column;gap:12px;align-items:center">
+      <label style="width:100%;display:flex;flex-direction:column;gap:6px"><span style="font-family:Poppins,sans-serif;font-size:16px;line-height:normal;color:#fff">Your name</span>
+        <span style="width:353px;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:0 16px;height:56px;border:1px solid #1f92b4;border-radius:10px;background:#ebfeff"><input autocomplete="name" placeholder="Your name" value="{{ f.name }}" onChange="{{ set.name }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:Poppins,sans-serif;font-weight:300;font-size:14px;color:#004256;padding:0"></span></label>
+      <label style="width:100%;display:flex;flex-direction:column;gap:6px"><span style="font-family:Poppins,sans-serif;font-size:16px;line-height:normal;color:#fff">Email</span>
+        <span style="width:353px;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:0 16px;height:56px;border:1px solid #1f92b4;border-radius:10px;background:#ebfeff"><input type="email" autocomplete="email" placeholder="Your email" value="{{ f.email }}" onChange="{{ set.email }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:Poppins,sans-serif;font-weight:300;font-size:14px;color:#004256;padding:0"></span></label>
+      <label style="width:100%;display:flex;flex-direction:column;gap:6px"><span style="font-family:Poppins,sans-serif;font-size:16px;line-height:normal;color:#fff">Create password</span>
+        <span style="width:353px;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:0 16px;height:56px;border:1px solid #1f92b4;border-radius:10px;background:#ebfeff"><input type="{{ pwType }}" autocomplete="new-password" placeholder="Your password" value="{{ f.password }}" onChange="{{ set.password }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:Poppins,sans-serif;font-weight:300;font-size:14px;color:#004256;padding:0">
+          <button type="button" aria-label="{{ pwLabel }}" onClick="{{ togglePw }}" style="border:none;background:none;padding:0;cursor:pointer;display:flex"><img src="assets/1c653.svg" alt="" style="width:17px;height:15px;opacity:{{ eyeOpacity }}"></button></span></label>
+      <sc-if value="{{ signupError }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:0;align-self:flex-start;font-size:12px;color:#c6feff">Add your name, email and a password to continue.</p></sc-if>
+      <button type="button" onClick="{{ submitSignup }}" style="margin-top:12px;width:100%;height:56px;border:none;border-radius:10px;background:#004256;color:#fff;font-family:Urbanist,sans-serif;font-weight:700;font-size:16px;letter-spacing:.32px;cursor:pointer">Continue</button>
+      <p style="margin:12px 0 0;font-family:Urbanist,sans-serif;font-size:14px;letter-spacing:.32px;color:#fff">Already have an account? <button type="button" onClick="{{ toLogin }}" style="border:none;background:none;padding:0;font:inherit;font-weight:700;color:#fff;text-decoration:underline;cursor:pointer">Log in</button></p>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ s.welcome }}" hint-placeholder-val="{{ false }}">
+    
+    <div style="position:absolute;left:24px;top:56px;width:342px;display:flex;align-items:center;justify-content:space-between">
+      <button type="button" aria-label="Back" onClick="{{ back }}" style="border:none;background:none;padding:0;cursor:pointer;width:24px;height:24px"><img src="assets/80a1f.svg" alt="" style="width:24px;height:24px;display:block"></button>
+      <div role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="{{ stepNo }}" style="display:flex;gap:4px">
+        <sc-for list="{{ bars }}" as="b" hint-placeholder-count="6"><span style="width:49px;height:4px;border-radius:61px;background:{{ b }}"></span></sc-for>
+      </div>
+    </div>
+    <div style="position:absolute;left:24px;top:173px;width:342px;display:flex;flex-direction:column;gap:8px">
+      <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:40px;line-height:normal;color:#fff"><span style="color:#c6feff">Ahoy!</span> Welcome aboard, {{ first }}!</h1>
+      <p style="margin:0;font-size:20px;line-height:normal;color:#c6feff">Help us chart your course with a few quick questions.</p>
+    </div>
+    <div aria-hidden="true" style="position:absolute;left:103px;top:392px;width:184.32px;height:205.94px;display:flex;align-items:center;justify-content:center"><img src="assets/161aa.svg" alt="" style="width:167px;height:191px;transform:rotate(5.43deg)"></div>
+    <img src="assets/6df69.svg" alt="" style="position:absolute;left:0;top:598px;width:410px;height:40px">
+    <img src="assets/6df69.svg" alt="" style="position:absolute;left:-6px;top:635px;width:410px;height:40px">
+    <img src="assets/ec210.svg" alt="" style="position:absolute;left:8px;top:633px;width:396px;height:21px">
+    <button type="button" onClick="{{ next }}" style="position:absolute;left:24px;top:721px;width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:1">Continue</button>
+  </sc-if>
+
+  <sc-if value="{{ s.role }}" hint-placeholder-val="{{ false }}">
+    
+    <div style="position:absolute;left:24px;top:56px;width:342px;display:flex;align-items:center;justify-content:space-between">
+      <button type="button" aria-label="Back" onClick="{{ back }}" style="border:none;background:none;padding:0;cursor:pointer;width:24px;height:24px"><img src="assets/80a1f.svg" alt="" style="width:24px;height:24px;display:block"></button>
+      <div role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="{{ stepNo }}" style="display:flex;gap:4px">
+        <sc-for list="{{ bars }}" as="b" hint-placeholder-count="6"><span style="width:49px;height:4px;border-radius:61px;background:{{ b }}"></span></sc-for>
+      </div>
+    </div>
+    <div style="position:absolute;left:24px;top:196px;width:281px;display:flex;flex-direction:column;gap:4px">
+      <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal;color:#fff">What is your role?</h1><p style="margin:0;font-size:16px;line-height:normal;color:#c6feff">Pick one.</p>
+    </div>
+    <div role="radiogroup" aria-label="Role" style="position:absolute;left:24px;top:290px;width:342px;display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{ roles }}" as="o" hint-placeholder-count="4">
+        <button type="button" role="radio" aria-checked="{{ o.checked }}" onClick="{{ o.pick }}" style="width:100%;height:56px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-radius:8px;background:{{ o.bg }};border:{{ o.border }};font-family:Inter,sans-serif;font-weight:500;font-size:16px;color:#004256;cursor:pointer;text-align:left;flex-shrink:0">{{ o.label }}<sc-if value="{{ o.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#004256" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 10.5 3.5 3.5 7.5-8"/></svg></sc-if></button>
+      </sc-for>
+    </div>
+    <img src="assets/86691.svg" alt="" style="position:absolute;left:224px;top:639px;width:48px;height:19px">
+    <img src="assets/86691.svg" alt="" style="position:absolute;left:81px;top:637px;width:48px;height:19px">
+    <img src="assets/0e120.svg" alt="" style="position:absolute;left:159px;top:656px;width:48px;height:21px">
+    <img src="assets/1fce8.svg" alt="" style="position:absolute;left:215px;top:684px;width:48px;height:28px">
+    <img src="assets/8b111.svg" alt="" style="position:absolute;left:272px;top:644px;width:137.9px;height:63.6px">
+    <img src="assets/af383.svg" alt="" style="position:absolute;left:-45px;top:648px;width:137.9px;height:63.6px;transform:scaleX(-1)">
+    <button type="button" onClick="{{ next }}" disabled="{{ noRole }}" style="position:absolute;left:24px;top:721px;width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:{{ canGo }}">Continue</button>
+  </sc-if>
+
+  <sc-if value="{{ s.grade }}" hint-placeholder-val="{{ false }}">
+    
+    <div style="position:absolute;left:24px;top:56px;width:342px;display:flex;align-items:center;justify-content:space-between">
+      <button type="button" aria-label="Back" onClick="{{ back }}" style="border:none;background:none;padding:0;cursor:pointer;width:24px;height:24px"><img src="assets/80a1f.svg" alt="" style="width:24px;height:24px;display:block"></button>
+      <div role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="{{ stepNo }}" style="display:flex;gap:4px">
+        <sc-for list="{{ bars }}" as="b" hint-placeholder-count="6"><span style="width:49px;height:4px;border-radius:61px;background:{{ b }}"></span></sc-for>
+      </div>
+    </div>
+    <div style="position:absolute;left:24px;top:196px;width:266px;display:flex;flex-direction:column;gap:4px">
+      <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal;color:#fff">What grade level are you?</h1><p style="margin:0;font-size:16px;line-height:normal;color:#c6feff">Pick one.</p>
+    </div>
+    <div class="ns" role="radiogroup" aria-label="Grade level" style="position:absolute;left:24px;top:332px;width:333px;height:376px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-bottom:40px;box-sizing:border-box">
+      <sc-for list="{{ grades }}" as="o" hint-placeholder-count="6">
+        <button type="button" role="radio" aria-checked="{{ o.checked }}" onClick="{{ o.pick }}" style="width:100%;height:56px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-radius:8px;background:{{ o.bg }};border:{{ o.border }};font-family:Inter,sans-serif;font-weight:500;font-size:16px;color:#004256;cursor:pointer;text-align:left;flex-shrink:0">{{ o.label }}<sc-if value="{{ o.on }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#004256" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 10.5 3.5 3.5 7.5-8"/></svg></sc-if></button>
+      </sc-for>
+    </div>
+    <span style="position:absolute;left:362px;top:332px;width:4px;height:358px;border-radius:21px;background:#166a83"></span>
+    <span style="position:absolute;left:362px;top:332px;width:4px;height:128px;border-radius:21px;background:#c6feff"></span>
+    <div style="position:absolute;left:0;bottom:0;width:390px;height:206px;background:linear-gradient(180deg, rgba(0,66,86,0) 0%, #004256 28%);pointer-events:none"></div>
+    <button type="button" onClick="{{ next }}" disabled="{{ noGrade }}" style="position:absolute;left:24px;top:721px;width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:{{ canGo }}">Continue</button>
+  </sc-if>
+
+  <sc-if value="{{ s.goals }}" hint-placeholder-val="{{ false }}">
+    
+    <div style="position:absolute;left:24px;top:56px;width:342px;display:flex;align-items:center;justify-content:space-between">
+      <button type="button" aria-label="Back" onClick="{{ back }}" style="border:none;background:none;padding:0;cursor:pointer;width:24px;height:24px"><img src="assets/80a1f.svg" alt="" style="width:24px;height:24px;display:block"></button>
+      <div role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="{{ stepNo }}" style="display:flex;gap:4px">
+        <sc-for list="{{ bars }}" as="b" hint-placeholder-count="6"><span style="width:49px;height:4px;border-radius:61px;background:{{ b }}"></span></sc-for>
+      </div>
+    </div>
+    <div style="position:absolute;left:24px;top:196px;display:flex;flex-direction:column;gap:4px">
+      <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal;color:#fff">What are your goals?</h1><p style="margin:0;font-size:16px;line-height:normal;color:#c6feff">Pick as many as you like.</p>
+    </div>
+    <div role="group" aria-label="Goals" style="position:absolute;left:16px;top:290px;width:358px;display:flex;flex-wrap:wrap;gap:16px 10px">
+      <sc-for list="{{ goals }}" as="g" hint-placeholder-count="11">
+        <button type="button" aria-pressed="{{ g.checked }}" onClick="{{ g.pick }}" style="display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:55px;border:1.5px solid #1f92b4;background:{{ g.bg }};cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;line-height:16px;color:{{ g.fg }};white-space:nowrap">
+          <img src="{{ g.icon }}" alt="" style="width:20px;height:20px;display:block;filter:{{ g.iconFilter }}">{{ g.label }}
+        </button>
+      </sc-for>
+    </div>
+    <img src="assets/86817.svg" alt="" style="position:absolute;left:49px;top:588px;width:90px;height:81px">
+    <img src="assets/d7b9e.svg" alt="" style="position:absolute;left:-20px;top:649px;width:416px;height:78.5px">
+    <button type="button" onClick="{{ next }}" style="position:absolute;left:24px;top:721px;width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:1">Continue</button>
+    <button type="button" onClick="{{ skip }}" style="position:absolute;left:24px;top:797px;width:342px;border:none;background:none;padding:0;font-family:Inter,sans-serif;font-weight:500;font-size:15px;color:#c6feff;text-decoration:underline;cursor:pointer">Skip</button>
+  </sc-if>
+
+  <sc-if value="{{ s.socials }}" hint-placeholder-val="{{ false }}">
+    
+    <div style="position:absolute;left:24px;top:56px;width:342px;display:flex;align-items:center;justify-content:space-between">
+      <button type="button" aria-label="Back" onClick="{{ back }}" style="border:none;background:none;padding:0;cursor:pointer;width:24px;height:24px"><img src="assets/80a1f.svg" alt="" style="width:24px;height:24px;display:block"></button>
+      <div role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="{{ stepNo }}" style="display:flex;gap:4px">
+        <sc-for list="{{ bars }}" as="b" hint-placeholder-count="6"><span style="width:49px;height:4px;border-radius:61px;background:{{ b }}"></span></sc-for>
+      </div>
+    </div>
+    <div style="position:absolute;left:24px;top:196px;width:342px;display:flex;flex-direction:column;gap:4px">
+      <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal;color:#fff">Connect your socials.</h1>
+      <p style="margin:0;font-size:16px;line-height:normal;color:#c6feff">Users with socials are 75% more likely to find job opportunities.</p>
+    </div>
+    <div style="position:absolute;left:24px;top:314px;width:342px;display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{ socials }}" as="c" hint-placeholder-count="3">
+        <div style="width:342px;box-sizing:border-box;border-radius:8px;background:#fff;border:1.5px solid #1f92b4;overflow:hidden">
+          <button type="button" aria-expanded="{{ c.openStr }}" onClick="{{ c.toggle }}" style="width:100%;height:48px;border:none;background:none;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-family:Inter,sans-serif;font-weight:500;font-size:16px;color:#1f92b4">
+            <img src="{{ c.icon }}" alt="" style="width:{{ c.size }};height:{{ c.size }}">{{ c.label }}
+          </button>
+          <sc-if value="{{ c.open }}" hint-placeholder-val="{{ false }}">
+            <label style="display:flex;align-items:center;gap:8px;margin:0 12px 12px;padding:0 12px;height:44px;border-radius:8px;background:#ebfeff;border:1px solid #1f92b4">
+              <span style="font-size:14px;color:#166a83">{{ c.prefix }}</span>
+              <input aria-label="{{ c.aria }}" placeholder="{{ c.placeholder }}" value="{{ c.value }}" onChange="{{ c.set }}" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:Poppins,sans-serif;font-weight:300;font-size:14px;color:#004256;padding:0">
+            </label>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <img src="assets/3262d.svg" alt="" style="position:absolute;left:140px;top:622px;width:90.5px;height:50.5px">
+    <img src="assets/6df69.svg" alt="" style="position:absolute;left:-22px;top:660px;width:413px;height:40px">
+    <img src="assets/1aee5.svg" alt="" style="position:absolute;left:-12px;top:663px;width:401.6px;height:58.3px">
+    <button type="button" onClick="{{ next }}" style="position:absolute;left:24px;top:721px;width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:1">Continue</button>
+    <button type="button" onClick="{{ skip }}" style="position:absolute;left:24px;top:797px;width:342px;border:none;background:none;padding:0;font-family:Inter,sans-serif;font-weight:500;font-size:15px;color:#c6feff;text-decoration:underline;cursor:pointer">Skip</button>
+  </sc-if>
+
+  <sc-if value="{{ s.review }}" hint-placeholder-val="{{ false }}">
+    
+    <div style="position:absolute;left:24px;top:56px;width:342px;display:flex;align-items:center;justify-content:space-between">
+      <button type="button" aria-label="Back" onClick="{{ back }}" style="border:none;background:none;padding:0;cursor:pointer;width:24px;height:24px"><img src="assets/80a1f.svg" alt="" style="width:24px;height:24px;display:block"></button>
+      <div role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="{{ stepNo }}" style="display:flex;gap:4px">
+        <sc-for list="{{ bars }}" as="b" hint-placeholder-count="6"><span style="width:49px;height:4px;border-radius:61px;background:{{ b }}"></span></sc-for>
+      </div>
+    </div>
+    <article style="position:absolute;left:24px;right:24px;top:94px;height:659px;box-sizing:border-box;padding:20px;border-radius:12px;background:#bbe2ec;overflow-y:auto;display:flex;flex-direction:column;align-items:center;gap:9px;color:#004256" class="ns">
+      <h1 style="margin:0;width:302px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal">Ready to set sail?</h1>
+      <p style="margin:0;width:302px;font-size:20px">Here’s what you told us</p>
+      <div style="width:302px;box-sizing:border-box;padding:10px 0;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid #7ec6dc"><span style="font-size:12px">Name</span>
+        <span style="display:flex;justify-content:space-between;align-items:flex-start"><span style="font-weight:600;font-size:14px;line-height:18px">{{ show.name }}</span><button type="button" onClick="{{ edit.signup }}" style="border:none;background:none;padding:0;font:inherit;font-size:12px;color:#004256;text-decoration:underline;cursor:pointer">Edit</button></span></div>
+      <div style="width:302px;box-sizing:border-box;padding:10px 0;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid #7ec6dc"><span style="font-size:12px">Email</span>
+        <span style="display:flex;justify-content:space-between;align-items:flex-start"><span style="font-size:14px">{{ show.email }}</span><button type="button" onClick="{{ edit.signup }}" style="border:none;background:none;padding:0;font:inherit;font-size:12px;color:#004256;text-decoration:underline;cursor:pointer">Edit</button></span></div>
+      <div style="width:302px;box-sizing:border-box;padding:10px 0;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid #7ec6dc"><span style="font-size:12px">Role</span>
+        <span style="display:flex;justify-content:space-between;align-items:flex-start"><span style="font-weight:600;font-size:14px;line-height:18px">{{ show.role }}</span><button type="button" onClick="{{ edit.role }}" style="border:none;background:none;padding:0;font:inherit;font-size:12px;color:#004256;text-decoration:underline;cursor:pointer">Edit</button></span></div>
+      <sc-if value="{{ isStudent }}" hint-placeholder-val="{{ true }}">
+        <div style="width:302px;box-sizing:border-box;padding:10px 0;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid #7ec6dc"><span style="font-size:12px">Grade Level</span>
+          <span style="display:flex;justify-content:space-between;align-items:flex-start"><span style="font-weight:600;font-size:14px;line-height:18px">{{ show.grade }}</span><button type="button" onClick="{{ edit.grade }}" style="border:none;background:none;padding:0;font:inherit;font-size:12px;color:#004256;text-decoration:underline;cursor:pointer">Edit</button></span></div>
+      </sc-if>
+      <div style="width:302px;box-sizing:border-box;padding:10px 0;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid #7ec6dc"><span style="font-size:12px">Goals</span>
+        <span style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <span style="display:flex;flex-wrap:wrap;gap:4px">
+            <sc-for list="{{ pickedGoals }}" as="g" hint-placeholder-count="3">
+              <span style="height:24px;box-sizing:border-box;display:flex;align-items:center;gap:3px;padding:0 6px;border-radius:40px;border:1.1px solid #1f92b4;background:#fff;font-family:'DM Sans',sans-serif;font-weight:600;font-size:10.2px;color:#1f92b4;white-space:nowrap"><img src="{{ g.icon }}" alt="" style="width:14.5px;height:14.5px">{{ g.label }}</span>
+            </sc-for>
+            <sc-if value="{{ noGoals }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px">None yet</span></sc-if>
+          </span>
+          <button type="button" onClick="{{ edit.goals }}" style="border:none;background:none;padding:0;font:inherit;font-size:12px;color:#004256;text-decoration:underline;cursor:pointer">Edit</button>
+        </span></div>
+      <div style="width:302px;box-sizing:border-box;padding:10px 0;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid #7ec6dc;border-bottom:none"><span style="font-size:12px">Socials</span>
+        <span style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <span style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px">
+            <sc-for list="{{ pickedSocials }}" as="c" hint-placeholder-count="2">
+              <span style="display:flex;align-items:center;gap:2px"><img src="{{ c.icon }}" alt="" style="width:18px;height:18px">{{ c.text }}</span>
+            </sc-for>
+            <sc-if value="{{ noSocials }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px">None yet</span></sc-if>
+          </span>
+          <button type="button" onClick="{{ edit.socials }}" style="border:none;background:none;padding:0;font:inherit;font-size:12px;color:#004256;text-decoration:underline;cursor:pointer">Edit</button>
+        </span></div>
+    </article>
+    <button type="button" onClick="{{ confirm }}" style="position:absolute;left:24px;top:767px;width:342px;height:52px;border:none;border-radius:8px;background:#1f92b4;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;cursor:pointer;opacity:1">Confirm</button>
+  </sc-if>
+
+  <sc-if value="{{ s.tides }}" hint-placeholder-val="{{ false }}">
+    
+    <div style="position:absolute;inset:0;background:#004256;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px">
+      <img src="assets/c30d9.svg" alt="" class="harbor-swirl" style="width:112px;height:112px;display:block">
+      <p role="status" style="margin:0;font-size:14px;color:#fff">Checking the tides…</p>
+    </div>
+    <div class="harbor-enter" style="position:absolute;inset:0">
+      <dc-import name="Main" hint-size="390px,844px"></dc-import>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startStep": {"editor": "enum", "options": ["login", "signup", "welcome", "role", "grade", "goals", "socials", "review", "tides"], "default": "login"}, "$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { step: props.startStep ?? 'login', f: { name: '', email: '', password: '', role: '', grade: '', goals: [], instagram: '', linkedin: '', website: '' },
+      showPw: false, err: '', open: {}, returnToReview: false, enter: false };
+  }
+  componentDidMount() {
+    let p = null;
+    try { p = JSON.parse(window.localStorage.getItem('harbor.profile') || 'null'); } catch (e) {}
+    if (p) this.setState({ f: { ...this.state.f, ...p, password: '' } });
+    this.armTimer();
+  }
+  componentDidUpdate(prev, prevState) { if (prevState.step !== this.state.step) this.armTimer(); }
+  componentWillUnmount() { clearTimeout(this._t); clearTimeout(this._t2); }
+  armTimer() {
+    clearTimeout(this._t);
+    const step = this.state.step;
+
+  }
+  save(f) {
+    const { password, ...rest } = f;
+    try { window.localStorage.setItem('harbor.profile', JSON.stringify(rest)); window.dispatchEvent(new Event('harbor-profile')); } catch (e) {}
+  }
+  update(patch) { const f = { ...this.state.f, ...patch }; this.setState({ f, err: '' }); this.save(f); }
+  go(step) { this.setState({ step, err: '', enter: false }); }
+  renderVals() {
+    const { step, f, showPw, err, open, returnToReview, enter, shown } = this.state;
+    const ORDER = ['welcome', 'role', 'grade', 'goals', 'socials', 'review'];
+    const isStudent = f.role === 'Student';
+    const flow = ORDER.filter((s) => s !== 'grade' || isStudent);
+    const idx = ORDER.indexOf(step);
+    const after = (s) => { const i = flow.indexOf(s); return flow[i + 1] || 'review'; };
+    const before = (s) => { const i = flow.indexOf(s); return i <= 0 ? 'signup' : flow[i - 1]; };
+    const advance = () => this.go(returnToReview && step !== 'welcome' ? 'review' : after(step));
+    const first = (String(f.name || '').trim().split(/\s+/)[0]) || 'there';
+    const s = {}; ['login', 'signup', 'welcome', 'role', 'grade', 'goals', 'socials', 'review', 'tides'].forEach((k) => { s[k] = step === k; });
+    const set = {}; ['name', 'email', 'password'].forEach((k) => { set[k] = (e) => this.update({ [k]: e.target.value }); });
+    const option = (field) => (label) => ({ label, on: f[field] === label, checked: f[field] === label ? 'true' : 'false',
+      bg: f[field] === label ? '#c6feff' : '#ffffff', border: f[field] === label ? '2px solid #26b2dc' : '1.5px solid #26b2dc',
+      pick: () => this.update({ [field]: label }) });
+    const GOALS = [
+      ['Find a job', 'assets/aa222.svg'], ['Find an internship', 'assets/82a05.svg'], ['Practice networking', 'assets/7cb3b.svg'], ['Gain confidence', 'assets/47a5f.svg'],
+      ['Discover events', 'assets/97950.svg'], ['Make more connections', 'assets/4c12d.svg'], ['Build professional relationships', 'assets/c30d9.svg'],
+      ['Find mentors', 'assets/d556a.svg'], ['Talk to recruiters', 'assets/47b6b.svg'], ['Explore career opportunities', 'assets/e3e91.svg'],
+    ];
+    const goalSet = new Set(f.goals || []);
+    const goals = GOALS.map(([label, icon]) => { const on = goalSet.has(label); return { label, icon, checked: on ? 'true' : 'false',
+      bg: on ? '#1f92b4' : '#ffffff', fg: on ? '#ffffff' : '#1f92b4', iconFilter: on ? 'brightness(0) invert(1)' : 'none',
+      pick: () => { const next = on ? (f.goals || []).filter((g) => g !== label) : [...(f.goals || []), label]; this.update({ goals: next }); } }; });
+    const SOC = [
+      { key: 'linkedin', label: 'Connect LinkedIn', icon: 'assets/33264.svg', size: '19.5px', prefix: 'linkedin.com/in/', placeholder: 'your-handle', aria: 'LinkedIn handle', small: 'assets/c576b.svg', fmt: (v) => '/' + v },
+      { key: 'instagram', label: 'Connect Instagram', icon: 'assets/1c063.svg', size: '24px', prefix: '@', placeholder: 'yourhandle', aria: 'Instagram handle', small: 'assets/c8638.svg', fmt: (v) => '@' + v },
+      { key: 'website', label: 'Connect website', icon: 'assets/addb4.svg', size: '24px', prefix: 'https://', placeholder: 'yourportfolio.com', aria: 'Website', small: 'assets/addb4.svg', fmt: (v) => v },
+    ];
+    const socials = SOC.map((c) => ({ ...c, open: !!open[c.key] || !!f[c.key], openStr: (!!open[c.key] || !!f[c.key]) ? 'true' : 'false', value: f[c.key] || '',
+      label: f[c.key] ? c.label.replace('Connect', 'Connected:') : c.label,
+      toggle: () => this.setState({ open: { ...open, [c.key]: !open[c.key] } }),
+      set: (e) => this.update({ [c.key]: e.target.value.replace(/^@/, '') }) }));
+    const pickedGoals = GOALS.filter(([l]) => goalSet.has(l)).map(([label, icon]) => ({ label, icon }));
+    const pickedSocials = SOC.filter((c) => f[c.key]).map((c) => ({ icon: c.small, text: c.fmt(f[c.key]) }));
+    const editTo = (target) => () => this.setState({ step: target, returnToReview: true, err: '' });
+    const stepNo = Math.max(1, idx + 1);
+    return {
+      s, f, set, first, bg: (step === 'login' || step === 'signup') ? '#166a83' : '#004256',
+      stepNo, bars: ORDER.map((_, i) => (i === idx ? '#c6feff' : '#166a83')),
+      pwType: showPw ? 'text' : 'password', pwLabel: showPw ? 'Hide password' : 'Show password', eyeOpacity: showPw ? 0.5 : 1,
+      togglePw: () => this.setState({ showPw: !showPw }),
+      loginError: err === 'login', signupError: err === 'signup',
+      submitLogin: (e) => { if (e && e.preventDefault) e.preventDefault(); if (!f.email || !f.password) { this.setState({ err: 'login' }); return; } this.go('tides'); },
+      quickLogin: () => this.go('tides'),
+      submitSignup: (e) => { if (e && e.preventDefault) e.preventDefault(); if (!String(f.name || '').trim() || !String(f.email || '').trim() || !f.password) { this.setState({ err: 'signup' }); return; } this.go(returnToReview ? 'review' : 'welcome'); },
+      toSignup: () => this.go('signup'), toLogin: () => this.go('login'),
+      back: () => this.go(returnToReview ? 'review' : before(step)),
+      next: advance, skip: advance,
+      roles: ['Student', 'Educator', 'Recruiter', 'Industry Professional'].map(option('role')), noRole: !f.role, canGo: (step === 'role' && !f.role) || (step === 'grade' && !f.grade) ? 0.45 : 1,
+      grades: ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Master’s', 'Doctoral'].map(option('grade')), noGrade: !f.grade,
+      goals, socials, pickedGoals, pickedSocials, noGoals: pickedGoals.length === 0, noSocials: pickedSocials.length === 0, isStudent,
+      show: { name: f.name || '—', email: f.email || '—', role: f.role || '—', grade: f.grade || '—' },
+      edit: { signup: editTo('signup'), role: editTo('role'), grade: editTo('grade'), goals: editTo('goals'), socials: editTo('socials') },
+      confirm: () => this.setState({ step: 'tides', returnToReview: false, enter: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

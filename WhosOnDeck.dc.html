@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Who’s on deck carousel</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<section style="width:390px;display:flex;flex-direction:column;gap:12px;font-family:Poppins,sans-serif">
+  <div style="width:390px;box-sizing:border-box;padding:0 16px;display:flex;align-items:center;justify-content:space-between;color:#004256">
+    <h2 style="margin:0;font-weight:600;font-size:14px;line-height:18px">Who’s on deck?</h2>
+    <a href="#" style="font-size:12px;color:#004256;text-decoration:underline">See all 48</a>
+  </div>
+  <div class="ns" style="width:390px;box-sizing:border-box;display:flex;gap:24px;overflow-x:auto;padding:0 45px;scroll-snap-type:x mandatory">
+      <sc-for list="{{ profiles }}" as="p" hint-placeholder-count="3">
+        <div style="scroll-snap-align:center;flex-shrink:0;display:flex">
+          <dc-import name="ProfileCard" person="{{ p }}" hint-size="300px,400px"></dc-import>
+        </div>
+      </sc-for>
+      <button type="button" style="scroll-snap-align:center;flex-shrink:0;width:300px;height:400px;box-sizing:border-box;border:3px solid #b90087;border-radius:16px;background:#fafeff;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;font:inherit">
+        <span style="font-family:'DM Sans',sans-serif;font-weight:600;font-size:24px;color:#b90087;text-decoration:underline">See more</span>
+        <img src="assets/5583e.svg" alt="" style="width:25px;height:25px;transform:scaleX(-1);display:block">
+      </button>
+    </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startExpanded": {"editor": "boolean", "default": false}, "onMode": {"editor": null}, "$preview": {"width": 390, "height": 430}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { photos: null }; }
+  renderVals() {
+    const photos = this.state.photos === null ? !!this.props.startExpanded : this.state.photos;
+    const set = (v) => () => { this.setState({ photos: v }); if (typeof this.props.onMode === 'function') this.props.onMode(v); };
+    const matches = [
+      { who: 'Jordan Newman', role: 'UX Researcher · Target', bg: '#8cd69e', fg: '#004256', boat: 'assets/66b09.svg', line: 'assets/cac9c.svg', photo: 'assets/5365f.webp', chips: ['Study HCI', 'Accessibility', 'Startup Panel'], prompt: '“What got you into UX research — was there a project that hooked you?”' },
+      { who: 'Jenna Caldwell', role: 'Senior Graphic Designer · Gucci', bg: '#1f92b4', fg: '#ebfeff', boat: 'assets/45059.svg', line: 'assets/5f56c.svg', photo: 'assets/ba9ae.webp', chips: ['Luxury Apparel', 'Patterns', 'TikTok Shop'], prompt: '“What has been the most polarizing project you have worked on?”' },
+      { who: 'Adam Crews', role: 'Recruiter · Google', bg: '#feace8', fg: '#004256', boat: 'assets/66b09.svg', line: 'assets/cac9c.svg', photo: 'assets/91aac.webp', chips: ['Curious Applicants', 'IOS Slander', 'AI'], prompt: '“How can I be more curious?”' },
+    ];
+    const profiles = [
+      { who: 'Jordan Newman', bg: '#004256', fade: 'rgba(0,66,86,0)', photo: 'assets/5365f.webp', chips: ['Study HCI', 'Accessibility', 'Startup Panel'], bio: 'I’m a user experience researcher at Target. I’m super passionate about mentoring the future generation of designers.' },
+      { who: 'Jenna Caldwell', bg: '#298d60', fade: 'rgba(41,141,96,0)', photo: 'assets/ba9ae.webp', chips: ['Luxury Apparel', 'Patterns', 'TikTok Shop'], bio: 'I’m a senior graphic designer at Gucci, and I LOVE patterns. I could talk about them for days' },
+      { who: 'Adam Crews', bg: '#b90087', fade: 'rgba(185,0,135,0)', photo: 'assets/91aac.webp', chips: ['Curious Applicants', 'IOS Slander', 'AI'], bio: 'I’m a recruiter for Google looking for very curious applicants; the more curious, the better!!!' },
+      { who: 'Sophie Pearson', bg: '#004256', fade: 'rgba(0,66,86,0)', photo: 'assets/c2351.webp', chips: ['Maps', 'Secrets', 'Government'], bio: 'I’m the lead cartographer at the CIA. I can keep a secret... can you?' },
+      { who: 'Caleb Foster', bg: '#298d60', fade: 'rgba(41,141,96,0)', photo: 'assets/31b98.webp', chips: ['Planes', 'Driven Applicants', 'Vacations'], bio: 'I’m the hiring manager at Delta. I love driven applicants, especially if they drive a Honda Civic 2011.' },
+    ];
+    return { compact: !photos, photos, matches, profiles, expand: set(true), collapse: set(false),
+      toggle: set(!photos), toggleLabel: photos ? 'Show less' : 'See all 48', gapHead: photos ? '12px' : '16px' };
+  }
+}
+</script>
+</body>
+</html>

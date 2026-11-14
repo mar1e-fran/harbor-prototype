@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Reset activity</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+.ra-rays{animation:raRays 14s ease-in-out infinite alternate}@keyframes raRays{from{transform:translateX(-14px)}to{transform:translateX(14px)}}@media (prefers-reduced-motion:reduce){.ra-rays{animation:none}}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&amp;display=swap">
+</helmet>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;background:#013F55;font-family:'Lexend',system-ui,sans-serif;color:#E4FAFF">
+  <svg aria-hidden="true" class="ra-rays" width="390" height="560" viewBox="0 0 390 560" style="position:absolute;left:0;top:0">
+    <defs><linearGradient id="raRay" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FDCEB" stop-opacity=".14"></stop><stop offset="1" stop-color="#8FDCEB" stop-opacity="0"></stop></linearGradient></defs>
+    <path d="M110 0 L178 0 L104 540 L28 540 Z" fill="url(#raRay)"></path>
+    <path d="M222 0 L264 0 L252 470 L190 470 Z" fill="url(#raRay)"></path>
+    <path d="M300 0 L366 0 L392 420 L318 420 Z" fill="url(#raRay)"></path>
+  </svg>
+  <svg aria-hidden="true" width="390" height="150" viewBox="0 0 390 150" style="position:absolute;left:0;top:770px"><path d="M0 26 Q195 -8 390 26 V150 H0 Z" fill="#FCE8F3"></path></svg>
+
+  <a href="LiveWellness.dc.html" aria-label="Back to wellness" style="position:absolute;left:10px;top:44px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:24px;color:#E4FAFF">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H4"></path><path d="M10 6l-6 6 6 6"></path></svg>
+  </a>
+
+  <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;left:32px;right:32px;top:250px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
+      <span style="font-size:14px;font-weight:500;color:#9FE3F5;letter-spacing:.04em">{{ a.length }}</span>
+      <h1 style="margin:0;font-size:40px;line-height:1.1;font-weight:600;color:#C9F5FF;letter-spacing:-0.01em">{{ a.title }}</h1>
+      <p style="margin:0;max-width:300px;font-size:18px;line-height:1.5;color:#A8D8E2">{{ a.intro }}</p>
+    </div>
+    <button type="button" onClick="{{ begin }}" style="position:absolute;left:32px;right:32px;bottom:116px;height:56px;border:none;border-radius:28px;background:#2BB5E3;color:#00334A;font-family:inherit;font-size:18px;font-weight:600;cursor:pointer">Begin</button>
+  </sc-if>
+
+  <sc-if value="{{ isSteps }}" hint-placeholder-val="{{ false }}">
+    <div role="progressbar" aria-label="Senses" aria-valuemin="1" aria-valuemax="5" aria-valuenow="{{ stepNo }}" style="position:absolute;left:0;right:0;top:118px;display:flex;justify-content:center;gap:8px">
+      <sc-for list="{{ dots }}" as="d" hint-placeholder-count="5"><span style="width:{{ d.w }};height:8px;border-radius:4px;background:{{ d.bg }};transition:width .3s ease"></span></sc-for>
+    </div>
+    <div style="position:absolute;left:32px;right:32px;top:190px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center">
+      <div style="font-size:112px;font-weight:600;line-height:1;color:#E4FAFF">{{ step.n }}</div>
+      <h1 aria-live="polite" style="margin:0;font-size:28px;line-height:1.2;font-weight:600;color:#C9F5FF">{{ step.title }}</h1>
+      <p style="margin:0;max-width:300px;font-size:16px;line-height:1.5;color:#A8D8E2">{{ step.hint }}</p>
+    </div>
+    <div style="position:absolute;left:24px;right:24px;top:520px;display:flex;flex-wrap:wrap;justify-content:center;gap:14px">
+      <sc-for list="{{ marks }}" as="m" hint-placeholder-count="5">
+        <button type="button" onClick="{{ m.tap }}" aria-pressed="{{ m.on }}" aria-label="{{ m.label }}" style="width:52px;height:52px;border-radius:26px;border:2px solid #9FE3F5;background:{{ m.bg }};color:#00334A;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease">
+          <sc-if value="{{ m.done }}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#00334A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 11.5 4 4 8-9"></path></svg></sc-if>
+        </button>
+      </sc-for>
+    </div>
+    <p style="position:absolute;left:0;right:0;top:600px;margin:0;text-align:center;font-size:14px;color:#A8D8E2">Tap a circle each time you notice one</p>
+    <button type="button" onClick="{{ next }}" style="position:absolute;left:32px;right:32px;bottom:116px;height:56px;border:none;border-radius:28px;background:#2BB5E3;color:#00334A;font-family:inherit;font-size:18px;font-weight:600;cursor:pointer;opacity:{{ nextOpacity }}">{{ nextLabel }}</button>
+  </sc-if>
+
+  <sc-if value="{{ isTimer }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:75px;top:150px;width:240px;height:240px">
+      <svg width="240" height="240" viewBox="0 0 240 240" aria-hidden="true" style="transform:rotate(-90deg)">
+        <circle cx="120" cy="120" r="110" fill="none" stroke="rgba(159,227,245,.18)" stroke-width="10"></circle>
+        <circle cx="120" cy="120" r="110" fill="none" stroke="#2BB5E3" stroke-width="10" stroke-linecap="round" stroke-dasharray="691.15" stroke-dashoffset="{{ ringOffset }}" style="transition:stroke-dashoffset 1s linear"></circle>
+      </svg>
+      <div role="timer" aria-label="Time left" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+        <span style="font-size:56px;font-weight:600;line-height:1;color:#E4FAFF;font-variant-numeric:tabular-nums">{{ clock }}</span>
+        <span style="margin-top:6px;font-size:14px;color:#A8D8E2">{{ timerSub }}</span>
+      </div>
+    </div>
+    <div style="position:absolute;left:32px;right:32px;top:430px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center">
+      <h1 aria-live="polite" style="margin:0;font-size:24px;line-height:1.3;font-weight:600;color:#C9F5FF">{{ cue.title }}</h1>
+      <p style="margin:0;max-width:300px;font-size:16px;line-height:1.5;color:#A8D8E2">{{ cue.hint }}</p>
+    </div>
+    <div style="position:absolute;left:32px;right:32px;bottom:116px;display:flex;gap:12px">
+      <button type="button" onClick="{{ togglePause }}" style="flex:1;height:56px;border:none;border-radius:28px;background:#2BB5E3;color:#00334A;font-family:inherit;font-size:18px;font-weight:600;cursor:pointer">{{ pauseLabel }}</button>
+      <button type="button" onClick="{{ finish }}" style="flex:1;height:52px;box-sizing:border-box;border:1.5px solid rgba(201,245,255,.55);border-radius:26px;background:transparent;color:#C9F5FF;font-family:inherit;font-size:17px;font-weight:500;display:flex;align-items:center;justify-content:center;cursor:pointer">End early</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:32px;right:32px;top:300px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
+      <h1 style="margin:0;font-size:40px;line-height:1.1;font-weight:600;color:#C9F5FF">Nicely done</h1>
+      <p style="margin:0;max-width:300px;font-size:18px;line-height:1.5;color:#A8D8E2">{{ a.outro }}</p>
+    </div>
+    <div style="position:absolute;left:32px;right:32px;bottom:116px;display:flex;flex-direction:column;gap:12px">
+      <button type="button" onClick="{{ begin }}" style="height:56px;border:none;border-radius:28px;background:#2BB5E3;color:#00334A;font-family:inherit;font-size:18px;font-weight:600;cursor:pointer">Do it again</button>
+      <a href="LiveWellness.dc.html" style="height:52px;box-sizing:border-box;border:1.5px solid rgba(201,245,255,.55);border-radius:26px;background:transparent;color:#C9F5FF;font-family:inherit;font-size:17px;font-weight:500;display:flex;align-items:center;justify-content:center;cursor:pointer">Finish</a>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"kind": {"editor": "enum", "options": ["grounding", "walk", "compress"], "default": "grounding"}, "$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { screen: 'intro', step: 0, marks: 0, left: 0, paused: false }; }
+  componentWillUnmount() { clearInterval(this._t); }
+  info() {
+    const A = {
+      grounding: { title: '5-4-3-2-1 Grounding', length: '2 MIN', type: 'steps',
+        intro: 'Bring yourself back to the room by naming what your senses notice.',
+        outro: 'You’re here, in this room, right now. Take that steadiness into your next conversation.',
+        steps: [
+          { n: 5, title: 'Things you can see', hint: 'A name badge, a banner, the color of someone’s shirt.' },
+          { n: 4, title: 'Things you can feel', hint: 'Your feet on the floor, the strap of your bag, the air on your hands.' },
+          { n: 3, title: 'Things you can hear', hint: 'Voices, footsteps, music, the hum of the room.' },
+          { n: 2, title: 'Things you can smell', hint: 'Coffee, fresh paper, the outside air by the door.' },
+          { n: 1, title: 'Thing you can taste', hint: 'Mint, water, or simply the taste in your mouth.' },
+        ] },
+      walk: { title: 'Reset Walk', length: '5 MIN', type: 'timer', secs: 300,
+        intro: 'Step away from the crowd for a slow loop. Move first, then get back in the groove.',
+        outro: 'Your body has had a reset. Head back in when you feel ready.',
+        cues: [
+          { title: 'Find a quieter path', hint: 'Walk toward a hallway or the edge of the room at an easy pace.' },
+          { title: 'Notice your feet', hint: 'Feel each heel touch down, then roll through to your toes.' },
+          { title: 'Loosen your shoulders', hint: 'Let them drop away from your ears as you keep moving.' },
+          { title: 'Match breath to steps', hint: 'Breathe in for three steps, out for three steps.' },
+          { title: 'Plan your next hello', hint: 'Pick one person or booth you’ll visit when you head back.' },
+        ] },
+      compress: { title: 'Cold Compress', length: '5 MIN', type: 'timer', secs: 300,
+        intro: 'Cool down your body to calm a racing heart. Grab a cold drink or a damp paper towel.',
+        outro: 'You’ve cooled down. Have a sip of water before you dive back in.',
+        cues: [
+          { title: 'Hold it to your wrists', hint: 'Rest the cold drink or towel on the inside of one wrist, then the other.' },
+          { title: 'Move to your neck', hint: 'Press it gently against the back of your neck.' },
+          { title: 'Breathe slowly', hint: 'In through your nose for four, out through your mouth for six.' },
+          { title: 'Cool your face', hint: 'Touch it lightly to your cheeks and forehead.' },
+          { title: 'Take a sip', hint: 'Finish with a few slow sips of water.' },
+        ] },
+    };
+    return A[this.props.kind] || A.grounding;
+  }
+  begin() {
+    const a = this.info();
+    clearInterval(this._t);
+    if (a.type === 'steps') { this.setState({ screen: 'steps', step: 0, marks: 0 }); return; }
+    this.setState({ screen: 'timer', left: a.secs, paused: false });
+    this.run();
+  }
+  run() {
+    clearInterval(this._t);
+    this._t = setInterval(() => {
+      const left = this.state.left - 1;
+      if (left <= 0) { clearInterval(this._t); this.setState({ left: 0, screen: 'done' }); return; }
+      this.setState({ left });
+    }, 1000);
+  }
+  renderVals() {
+    const a = this.info();
+    const { screen, step, marks, left, paused } = this.state;
+    const s = a.steps ? a.steps[Math.min(step, a.steps.length - 1)] : { n: 0, title: '', hint: '' };
+    const full = a.steps ? marks >= s.n : false;
+    const total = a.secs || 1;
+    const cues = a.cues || [{ title: '', hint: '' }];
+    const cue = cues[Math.min(cues.length - 1, Math.floor(((total - left) / total) * cues.length))];
+    const mm = Math.floor(left / 60), ss = String(left % 60).padStart(2, '0');
+    return {
+      a, isIntro: screen === 'intro', isSteps: screen === 'steps', isTimer: screen === 'timer', isDone: screen === 'done',
+      step: s, stepNo: step + 1,
+      dots: (a.steps || []).map((x, i) => ({ w: i === step ? '28px' : '8px', bg: i <= step ? '#2BB5E3' : 'rgba(159,227,245,.3)' })),
+      marks: Array.from({ length: s.n }, (_, i) => ({ done: i < marks, on: i < marks ? 'true' : 'false', bg: i < marks ? '#9FE3F5' : 'transparent',
+        label: (i + 1) + ' of ' + s.n, tap: () => this.setState({ marks: i < marks ? i : i + 1 }) })),
+      nextOpacity: full ? 1 : 0.55,
+      nextLabel: step >= (a.steps || []).length - 1 ? 'Finish' : 'Next sense',
+      next: () => {
+        if (!a.steps) return;
+        if (step >= a.steps.length - 1) { this.setState({ screen: 'done' }); return; }
+        this.setState({ step: step + 1, marks: 0 });
+      },
+      clock: mm + ':' + ss, timerSub: paused ? 'Paused' : 'remaining',
+      ringOffset: (691.15 * (1 - left / total)).toFixed(1), cue,
+      pauseLabel: paused ? 'Resume' : 'Pause',
+      togglePause: () => { if (paused) { this.setState({ paused: false }); this.run(); } else { clearInterval(this._t); this.setState({ paused: true }); } },
+      finish: () => { clearInterval(this._t); this.setState({ screen: 'done' }); },
+      begin: () => this.begin(),
+    };
+  }
+}
+</script>
+</body>
+</html>

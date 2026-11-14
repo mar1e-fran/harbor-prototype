@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Live – Wellness</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;background:#fafeff;font-family:Poppins,sans-serif">
+  <div class="ns" style="position:absolute;left:0;top:0;width:390px;bottom:78px;overflow-y:auto;overflow-x:hidden">
+    <div style="position:sticky;top:0;z-index:3;height:269px">
+      <dc-import name="LiveHeader" tab="wellness" overview-href="{{ overviewHref }}" hint-size="390px,273px"></dc-import>
+    </div>
+    <div style="padding:38px 16px 24px;display:flex;flex-direction:column;gap:24px">
+      <dc-import name="MoodPicker" selected="{{ mood }}" on-pick="{{ pick }}" hint-size="358px,70px"></dc-import>
+      <sc-if value="{{ hasMood }}" hint-placeholder-val="{{ false }}">
+        <dc-import name="AnchorCard" kind="{{ recKind }}" hint-size="358px,200px"></dc-import>
+      </sc-if>
+      <section style="display:flex;flex-direction:column;gap:12px">
+        <h2 style="margin:0;font-weight:600;font-size:14px;line-height:18px;color:#004256">One-tap resets</h2>
+        <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:12px">
+          <dc-import name="ResetTile" kind="anchor" hint-size="173px,100px"></dc-import>
+          <dc-import name="ResetTile" kind="grounding" hint-size="173px,100px"></dc-import>
+          <dc-import name="ResetTile" kind="walk" hint-size="173px,100px"></dc-import>
+          <dc-import name="ResetTile" kind="compress" hint-size="173px,100px"></dc-import>
+        </div>
+      </section>
+      <section style="display:flex;flex-direction:column;gap:12px">
+        <h2 style="margin:0;font-weight:600;font-size:14px;line-height:18px;color:#004256">The crew’s advice</h2>
+        <figure style="margin:0;background:#acfec0;border-radius:16px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:10px">
+          <blockquote style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px;line-height:normal;color:#004256;text-align:center">“I still get nervous when meeting new people.”</blockquote>
+          <figcaption style="display:flex;align-items:center;gap:8px;font-size:12px;color:#004256">
+            <img src="assets/5365f.webp" alt="" style="width:25px;height:25px;border-radius:13px;object-fit:cover">
+            <span><strong style="font-weight:600">Jordan N · </strong>UX Researcher, Target</span>
+          </figcaption>
+        </figure>
+      </section>
+    </div>
+  </div>
+  <div style="position:absolute;left:0;bottom:0;width:390px;height:78px">
+    <dc-import name="NavBar" active="live" home-href="HomeLive.dc.html" hint-size="390px,78px"></dc-import>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startMood": {"editor": "enum", "options": ["anxious", "uneasy", "steady", "ready"], "default": null}, "$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { mood: props.startMood ?? null }; }
+  componentDidMount() {
+    if (this.props.startMood) return;
+    let m = null; try { m = window.localStorage.getItem('harbor.mood'); } catch (e) {}
+    if (m) this.setState({ mood: m });
+  }
+  setMood(m) {
+    this.setState({ mood: m });
+    try { if (m) window.localStorage.setItem('harbor.mood', m); else window.localStorage.removeItem('harbor.mood'); window.dispatchEvent(new Event('harbor-mood')); } catch (e) {}
+  }
+  renderVals() {
+    const mood = this.state.mood;
+    return { mood, hasMood: !!mood, recKind: mood === 'anxious' ? 'anchor' : 'walk', pick: (m) => this.setMood(m),
+      overviewHref: 'LiveOverview.dc.html' };
+  }
+}
+</script>
+</body>
+</html>

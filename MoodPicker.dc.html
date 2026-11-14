@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mood check-in</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="width:358px;display:flex;flex-direction:column;gap:12px;font-family:Poppins,sans-serif">
+  <p style="margin:0;font-weight:600;font-size:14px;line-height:18px;color:#004256">How are you feeling right now?</p>
+  <div role="radiogroup" aria-label="Mood" style="width:358px;display:flex;justify-content:space-between;align-items:flex-start">
+    <sc-for list="{{ moods }}" as="m" hint-placeholder-count="4">
+      <button type="button" role="radio" aria-checked="{{ m.checked }}" onClick="{{ m.pick }}" style="display:flex;align-items:center;justify-content:center;gap:4px;padding:8px;border-radius:999px;border:1.5px solid {{ m.color }};background:{{ m.bg }};cursor:pointer;font:inherit">
+        <img src="{{ m.icon }}" alt="" style="width:15px;height:15px;display:block">
+        <span style="font-weight:600;font-size:12px;line-height:normal;color:{{ m.fg }};white-space:nowrap">{{ m.label }}</span>
+      </button>
+    </sc-for>
+  </div>
+  <sc-if value="{{ hasHint }}" hint-placeholder-val="{{ false }}">
+    <p style="margin:0;font-size:12px;line-height:normal;color:#5c5c5c">{{ hint }}</p>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"selected": {"editor": "enum", "options": ["anxious", "uneasy", "steady", "ready"], "default": null}, "onPick": {"editor": null}, "$preview": {"width": 358, "height": 100}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sel: null }; }
+  renderVals() {
+    const controlled = typeof this.props.onPick === 'function';
+    const sel = controlled ? (this.props.selected ?? null) : this.state.sel;
+    const defs = [
+      { id: 'anxious', label: 'Anxious', color: '#b90087', tint: '#feeaf9', icon: 'assets/f5cf1.svg', iconOn: 'assets/cad6c.svg' },
+      { id: 'uneasy', label: 'Uneasy', color: '#e2a200', tint: '#004256', icon: 'assets/1f3e4.svg', iconOn: 'assets/1f3e4.svg' },
+      { id: 'steady', label: 'Steady', color: '#166a83', tint: '#ffffff', icon: 'assets/04e61.svg', iconOn: 'assets/04e61.svg' },
+      { id: 'ready', label: 'Ready', color: '#298d60', tint: '#ffffff', icon: 'assets/41e35.svg', iconOn: 'assets/41e35.svg' },
+    ];
+    const moods = defs.map((d) => {
+      const on = sel === d.id;
+      return { ...d, checked: on ? 'true' : 'false', bg: on ? d.color : '#ffffff', fg: on ? d.tint : d.color,
+        icon: on ? d.iconOn : d.icon,
+        pick: () => { const next = on ? null : d.id; if (controlled) this.props.onPick(next); else this.setState({ sel: next }); } };
+    });
+    const d = defs.find((x) => x.id === sel);
+    const rec = sel === 'anxious' ? 'Anchor Breath' : 'Reset Walk';
+    return { moods, hasHint: !!d, hint: d ? d.label + ' → we’ve highlighted “' + rec + '” for you.' : '' };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Live – Notes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;background:#fafeff;font-family:Poppins,sans-serif">
+  <div class="ns" style="position:absolute;left:0;top:0;width:390px;bottom:78px;overflow-y:auto;overflow-x:hidden">
+    <div style="position:sticky;top:0;z-index:3;height:269px">
+      <dc-import name="LiveHeader" tab="notes" notes-href="{{ selfHref }}" hint-size="390px,273px"></dc-import>
+    </div>
+    <div style="padding:24px 16px 24px;display:flex;flex-direction:column;gap:24px">
+      <a href="NoteEditor.dc.html" onClick="{{ newEntry }}" aria-label="New entry" style="display:flex;flex-direction:column;padding:14px;border:2px solid #1f92b4;border-radius:16px;background:#ebfeff;box-sizing:border-box">
+        <span style="font-weight:600;font-size:12px;color:#004256">New entry</span>
+        <span style="height:150px;box-sizing:border-box;padding:10px 0;font-size:14px;line-height:normal;color:#80a0aa">Drop a quick entry… who, company, what to remember</span>
+      </a>
+      <section style="display:flex;flex-direction:column;gap:12px;align-items:center">
+        <div style="width:358px;display:flex;align-items:center;justify-content:space-between;color:#004256">
+          <h2 style="margin:0;font-weight:600;font-size:14px;line-height:18px">Recent entries</h2>
+          <span style="font-size:12px">{{ total }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <sc-for list="{{ entries }}" as="e" hint-placeholder-count="3">
+            <dc-import name="NoteEntry" entry="{{ e }}" hint-size="358px,90px"></dc-import>
+          </sc-for>
+        </div>
+        <a href="#" style="font-size:12px;text-decoration:underline;color:#004256">View all</a>
+      </section>
+      <section style="display:flex;flex-direction:column;gap:12px">
+        <h2 style="margin:0;font-weight:600;font-size:14px;line-height:18px;color:#004256">Gallery</h2>
+        <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px">
+          <a href="NoteEditorCamera.dc.html" aria-label="Add photo" style="height:64px;display:block"><img src="assets/e0b60.svg" alt="" style="width:100%;height:64px;display:block"></a>
+          <sc-for list="{{ photos }}" as="p" hint-placeholder-count="3">
+            <img src="{{ p }}" alt="" style="width:100%;height:64px;box-sizing:border-box;border:1.5px solid #1f92b4;border-radius:8px;object-fit:cover;display:block">
+          </sc-for>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div style="position:absolute;left:0;bottom:0;width:390px;height:78px">
+    <dc-import name="NavBar" active="live" home-href="HomeLive.dc.html" hint-size="390px,78px"></dc-import>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"withNew": {"editor": "boolean", "default": false}, "$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { saved: [] }; this._load = () => this.load(); }
+  componentDidMount() { this.load(); try { window.addEventListener('harbor-notes', this._load); window.addEventListener('storage', this._load); } catch (e) {} }
+  componentWillUnmount() { try { window.removeEventListener('harbor-notes', this._load); window.removeEventListener('storage', this._load); } catch (e) {} }
+  load() { let l = []; try { l = JSON.parse(window.localStorage.getItem('harbor.notes') || '[]'); } catch (e) {} this.setState({ saved: Array.isArray(l) ? l : [] }); }
+  renderVals() {
+    const withNew = !!this.props.withNew;
+    const mine = this.state.saved.map((n) => {
+      const text = String(n.body || '').replace(/\s+/g, ' ').trim();
+      const extra = (n.memos || []).length ? ' · ' + n.memos.length + ' voice memo' + (n.memos.length > 1 ? 's' : '') : '';
+      return { id: n.id, kind: n.photo ? 'photo' : 'followup', title: n.title || 'Untitled Note', time: n.time || '',
+        body: text.length > 90 ? text.slice(0, 90) + '…' : text, meta: (n.photo ? 'Photo note' : 'Your note') + extra + ' · Tap to edit', href: 'NoteEditor.dc.html' };
+    });
+    const base = [
+      { kind: 'transcribed', title: 'Breaking into Product Design', time: '2:20 PM', body: '“Panel tip: lead your portfolio with one deep case study, not five shallow ones…”', meta: 'Transcribed · Product Design panel · Room 204' },
+      { kind: 'contact', title: 'Adam C. · Recruiter, Google', time: '1:55 PM', body: 'Contact: adam.crew@google.com', meta: 'Photo Grab · Coffee Talk · Room 107' },
+      { kind: 'followup', title: 'Jordan N. · UX Researcher, Target', time: '1:35 PM', body: 'Follow up: Ask about how to be a curious candidate. Send portfolio link.', meta: 'Transcribed · Coffee Talk · Room 107' },
+    ];
+    const fresh = { kind: 'photo', title: 'Product design photo', time: '2:23 PM', body: '', meta: 'Photo Grab · Product design panel · Room 204', href: 'NoteEditorTitled.dc.html' };
+    const gallery = ['assets/eb0b1.webp', 'assets/b1505.webp', 'assets/47b4a.webp'];
+    return {
+      entries: [...mine, ...(withNew ? [fresh, ...base] : base)],
+      total: ((withNew ? 18 : 17) + mine.length) + ' total',
+      newEntry: () => { try { window.localStorage.removeItem('harbor.notes.open'); } catch (e) {} },
+      photos: withNew ? ['assets/5014d.webp', ...gallery] : gallery,
+      selfHref: withNew ? 'LiveNotesNew.dc.html' : 'LiveNotes.dc.html',
+    };
+  }
+}
+</script>
+</body>
+</html>

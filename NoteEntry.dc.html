@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Note entry</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<a href="{{ href }}" onClick="{{ open }}" style="width:358px;box-sizing:border-box;display:flex;gap:8px;align-items:flex-start;padding:12px;border-radius:8px;background:{{ s.bg }};font-family:Poppins,sans-serif;color:{{ s.fg }}">
+  <sc-if value="{{ s.mic }}" hint-placeholder-val="{{ true }}"><img src="assets/672a7.svg" alt="Voice note" style="width:11.03px;height:16px;display:block;flex-shrink:0"></sc-if>
+  <sc-if value="{{ s.pad }}" hint-placeholder-val="{{ false }}"><img src="assets/c4600.svg" alt="Note" style="width:13.04px;height:16px;display:block;flex-shrink:0"></sc-if>
+  <sc-if value="{{ s.duo }}" hint-placeholder-val="{{ false }}">
+    <span style="position:relative;width:29px;height:24px;flex-shrink:0">
+      <img src="assets/d7ed0.webp" alt="" style="position:absolute;left:5px;top:0;width:24px;height:24px;border-radius:12px;display:block">
+      <img src="assets/4ba52.webp" alt="" style="position:absolute;left:0;top:0;width:24px;height:24px;border-radius:12px;display:block">
+    </span>
+  </sc-if>
+  <sc-if value="{{ s.photo }}" hint-placeholder-val="{{ false }}"><img src="assets/5014d.webp" alt="" style="width:24px;height:24px;border-radius:12px;object-fit:cover;display:block;flex-shrink:0"></sc-if>
+  <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:12px">
+    <span style="display:flex;flex-direction:column;gap:4px">
+      <span style="display:flex;align-items:center;justify-content:space-between;gap:8px;white-space:nowrap">
+        <span style="font-weight:600;font-size:12px;line-height:normal">{{ e.title }}</span>
+        <span style="font-family:'DM Sans',sans-serif;font-size:10px;line-height:1">{{ e.time }}</span>
+      </span>
+      <sc-if value="{{ hasBody }}" hint-placeholder-val="{{ true }}"><span style="font-size:12px;line-height:normal;max-width:285px">{{ e.body }}</span></sc-if>
+    </span>
+    <span style="font-family:'DM Sans',sans-serif;font-size:10px;line-height:1;color:{{ s.meta }};white-space:nowrap">{{ e.meta }}</span>
+  </span>
+</a>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"entry": {"editor": null}, "$preview": {"width": 358, "height": 90}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const e = this.props.entry ?? { kind: 'transcribed', title: 'Breaking into Product Design', time: '2:20 PM', body: '“Panel tip: lead your portfolio with one deep case study, not five shallow ones…”', meta: 'Transcribed · Product Design panel · Room 204' };
+    const styles = {
+      transcribed: { bg: '#166a83', fg: '#ffffff', meta: '#a0c3ce', mic: true },
+      contact: { bg: '#fec6ef', fg: '#004256', meta: '#004256', duo: true },
+      followup: { bg: '#8cd69e', fg: '#004256', meta: '#166a83', pad: true },
+      photo: { bg: '#8cd69e', fg: '#004256', meta: '#166a83', photo: true },
+    };
+    const s = { mic: false, pad: false, duo: false, photo: false, ...(styles[e.kind] || styles.transcribed) };
+    const open = () => { if (!e.id) return; try { window.localStorage.setItem('harbor.notes.open', JSON.stringify({ id: e.id, at: Date.now() })); } catch (err) {} };
+    return { e, s, hasBody: !!e.body, href: e.href ?? '#', open };
+  }
+}
+</script>
+</body>
+</html>

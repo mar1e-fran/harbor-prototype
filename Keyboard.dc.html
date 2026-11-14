@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>iOS keyboard</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="width:390px;height:354px;box-sizing:border-box;background:#d5d9de;border-radius:26px 26px 0 0;padding:6px 3px 0;display:flex;flex-direction:column;font-family:Inter,sans-serif">
+  <div style="height:44px;display:flex;align-items:center">
+    <button type="button" onClick="{{ sugg1 }}" style="flex:1;border:none;background:none;font-size:16px;cursor:pointer;color:#000">“The”</button>
+    <span style="width:1px;height:24px;background:#bfc3c8"></span>
+    <button type="button" onClick="{{ sugg2 }}" style="flex:1;border:none;background:none;font-size:16px;cursor:pointer;color:#000">the</button>
+    <span style="width:1px;height:24px;background:#bfc3c8"></span>
+    <button type="button" onClick="{{ sugg3 }}" style="flex:1;border:none;background:none;font-size:16px;cursor:pointer;color:#000">to</button>
+  </div>
+  <div style="display:flex;gap:6px;padding:0 3px;margin-top:4px">
+    <sc-for list="{{ row1 }}" as="k" hint-placeholder-count="10"><button type="button" onClick="{{ k.press }}" style="height:42px;border:none;border-radius:8px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,0.3);font-family:-apple-system,'SF Pro Text',Inter,sans-serif;font-size:22px;color:#000;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex:1">{{ k.ch }}</button></sc-for>
+  </div>
+  <div style="display:flex;gap:6px;padding:0 22px;margin-top:12px">
+    <sc-for list="{{ row2 }}" as="k" hint-placeholder-count="9"><button type="button" onClick="{{ k.press }}" style="height:42px;border:none;border-radius:8px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,0.3);font-family:-apple-system,'SF Pro Text',Inter,sans-serif;font-size:22px;color:#000;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex:1">{{ k.ch }}</button></sc-for>
+  </div>
+  <div style="display:flex;gap:6px;padding:0 3px;margin-top:12px">
+    <button type="button" aria-label="Shift" style="height:42px;border:none;border-radius:8px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,0.3);font-family:-apple-system,'SF Pro Text',Inter,sans-serif;font-size:22px;color:#000;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;width:44px">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 12h5v8h8v-8h5z"/></svg>
+    </button>
+    <span style="width:8px"></span>
+    <sc-for list="{{ row3 }}" as="k" hint-placeholder-count="7"><button type="button" onClick="{{ k.press }}" style="height:42px;border:none;border-radius:8px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,0.3);font-family:-apple-system,'SF Pro Text',Inter,sans-serif;font-size:22px;color:#000;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex:1">{{ k.ch }}</button></sc-for>
+    <span style="width:8px"></span>
+    <button type="button" aria-label="Delete" onClick="{{ del }}" style="height:42px;border:none;border-radius:8px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,0.3);font-family:-apple-system,'SF Pro Text',Inter,sans-serif;font-size:22px;color:#000;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;width:44px">
+      <svg width="24" height="20" viewBox="0 0 26 20" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M8 2h16v16H8L1 10z"/><path d="m12 6 8 8m0-8-8 8"/></svg>
+    </button>
+  </div>
+  <div style="display:flex;gap:6px;padding:0 3px;margin-top:12px">
+    <button type="button" style="height:42px;border:none;border-radius:8px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,0.3);font-family:-apple-system,'SF Pro Text',Inter,sans-serif;font-size:22px;color:#000;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;width:92px;font-size:16px">ABC</button>
+    <button type="button" aria-label="Space" onClick="{{ space }}" style="height:42px;border:none;border-radius:8px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,0.3);font-family:-apple-system,'SF Pro Text',Inter,sans-serif;font-size:22px;color:#000;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex:1"></button>
+    <button type="button" aria-label="Return" onClick="{{ ret }}" style="height:42px;border:none;border-radius:8px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,0.3);font-family:-apple-system,'SF Pro Text',Inter,sans-serif;font-size:22px;color:#000;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;width:92px;background:#0a84ff">
+      <svg width="24" height="20" viewBox="0 0 24 20" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 3v7H5"/><path d="m9 6-4 4 4 4"/></svg>
+    </button>
+  </div>
+  <div style="display:flex;justify-content:space-between;padding:14px 26px 0">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#50555c" stroke-width="1.8" stroke-linecap="round" role="img" aria-label="Emoji"><circle cx="14" cy="14" r="11"/><path d="M9.5 16.5c1.2 1.6 2.7 2.4 4.5 2.4s3.3-.8 4.5-2.4"/><circle cx="10.5" cy="11" r=".6" fill="#50555c"/><circle cx="17.5" cy="11" r=".6" fill="#50555c"/></svg>
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#50555c" stroke-width="1.8" stroke-linecap="round" role="img" aria-label="Dictation"><rect x="10" y="3" width="8" height="14" rx="4"/><path d="M6 13a8 8 0 0 0 16 0M14 21v4"/></svg>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"onKey": {"editor": null}, "onDelete": {"editor": null}, "onReturn": {"editor": null}, "$preview": {"width": 390, "height": 354}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const fire = (name, arg) => () => { if (typeof this.props[name] === 'function') this.props[name](arg); };
+    const row = (s) => s.split('').map((ch) => ({ ch, press: fire('onKey', ch) }));
+    return {
+      row1: row('qwertyuiop'), row2: row('asdfghjkl'), row3: row('zxcvbnm'),
+      del: fire('onDelete'), space: fire('onKey', ' '), ret: fire('onReturn'),
+      sugg1: fire('onKey', 'The '), sugg2: fire('onKey', 'the '), sugg3: fire('onKey', 'to '),
+    };
+  }
+}
+</script>
+</body>
+</html>

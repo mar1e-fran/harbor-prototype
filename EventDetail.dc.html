@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Event detail</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;background:#fafeff;font-family:Poppins,sans-serif">
+  <div class="ns" style="position:absolute;left:0;top:0;width:390px;bottom:95px;overflow-y:auto;overflow-x:hidden">
+    <div style="position:relative;width:390px;height:316px;overflow:hidden;background:#004256">
+      <img src="{{ e.img }}" alt="{{ e.title }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ e.imgpos }}">
+    </div>
+    <div style="position:relative;margin-top:-52px;background:#fafeff;padding:19px 0 24px;display:flex;flex-direction:column;gap:4px">
+      <div style="padding:0 {{ padX }}">
+        <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:500;font-size:32px;line-height:normal;color:#004256">{{ e.title }}</h1>
+        <div style="display:flex;align-items:center;gap:12px;min-height:61px">
+          <sc-if value="{{ notReg }}" hint-placeholder-val="{{ true }}"><img src="assets/8e17c.svg" alt="" style="width:18px;height:18px"></sc-if>
+          <sc-if value="{{ reg }}" hint-placeholder-val="{{ false }}"><img src="assets/e634e.svg" alt="" style="width:18px;height:18px"></sc-if>
+          <span style="display:flex;flex-direction:column;color:#166a83;white-space:nowrap"><span style="font-size:16px">{{ e.date }}</span><span style="font-size:12px">{{ e.time }}</span></span>
+        </div>
+      </div>
+      <div style="padding:0 24px;display:flex;flex-direction:column;gap:8px">
+        <h2 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:400;font-size:24px;line-height:normal;color:#004256">About</h2>
+        <p style="margin:0;font-size:14px;line-height:normal;color:#004256">{{ e.about }}</p>
+        <div style="display:flex;align-items:center;gap:10px;height:36px;padding-top:4px;box-sizing:border-box">
+          <img src="assets/e200f.webp" alt="" style="width:32px;height:32px;border:1px solid #b5b5b5;border-radius:16px;object-fit:cover;box-sizing:border-box">
+          <span style="font-size:12px;color:#004256">Hosted by SCAD CAS</span>
+        </div>
+        <sc-if value="{{ reg }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0">
+            <span style="display:flex;align-items:center;gap:12px">
+              <img src="{{ e.contact.photo }}" alt="" style="width:44px;height:44px;border:2px solid #fff;border-radius:22px;object-fit:cover;object-position:center top;box-sizing:border-box">
+              <span style="display:flex;flex-direction:column"><span style="font-weight:600;font-size:14px;line-height:18px;color:#004256">{{ e.contact.who }}</span><span style="font-size:12px;color:#6b6b6b">{{ e.contact.role }}</span></span>
+            </span>
+            <button type="button" style="height:52px;padding:0 14px;border-radius:8px;border:none;background:#ebfafe;font:inherit;font-weight:600;font-size:14px;color:#1a1a1a;cursor:pointer">Contact</button>
+          </div>
+        </sc-if>
+      </div>
+      <div style="padding:0 {{ padX }};display:flex;align-items:center;gap:12px;min-height:60px">
+        <img src="assets/794b0.svg" alt="" style="width:18px;height:18px">
+        <span style="display:flex;flex-direction:column"><span style="font-weight:600;font-size:16px;color:#004256">{{ e.place }}</span><span style="font-size:12px;color:#166a83">{{ e.addr }}</span></span>
+      </div>
+      <sc-if value="{{ e.map }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:0 {{ padX }} 14px">
+          <div style="position:relative;height:150px;border:1px solid #c9c9c9;border-radius:10px;background:#efefef;overflow:hidden">
+            <div style="position:absolute;left:-1px;top:-1px;width:307px;height:150px;overflow:hidden">
+              <img src="assets/9f30d.webp" alt="Map of Poetter Hall" style="position:absolute;left:-118.5px;top:-116.5px;width:626px;height:369px;object-fit:cover">
+            </div>
+          </div>
+        </div>
+      </sc-if>
+      <div style="padding:0 24px;display:flex;flex-direction:column">
+        <p style="margin:0;font-size:16px;line-height:23px;color:#004256">{{ attendeesTitle }}</p>
+        <sc-for list="{{ e.attendees }}" as="a" hint-placeholder-count="4">
+          <dc-import name="AttendeeRow" attendee="{{ a }}" hint-size="342px,64px"></dc-import>
+        </sc-for>
+        <button type="button" style="height:44px;width:175px;text-align:left;padding-left:8px;border:none;background:none;font:inherit;font-weight:600;font-size:12px;color:#004256;cursor:pointer">See all {{ e.count }}</button>
+      </div>
+      <sc-if value="{{ reg }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:0 24px;display:flex;flex-direction:column">
+          <h2 style="margin:0;font-weight:400;font-size:20px;color:#1a1a1a">Agenda</h2>
+          <div style="padding-top:6px">
+            <sc-for list="{{ e.agenda }}" as="g" hint-placeholder-count="3">
+              <div style="height:59px;position:relative;width:342px">
+                <span style="position:absolute;left:0;top:14px;font-weight:300;font-size:14px;color:#6b6b6b">{{ g.time }}</span>
+                <span style="position:absolute;left:70px;top:12px;width:272px;display:flex;flex-direction:column"><span style="font-weight:600;font-size:14px;line-height:18px;color:#1a1a1a">{{ g.title }}</span><span style="font-size:12px;color:#6b6b6b">{{ g.sub }}</span></span>
+              </div>
+            </sc-for>
+          </div>
+          <button type="button" style="height:44px;width:149px;border:none;background:none;padding:0;text-align:left;font:inherit;font-weight:600;font-size:14px;color:#1a1a1a;cursor:pointer">Full agenda</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+  <div style="position:absolute;left:14px;right:14px;top:52px;display:flex;justify-content:space-between">
+    <a href="{{ backHref }}" aria-label="Back" style="width:44px;height:44px;border-radius:10px;background:#ebfafe;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;padding:0"><img src="assets/1f1e0.svg" alt="" style="width:22px;height:22px"></a>
+    <button type="button" aria-label="Share event" style="width:44px;height:44px;border-radius:10px;background:#ebfafe;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;padding:0"><img src="assets/320b0.svg" alt="" style="width:20px;height:20px"></button>
+  </div>
+  <div style="position:absolute;left:0;bottom:0;width:390px;height:95px;box-sizing:border-box;background:#fff;border-top:1px solid #e3e3e3;padding:12px 24px 30px;display:flex;gap:12px;align-items:center;justify-content:center">
+    <sc-if value="{{ notReg }}" hint-placeholder-val="{{ true }}">
+      <button type="button" onClick="{{ openSheet }}" style="width:278px;height:52px;border-radius:8px;border:1.5px solid #fafeff;background:#26b2dc;color:#fafeff;font:inherit;font-weight:600;font-size:14px;line-height:18px;cursor:pointer">Register</button>
+      <button type="button" onClick="{{ toggleSave }}" aria-pressed="{{ savedStr }}" aria-label="Save event" style="width:52px;height:52px;border-radius:8px;border:none;background:#ebfafe;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0">
+        <sc-if value="{{ saved }}" hint-placeholder-val="{{ false }}"><img src="assets/6d3ce.svg" alt="" style="width:24px;height:24px"></sc-if>
+        <sc-if value="{{ unsaved }}" hint-placeholder-val="{{ true }}"><img src="assets/4afac.svg" alt="" style="width:24px;height:24px"></sc-if>
+      </button>
+    </sc-if>
+    <sc-if value="{{ reg }}" hint-placeholder-val="{{ false }}">
+      <button type="button" onClick="{{ unregister }}" style="height:52px;padding:0 14px;border-radius:8px;border:none;background:#ebfafe;display:flex;align-items:center;gap:6px;font:inherit;font-weight:600;font-size:14px;color:#80a0aa;cursor:pointer">Unregister<img src="assets/a86c4.svg" alt="" style="width:14px;height:14px"></button>
+      <a href="{{ e.checkin }}" style="width:214px;height:52px;box-sizing:border-box;border-radius:8px;border:1.5px solid #fafeff;background:#26b2dc;color:#fafeff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;line-height:18px">{{ checkLabel }}</a>
+    </sc-if>
+  </div>
+  <sc-if value="{{ sheet }}" hint-placeholder-val="{{ false }}">
+    <button type="button" aria-label="Close" onClick="{{ closeSheet }}" style="position:absolute;inset:0;border:none;padding:0;background:rgba(0,30,40,0.45);cursor:pointer"></button>
+    <div style="position:absolute;left:0;bottom:0;width:390px">
+      <dc-import name="RegisterSheet" on-add="{{ confirm }}" on-invite="{{ confirm }}" hint-size="390px,217px"></dc-import>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"eventId": {"editor": "enum", "options": ["EventDetail", "EventAlumniPanel", "EventPortfolioDay", "EventCareerDecoder", "EventTechConference", "EventCIASession", "EventDeltaUX", "EventMeetDesigners", "EventCoffeeCD"], "default": "EventDetail"}, "startSaved": {"editor": "boolean", "default": false}, "startSheet": {"editor": "boolean", "default": false}, "startRegistered": {"editor": "boolean", "default": false}, "$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { saved: !!props.startSaved, sheet: !!props.startSheet, reg: !!props.startRegistered };
+  }
+  renderVals() {
+    const { saved, sheet, reg } = this.state;
+    const EVENTS = {
+ "EventDetail": {
+  "title": "SCAD Career Fair",
+  "img": "assets/4264d.webp",
+  "imgpos": "center",
+  "date": "November 18",
+  "time": "2:00PM - 4:00pm; Doors Open 12:30pm",
+  "about": "SCAD Career Fair connects students with top creative employers through talks, a networking mixer, and portfolio reviews.",
+  "contact": {
+   "who": "Amy Moore",
+   "role": "CAS Advisor",
+   "photo": "assets/38c9c.webp"
+  },
+  "place": "Poetter Hall",
+  "addr": "342 Bull St, Savannah, GA 31401",
+  "map": true,
+  "virtual": false,
+  "attendees": [
+   {
+    "who": "Natalie Brooks",
+    "tag": "Match",
+    "tagBg": "#feace8",
+    "sub": "Advertising and Branding",
+    "photo": "assets/8dc47.webp"
+   },
+   {
+    "who": "Jamie Lopez",
+    "tag": "Hiring",
+    "tagBg": "#acfec0",
+    "sub": "Talent Aquisition @ Amazon",
+    "photo": "assets/0a355.webp"
+   },
+   {
+    "who": "Caleb Foster",
+    "tag": "Hiring",
+    "tagBg": "#acfec0",
+    "sub": "Recruiter @ Delta",
+    "photo": "assets/31b98.webp"
+   },
+   {
+    "who": "Marcus Bell",
+    "tag": "Crew",
+    "tagBg": "#80fdff",
+    "sub": "Graphic Design",
+    "photo": "assets/f89e2.webp"
+   }
+  ],
+  "count": 88,
+  "agenda": [
+   {
+    "time": "2:00 pm",
+    "title": "How Creatives Get Hired",
+    "sub": "Dana Whitfield · Main stage"
+   },
+   {
+    "time": "2:45 pm",
+    "title": "Portfolio Reviews That Stand Out",
+    "sub": "Elena Brooks · 2nd Floor"
+   },
+   {
+    "time": "3:30 pm",
+    "title": "Mixer",
+    "sub": "1st Floor"
+   }
+  ],
+  "back": "SearchResults.dc.html",
+  "regBack": "Main.dc.html",
+  "checkin": "HomeLive.dc.html"
+ },
+ "EventAlumniPanel": {
+  "title": "Alumni Panel",
+  "img": "assets/b87d7.webp",
+  "imgpos": "left center",
+  "date": "November 16",
+  "time": "5:00PM - 7:00pm; Doors Open 4:30pm",
+  "about": "Recent SCAD grads share what their first year after graduation really looked like, from landing the job to finding their footing.",
+  "contact": {
+   "who": "Amy Moore",
+   "role": "CAS Advisor",
+   "photo": "assets/38c9c.webp"
+  },
+  "place": "River Event Space",
+  "addr": "Savannah, GA",
+  "map": false,
+  "virtual": false,
+  "attendees": [
+   {
+    "who": "Jenna Caldwell",
+    "tag": "Match",
+    "tagBg": "#feace8",
+    "sub": "Senior Graphic Designer @ Gucci",
+    "photo": "assets/ba9ae.webp"
+   },
+   {
+    "who": "Brooke Sullivan",
+    "tag": "Crew",
+    "tagBg": "#80fdff",
+    "sub": "Design @ Arts & Letters",
+    "photo": "assets/1de59.webp"
+   },
+   {
+    "who": "Natalie Brooks",
+    "tag": "Match",
+    "tagBg": "#feace8",
+    "sub": "Advertising and Branding",
+    "photo": "assets/8dc47.webp"
+   },
+   {
+    "who": "Marcus Bell",
+    "tag": "Crew",
+    "tagBg": "#80fdff",
+    "sub": "Graphic Design",
+    "photo": "assets/f89e2.webp"
+   }
+  ],
+  "count": 86,
+  "agenda": [
+   {
+    "time": "5:00 pm",
+    "title": "Your First Year After SCAD",
+    "sub": "Alumni panel · Main room"
+   },
+   {
+    "time": "6:00 pm",
+    "title": "Audience Q&A",
+    "sub": "Main room"
+   },
+   {
+    "time": "6:30 pm",
+    "title": "Mixer",
+    "sub": "Lobby"
+   }
+  ],
+  "back": "Main.dc.html",
+  "regBack": "Main.dc.html",
+  "checkin": "Main.dc.html"
+ },
+ "EventPortfolioDay": {
+  "title": "SCAD Portfolio Day",
+  "img": "assets/08525.webp",
+  "imgpos": "center",
+  "date": "October 8-9",
+  "time": "2:00PM - 5:00pm; Doors Open 1:30pm",
+  "about": "Bring your portfolio for one-on-one feedback from creative professionals and recruiters across disciplines.",
+  "contact": {
+   "who": "Amy Moore",
+   "role": "CAS Advisor",
+   "photo": "assets/38c9c.webp"
+  },
+  "place": "Poetter Hall",
+  "addr": "342 Bull St, Savannah, GA 31401",
+  "map": true,
+  "virtual": false,
+  "attendees": [
+   {
+    "who": "Adam Crews",
+    "tag": "Hiring",
+    "tagBg": "#acfec0",
+    "sub": "Recruiter @ Google",
+    "photo": "assets/91aac.webp"
+   },
+   {
+    "who": "Jenna Caldwell",
+    "tag": "Match",
+    "tagBg": "#feace8",
+    "sub": "Senior Graphic Designer @ Gucci",
+    "photo": "assets/ba9ae.webp"
+   },
+   {
+    "who": "Brooke Sullivan",
+    "tag": "Crew",
+    "tagBg": "#80fdff",
+    "sub": "Design @ Arts & Letters",
+    "photo": "assets/1de59.webp"
+   },
+   {
+    "who": "Marcus Bell",
+    "tag": "Crew",
+    "tagBg": "#80fdff",
+    "sub": "Graphic Design",
+    "photo": "assets/f89e2.webp"
+   }
+  ],
+  "count": 86,
+  "agenda": [
+   {
+    "time": "2:00 pm",
+    "title": "Portfolio Review Rounds",
+    "sub": "Reviewers · 1st Floor"
+   },
+   {
+    "time": "3:30 pm",
+    "title": "Presenting Your Process",
+    "sub": "Elena Brooks · 2nd Floor"
+   },
+   {
+    "time": "4:30 pm",
+    "title": "Open Reviews",
+    "sub": "1st Floor"
+   }
+  ],
+  "back": "Main.dc.html",
+  "regBack": "Main.dc.html",
+  "checkin": "Main.dc.html"
+ },
+ "EventCareerDecoder": {
+  "title": "Career Decoder: Marketing",
+  "img": "assets/1a0e4.webp",
+  "imgpos": "center",
+  "date": "November 3",
+  "time": "2:00PM - 3:00pm",
+  "about": "A virtual session that breaks down marketing career paths, the roles inside them, and how creative students can break in.",
+  "contact": {
+   "who": "Amy Moore",
+   "role": "CAS Advisor",
+   "photo": "assets/38c9c.webp"
+  },
+  "place": "Virtual",
+  "addr": "Join on SCAD 12twenty · link sent after you register",
+  "map": false,
+  "virtual": true,
+  "attendees": [
+   {
+    "who": "Natalie Brooks",
+    "tag": "Match",
+    "tagBg": "#feace8",
+    "sub": "Advertising and Branding",
+    "photo": "assets/8dc47.webp"
+   },
+   {
+    "who": "Jordan Newman",
+    "tag": "Match",
+    "tagBg": "#feace8",
+    "sub": "UX Researcher @ Target",
+    "photo": "assets/5365f.webp"
+   },
+   {
+    "who": "Marcus Bell",
+    "tag": "Crew",
+    "tagBg": "#80fdff",
+    "sub": "Graphic Design",
+    "photo": "assets/f89e2.webp"
+   },
+   {
+    "who": "Brooke Sullivan",
+    "tag": "Crew",
+    "tagBg": "#80fdff",
+    "sub": "Design @ Arts & Letters",
+    "photo": "assets/1de59.webp"
+   }
+  ],
+  "count": 43,
+  "agenda": [
+   {
+    "time": "2:00 pm",
+    "title": "Marketing Roles, Decoded",
+    "sub": "CAS advisor · Virtual"
+   },
+   {
+    "time": "2:30 pm",
+    "title": "Building a Marketing Portfolio",
+    "sub": "Virtual"
+   },
+   {
+    "time": "2:50 pm",
+    "title": "Q&A",
+    "sub": "Virtual"
+   }
+  ],
+  "back": "Main.dc.html",
+  "regBack": "Main.dc.html",
+  "checkin": "Main.dc.html"
+ },
+ "EventTechConference": {
+  "title": "Tech Conference",
+  "img": "assets/40b5c.webp",
+  "imgpos": "center 60%",
+  "date": "November 7",
+  "time": "2:00PM - 3:00pm; Doors Open 1:30pm",
+  "about": "Industry speakers explore where design and technology meet, with a focus on emerging tools and the roles they create.",
+  "contact": {
+   "who": "Amy Moore",
+   "role": "CAS Advisor",
+   "photo": "assets/38c9c.webp"
+  },
+  "place": "Poetter Hall",
+  "addr": "342 Bull St, Savannah, GA 31401",
+  "map": true,
+  "virtual": false,
+  "attendees": [
+   {
+    "who": "Adam Crews",
+    "tag": "Hiring",
+    "tagBg": "#acfec0",
+    "sub": "Recruiter @ Google",
+    "photo": "assets/91aac.webp"
+   },
+   {
+    "who": "Jordan Newman",
+    "tag": "Match",
+    "tagBg": "#feace8",
+    "sub": "UX Researcher @ Target",
+    "photo": "assets/5365f.webp"
+   },
+   {
+    "who": "Jamie Lopez",
+    "tag": "Hiring",
+    "tagBg": "#acfec0",
+    "sub": "Talent Aquisition @ Amazon",
+    "photo": "assets/0a355.webp"
+   },
+   {
+    "who": "Marcus Bell",
+    "tag": "Crew",
+    "tagBg": "#80fdff",
+    "sub": "Graphic Design",
+    "photo": "assets/f89e2.webp"
+   }
+  ],
+  "count": 64,
+  "agenda": [
+   {
+    "time": "2:00 pm",
+    "title": "Design in Emerging Tech",
+    "sub": "Keynote · Main stage"
+   },
+   {
+    "time": "2:30 pm",
+    "title": "Lightning Talks",
+    "sub": "2nd Floor"
+   },
+   {
+    "time": "2:50 pm",
+    "title": "Networking",
+    "sub": "1st Floor"
+   }
+  ],
+  "back": "Main.dc.html",
+  "regBack": "Main.dc.html",
+  "checkin": "Main.dc.html"
+ },
+ "EventCIASession": {
+  "title": "CIA Information Session",
+  "img": "assets/69908.webp",
+  "imgpos": "center",
+  "date": "November 4",
+  "time": "5:00PM - 6:00pm",
+  "about": "Learn about creative and analytical career paths at the CIA, from cartography to visual communication.",
+  "contact": {
+   "who": "Sophie Pearson",
+   "role": "Lead Cartographer, CIA",
+   "photo": "assets/c2351.webp"
+  },
+  "place": "River Event Space",
+  "addr": "Savannah, GA",
+  "map": false,
+  "virtual": false,
+  "attendees": [
+   {
+    "who": "Sophie Pearson",
+    "tag": "Hiring",
+    "tagBg": "#acfec0",
+    "sub": "Lead Cartographer @ CIA",
+    "photo": "assets/c2351.webp"
+   },
+   {
+    "who": "Natalie Brooks",
+    "tag": "Match",
+    "tagBg": "#feace8",
+    "sub": "Advertising and Branding",
+    "photo": "assets/8dc47.webp"
+   },
+   {
+    "who": "Marcus Bell",
+    "tag": "Crew",
+    "tagBg": "#80fdff",
+    "sub": "Graphic Design",
+    "photo": "assets/f89e2.webp"
+   },
+   {
+    "who": "Jordan Newman",
+    "tag": "Match",
+    "tagBg": "#feace8",
+    "sub": "UX Researcher @ Target",
+    "photo": "assets/5365f.webp"
+   }
+  ],
+  "count": 52,
+  "agenda": [
+   {
+    "time": "5:00 pm",
+    "title": "Careers at the Agency",
+    "sub": "Sophie Pearson · Main room"
+   },
+   {
+    "time": "5:30 pm",
+    "title": "Application Walkthrough",
+    "sub": "Main room"
+   },
+   {
+    "time": "5:45 pm",
+    "title": "Q&A",
+    "sub": "Main room"
+   }
+  ],
+  "back": "Main.dc.html",
+  "regBack": "Main.dc.html",
+  "checkin": "Main.dc.html"
+ },
+ "EventDeltaUX": {
+  "title": "Explore UX careers at Delta",
+  "img": "assets/aed05.webp",
+  "imgpos": "center",
+  "date": "November 3",
+  "time": "5:00PM - 6:00pm",
+  "about": "Meet Delta’s design team and hear how UX shapes the travel experience, from booking to boarding.",
+  "contact": {
+   "who": "Caleb Foster",
+   "role": "Hiring Manager, Delta",
+   "photo": "assets/31b98.webp"
+  },
+  "place": "Virtual",
+  "addr": "Join on SCAD 12twenty · link sent after you register",
+  "map": false,
+  "virtual": true,
+  "attendees": [
+   {
+    "who": "Caleb Foster",
+    "tag": "Hiring",
+    "tagBg": "#acfec0",
+    "sub": "Recruiter @ Delta",
+    "photo": "assets/31b98.webp"
+   },
+   {
+    "who": "Jordan Newman",
+    "tag": "Match",
+    "tagBg": "#feace8",
+    "sub": "UX Researcher @ Target",
+    "photo": "assets/5365f.webp"
+   },
+   {
+    "who": "Natalie Brooks",
+    "tag": "Match",
+    "tagBg": "#feace8",
+    "sub": "Advertising and Branding",
+    "photo": "assets/8dc47.webp"
+   },
+   {
+    "who": "Brooke Sullivan",
+    "tag": "Crew",
+    "tagBg": "#80fdff",
+    "sub": "Design @ Arts & Letters",
+    "photo": "assets/1de59.webp"
+   }
+  ],
+  "count": 38,
+  "agenda": [
+   {
+    "time": "5:00 pm",
+    "title": "Designing for Travelers",
+    "sub": "Delta UX team · Virtual"
+   },
+   {
+    "time": "5:30 pm",
+    "title": "Internship Paths",
+    "sub": "Caleb Foster · Virtual"
+   },
+   {
+    "time": "5:50 pm",
+    "title": "Q&A",
+    "sub": "Virtual"
+   }
+  ],
+  "back": "Main.dc.html",
+  "regBack": "Main.dc.html",
+  "checkin": "Main.dc.html"
+ },
+ "EventMeetDesigners": {
+  "title": "Meet Designers Across Majors",
+  "img": "assets/10e4f.webp",
+  "imgpos": "center",
+  "date": "November 10",
+  "time": "4:00PM - 6:00pm; Doors Open 3:45pm",
+  "about": "Sketch and Connect brings designers from every major together for quick drawing prompts and easy conversation.",
+  "contact": {
+   "who": "Amy Moore",
+   "role": "CAS Advisor",
+   "photo": "assets/38c9c.webp"
+  },
+  "place": "Haymans Hall",
+  "addr": "Savannah, GA",
+  "map": false,
+  "virtual": false,
+  "attendees": [
+   {
+    "who": "Brooke Sullivan",
+    "tag": "Crew",
+    "tagBg": "#80fdff",
+    "sub": "Design @ Arts & Letters",
+    "photo": "assets/1de59.webp"
+   },
+   {
+    "who": "Marcus Bell",
+    "tag": "Crew",
+    "tagBg": "#80fdff",
+    "sub": "Graphic Design",
+    "photo": "assets/f89e2.webp"
+   },
+   {
+    "who": "Jenna Caldwell",
+    "tag": "Match",
+    "tagBg": "#feace8",
+    "sub": "Senior Graphic Designer @ Gucci",
+    "photo": "assets/ba9ae.webp"
+   },
+   {
+    "who": "Natalie Brooks",
+    "tag": "Match",
+    "tagBg": "#feace8",
+    "sub": "Advertising and Branding",
+    "photo": "assets/8dc47.webp"
+   }
+  ],
+  "count": 48,
+  "agenda": [
+   {
+    "time": "4:00 pm",
+    "title": "Warm-up Sketch Prompts",
+    "sub": "Studio A"
+   },
+   {
+    "time": "4:45 pm",
+    "title": "Cross-Major Speed Critiques",
+    "sub": "Studio A"
+   },
+   {
+    "time": "5:30 pm",
+    "title": "Open Sketching",
+    "sub": "Studio B"
+   }
+  ],
+  "back": "Main.dc.html",
+  "regBack": "Main.dc.html",
+  "checkin": "Main.dc.html"
+ },
+ "EventCoffeeCD": {
+  "title": "Coffee With a Creative Director",
+  "img": "assets/298a3.webp",
+  "imgpos": "center",
+  "date": "November 6",
+  "time": "10:00AM - 11:00am",
+  "about": "A small-group coffee chat with a creative director about leading teams, building a career, and staying inspired.",
+  "contact": {
+   "who": "Amy Moore",
+   "role": "CAS Advisor",
+   "photo": "assets/38c9c.webp"
+  },
+  "place": "Gulfstream, Room 112",
+  "addr": "Savannah, GA",
+  "map": false,
+  "virtual": false,
+  "attendees": [
+   {
+    "who": "Jenna Caldwell",
+    "tag": "Match",
+    "tagBg": "#feace8",
+    "sub": "Senior Graphic Designer @ Gucci",
+    "photo": "assets/ba9ae.webp"
+   },
+   {
+    "who": "Adam Crews",
+    "tag": "Hiring",
+    "tagBg": "#acfec0",
+    "sub": "Recruiter @ Google",
+    "photo": "assets/91aac.webp"
+   },
+   {
+    "who": "Natalie Brooks",
+    "tag": "Match",
+    "tagBg": "#feace8",
+    "sub": "Advertising and Branding",
+    "photo": "assets/8dc47.webp"
+   },
+   {
+    "who": "Marcus Bell",
+    "tag": "Crew",
+    "tagBg": "#80fdff",
+    "sub": "Graphic Design",
+    "photo": "assets/f89e2.webp"
+   }
+  ],
+  "count": 24,
+  "agenda": [
+   {
+    "time": "10:00 am",
+    "title": "Introductions",
+    "sub": "Room 112"
+   },
+   {
+    "time": "10:15 am",
+    "title": "Fireside Chat",
+    "sub": "Room 112"
+   },
+   {
+    "time": "10:45 am",
+    "title": "Open Questions",
+    "sub": "Room 112"
+   }
+  ],
+  "back": "Main.dc.html",
+  "regBack": "Main.dc.html",
+  "checkin": "Main.dc.html"
+ }
+};
+    const e = EVENTS[this.props.eventId] || EVENTS.EventDetail;
+    const isFair = (this.props.eventId || 'EventDetail') === 'EventDetail';
+    return {
+      e, saved, unsaved: !saved, savedStr: saved ? 'true' : 'false', sheet, reg, notReg: !reg,
+      padX: reg ? '24px' : '16px',
+      attendeesTitle: (reg ? 'Who’s going · ' : 'Attendees · ') + e.count + ' people',
+      checkLabel: e.virtual ? 'Join session' : 'Check In - QR',
+      backHref: reg ? e.regBack : e.back,
+      toggleSave: () => this.setState({ saved: !saved }),
+      openSheet: () => this.setState({ sheet: true }),
+      closeSheet: () => this.setState({ sheet: false }),
+      confirm: () => { this.setState({ sheet: false, reg: true }); if (isFair) { try { window.localStorage.setItem('harbor.fair', 'upcoming'); window.dispatchEvent(new Event('harbor-fair')); } catch (err) {} } },
+      unregister: () => { this.setState({ reg: false }); if (isFair) { try { window.localStorage.removeItem('harbor.fair'); window.dispatchEvent(new Event('harbor-fair')); } catch (err) {} } },
+    };
+  }
+}
+</script>
+</body>
+</html>

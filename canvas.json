@@ -1,0 +1,659 @@
+{
+ "v": 3,
+ "createdOnFiles": {
+  "v": 1,
+  "at": "2026-11-13T21:20:53Z"
+ },
+ "title": "UXD 370 Hi-Fi Prototype",
+ "launch": {
+  "view": "canvas"
+ },
+ "pages": [],
+ "boards": {
+  "Main.dc.html": {
+   "x": 0,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Home",
+   "is_interactive": true
+  },
+  "HomeUpcoming.dc.html": {
+   "x": 470,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Home · upcoming event",
+   "is_interactive": true
+  },
+  "HomeLive.dc.html": {
+   "x": 940,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Home · live event",
+   "is_interactive": true
+  },
+  "Search.dc.html": {
+   "x": 1410,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Search",
+   "is_interactive": true
+  },
+  "SearchTyping.dc.html": {
+   "x": 1880,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Search · typing",
+   "is_interactive": true
+  },
+  "SearchSuggestions.dc.html": {
+   "x": 2350,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Search · suggestions",
+   "is_interactive": true
+  },
+  "SearchResults.dc.html": {
+   "x": 2820,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Search results",
+   "is_interactive": true
+  },
+  "SearchResultsToday.dc.html": {
+   "x": 3290,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Search results · Today",
+   "is_interactive": true
+  },
+  "EventDetail.dc.html": {
+   "x": 3760,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Event detail",
+   "is_interactive": true
+  },
+  "EventSaved.dc.html": {
+   "x": 4230,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Event detail · saved",
+   "is_interactive": true
+  },
+  "EventSheet.dc.html": {
+   "x": 4700,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Event · You’re going sheet",
+   "is_interactive": true
+  },
+  "EventRegistered.dc.html": {
+   "x": 5170,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Event · registered",
+   "is_interactive": true
+  },
+  "LiveOverview.dc.html": {
+   "x": 0,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Live · Overview",
+   "is_interactive": true
+  },
+  "LiveOverviewAnxious.dc.html": {
+   "x": 470,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Live · Overview, anxious",
+   "is_interactive": true
+  },
+  "LiveWellness.dc.html": {
+   "x": 940,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Live · Wellness",
+   "is_interactive": true
+  },
+  "LiveWellnessAnxious.dc.html": {
+   "x": 1410,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Live · Wellness, anxious",
+   "is_interactive": true
+  },
+  "LiveNotes.dc.html": {
+   "x": 1880,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Live · Notes",
+   "is_interactive": true
+  },
+  "LiveNotesNew.dc.html": {
+   "x": 2350,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Live · Notes, 18 entries",
+   "is_interactive": true
+  },
+  "NoteEditor.dc.html": {
+   "x": 2820,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Note · new",
+   "is_interactive": true
+  },
+  "NoteEditorCamera.dc.html": {
+   "x": 3290,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Note · camera",
+   "is_interactive": true
+  },
+  "NoteEditorCrop.dc.html": {
+   "x": 3760,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Note · crop",
+   "is_interactive": true
+  },
+  "NoteEditorPhoto.dc.html": {
+   "x": 4230,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Note · photo added",
+   "is_interactive": true
+  },
+  "NoteEditorEditing.dc.html": {
+   "x": 4700,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Note · editing",
+   "is_interactive": true
+  },
+  "NoteEditorTitled.dc.html": {
+   "x": 5170,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Note · Product design photo",
+   "is_interactive": true
+  },
+  "NavBar.dc.html": {
+   "x": 0,
+   "y": 3792,
+   "w": 390,
+   "h": 78,
+   "title": "NavBar",
+   "is_interactive": true
+  },
+  "LiveHeader.dc.html": {
+   "x": 470,
+   "y": 3792,
+   "w": 390,
+   "h": 273,
+   "title": "LiveHeader",
+   "is_interactive": true
+  },
+  "MoodPicker.dc.html": {
+   "x": 940,
+   "y": 3792,
+   "w": 358,
+   "h": 100,
+   "title": "MoodPicker",
+   "is_interactive": true
+  },
+  "SessionHero.dc.html": {
+   "x": 1378,
+   "y": 3792,
+   "w": 358,
+   "h": 200,
+   "title": "SessionHero",
+   "is_interactive": true
+  },
+  "AnchorCard.dc.html": {
+   "x": 1816,
+   "y": 3792,
+   "w": 358,
+   "h": 200,
+   "title": "AnchorCard",
+   "is_interactive": true
+  },
+  "AvatarStack.dc.html": {
+   "x": 2254,
+   "y": 3792,
+   "w": 150,
+   "h": 20,
+   "title": "AvatarStack",
+   "is_interactive": true
+  },
+  "EventTile.dc.html": {
+   "x": 2484,
+   "y": 3792,
+   "w": 150,
+   "h": 226,
+   "title": "EventTile",
+   "is_interactive": true
+  },
+  "EventCarousel.dc.html": {
+   "x": 2714,
+   "y": 3792,
+   "w": 366,
+   "h": 270,
+   "title": "EventCarousel",
+   "is_interactive": true
+  },
+  "ProfileCard.dc.html": {
+   "x": 3160,
+   "y": 3792,
+   "w": 300,
+   "h": 400,
+   "title": "ProfileCard",
+   "is_interactive": true
+  },
+  "WhosOnDeck.dc.html": {
+   "x": 3540,
+   "y": 3792,
+   "w": 390,
+   "h": 430,
+   "title": "WhosOnDeck",
+   "is_interactive": true
+  },
+  "AgendaCard.dc.html": {
+   "x": 4010,
+   "y": 3792,
+   "w": 358,
+   "h": 250,
+   "title": "AgendaCard",
+   "is_interactive": true
+  },
+  "NoteEntry.dc.html": {
+   "x": 4448,
+   "y": 3792,
+   "w": 358,
+   "h": 90,
+   "title": "NoteEntry",
+   "is_interactive": true
+  },
+  "ResetTile.dc.html": {
+   "x": 4886,
+   "y": 3792,
+   "w": 173,
+   "h": 100,
+   "title": "ResetTile",
+   "is_interactive": true
+  },
+  "ResultCard.dc.html": {
+   "x": 5139,
+   "y": 3792,
+   "w": 342,
+   "h": 300,
+   "title": "ResultCard",
+   "is_interactive": true
+  },
+  "AttendeeRow.dc.html": {
+   "x": 5561,
+   "y": 3792,
+   "w": 342,
+   "h": 64,
+   "title": "AttendeeRow",
+   "is_interactive": true
+  },
+  "RegisterSheet.dc.html": {
+   "x": 5983,
+   "y": 3792,
+   "w": 390,
+   "h": 217,
+   "title": "RegisterSheet",
+   "is_interactive": true
+  },
+  "Keyboard.dc.html": {
+   "x": 6453,
+   "y": 3792,
+   "w": 390,
+   "h": 354,
+   "title": "Keyboard",
+   "is_interactive": true
+  },
+  "CategoryTiles.dc.html": {
+   "x": 6923,
+   "y": 3792,
+   "w": 362,
+   "h": 364,
+   "title": "CategoryTiles",
+   "is_interactive": true
+  },
+  "EventAlumniPanel.dc.html": {
+   "x": 5640,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Event · Alumni Panel",
+   "is_interactive": true
+  },
+  "EventPortfolioDay.dc.html": {
+   "x": 6110,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Event · Portfolio Day",
+   "is_interactive": true
+  },
+  "EventCareerDecoder.dc.html": {
+   "x": 6580,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Event · Career Decoder",
+   "is_interactive": true
+  },
+  "EventTechConference.dc.html": {
+   "x": 7050,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Event · Tech Conference",
+   "is_interactive": true
+  },
+  "EventCIASession.dc.html": {
+   "x": 7520,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Event · CIA Info Session",
+   "is_interactive": true
+  },
+  "EventDeltaUX.dc.html": {
+   "x": 7990,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Event · UX at Delta",
+   "is_interactive": true
+  },
+  "EventMeetDesigners.dc.html": {
+   "x": 8460,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Event · Meet Designers",
+   "is_interactive": true
+  },
+  "EventCoffeeCD.dc.html": {
+   "x": 8930,
+   "y": 1264,
+   "w": 390,
+   "h": 844,
+   "title": "Event · Coffee w/ Creative Director",
+   "is_interactive": true
+  },
+  "Onboarding.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Onboarding · Log in",
+   "is_interactive": true
+  },
+  "OnboardingSignup.dc.html": {
+   "x": 470,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Onboarding · Sign up",
+   "is_interactive": true
+  },
+  "OnboardingWelcome.dc.html": {
+   "x": 940,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Onboarding · Welcome",
+   "is_interactive": true
+  },
+  "OnboardingRole.dc.html": {
+   "x": 1410,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Onboarding · Role",
+   "is_interactive": true
+  },
+  "OnboardingGrade.dc.html": {
+   "x": 1880,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Onboarding · Grade level",
+   "is_interactive": true
+  },
+  "OnboardingGoals.dc.html": {
+   "x": 2350,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Onboarding · Goals",
+   "is_interactive": true
+  },
+  "OnboardingSocials.dc.html": {
+   "x": 2820,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Onboarding · Socials",
+   "is_interactive": true
+  },
+  "OnboardingReview.dc.html": {
+   "x": 3290,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Onboarding · Review · Ready to set sail?",
+   "is_interactive": true
+  },
+  "OnboardingTides.dc.html": {
+   "x": 3760,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Onboarding · Loading (swirl)",
+   "is_interactive": true
+  },
+  "LogbookCard.dc.html": {
+   "x": 7365,
+   "y": 3792,
+   "w": 346,
+   "h": 83,
+   "title": "LogbookCard",
+   "is_interactive": true
+  },
+  "ConversationStarters.dc.html": {
+   "x": 7791,
+   "y": 3792,
+   "w": 362,
+   "h": 364,
+   "title": "ConversationStarters",
+   "is_interactive": true
+  },
+  "StartersSheet.dc.html": {
+   "x": 8233,
+   "y": 3792,
+   "w": 390,
+   "h": 844,
+   "title": "StartersSheet",
+   "is_interactive": true
+  },
+  "NoteEditorWriting.dc.html": {
+   "x": 5640,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Note · Writing",
+   "is_interactive": true
+  },
+  "AnchorDrop.dc.html": {
+   "x": 6110,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Wellness · Anchor Drop",
+   "is_interactive": true
+  },
+  "Grounding.dc.html": {
+   "x": 6580,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Wellness · 5-4-3-2-1 Grounding",
+   "is_interactive": true
+  },
+  "ResetWalk.dc.html": {
+   "x": 7050,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Wellness · Reset Walk",
+   "is_interactive": true
+  },
+  "ColdCompress.dc.html": {
+   "x": 7520,
+   "y": 2528,
+   "w": 390,
+   "h": 844,
+   "title": "Wellness · Cold Compress",
+   "is_interactive": true
+  },
+  "ResetActivity.dc.html": {
+   "x": 8703,
+   "y": 3792,
+   "w": 390,
+   "h": 844,
+   "title": "ResetActivity",
+   "is_interactive": true
+  }
+ },
+ "order": [
+  "Onboarding.dc.html",
+  "OnboardingSignup.dc.html",
+  "OnboardingWelcome.dc.html",
+  "OnboardingRole.dc.html",
+  "OnboardingGrade.dc.html",
+  "OnboardingGoals.dc.html",
+  "OnboardingSocials.dc.html",
+  "OnboardingReview.dc.html",
+  "OnboardingTides.dc.html",
+  "Main.dc.html",
+  "HomeUpcoming.dc.html",
+  "HomeLive.dc.html",
+  "Search.dc.html",
+  "SearchTyping.dc.html",
+  "SearchSuggestions.dc.html",
+  "SearchResults.dc.html",
+  "SearchResultsToday.dc.html",
+  "EventDetail.dc.html",
+  "EventSaved.dc.html",
+  "EventSheet.dc.html",
+  "EventRegistered.dc.html",
+  "EventAlumniPanel.dc.html",
+  "EventPortfolioDay.dc.html",
+  "EventCareerDecoder.dc.html",
+  "EventTechConference.dc.html",
+  "EventCIASession.dc.html",
+  "EventDeltaUX.dc.html",
+  "EventMeetDesigners.dc.html",
+  "EventCoffeeCD.dc.html",
+  "LiveOverview.dc.html",
+  "LiveOverviewAnxious.dc.html",
+  "LiveWellness.dc.html",
+  "LiveWellnessAnxious.dc.html",
+  "LiveNotes.dc.html",
+  "LiveNotesNew.dc.html",
+  "NoteEditor.dc.html",
+  "NoteEditorCamera.dc.html",
+  "NoteEditorCrop.dc.html",
+  "NoteEditorPhoto.dc.html",
+  "NoteEditorEditing.dc.html",
+  "NoteEditorTitled.dc.html",
+  "NoteEditorWriting.dc.html",
+  "NavBar.dc.html",
+  "LiveHeader.dc.html",
+  "MoodPicker.dc.html",
+  "SessionHero.dc.html",
+  "AnchorCard.dc.html",
+  "AvatarStack.dc.html",
+  "EventTile.dc.html",
+  "EventCarousel.dc.html",
+  "ProfileCard.dc.html",
+  "WhosOnDeck.dc.html",
+  "AgendaCard.dc.html",
+  "NoteEntry.dc.html",
+  "ResetTile.dc.html",
+  "ResultCard.dc.html",
+  "AttendeeRow.dc.html",
+  "RegisterSheet.dc.html",
+  "Keyboard.dc.html",
+  "CategoryTiles.dc.html",
+  "LogbookCard.dc.html",
+  "ConversationStarters.dc.html",
+  "StartersSheet.dc.html",
+  "AnchorDrop.dc.html",
+  "Grounding.dc.html",
+  "ResetWalk.dc.html",
+  "ColdCompress.dc.html",
+  "ResetActivity.dc.html"
+ ],
+ "notes": {
+  "rowA": {
+   "x": 0,
+   "y": 964,
+   "text": "Home, search & registration",
+   "kind": "title1",
+   "maxW": 9320
+  },
+  "rowB": {
+   "x": 0,
+   "y": 2228,
+   "text": "Live event dashboard",
+   "kind": "title1",
+   "maxW": 7910
+  },
+  "rowC": {
+   "x": 0,
+   "y": 3492,
+   "text": "Components",
+   "kind": "title1",
+   "maxW": 9093
+  },
+  "row0": {
+   "x": 0,
+   "y": -300,
+   "text": "Onboarding",
+   "kind": "title1",
+   "maxW": 4150
+  }
+ },
+ "designSystems": []
+}
