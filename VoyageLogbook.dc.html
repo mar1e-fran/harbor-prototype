@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Voyage Logbook</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;background:#fafeff;font-family:Poppins,sans-serif">
+  <div class="ns" style="position:absolute;left:0;top:0;width:390px;bottom:78px;overflow-y:auto;overflow-x:hidden">
+    <header style="position:relative;width:390px;height:267px">
+      <div style="position:absolute;left:0;top:0;width:390px;height:241px;background:#7ec6dc;overflow:hidden">
+        <h1 style="position:absolute;left:141px;top:145px;transform:translateX(-50%);margin:0;font-family:'DM Sans',sans-serif;font-weight:700;font-size:32px;line-height:normal;color:#004256;white-space:nowrap">Voyage Logbook</h1>
+        <span style="position:absolute;left:269px;top:84px;width:162.84px;height:188.113px;display:flex;align-items:center;justify-content:center"><img src="assets/h-bottle.svg" alt="" style="width:91.908px;height:164.202px;transform:rotate(-30.69deg);display:block"></span>
+        <span style="position:absolute;left:0;top:207px;width:300px;height:34px;background:#166a83"></span>
+        <img src="assets/h-wave.svg" alt="" style="position:absolute;left:-1px;top:197px;width:395.621px;height:20.816px;display:block">
+        <img src="assets/h-current.svg" alt="" style="position:absolute;left:-16.5px;top:187.5px;width:413px;height:40.01px;display:block">
+      </div>
+      <div role="tablist" style="position:absolute;left:16px;top:215px;width:358px;height:52px;box-sizing:border-box;padding:4px;border-radius:12px;background:#fff;display:flex">
+        <button type="button" role="tab" aria-selected="{{ notesSel }}" onClick="{{ toNotes }}" style="flex:1;height:44px;border:none;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:4px;font:inherit;font-weight:600;font-size:14px;line-height:18px;cursor:pointer;background:{{ notesBg }};color:{{ notesFg }}">
+          <sc-if value="{{ isNotes }}" hint-placeholder-val="{{ false }}"><img src="assets/h-notepad-on.svg" alt="" style="width:20px;height:20px;display:block"></sc-if>
+          <sc-if value="{{ isEvents }}" hint-placeholder-val="{{ true }}"><img src="assets/h-notepad-off.svg" alt="" style="width:20px;height:20px;display:block"></sc-if>
+          Notes
+        </button>
+        <button type="button" role="tab" aria-selected="{{ eventsSel }}" onClick="{{ toEvents }}" style="flex:1;height:44px;border:none;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:4px;font:inherit;font-weight:600;font-size:14px;line-height:18px;cursor:pointer;background:{{ eventsBg }};color:{{ eventsFg }}">
+          <sc-if value="{{ isEvents }}" hint-placeholder-val="{{ true }}"><img src="assets/h-boat-on.svg" alt="" style="width:20px;height:20px;display:block"></sc-if>
+          <sc-if value="{{ isNotes }}" hint-placeholder-val="{{ false }}"><img src="assets/h-boat-off.svg" alt="" style="width:20px;height:20px;display:block"></sc-if>
+          Events
+        </button>
+      </div>
+    </header>
+
+    <!-- Events tab -->
+    <sc-if value="{{ isEvents }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:5px 20px 32px 24px;display:flex;flex-direction:column;gap:24px">
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <h2 style="margin:0;height:32px;display:flex;align-items:center;font-family:'DM Sans',sans-serif;font-weight:400;font-size:24px;color:#004256">{{ g.h }}</h2>
+            <sc-for list="{{ g.items }}" as="e" hint-placeholder-count="2">
+              <dc-import name="LogbookCard" event="{{ e }}" hint-size="346px,83px"></dc-import>
+            </sc-for>
+          </section>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <!-- Notes tab -->
+    <sc-if value="{{ isNotes }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:21px 24px 32px;display:flex;flex-direction:column;gap:16px">
+        <label style="height:48px;box-sizing:border-box;border:1px solid #004256;border-radius:24px;display:flex;align-items:center;gap:8px;padding:0 8px 0 16px">
+          <img src="assets/h-search.svg" alt="" style="width:20px;height:20px;display:block">
+          <input type="search" value="{{ q }}" onChange="{{ onSearch }}" placeholder="Search" aria-label="Search notes" style="flex:1;min-width:0;height:44px;border:none;background:none;outline:none;font-family:Inter,sans-serif;font-size:16px;color:#004256">
+        </label>
+        <div style="margin:0 -6px;box-sizing:border-box;border:2px solid #1f92b4;border-radius:16px;background:#ebfeff;padding:14px;display:flex;flex-direction:column">
+          <span style="font-weight:600;font-size:12px;color:#004256">New entry</span>
+          <textarea value="{{ draft }}" onChange="{{ onDraft }}" placeholder="Drop a quick entry… who, company, what to remember" aria-label="New entry" style="height:{{ draftH }};resize:none;border:none;background:none;outline:none;padding:10px 0;font-family:Poppins,sans-serif;font-size:14px;line-height:normal;color:#004256"></textarea>
+          <sc-if value="{{ canSave }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ saveDraft }}" style="align-self:flex-end;height:40px;padding:0 18px;border:none;border-radius:8px;background:#004256;color:#fff;font:inherit;font-weight:600;font-size:14px;cursor:pointer">Save entry</button>
+          </sc-if>
+        </div>
+        <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:8px 0;font-size:14px;color:#166a83">No notes match “{{ q }}”.</p>
+        </sc-if>
+        <sc-for list="{{ sections }}" as="s" hint-placeholder-count="2">
+          <section style="display:flex;flex-direction:column;gap:13px">
+            <h2 style="margin:0;height:32px;display:flex;align-items:center;font-family:'DM Sans',sans-serif;font-weight:400;font-size:24px;color:#004256">{{ s.h }}</h2>
+            <div style="display:flex;gap:13px;align-items:flex-start">
+              <sc-for list="{{ s.cols }}" as="col" hint-placeholder-count="2">
+                <div style="width:166px;display:flex;flex-direction:column;gap:16px">
+                  <sc-for list="{{ col }}" as="n" hint-placeholder-count="2">
+                    <a href="{{ n.href }}" style="box-sizing:border-box;width:166px;padding:12px;border-radius:10px;background:#ebfafe;display:flex;flex-direction:column;font-family:Inter,sans-serif;color:#1a1a1a">
+                      <sc-if value="{{ n.photo }}" hint-placeholder-val="{{ false }}">
+                        <span style="display:block;height:110px;box-sizing:border-box;border:1px solid #c9c9c9;border-radius:8px;overflow:hidden;background:#166a83;margin-bottom:8px"><img src="assets/h-slide.png" alt="" style="width:145px;height:193px;margin:-29px 0 0 -3px;object-fit:cover;display:block"></span>
+                      </sc-if>
+                      <span style="font-weight:600;font-size:15px;line-height:19.5px">{{ n.title }}</span>
+                      <sc-if value="{{ n.hasMention }}" hint-placeholder-val="{{ false }}"><span style="align-self:flex-start;background:#fec6ef;border-radius:4px;padding:0 4px;font-weight:600;font-size:15px;line-height:19.5px;white-space:nowrap">@{{ n.mention }}</span></sc-if>
+                      <sc-if value="{{ n.voice }}" hint-placeholder-val="{{ false }}">
+                        <span style="display:flex;gap:3px;align-items:center;height:30px;padding-top:6px;box-sizing:border-box"><sc-for list="{{ wave }}" as="h" hint-placeholder-count="12"><span style="width:3px;height:{{ h }};border-radius:2px;background:#298d60"></span></sc-for></span>
+                      </sc-if>
+                      <sc-if value="{{ n.hasBody }}" hint-placeholder-val="{{ true }}"><span style="padding-top:4px;font-size:13px;line-height:18.85px;color:#3d3d3d;white-space:pre-line">{{ n.body }}</span></sc-if>
+                    </a>
+                  </sc-for>
+                </div>
+              </sc-for>
+            </div>
+          </section>
+        </sc-for>
+      </div>
+    </sc-if>
+  </div>
+  <div style="position:absolute;left:0;bottom:0;width:390px">
+    <dc-import name="NavBar" active="history" hint-size="390px,78px"></dc-import>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startTab": {"editor": "enum", "options": ["events", "notes"], "default": "events"}, "$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { tab: props.startTab || 'events', q: '', draft: '', mine: [] }; }
+  renderVals() {
+    const { tab, q, draft, mine } = this.state;
+    const isNotes = tab === 'notes';
+    const groups = [
+      { h: 'Today', items: [{ title: 'SCAD Career Fair', date: 'November 18, 2:00PM - 4:00pm', place: 'Poetter Hall', img: 'assets/h-fair.png', href: 'Wrapped.dc.html' }] },
+      { h: 'This Month', items: [
+        { title: 'Winter Game Jam: 48 Hours', date: 'Nov. 13 6 p.m. to Nov. 15 at 6 p.m.', place: 'Studio 121, Savannah', img: 'assets/h-gamejam.png', href: '#' },
+        { title: 'Coffee With Creative Directors', date: 'Nov. 11 from 9 a.m. to 10:30 a.m.', place: 'Poetter Gallery, Savannah', img: 'assets/h-coffee.png', href: '#' },
+      ] },
+      { h: 'October', items: [
+        { title: 'Profile Glow-Up: Free Headshots + Profile Reviews', date: 'Oct. 15, 2026 from 12 p.m. to 3 p.m.', place: 'Adler Hall, Savannah', img: 'assets/h-glowup.png', href: '#' },
+        { title: 'UX Case Study Teardown: Live Portfolio Critique', date: 'Oct. 7, 2026 from 5 p.m. to 6 p.m. ET', place: 'Virtual', img: 'assets/h-teardown.png', href: '#' },
+      ] },
+      { h: 'September', items: [
+        { title: 'Freelance 101: Contracts, Rates and Getting Paid', date: 'Sept. 29, 2026 from 5 p.m. to 6:30 p.m', place: 'Virtual', img: 'assets/h-freelance.png', href: '#' },
+      ] },
+    ];
+    const N = (o) => ({ mention: '', body: '', voice: false, photo: false, href: '#', ...o });
+    const all = [
+      { h: 'SCAD Career Fair', cols: [
+        [N({ title: 'Coffee line with', mention: 'Priya Nair', body: 'Hiring design systems interns at Northwind. Portfolio by Fri.' }),
+         N({ title: 'Case study idea', voice: true, body: '0:42' })],
+        [N({ title: 'Keynote slides', photo: true, body: '2 photos · 11:42 AM', href: 'NoteEditorTitled.dc.html' })],
+      ] },
+      { h: 'Coffee With Creative Directors', cols: [
+        [N({ title: 'Follow up with', mention: 'Jordan Newman', body: 'Game dev role at Riot. Send case study tonight.', href: 'Crewmate.dc.html' }),
+         N({ title: 'To-do', body: '• Tighten portfolio intro\n• Connect with Bradie\n• RSVP Design Hiring Meetup' }),
+         N({ title: 'Thank-you draft', voice: true, body: '0:28' })],
+        [N({ title: 'Transcript', body: '"…the biggest shift this year: recruiters want one deep case study, not five shallow ones."' }),
+         N({ title: 'Booth chat with', mention: 'Bella Jean', body: 'Switched careers into UX at Uber. Ask about Designathon.' }),
+         N({ title: 'Bradie on robotics', voice: true, body: '1:15' }),
+         N({ title: 'Portfolio tip', body: 'Lead with the problem, then 2–3 key decisions and the impact.' })],
+      ] },
+    ];
+    if (mine.length) all.unshift({ h: 'Just now', cols: [mine.filter((_, i) => i % 2 === 0), mine.filter((_, i) => i % 2 === 1)] });
+    const needle = q.trim().toLowerCase();
+    const hit = (n) => !needle || [n.title, n.mention, n.body].join(' ').toLowerCase().includes(needle);
+    const sections = all.map((s) => ({ h: s.h, cols: s.cols.map((c) => c.filter(hit).map((n) => ({ ...n, hasMention: !!n.mention, hasBody: !!n.body }))) }))
+      .filter((s) => s.cols.some((c) => c.length));
+    return {
+      isNotes, isEvents: !isNotes, notesSel: isNotes ? 'true' : 'false', eventsSel: isNotes ? 'false' : 'true',
+      notesBg: isNotes ? '#166a83' : '#ffffff', notesFg: isNotes ? '#fafeff' : '#80a0aa',
+      eventsBg: isNotes ? '#ffffff' : '#166a83', eventsFg: isNotes ? '#80a0aa' : '#ffffff',
+      groups, sections, empty: sections.length === 0, q, draft,
+      draftH: draft ? '90px' : '150px', canSave: draft.trim().length > 0,
+      wave: ['8px', '14px', '20px', '12px', '18px', '24px', '10px', '16px', '22px', '12px', '8px', '14px'],
+      toNotes: () => this.setState({ tab: 'notes' }),
+      toEvents: () => this.setState({ tab: 'events' }),
+      onSearch: (e) => this.setState({ q: e.target.value }),
+      onDraft: (e) => this.setState({ draft: e.target.value }),
+      saveDraft: () => { const t = draft.trim(); if (!t) return; const [first, ...rest] = t.split('\n'); this.setState({ draft: '', mine: [N({ title: first.slice(0, 40), body: rest.join('\n') || 'Saved just now' }), ...mine] }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

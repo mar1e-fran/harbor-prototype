@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Crewmate profile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;background:#fafeff;font-family:Poppins,sans-serif;color:#1a1a1a">
+  <div class="ns" style="position:absolute;inset:0;overflow-y:auto;overflow-x:hidden">
+    <div style="position:relative;width:390px;height:230px">
+      <img src="assets/p-cover.png" alt="" style="width:390px;height:170px;box-sizing:border-box;border:1px solid #c9c9c9;object-fit:cover;display:block">
+      <a href="Crewmate.dc.html" aria-label="Back" style="position:absolute;left:16px;top:52px;width:44px;height:44px;display:flex;align-items:center;justify-content:center"><img src="assets/p-back.svg" alt="" style="width:22px;height:22px;display:block"></a>
+      <button type="button" aria-label="More options" style="position:absolute;left:330px;top:52px;width:44px;height:44px;box-sizing:border-box;border:1px solid #c9c9c9;border-radius:22px;background:#fff;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer"><img src="assets/p-more.svg" alt="" style="width:20px;height:20px;display:block"></button>
+      <span style="position:absolute;left:24px;top:118px;width:104px;height:104px;box-sizing:border-box;border:4px solid #fff;border-radius:52px;background:#dcdcdc;overflow:hidden"><img src="assets/p-jordan.png" alt="" style="position:absolute;left:-2px;top:-5px;width:102px;height:102px;border-radius:999px;object-fit:cover;display:block"></span>
+    </div>
+    <div style="box-sizing:border-box;padding:8px 24px 48px;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <span style="display:flex;flex-direction:column">
+            <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:24px;line-height:normal">Jordan Newman</h1>
+            <span style="padding-top:2px;font-size:16px;color:#6b6b6b">UX Researcher @ Target</span>
+          </span>
+          <span style="margin-top:6px;height:26px;padding:0 10px;border-radius:13px;background:#004256;color:#fff;display:flex;align-items:center;font-weight:600;font-size:12px;white-space:nowrap">In your crew</span>
+        </div>
+        <p style="margin:0;font-size:16px;line-height:normal">“I study how people actually use products, then help designers fix what gets in their way.”</p>
+        <p style="margin:-6px 0 0;font-size:14px;color:#6b6b6b">Met at SCAD Career Fair · Nov 18 · 86% like you</p>
+        <a href="Chat.dc.html" style="height:48px;border-radius:8px;background:#004256;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px">Message</a>
+      </div>
+      <section style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:16px"><b style="font-weight:600">Crew 24</b><span style="color:#6b6b6b"> · 4 mutual</span></span>
+          <a href="Crewmate.dc.html" aria-label="See all crewmates" style="width:44px;height:44px;display:flex;align-items:center;justify-content:flex-end"><img src="assets/p-arrow.svg" alt="" style="width:20px;height:20px;display:block"></a>
+        </div>
+        <div style="display:flex;padding-left:10px">
+          <sc-for list="{{ crew }}" as="c" hint-placeholder-count="4"><img src="{{ c }}" alt="" style="width:40px;height:40px;border-radius:20px;object-fit:cover;margin-left:-10px;display:block"></sc-for>
+          <span style="width:40px;height:40px;box-sizing:border-box;margin-left:-10px;border:2px solid #fff;border-radius:20px;background:#d4d4d4;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px">+20</span>
+        </div>
+      </section>
+      <section style="padding:16px;border-radius:12px;background:#c6fed4">
+        <h2 style="margin:0 0 4px;font-weight:600;font-size:14px;line-height:18px;color:#004256">What you have in common</h2>
+        <sc-for list="{{ common }}" as="c" hint-placeholder-count="4">
+          <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0">
+            <span style="width:32px;height:32px;border-radius:8px;background:#004256;display:flex;align-items:center;justify-content:center;flex-shrink:0"><img src="{{ c.icon }}" alt="" style="width:16px;height:16px;display:block"></span>
+            <span style="display:flex;flex-direction:column;max-width:210px"><span style="padding-bottom:2px;font-weight:600;font-size:12px;color:#004256">{{ c.k }}</span><span style="font-size:16px;line-height:normal">{{ c.v }}</span></span>
+          </div>
+        </sc-for>
+      </section>
+      <section style="padding:16px;border-radius:12px;background:#26b2dc;color:#fff;display:flex;flex-direction:column;gap:12px">
+        <h2 style="margin:0;font-weight:600;font-size:14px;line-height:18px">I’m here for…</h2>
+        <p style="margin:0;font-size:20px">Mentoring &amp; hiring</p>
+      </section>
+      <section style="padding:16px;border-radius:12px;background:#feace8;display:flex;flex-direction:column;gap:12px">
+        <h2 style="margin:0;font-weight:600;font-size:14px;line-height:18px;color:#6b6b6b">Talk to me about…</h2>
+        <img src="assets/p-talk.png" alt="" style="width:307px;height:180px;border-radius:8px;object-fit:cover;display:block">
+        <p style="margin:0;font-size:20px;line-height:normal">How to be a curious candidate</p>
+      </section>
+      <section style="display:flex;flex-direction:column;gap:8px">
+        <h2 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px;color:#202124">Cross paths again</h2>
+        <p style="margin:0;font-size:12px;color:#5f6368">Voyages your new shipmates are joining</p>
+        <sc-for list="{{ cross }}" as="x" hint-placeholder-count="2">
+          <a href="{{ x.href }}" style="height:56px;display:flex;gap:12px;align-items:center;color:#1a1a1a">
+            <img src="{{ x.img }}" alt="" style="width:56px;height:56px;border-radius:8px;object-fit:cover;display:block">
+            <span style="display:flex;flex-direction:column"><span style="font-size:16px">{{ x.title }}</span><span style="font-size:14px;color:#6b6b6b">{{ x.date }}</span></span>
+          </a>
+        </sc-for>
+        <a href="VoyageLogbook.dc.html" style="height:44px;display:flex;gap:6px;align-items:center;font-size:16px;color:#1a1a1a">Show all<img src="assets/p-showall.svg" alt="" style="width:18px;height:18px;display:block"></a>
+      </section>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      crew: ['assets/p-crew1.png', 'assets/p-crew2.png', 'assets/p-crew3.png', 'assets/p-jordan.png'],
+      common: [
+        { icon: 'assets/p-goals.svg', k: 'Goals', v: 'You both want a job in product design' },
+        { icon: 'assets/p-interests.svg', k: 'Interests', v: 'User research, Portfolio reviews, Design systems' },
+        { icon: 'assets/p-events.svg', k: 'Events', v: 'You both went to Portfolio Day' },
+        { icon: 'assets/p-people.svg', k: 'People', v: 'You both know Emily Stuart +3' },
+      ],
+      cross: [
+        { img: 'assets/p-talk.png', title: 'Hiring Manager Meet & Greet', date: 'Nov 20', href: 'EventRecap.dc.html' },
+        { img: 'assets/p-alumni.png', title: 'Alumni Panel', date: 'Nov 16', href: 'EventAlumniPanel.dc.html' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Chat</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;background:#fafeff;font-family:Inter,sans-serif;display:flex;flex-direction:column">
+  <header style="box-sizing:border-box;padding:52px 14px 10px;background:#7ec6dc;border-bottom:1px solid #7ec6dc;display:flex;gap:8px;align-items:center;flex-shrink:0">
+    <a href="EventRecap.dc.html" aria-label="Back" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><img src="assets/ch-back.svg" alt="" style="width:22px;height:22px;display:block"></a>
+    <img src="assets/ch-jordan.png" alt="" style="width:40px;height:40px;border-radius:20px;background:#e2e2e2;object-fit:cover;display:block">
+    <span style="flex:1;min-width:0;display:flex;flex-direction:column;color:#004256"><span style="font-weight:600;font-size:16px">Jordan Newman</span><span style="font-size:12px">In your session Room 204</span></span>
+    <a href="Crewmate.dc.html" aria-label="Crew details and notes" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><img src="assets/ch-info.svg" alt="" style="width:22px;height:22px;display:block"></a>
+  </header>
+  <div class="ns" aria-live="polite" style="flex:1;min-height:0;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px">
+    <p style="margin:0;text-align:center;font-size:12px;color:#6b6b6b">Nov 18</p>
+    <sc-for list="{{ msgs }}" as="m" hint-placeholder-count="3">
+      <div style="display:flex;justify-content:{{ m.justify }}">
+        <div class="cs-pop" style="max-width:{{ m.max }};padding:10px 14px;border-radius:{{ m.radius }};background:{{ m.bg }};color:{{ m.fg }};font-family:{{ m.font }};font-size:{{ m.size }};line-height:{{ m.lh }}">{{ m.text }}</div>
+      </div>
+    </sc-for>
+    <sc-if value="{{ typing }}" hint-placeholder-val="{{ false }}">
+      <div style="align-self:flex-start;padding:10px 14px;border-radius:16px 16px 16px 4px;background:#bce7f3;font-size:15px;color:#1a1a1a" class="harbor-pulse">Jordan is typing…</div>
+    </sc-if>
+  </div>
+  <div style="box-sizing:border-box;padding:0 16px 34px;display:flex;flex-direction:column;gap:10px;flex-shrink:0">
+    <sc-if value="{{ showChips }}" hint-placeholder-val="{{ false }}">
+      <div class="ns" style="margin-right:-16px;overflow-x:auto;display:flex;gap:8px;padding-right:16px">
+        <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+          <button type="button" onClick="{{ c.send }}" style="height:36px;flex-shrink:0;padding:0 12px;border:none;border-radius:18px;background:#bbe2ec;font-family:Inter,sans-serif;font-weight:500;font-size:13px;color:#1a1a1a;white-space:nowrap;cursor:pointer">{{ c.text }}</button>
+        </sc-for>
+      </div>
+    </sc-if>
+    <div style="box-sizing:border-box;min-height:55px;border:1.5px solid #004256;border-radius:10px;background:#fff;display:flex;gap:8px;align-items:flex-end;padding:7px 6px 7px 18px">
+      <textarea value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onKey }}" placeholder="Message Jordan" aria-label="Message" rows="{{ rows }}" style="flex:1;min-width:0;align-self:center;border:none;outline:none;resize:none;background:none;padding:2px;font-family:{{ inputFont }};font-size:15px;line-height:20px;color:#004256"></textarea>
+      <button type="button" onClick="{{ send }}" aria-label="Send" style="width:40px;height:40px;border:none;border-radius:10px;background:#004256;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0"><img src="assets/ch-send.svg" alt="" style="width:18px;height:18px;display:block"></button>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startSent": {"editor": "boolean", "default": false}, "$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const DRAFT = 'Hi Jordan, great meeting you at the career fair! Here’s the case study we talked about: evelynsharpe.com/case. Would love to hear more about the product designer role at Target…';
+    this.state = props.startSent
+      ? { draft: '', typing: false, msgs: [{ me: true, text: DRAFT }, { me: false, text: 'Thanks for reaching out!' }, { me: false, text: 'I will be sending it to HR for processing :)' }] }
+      : { draft: DRAFT, typing: false, msgs: [] };
+    this._timers = [];
+  }
+  componentWillUnmount() { this._timers.forEach(clearTimeout); }
+  later(ms, fn) { this._timers.push(setTimeout(fn, ms)); }
+  push(text) {
+    const t = String(text || '').trim();
+    if (!t) return;
+    const first = this.state.msgs.length === 0;
+    this.setState({ draft: '', msgs: [...this.state.msgs, { me: true, text: t }] });
+    const replies = first
+      ? ['Thanks for reaching out!', 'I will be sending it to HR for processing :)']
+      : [/coffee/i.test(t) ? 'Coffee sounds great. Thursday at 10?' : /cv|resume/i.test(t) ? 'Yes please, send it over and I’ll pass it along.' : 'Happy to help. Let’s stay in touch!'];
+    this.later(500, () => this.setState({ typing: true }));
+    replies.forEach((r, i) => this.later(1300 + i * 1100, () => this.setState({ typing: i < replies.length - 1, msgs: [...this.state.msgs, { me: false, text: r }] })));
+  }
+  renderVals() {
+    const { draft, msgs, typing } = this.state;
+    const composing = msgs.length === 0;
+    const sent = msgs.filter((m) => m.me).map((m) => m.text);
+    return {
+      draft, typing,
+      rows: composing && draft ? 4 : 1,
+      inputFont: composing && draft ? 'Poppins,sans-serif' : 'Inter,sans-serif',
+      msgs: msgs.map((m) => m.me
+        ? { text: m.text, justify: 'flex-end', max: '297px', radius: '16px 16px 4px 16px', bg: '#004256', fg: '#fafeff', font: 'Poppins,sans-serif', size: '14px', lh: 'normal' }
+        : { text: m.text, justify: 'flex-start', max: '212px', radius: '16px 16px 16px 4px', bg: '#bce7f3', fg: '#1a1a1a', font: 'Inter,sans-serif', size: '15px', lh: '21px' }),
+      showChips: !composing && !typing,
+      chips: ['Want to grab coffee?', 'Would you need my CV?', 'Thanks for the intro to Emily'].filter((c) => !sent.includes(c)).map((c) => ({ text: c, send: () => this.push(c) })),
+      onDraft: (e) => this.setState({ draft: e.target.value }),
+      onKey: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.push(draft); } },
+      send: () => this.push(draft),
+    };
+  }
+}
+</script>
+</body>
+</html>

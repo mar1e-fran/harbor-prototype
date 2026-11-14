@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Event recap</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;background:#fafeff;font-family:Poppins,sans-serif;color:#202124">
+  <div class="ns" style="position:absolute;left:0;top:0;width:390px;bottom:78px;overflow-y:auto;overflow-x:hidden">
+    <div style="box-sizing:border-box;padding:56px 24px 40px;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;justify-content:space-between">
+        <a href="VoyageLogbook.dc.html" aria-label="Back" style="width:44px;height:44px;border-radius:8px;background:#ebfafe;display:flex;align-items:center;justify-content:center"><img src="assets/r-back.svg" alt="" style="width:22px;height:22px;display:block"></a>
+        <button type="button" onClick="{{ share }}" aria-label="Share recap" style="width:44px;height:44px;border-radius:8px;border:none;background:#ebfafe;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0"><img src="assets/r-share.svg" alt="" style="width:20px;height:20px;display:block"></button>
+      </div>
+      <div>
+        <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:500;font-size:32px;line-height:normal;width:342px">SCAD Career Fair</h1>
+        <p style="margin:6px 0 0;font-size:14px;color:#5f6368">Ended Tue, Nov 18 · you attended</p>
+      </div>
+      <div role="tablist" style="display:flex;padding:4px;border-radius:12px;background:#ebfafe">
+        <a href="EventPast.dc.html" role="tab" aria-selected="false" style="flex:1;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;line-height:18px;color:#5f6368">Details</a>
+        <span role="tab" aria-selected="true" style="flex:1;height:44px;border-radius:8px;background:#bce7f3;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;line-height:18px;color:#115569">Recap</span>
+      </div>
+      <div>
+        <h2 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:24px;line-height:normal">You met 12 new shipmates!</h2>
+        <p style="margin:2px 0 0;font-size:14px;color:#5f6368">Charted from your notes and transcripts</p>
+      </div>
+      <a href="Wrapped.dc.html" aria-label="Replay your Wrapped" style="position:relative;display:block;width:342px;height:158px;border-radius:12px;background:#bbe2ec;overflow:hidden">
+        <img src="assets/r-goal-waves.svg" alt="" style="position:absolute;left:-66px;top:122px;width:553px;height:42.73px;display:block">
+        <span style="position:absolute;left:16px;top:16px;width:310px;display:flex;flex-direction:column;gap:10px">
+          <span style="display:flex;justify-content:space-between;font-weight:600;font-size:14px;line-height:18px;color:#1f92b4"><span>Your goal</span><span>Meet 3 people hiring</span></span>
+          <span style="font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px;color:#004256">2 of 3 met</span>
+          <img src="assets/r-goal-stars.svg" alt="2 of 3 stars" style="width:115.2px;height:32px;display:block">
+        </span>
+      </a>
+      <h2 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px;line-height:normal">Follow Up</h2>
+      <div class="ns" style="width:366px;margin-right:-24px;overflow-x:auto;scroll-snap-type:x mandatory">
+        <div style="display:flex;gap:12px;padding-right:24px;width:max-content;align-items:flex-start">
+          <sc-for list="{{ follow }}" as="p" hint-placeholder-count="3">
+            <article style="scroll-snap-align:start;width:324px;box-sizing:border-box;padding:16px;border-radius:16px;background:{{ p.bg }};color:{{ p.fg }};display:flex;flex-direction:column;gap:24px">
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <div style="display:flex;gap:12px;align-items:center">
+                  <img src="{{ p.photo }}" alt="" style="width:60px;height:60px;border-radius:999px;object-fit:cover;object-position:{{ p.pos }};display:block;flex-shrink:0">
+                  <div style="display:flex;flex-direction:column;gap:2px">
+                    <span style="font-weight:600;font-size:16px">{{ p.who }}</span>
+                    <span style="font-size:12px">{{ p.role }}</span>
+                    <span style="display:flex;gap:6px;align-items:center;font-size:12px"><img src="{{ p.boat }}" alt="" style="width:15px;height:15px;display:block">{{ p.where }}</span>
+                  </div>
+                </div>
+                <img src="{{ p.line }}" alt="" style="width:292px;height:1px;display:block">
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <span style="font-weight:600;font-size:12px">Interests</span>
+                  <span style="display:flex;flex-wrap:wrap;gap:6px 4px">
+                    <sc-for list="{{ p.chips }}" as="c" hint-placeholder-count="3"><span style="background:#fff;border:1px solid #004256;border-radius:999px;padding:3px 10px;font-size:12px;color:#004256;white-space:nowrap">{{ c }}</span></sc-for>
+                  </span>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="font-weight:600">AI-drafted message</span><span>Edit</span></div>
+                <div style="background:#fff;border:1.5px dashed #004256;border-radius:10px;padding:12px;font-size:{{ p.draftSize }};line-height:normal;color:#202124">{{ p.draft }}</div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <a href="{{ p.chat }}" style="height:44px;padding:0 16px;border-radius:10px;background:#004256;color:#fff;display:flex;align-items:center;font-weight:600;font-size:14px;line-height:18px">Message</a>
+                <a href="{{ p.profile }}" style="height:44px;box-sizing:border-box;padding:0 16px;border-radius:10px;border:1.5px solid #004256;color:#004256;display:flex;align-items:center;font-weight:600;font-size:14px;line-height:18px">View profile</a>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </div>
+      <section style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><h2 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px">Your notes, summarized</h2><span style="font-size:12px;color:#5f6368">18 notes</span></div>
+        <div style="background:#f8f9fa;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+          <span style="display:flex;gap:8px;align-items:center;font-weight:600;font-size:12px;color:#5f6368"><img src="assets/r-sparkle.svg" alt="" style="width:14px;height:14px;display:block">AI summary</span>
+          <p style="margin:0;font-size:14px;line-height:normal">Recruiters want one deep case study over many shallow ones. Two teams are hiring designers this spring, and Priya Nair’s talk on design systems lines up with your portfolio.</p>
+        </div>
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ topics }}" as="t" hint-placeholder-count="4">
+            <a href="LogbookNotes.dc.html" style="height:60px;box-sizing:border-box;padding:8px 0;border-bottom:1px solid #e8eaed;display:flex;align-items:center;gap:12px">
+              <span style="width:38px;height:38px;box-sizing:border-box;border-radius:8px;background:#004256;border:1px solid #dadce0;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;color:#fff;flex-shrink:0">{{ t.n }}</span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="font-weight:600;font-size:14px;line-height:18px;color:#202124">{{ t.name }}</span><span style="font-size:12px;color:#5f6368;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.sub }}</span></span>
+              <img src="assets/r-chevron.svg" alt="" style="width:18px;height:18px;display:block">
+            </a>
+          </sc-for>
+        </div>
+        <a href="LogbookNotes.dc.html" style="font-weight:600;font-size:14px;line-height:18px;color:#115569;padding:8px 0">Open all 18 notes</a>
+      </section>
+      <section style="display:flex;flex-direction:column;gap:16px">
+        <h2 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px">People you met</h2>
+        <div class="ns" style="width:366px;margin-right:-24px;overflow-x:auto">
+          <div style="display:flex;gap:7px;width:max-content;padding-right:24px;align-items:stretch">
+            <sc-for list="{{ met }}" as="m" hint-placeholder-count="3">
+              <a href="Crewmate.dc.html" style="width:185px;min-height:211px;box-sizing:border-box;padding:9px;border-radius:9px;background:{{ m.bg }};color:{{ m.fg }};display:flex;flex-direction:column;justify-content:space-between;gap:14px">
+                <span style="display:flex;flex-direction:column;gap:7px;align-items:center;text-align:center">
+                  <img src="{{ m.photo }}" alt="" style="width:68px;height:68px;border-radius:999px;object-fit:cover;object-position:center top;display:block">
+                  <span style="font-weight:600;font-size:9px">{{ m.who }}</span>
+                  <span style="font-size:7px;margin-top:-6px">{{ m.role }}</span>
+                  <span style="display:flex;gap:3px;align-items:center;font-size:7px;margin-top:-4px"><img src="{{ m.boat }}" alt="" style="width:8.58px;height:8.58px;display:block">{{ m.where }}</span>
+                  <img src="assets/r-line-sm.svg" alt="" style="width:167px;height:0.57px;display:block">
+                  <span style="align-self:flex-start;font-weight:600;font-size:7px">Interests</span>
+                  <span style="align-self:flex-start;display:flex;flex-wrap:wrap;gap:3px 2px;margin-top:-3px">
+                    <sc-for list="{{ m.chips }}" as="c" hint-placeholder-count="2"><span style="background:#fff;border:0.6px solid #004256;border-radius:999px;padding:2px 6px;font-size:7px;color:#004256;white-space:nowrap">{{ c }}</span></sc-for>
+                  </span>
+                </span>
+                <span style="align-self:flex-start;height:25px;box-sizing:border-box;padding:0 9px;border:0.86px solid #004256;border-radius:6px;display:flex;align-items:center;font-weight:600;font-size:8px;color:#004256">View profile</span>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+      <section style="display:flex;flex-direction:column;gap:8px">
+        <h2 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px">Cross paths again</h2>
+        <p style="margin:0;font-size:12px;color:#5f6368">Voyages your new shipmates are joining</p>
+        <sc-for list="{{ cross }}" as="x" hint-placeholder-count="2">
+          <div style="display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #f1f3f4">
+            <img src="{{ x.img }}" alt="" style="width:56px;height:56px;border-radius:8px;object-fit:cover;display:block;flex-shrink:0">
+            <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+              <span style="font-weight:600;font-size:16px;line-height:normal">{{ x.title }}</span>
+              <span style="display:flex;gap:8px;align-items:center"><span style="width:18px;height:18px;box-sizing:border-box;border-radius:9px;background:#d1ebf2;border:2px solid #fff;flex-shrink:0"></span><span style="font-size:12px;color:#5f6368">{{ x.sub }}</span></span>
+            </span>
+            <button type="button" onClick="{{ x.toggle }}" aria-pressed="{{ x.pressed }}" style="height:44px;padding:0 16px;border-radius:8px;border:1px solid #004256;background:{{ x.bg }};font:inherit;font-weight:600;font-size:14px;line-height:18px;color:{{ x.fg }};cursor:pointer;flex-shrink:0">{{ x.label }}</button>
+          </div>
+        </sc-for>
+      </section>
+    </div>
+  </div>
+  <div style="position:absolute;left:0;bottom:0;width:390px">
+    <dc-import name="NavBar" active="history" hint-size="390px,78px"></dc-import>
+  </div>
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" class="cs-pop" style="position:absolute;left:24px;right:24px;bottom:94px;padding:12px 16px;border-radius:10px;background:#004256;color:#fff;font-size:14px">Recap link copied</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { reg: {}, toast: false }; }
+  renderVals() {
+    const { reg, toast } = this.state;
+    const dark = { fg: '#004256', boat: 'assets/r-boat-dark.svg', line: 'assets/r-line-dark.svg', draftSize: '12px' };
+    const follow = [
+      { ...dark, bg: '#8cd69e', who: 'Jordan Newman', role: 'UX Researcher · Target', where: 'In your session · Room 204', photo: 'assets/r-jordan.png', pos: 'center', chips: ['Study HCI', 'Accessibility', 'Startup Panel'], draft: 'Hi Jordan, great meeting you at the career fair! Here’s the case study we talked about. Would love to hear more about the product designer role…', draftSize: '14px', chat: 'Chat.dc.html', profile: 'Crewmate.dc.html' },
+      { bg: '#1f92b4', fg: '#ebfeff', boat: 'assets/r-boat-light.svg', line: 'assets/r-line-light.svg', draftSize: '12px', who: 'Jenna Caldwell', role: 'Senior Graphic Designer · Gucci', where: 'In your session · Room 204', photo: 'assets/r-jenna.png', pos: 'center', chips: ['Luxury Apparel', 'Patterns', 'TikTok Shop'], draft: 'Hi Jenna it was lovely to talk about your project. I’ve looked into it and have a few suggestions, would you mind if we schedule a one on one?', chat: 'Chat.dc.html', profile: 'Crewmate.dc.html' },
+      { ...dark, bg: '#feace8', who: 'Adam Crews', role: 'Recruiter · Google', where: 'In your session · Room 204', photo: 'assets/r-adam.png', pos: '30% center', chips: ['Curious Applicants', 'IOS Slander', 'AI'], draft: 'Curiosity is my strong suit.', chat: 'Chat.dc.html', profile: 'Crewmate.dc.html' },
+    ];
+    const topics = [
+      { n: 6, name: 'Career advice', sub: 'Lead with one in-depth case study' },
+      { n: 4, name: 'Hiring leads', sub: 'Northwind Labs design systems · spring interns' },
+      { n: 5, name: 'Ideas & to-dos', sub: 'Send portfolio to Jordan Newman by Fri' },
+      { n: 3, name: 'Slides & recordings', sub: 'Keynote and portfolio session · shared by speakers' },
+    ];
+    const met = [
+      { bg: '#8cd69e', fg: '#004256', boat: 'assets/r-boat-sm-dark.svg', who: 'Bella Jean', role: 'UX Designer · Uber', where: 'Keynote · Room 301', photo: 'assets/r-bella.png', chips: ['Career Switching', 'Designathon'] },
+      { bg: '#1f92b4', fg: '#ffffff', boat: 'assets/r-boat-sm-light.svg', who: 'Bradie Blue', role: 'UX Researcher · Amazon', where: 'Design · Room 112', photo: 'assets/r-bradie.png', chips: ['Robotics', 'Optimization', 'Parcels'] },
+      { bg: '#feace8', fg: '#004256', boat: 'assets/r-boat-sm-dark.svg', who: 'Gracie Neue', role: 'Product Manager · Freelancer', where: 'Mixer · Room 302', photo: 'assets/r-gracie.png', chips: ['Adobe', 'Motion', 'Hair styling'] },
+    ];
+    const cross = [
+      { id: 'meetup', img: 'assets/r-meetup.png', title: 'Design Hiring Meetup', sub: 'Sam Okafor +2 going · Thu, Nov 20' },
+      { id: 'hm', img: 'assets/r-hm-meet.png', title: 'Hiring Manager Meet & Greet', sub: 'Priya Nair is hosting · Nov 20' },
+    ].map((x) => {
+      const on = !!reg[x.id];
+      return { ...x, label: on ? 'Going' : 'Register', pressed: on ? 'true' : 'false', bg: on ? '#004256' : '#ffffff', fg: on ? '#ffffff' : '#202124',
+        toggle: () => this.setState({ reg: { ...reg, [x.id]: !on } }) };
+    });
+    return { follow, topics, met, cross, toast,
+      share: () => { this.setState({ toast: true }); clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: false }), 1800); } };
+  }
+}
+</script>
+</body>
+</html>

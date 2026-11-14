@@ -35,11 +35,11 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
     </sc-if>
     <span style="font-family:Poppins,sans-serif;font-size:12px;line-height:normal;white-space:nowrap;color:{{ liveColor }};font-weight:{{ liveWeight }}">Live</span>
   </a>
-  <button type="button" aria-current="{{ histCur }}" style="width:71.6px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0;border-radius:8px;box-sizing:border-box;border:none;font:inherit;cursor:pointer;background:{{ histBg }}">
+  <a href="{{ histHref }}" aria-current="{{ histCur }}" style="width:71.6px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0;border-radius:8px;box-sizing:border-box;border:none;font:inherit;cursor:pointer;background:{{ histBg }}">
     <sc-if value="{{ histOn }}" hint-placeholder-val="{{ false }}"><img src="assets/cf9a6.svg" alt="" style="width:24px;height:24px;display:block"></sc-if>
     <sc-if value="{{ histOff }}" hint-placeholder-val="{{ true }}"><img src="assets/08bd9.svg" alt="" style="width:24px;height:24px;display:block"></sc-if>
     <span style="font-family:Poppins,sans-serif;font-size:12px;line-height:normal;white-space:nowrap;color:{{ histColor }};font-weight:{{ histWeight }}">History</span>
-  </button>
+  </a>
   <a href="{{ profHref }}" aria-current="{{ profCur }}" style="width:71.6px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:4px 0;border-radius:8px;box-sizing:border-box;border:none;font:inherit;cursor:pointer;background:{{ profBg }}">
     <sc-if value="{{ profOn }}" hint-placeholder-val="{{ false }}"><img src="assets/3d468.svg" alt="" style="width:24px;height:24px;display:block"></sc-if>
     <sc-if value="{{ profOff }}" hint-placeholder-val="{{ true }}"><img src="assets/b5530.svg" alt="" style="width:24px;height:24px;display:block"></sc-if>
@@ -47,7 +47,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
   </a>
 </nav>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"active": {"editor": "enum", "options": ["home", "calendar", "live", "history", "profile"], "default": "home"}, "liveEvent": {"editor": "boolean", "default": false}, "homeHref": {"editor": null}, "liveHref": {"editor": null}, "profileHref": {"editor": null}, "$preview": {"width": 390, "height": 78}}'>
+<script type="text/x-dc" data-dc-script data-props='{"active": {"editor": "enum", "options": ["home", "calendar", "live", "history", "profile"], "default": "home"}, "liveEvent": {"editor": "boolean", "default": false}, "homeHref": {"editor": null}, "liveHref": {"editor": null}, "profileHref": {"editor": null}, "historyHref": {"editor": null}, "$preview": {"width": 390, "height": 78}}'>
 class Component extends DCLogic {
   constructor(props) { super(props); this.state = { mood: null }; }
   componentDidMount() {
@@ -70,6 +70,7 @@ class Component extends DCLogic {
       homeHref: this.props.homeHref ?? 'Main.dc.html',
       liveHref: this.props.liveHref ?? 'LiveOverview.dc.html',
       profHref: this.props.profileHref ?? 'OnboardingReview.dc.html',
+      histHref: this.props.historyHref ?? 'VoyageLogbook.dc.html',
       moodIcon: m.icon, moodHalo: m.halo,
     };
     const ids = { home: 'home', cal: 'calendar', live: 'live', hist: 'history', prof: 'profile' };

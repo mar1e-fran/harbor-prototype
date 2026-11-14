@@ -26,6 +26,19 @@ components from sibling files, which browsers block without a server.
 - `canvas.json`: the layout of the artboards on the Claude canvas. Not needed
   to run the prototype.
 
+## After the event (built from the Mid-Fi User Tests page)
+
+These screens had no Hi-Fi frame in Figma, so they were built from the
+mid-fi user-test versions in the Hi-Fi style:
+
+- History tab → `VoyageLogbook` (Events and Notes tabs, search, new entry)
+- SCAD Career Fair in the logbook → `Wrapped` (tap through 4 slides, then the
+  share card) → close → `EventRecap`
+- `EventRecap` → Details tab (`EventPast`), follow-up cards → `Chat` and
+  `Crewmate` → `CrewmateProfile`
+
+The transcript-style Logbook variant was intentionally left out.
+
 ## Notes
 
 - Fonts (Poppins, DM Sans, Inter, Urbanist, Lexend) load from Google Fonts,

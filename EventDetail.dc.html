@@ -14,7 +14,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 </style>
 </helmet>
 <div style="position:relative;width:390px;height:844px;overflow:hidden;background:#fafeff;font-family:Poppins,sans-serif">
-  <div class="ns" style="position:absolute;left:0;top:0;width:390px;bottom:95px;overflow-y:auto;overflow-x:hidden">
+  <div class="ns" style="position:absolute;left:0;top:0;width:390px;bottom:{{ scrollBottom }};overflow-y:auto;overflow-x:hidden">
     <div style="position:relative;width:390px;height:316px;overflow:hidden;background:#004256">
       <img src="{{ e.img }}" alt="{{ e.title }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ e.imgpos }}">
     </div>
@@ -26,6 +26,12 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
           <sc-if value="{{ reg }}" hint-placeholder-val="{{ false }}"><img src="assets/e634e.svg" alt="" style="width:18px;height:18px"></sc-if>
           <span style="display:flex;flex-direction:column;color:#166a83;white-space:nowrap"><span style="font-size:16px">{{ e.date }}</span><span style="font-size:12px">{{ e.time }}</span></span>
         </div>
+        <sc-if value="{{ past }}" hint-placeholder-val="{{ false }}">
+          <div role="tablist" style="display:flex;padding:4px;margin:4px 0 12px;border-radius:12px;background:#ebfafe">
+            <span role="tab" aria-selected="true" style="flex:1;height:44px;border-radius:8px;background:#bce7f3;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;line-height:18px;color:#115569">Details</span>
+            <a href="EventRecap.dc.html" role="tab" aria-selected="false" style="flex:1;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;line-height:18px;color:#5f6368">Recap</a>
+          </div>
+        </sc-if>
       </div>
       <div style="padding:0 24px;display:flex;flex-direction:column;gap:8px">
         <h2 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:400;font-size:24px;line-height:normal;color:#004256">About</h2>
@@ -84,6 +90,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
     <a href="{{ backHref }}" aria-label="Back" style="width:44px;height:44px;border-radius:10px;background:#ebfafe;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;padding:0"><img src="assets/1f1e0.svg" alt="" style="width:22px;height:22px"></a>
     <button type="button" aria-label="Share event" style="width:44px;height:44px;border-radius:10px;background:#ebfafe;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;padding:0"><img src="assets/320b0.svg" alt="" style="width:20px;height:20px"></button>
   </div>
+  <sc-if value="{{ notPast }}" hint-placeholder-val="{{ true }}">
   <div style="position:absolute;left:0;bottom:0;width:390px;height:95px;box-sizing:border-box;background:#fff;border-top:1px solid #e3e3e3;padding:12px 24px 30px;display:flex;gap:12px;align-items:center;justify-content:center">
     <sc-if value="{{ notReg }}" hint-placeholder-val="{{ true }}">
       <button type="button" onClick="{{ openSheet }}" style="width:278px;height:52px;border-radius:8px;border:1.5px solid #fafeff;background:#26b2dc;color:#fafeff;font:inherit;font-weight:600;font-size:14px;line-height:18px;cursor:pointer">Register</button>
@@ -97,6 +104,10 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
       <a href="{{ e.checkin }}" style="width:214px;height:52px;box-sizing:border-box;border-radius:8px;border:1.5px solid #fafeff;background:#26b2dc;color:#fafeff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;line-height:18px">{{ checkLabel }}</a>
     </sc-if>
   </div>
+  </sc-if>
+  <sc-if value="{{ past }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:0;bottom:0;width:390px"><dc-import name="NavBar" active="history" hint-size="390px,78px"></dc-import></div>
+  </sc-if>
   <sc-if value="{{ sheet }}" hint-placeholder-val="{{ false }}">
     <button type="button" aria-label="Close" onClick="{{ closeSheet }}" style="position:absolute;inset:0;border:none;padding:0;background:rgba(0,30,40,0.45);cursor:pointer"></button>
     <div style="position:absolute;left:0;bottom:0;width:390px">
@@ -105,7 +116,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
   </sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"eventId": {"editor": "enum", "options": ["EventDetail", "EventAlumniPanel", "EventPortfolioDay", "EventCareerDecoder", "EventTechConference", "EventCIASession", "EventDeltaUX", "EventMeetDesigners", "EventCoffeeCD"], "default": "EventDetail"}, "startSaved": {"editor": "boolean", "default": false}, "startSheet": {"editor": "boolean", "default": false}, "startRegistered": {"editor": "boolean", "default": false}, "$preview": {"width": 390, "height": 844}}'>
+<script type="text/x-dc" data-dc-script data-props='{"eventId": {"editor": "enum", "options": ["EventDetail", "EventAlumniPanel", "EventPortfolioDay", "EventCareerDecoder", "EventTechConference", "EventCIASession", "EventDeltaUX", "EventMeetDesigners", "EventCoffeeCD"], "default": "EventDetail"}, "startSaved": {"editor": "boolean", "default": false}, "startSheet": {"editor": "boolean", "default": false}, "startRegistered": {"editor": "boolean", "default": false}, "past": {"editor": "boolean", "default": false}, "$preview": {"width": 390, "height": 844}}'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
@@ -729,12 +740,14 @@ class Component extends DCLogic {
 };
     const e = EVENTS[this.props.eventId] || EVENTS.EventDetail;
     const isFair = (this.props.eventId || 'EventDetail') === 'EventDetail';
+    const past = !!this.props.past;
     return {
+      past, notPast: !past, scrollBottom: past ? '78px' : '95px',
       e, saved, unsaved: !saved, savedStr: saved ? 'true' : 'false', sheet, reg, notReg: !reg,
       padX: reg ? '24px' : '16px',
       attendeesTitle: (reg ? 'Who’s going · ' : 'Attendees · ') + e.count + ' people',
       checkLabel: e.virtual ? 'Join session' : 'Check In - QR',
-      backHref: reg ? e.regBack : e.back,
+      backHref: past ? 'VoyageLogbook.dc.html' : (reg ? e.regBack : e.back),
       toggleSave: () => this.setState({ saved: !saved }),
       openSheet: () => this.setState({ sheet: true }),
       closeSheet: () => this.setState({ sheet: false }),

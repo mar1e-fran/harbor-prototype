@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Crewmate</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&amp;family=Inter:wght@400;700&amp;family=Poppins:wght@300;400;600&amp;family=Urbanist:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scrollbar-width:none}.ns::-webkit-scrollbar{display:none}input::placeholder,textarea::placeholder{color:#80a0aa}@keyframes harborPulse{0%,100%{opacity:0}50%{opacity:1}}.harbor-pulse{animation:harborPulse 1.8s ease-in-out infinite}@keyframes harborSwirl{to{transform:rotate(360deg)}}.harbor-swirl{animation:harborSwirl 1.6s linear infinite}@keyframes harborEnter{from{opacity:0;transform:scale(1.04);visibility:hidden}1%{visibility:visible}to{opacity:1;transform:none;visibility:visible}}.harbor-enter{animation:harborEnter .6s ease 1.8s both}@keyframes csFade{from{opacity:0}}@keyframes csRise{from{transform:translateY(100%)}}.cs-fade{animation:csFade .25s ease both}.cs-rise{animation:csRise .32s cubic-bezier(.2,.8,.2,1) both}@keyframes recWave{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}.rec-wave{animation:recWave .9s ease-in-out infinite}@keyframes csPop{from{opacity:0;transform:translateY(8px) scale(.97)}}.cs-pop{animation:csPop .18s ease-out both}@media (prefers-reduced-motion:reduce){.harbor-swirl,.harbor-pulse,.cs-fade,.cs-rise,.rec-wave,.cs-pop{animation:none}.harbor-enter{animation:harborEnter .01s linear 1.8s both}}
+</style>
+</helmet>
+<div style="position:relative;width:390px;height:844px;overflow:hidden;background:#fafeff;font-family:Poppins,sans-serif;color:#004256">
+  <div class="ns" style="position:absolute;inset:0;overflow-y:auto;overflow-x:hidden">
+    <div style="box-sizing:border-box;padding:52px 24px 40px;display:flex;flex-direction:column;gap:22px">
+      <div style="height:44px;display:flex;justify-content:space-between;margin:0 -10px">
+        <a href="EventRecap.dc.html" aria-label="Back" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><img src="assets/c-back.svg" alt="" style="width:22px;height:22px;display:block"></a>
+        <button type="button" aria-label="More options" style="width:44px;height:44px;border:none;background:none;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer"><img src="assets/c-more.svg" alt="" style="width:22px;height:22px;display:block"></button>
+      </div>
+      <a href="CrewmateProfile.dc.html" aria-label="Open Jordan Newman’s full profile" style="display:flex;gap:16px;align-items:center">
+        <img src="assets/c-jordan.png" alt="" style="width:80px;height:80px;border-radius:999px;object-fit:cover;display:block;flex-shrink:0">
+        <span style="display:flex;flex-direction:column">
+          <span style="font-family:'DM Sans',sans-serif;font-weight:600;font-size:24px;line-height:normal;color:#1a1a1a">Jordan Newman</span>
+          <span style="font-size:14px;color:#6b6b6b">UX Researcher @ Target</span>
+        </span>
+      </a>
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <a href="CrewmateProfile.dc.html" style="min-height:52px;box-sizing:border-box;margin-top:3px;padding:8px 12px;border-radius:12px;background:#bce7f3;display:flex;gap:12px;align-items:center">
+          <span style="display:flex;padding-left:8px">
+            <sc-for list="{{ mutuals }}" as="m" hint-placeholder-count="3"><img src="{{ m }}" alt="" style="width:30px;height:30px;border-radius:15px;object-fit:cover;margin-left:-8px;display:block"></sc-for>
+          </span>
+          <span style="flex:1;min-width:0;display:flex;flex-direction:column">
+            <span style="font-weight:600;font-size:14px;line-height:18px;color:#1a1a1a">4 mutual crewmates</span>
+            <span style="font-size:14px;color:#6b6b6b">Emily Stuart, Bowen Neue +2</span>
+          </span>
+          <img src="assets/c-chev.svg" alt="" style="width:18px;height:18px;display:block">
+        </a>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:8px">
+            <sc-for list="{{ socials }}" as="s" hint-placeholder-count="4">
+              <button type="button" onClick="{{ s.tap }}" style="flex:1;padding:10px 0;border:none;border-radius:10px;background:#26b2dc;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;font:inherit">
+                <img src="{{ s.icon }}" alt="" style="width:22px;height:22px;margin:1px;display:block">
+                <span style="font-weight:600;font-size:12px;color:#004256">{{ s.label }}</span>
+              </button>
+            </sc-for>
+          </div>
+          <div style="padding:12px 14px;border-radius:10px;background:#c6fed4;display:flex;gap:12px;align-items:center">
+            <p style="margin:0;flex:1;font-size:14px;line-height:18.2px;color:#1a1a1a"><b style="font-weight:600">Haven’t swapped contacts?</b> Event chat stays open until Nov 21, 3 days after.</p>
+            <a href="Chat.dc.html" style="height:44px;box-sizing:border-box;padding:0 14px;border:1.5px solid #1a1a1a;border-radius:8px;background:#fff;display:flex;align-items:center;font-weight:600;font-size:14px;line-height:18px;color:#1a1a1a">Chat</a>
+          </div>
+        </div>
+        <section>
+          <h2 style="margin:0;font-weight:600;font-size:16px">Met at</h2>
+          <div style="padding-top:4px">
+            <sc-for list="{{ metAt }}" as="m" hint-placeholder-count="2">
+              <div style="display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:{{ m.border }}">
+                <img src="{{ m.img }}" alt="" style="width:36px;height:36px;border-radius:8px;object-fit:cover;display:block">
+                <span style="display:flex;flex-direction:column"><span style="font-weight:600;font-size:14px;line-height:18px">{{ m.title }}</span><span style="font-size:12px;color:#166a83">{{ m.sub }}</span></span>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+        <section style="background:#fff">
+          <div style="display:flex;justify-content:space-between;font-weight:600;font-size:16px"><h2 style="margin:0;font:inherit">Notes</h2><span>{{ count }}</span></div>
+          <sc-for list="{{ notes }}" as="n" hint-placeholder-count="3">
+            <div style="padding:12px 0;display:flex;flex-direction:column;gap:4px">
+              <p style="margin:0;font-size:16px;line-height:normal">
+                <sc-if value="{{ n.mention }}" hint-placeholder-val="{{ false }}">Met <span style="display:inline-block;background:#26b2dc;border-radius:4px;padding:0 6px;font-weight:600">@Jordan Newman</span> </sc-if>{{ n.text }}
+              </p>
+              <span style="font-size:12px;color:#166a83">{{ n.where }}</span>
+            </div>
+          </sc-for>
+          <label style="height:48px;box-sizing:border-box;border:1.5px dashed #26b2dc;border-radius:8px;background:#ebfeff;display:flex;align-items:center;padding:0 12px;gap:4px">
+            <span aria-hidden="true" style="font-size:16px">+</span>
+            <input value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onKey }}" placeholder="Note about Jordan" aria-label="Add a note about Jordan" style="flex:1;min-width:0;border:none;outline:none;background:none;font-family:Poppins,sans-serif;font-size:16px;color:#004256">
+          </label>
+        </section>
+      </div>
+    </div>
+  </div>
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" class="cs-pop" style="position:absolute;left:24px;right:24px;bottom:28px;padding:12px 16px;border-radius:10px;background:#004256;color:#fff;font-size:14px">{{ toast }}</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { draft: '', extra: [], toast: '' }; }
+  flash(msg) { this.setState({ toast: msg }); clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: '' }), 1800); }
+  renderVals() {
+    const { draft, extra, toast } = this.state;
+    const base = [
+      { mention: true, text: 'at the coffee line, hiring in January', where: 'SCAD Career Fair › Mixer' },
+      { mention: false, text: 'Talked about design internships at Target and how research shapes product decisions. Open to reviewing your portfolio.', where: 'SCAD Career Fair › Mixer' },
+      { mention: false, text: 'Asked a sharp question about portfolio depth during Q&A', where: 'Portfolio Day › Panel Q&A' },
+    ];
+    const notes = [...extra, ...base];
+    const add = () => { const t = draft.trim(); if (!t) return; this.setState({ draft: '', extra: [{ mention: false, text: t, where: 'Just now' }, ...extra] }); this.flash('Note saved'); };
+    const soc = (label, icon) => ({ label, icon, tap: () => this.flash(label + ' opened') });
+    return {
+      toast,
+      mutuals: ['assets/c-mut1.png', 'assets/c-mut2.png', 'assets/c-mut3.png'],
+      socials: [soc('LinkedIn', 'assets/c-linkedin.svg'), soc('Instagram', 'assets/c-instagram.svg'), soc('X', 'assets/c-x.svg'), soc('Email', 'assets/c-email.svg')],
+      metAt: [
+        { img: 'assets/c-ev-fair.png', title: 'SCAD Career Fair', sub: 'Nov 18 · Mixer', border: '1px solid #ececec' },
+        { img: 'assets/c-ev-portfolio.png', title: 'Portfolio Day', sub: 'Oct 8 · both attended', border: 'none' },
+      ],
+      notes, count: notes.length, draft,
+      onDraft: (e) => this.setState({ draft: e.target.value }),
+      onKey: (e) => { if (e.key === 'Enter') add(); },
+    };
+  }
+}
+</script>
+</body>
+</html>
