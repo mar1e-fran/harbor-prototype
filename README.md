@@ -16,7 +16,8 @@ components from sibling files, which browsers block without a server.
 
 ## What is in the folder
 
-- `index.html`: list of every screen, with a button that clears saved data.
+- `index.html`: opens the prototype (onboarding). `screens.html`: list of every screen, with a button that clears saved data.
+- `phone-fit.js`: shows each screen full-screen on phones and inside a phone frame (with a flow menu) on desktop.
 - `*.dc.html`: one file per screen or component. Markup is inside `<x-dc>`,
   logic is the `class Component` script at the bottom. A screen pulls in a
   component with `<dc-import name="NavBar">`, which loads `NavBar.dc.html`.

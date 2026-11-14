@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>Home</title>
 <script src="./support.js"></script>
+<script src="./phone-fit.js"></script>
 </head>
 <body>
 <x-dc>
@@ -129,15 +130,9 @@ class Component extends DCLogic {
     try { window.removeEventListener('storage', this._sync); window.removeEventListener('harbor-profile', this._sync);
       window.removeEventListener('storage', this._fair); window.removeEventListener('harbor-fair', this._fair); } catch (e) {}
   }
-  arm(f) {
+  arm() {
+    // Live mode starts only when the student checks in on the event page (EventDetail).
     clearTimeout(this._live);
-    const upcoming = this.props.mode === 'upcoming' || ((this.props.mode ?? 'none') === 'none' && f === 'upcoming');
-    if (!upcoming || f === 'live') return;
-    this._live = setTimeout(() => {
-      if (f === 'upcoming') { try { window.localStorage.setItem('harbor.fair', 'live'); } catch (e) {} }
-      this.setState({ fair: 'live', toast: true });
-      clearTimeout(this._hide); this._hide = setTimeout(() => this.setState({ toast: false }), 6000);
-    }, 4000);
   }
   renderVals() {
     const fair = this.state.fair;

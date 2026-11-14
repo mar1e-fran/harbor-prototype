@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>Event detail</title>
 <script src="./support.js"></script>
+<script src="./phone-fit.js"></script>
 </head>
 <body>
 <x-dc>
@@ -73,6 +74,11 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
       <sc-if value="{{ reg }}" hint-placeholder-val="{{ false }}">
         <div style="padding:0 24px;display:flex;flex-direction:column">
           <h2 style="margin:0;font-weight:400;font-size:20px;color:#1a1a1a">Agenda</h2>
+          <div role="tablist" aria-label="Agenda day" style="display:flex;gap:16px;padding-top:2px">
+            <sc-for list="{{ days }}" as="d" hint-placeholder-count="3">
+              <button type="button" role="tab" aria-selected="{{ d.sel }}" onClick="{{ d.pick }}" style="padding:8px 0;border:none;border-bottom:2px solid {{ d.line }};background:none;font-family:Poppins,sans-serif;font-weight:600;font-size:12px;color:{{ d.color }};cursor:pointer">{{ d.label }}</button>
+            </sc-for>
+          </div>
           <div style="padding-top:6px">
             <sc-for list="{{ e.agenda }}" as="g" hint-placeholder-count="3">
               <div style="height:59px;position:relative;width:342px">
@@ -81,7 +87,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
               </div>
             </sc-for>
           </div>
-          <button type="button" style="height:44px;width:149px;border:none;background:none;padding:0;text-align:left;font:inherit;font-weight:600;font-size:14px;color:#1a1a1a;cursor:pointer">Full agenda</button>
+          <button type="button" style="height:44px;width:auto;align-self:flex-start;border:none;background:none;padding:0;text-align:left;font:inherit;font-weight:600;font-size:14px;color:#1a1a1a;cursor:pointer;white-space:nowrap">Full agenda · 6 more</button>
         </div>
       </sc-if>
     </div>
@@ -101,7 +107,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
     </sc-if>
     <sc-if value="{{ reg }}" hint-placeholder-val="{{ false }}">
       <button type="button" onClick="{{ unregister }}" style="height:52px;padding:0 14px;border-radius:8px;border:none;background:#ebfafe;display:flex;align-items:center;gap:6px;font:inherit;font-weight:600;font-size:14px;color:#80a0aa;cursor:pointer">Unregister<img src="assets/a86c4.svg" alt="" style="width:14px;height:14px"></button>
-      <a href="{{ e.checkin }}" style="width:214px;height:52px;box-sizing:border-box;border-radius:8px;border:1.5px solid #fafeff;background:#26b2dc;color:#fafeff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;line-height:18px">{{ checkLabel }}</a>
+      <a href="{{ e.checkin }}" onClick="{{ checkIn }}" style="width:214px;height:52px;box-sizing:border-box;border-radius:8px;border:1.5px solid #fafeff;background:#26b2dc;color:#fafeff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;line-height:18px">{{ checkLabel }}</a>
     </sc-if>
   </div>
   </sc-if>
@@ -120,7 +126,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { saved: !!props.startSaved, sheet: !!props.startSheet, reg: !!props.startRegistered };
+    this.state = { day: 'Mon', saved: !!props.startSaved, sheet: !!props.startSheet, reg: !!props.startRegistered };
   }
   renderVals() {
     const { saved, sheet, reg } = this.state;
@@ -742,6 +748,7 @@ class Component extends DCLogic {
     const isFair = (this.props.eventId || 'EventDetail') === 'EventDetail';
     const past = !!this.props.past;
     return {
+      days: ['Mon', 'Tue', 'Wed'].map((d) => { const on = (this.state.day || 'Mon') === d; return { label: d, sel: on ? 'true' : 'false', line: on ? '#1a1a1a' : 'transparent', color: on ? '#1a1a1a' : '#6b6b6b', pick: () => this.setState({ day: d }) }; }),
       past, notPast: !past, scrollBottom: past ? '78px' : '95px',
       e, saved, unsaved: !saved, savedStr: saved ? 'true' : 'false', sheet, reg, notReg: !reg,
       padX: reg ? '24px' : '16px',
@@ -752,6 +759,7 @@ class Component extends DCLogic {
       openSheet: () => this.setState({ sheet: true }),
       closeSheet: () => this.setState({ sheet: false }),
       confirm: () => { this.setState({ sheet: false, reg: true }); if (isFair) { try { window.localStorage.setItem('harbor.fair', 'upcoming'); window.dispatchEvent(new Event('harbor-fair')); } catch (err) {} } },
+      checkIn: () => { if (isFair) { try { window.localStorage.setItem('harbor.fair', 'live'); window.dispatchEvent(new Event('harbor-fair')); } catch (err) {} } },
       unregister: () => { this.setState({ reg: false }); if (isFair) { try { window.localStorage.removeItem('harbor.fair'); window.dispatchEvent(new Event('harbor-fair')); } catch (err) {} } },
     };
   }

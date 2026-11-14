@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>Search results</title>
 <script src="./support.js"></script>
+<script src="./phone-fit.js"></script>
 </head>
 <body>
 <x-dc>
@@ -33,9 +34,9 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
         <div class="ns" style="display:flex;gap:8px;overflow-x:auto;width:366px;height:36px;align-items:flex-start">
           <sc-for list="{{ dropdowns }}" as="dd" hint-placeholder-count="2">
             <div style="flex-shrink:0;width:{{ dd.w }};height:36px;border-radius:18px;background:#ebfafe">
-              <button type="button" onClick="{ dd.toggle }" aria-expanded="{ dd.openStr }" aria-haspopup="listbox" style="width:100%;height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 12px;border:none;background:none;font:inherit;font-weight:600;font-size:14px;line-height:18px;color:#166a83;cursor:pointer;white-space:nowrap">
-                  <img src="{ dd.icon }" alt="" style="width:24px;height:24px">{ dd.label }
-                  <img src="assets/cd8f7.svg" alt="" style="width:16px;height:16px;margin-left:auto;transform:rotate({ dd.turn })">
+              <button type="button" onClick="{{ dd.toggle }}" aria-expanded="{{ dd.openStr }}" aria-haspopup="listbox" style="width:100%;height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 12px;border:none;background:none;font:inherit;font-weight:600;font-size:14px;line-height:18px;color:#166a83;cursor:pointer;white-space:nowrap">
+                  <img src="{{ dd.icon }}" alt="" style="width:24px;height:24px">{{ dd.label }}
+                  <img src="assets/cd8f7.svg" alt="" style="width:16px;height:16px;margin-left:auto;transform:rotate({{ dd.turn }})">
                 </button>
             </div>
           </sc-for>
@@ -44,9 +45,9 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
         <sc-for list="{{ dropdowns }}" as="dd" hint-placeholder-count="2">
           <sc-if value="{{ dd.open }}" hint-placeholder-val="{{ false }}">
             <div style="position:absolute;left:{{ dd.left }};top:0;width:{{ dd.w }};box-sizing:border-box;border-radius:18px;background:#ebfafe;box-shadow:0 8px 24px rgba(0,66,86,0.16)">
-              <button type="button" onClick="{ dd.toggle }" aria-expanded="{ dd.openStr }" aria-haspopup="listbox" style="width:100%;height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 12px;border:none;background:none;font:inherit;font-weight:600;font-size:14px;line-height:18px;color:#166a83;cursor:pointer;white-space:nowrap">
-                  <img src="{ dd.icon }" alt="" style="width:24px;height:24px">{ dd.label }
-                  <img src="assets/cd8f7.svg" alt="" style="width:16px;height:16px;margin-left:auto;transform:rotate({ dd.turn })">
+              <button type="button" onClick="{{ dd.toggle }}" aria-expanded="{{ dd.openStr }}" aria-haspopup="listbox" style="width:100%;height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 12px;border:none;background:none;font:inherit;font-weight:600;font-size:14px;line-height:18px;color:#166a83;cursor:pointer;white-space:nowrap">
+                  <img src="{{ dd.icon }}" alt="" style="width:24px;height:24px">{{ dd.label }}
+                  <img src="assets/cd8f7.svg" alt="" style="width:16px;height:16px;margin-left:auto;transform:rotate({{ dd.turn }})">
                 </button>
               <div role="listbox" style="display:flex;flex-direction:column;padding:2px 16px 12px">
                 <sc-for list="{{ dd.options }}" as="o" hint-placeholder-count="5">
@@ -104,10 +105,10 @@ class Component extends DCLogic {
     const { tab, day, loc, open, spots } = this.state;
     const today = day === 'Today' || day === 'Starting Soon';
     const career = { title: 'SCAD Career Fair', img: 'assets/4264d.webp', when: 'Nov 18 · 12:30pm to 4pm', where: today ? 'Poetter Hall' : '', going: '43 going', faces: ['assets/fc4c0.webp', 'assets/66a9e.webp', 'assets/8dc47.webp'], href: 'EventDetail.dc.html', virtual: false };
-    const decoder = { title: today ? 'Career Decoder' : 'Career Decoder: Marketing', img: 'assets/1a0e4.webp', when: 'Nov 3 · 2pm to 3pm', where: 'Virtual', going: '43 going', faces: ['assets/50c28.webp', 'assets/b3e18.webp', 'assets/3650d.webp'], href: 'EventCareerDecoder.dc.html', virtual: true };
+    const decoder = { title: 'Career Decoder: Marketing', img: 'assets/1a0e4.webp', when: 'Nov 3 · 2pm to 3pm', where: 'Virtual', going: '43 going', faces: ['assets/50c28.webp', 'assets/b3e18.webp', 'assets/3650d.webp'], href: 'EventCareerDecoder.dc.html', virtual: true };
     const alumni = { title: 'Alumni Panel', img: 'assets/b87d7.webp', when: 'Nov. 16 · 5pm to 7pm', where: 'River Event Space', going: '86 going', faces: ['assets/50c28.webp', 'assets/b3e18.webp', 'assets/3650d.webp'], href: 'EventAlumniPanel.dc.html', saved: true, virtual: false };
     const portfolio = { title: 'SCAD Portfolio Day', img: 'assets/08525.webp', when: 'OCt. 8-9 · 2pm to 5pm', where: 'Poetter Hall', going: '86 going', faces: ['assets/50c28.webp', 'assets/b3e18.webp', 'assets/3650d.webp'], href: 'EventPortfolioDay.dc.html', virtual: false };
-    const byDay = { 'Any Day': [alumni, portfolio, career, decoder], 'Starting Soon': [career, decoder], 'Today': [career, decoder],
+    const byDay = { 'Any Day': [alumni, portfolio, career, decoder], 'Starting Soon': [career, decoder], 'Today': [career, decoder, alumni, portfolio],
       'Tomorrow': [alumni], 'This Week': [alumni, career, decoder], 'Next Week': [] };
     let results = byDay[day] || byDay['Any Day'];
     if (loc === 'Savannah') results = results.filter((r) => !r.virtual);

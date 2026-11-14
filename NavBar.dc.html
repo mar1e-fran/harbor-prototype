@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>Nav bar</title>
 <script src="./support.js"></script>
+<script src="./phone-fit.js"></script>
 </head>
 <body>
 <x-dc>
@@ -49,13 +50,13 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"active": {"editor": "enum", "options": ["home", "calendar", "live", "history", "profile"], "default": "home"}, "liveEvent": {"editor": "boolean", "default": false}, "homeHref": {"editor": null}, "liveHref": {"editor": null}, "profileHref": {"editor": null}, "historyHref": {"editor": null}, "$preview": {"width": 390, "height": 78}}'>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { mood: null }; }
+  constructor(props) { super(props); this.state = { mood: null, fair: null }; }
   componentDidMount() {
-    this._sync = () => { let m = null; try { m = window.localStorage.getItem('harbor.mood'); } catch (e) {} this.setState({ mood: m }); };
+    this._sync = () => { let m = null, f = null; try { m = window.localStorage.getItem('harbor.mood'); f = window.localStorage.getItem('harbor.fair'); } catch (e) {} this.setState({ mood: m, fair: f }); };
     this._sync();
-    try { window.addEventListener('storage', this._sync); window.addEventListener('harbor-mood', this._sync); } catch (e) {}
+    try { window.addEventListener('storage', this._sync); window.addEventListener('harbor-mood', this._sync); window.addEventListener('harbor-fair', this._sync); } catch (e) {}
   }
-  componentWillUnmount() { try { window.removeEventListener('storage', this._sync); window.removeEventListener('harbor-mood', this._sync); } catch (e) {} }
+  componentWillUnmount() { try { window.removeEventListener('storage', this._sync); window.removeEventListener('harbor-mood', this._sync); window.removeEventListener('harbor-fair', this._sync); } catch (e) {} }
   renderVals() {
     const active = this.props.active ?? 'home';
     const liveEvent = !!this.props.liveEvent;
@@ -68,7 +69,10 @@ class Component extends DCLogic {
     const m = MOODS[this.state.mood] || MOODS.anxious;
     const out = {
       homeHref: this.props.homeHref ?? 'Main.dc.html',
-      liveHref: this.props.liveHref ?? 'LiveOverview.dc.html',
+      // Live opens the event only once the student has checked in. Before that it
+      // sends them to the registered event (to check in) or to Search (to find one).
+      liveHref: (active === 'live' || liveEvent || this.state.fair === 'live') ? (this.props.liveHref ?? 'LiveOverview.dc.html')
+        : this.state.fair === 'upcoming' ? 'EventRegistered.dc.html' : 'Search.dc.html',
       profHref: this.props.profileHref ?? 'OnboardingReview.dc.html',
       histHref: this.props.historyHref ?? 'VoyageLogbook.dc.html',
       moodIcon: m.icon, moodHalo: m.halo,
