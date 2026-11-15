@@ -74,7 +74,7 @@ class Component extends DCLogic {
       // Otherwise it opens the Live tab's waiting screen (no event / starts soon / wrapped up).
       liveHref: (active === 'live' || liveEvent || this.state.fair === 'live') ? (this.props.liveHref ?? 'LiveOverview.dc.html')
         : 'LiveWaiting.dc.html',
-      profHref: this.props.profileHref ?? 'OnboardingReview.dc.html',
+      profHref: this.props.profileHref ?? 'Profile.dc.html',
       histHref: this.props.historyHref ?? 'VoyageLogbook.dc.html',
       moodIcon: m.icon, moodHalo: m.halo,
     };

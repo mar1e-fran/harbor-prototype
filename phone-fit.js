@@ -17,6 +17,7 @@
     ['Live · Wellness', 'LiveWellness.dc.html'],
     ['After the event', 'VoyageLogbook.dc.html'],
     ['Event recap', 'Wrapped.dc.html'],
+    ['Profile', 'Profile.dc.html'],
   ];
 
   if (!document.querySelector('meta[name="viewport"]')) {
@@ -69,9 +70,12 @@
     '.fit-panel :focus-visible{outline:2px solid #80fdff;outline-offset:2px}',
     // Phones and narrow windows: a small tab on the right edge opens the same menu as a bottom sheet.
     '.fit-fab,.fit-sheet{display:none}',
-    'html:not(.fit-wide) .fit-fab{display:flex;position:fixed;right:0;top:var(--fab-y,42%);z-index:7;width:30px;height:60px;padding:0 0 0 2px;box-sizing:border-box;',
-    'border:1px solid rgba(235,250,254,.35);border-right:none;border-radius:14px 0 0 14px;background:rgba(0,48,63,.88);color:#ebfafe;',
-    'align-items:center;justify-content:center;cursor:grab;touch-action:none;box-shadow:0 4px 14px rgba(0,0,0,.3);-webkit-tap-highlight-color:transparent}',
+    // A small pull-tab hanging from the top edge, in the status-bar strip every screen leaves empty,
+    // so it never covers buttons or the nav bar. Drag it sideways if it sits over something.
+    'html:not(.fit-wide) .fit-fab{display:flex;position:fixed;left:var(--fab-x,50%);top:env(safe-area-inset-top,0px);transform:translateX(-50%);z-index:7;width:52px;height:24px;padding:0 0 4px;box-sizing:border-box;',
+    'border:none;border-radius:0 0 12px 12px;background:rgba(0,48,63,.72);color:#ebfafe;',
+    'align-items:flex-end;justify-content:center;cursor:pointer;touch-action:none;-webkit-tap-highlight-color:transparent}',
+    'html:not(.fit-wide) .fit-fab::after{content:"";position:absolute;left:-6px;right:-6px;top:0;bottom:-8px}',
     'html:not(.fit-wide) .fit-fab:focus-visible{outline:2px solid #80fdff;outline-offset:2px}',
     '.fit-sheet.open{display:block;position:fixed;inset:0;z-index:8}',
     '.fit-sheet .fit-backdrop{position:absolute;inset:0;background:rgba(0,20,28,.55);border:none;padding:0;width:100%;cursor:pointer;animation:fitFade .2s ease both}',
@@ -133,14 +137,14 @@
     });
   }
 
-  // Mobile menu: an edge tab that can be dragged up or down, opening a bottom sheet.
+  // Mobile menu: a small tab at the top edge (drag it sideways), opening a bottom sheet.
   function buildSheet() {
     var fab = el('button', 'fit-fab');
     fab.type = 'button';
     fab.setAttribute('aria-label', 'Open prototype menu');
     fab.setAttribute('aria-haspopup', 'dialog');
-    fab.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4h10M3 8h10M3 12h10"/></svg>';
-    try { var y = localStorage.getItem('proto.fabY'); if (y) doc.style.setProperty('--fab-y', y + 'px'); } catch (e) {}
+    fab.innerHTML = '<svg width="14" height="12" viewBox="0 0 14 12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 2h10M2 6h10M2 10h10"/></svg>';
+    try { var x = localStorage.getItem('proto.fabX'); if (x) doc.style.setProperty('--fab-x', x + 'px'); } catch (e) {}
 
     var sheet = el('div', 'fit-sheet');
     sheet.setAttribute('role', 'dialog');
@@ -150,7 +154,7 @@
       '<div class="fit-panel"><span class="fit-grab" aria-hidden="true"></span>' +
       '<div class="fit-head"><div><h1>Harbor</h1><p class="fit-sub">UXD 370 · Hi-fi prototype</p></div>' +
       '<button type="button" class="fit-close" aria-label="Close menu">×</button></div>' +
-      panelBody('Use the tab on the right edge to open this menu from any screen. Drag it up or down if it covers something. Restart clears your name, mood, notes and registration.') +
+      panelBody('Tap the small tab at the top of the screen to open this menu from anywhere. Drag it sideways if it covers something. Restart clears your name, mood, notes and registration.') +
       '</div>';
     wire(sheet);
 
@@ -160,19 +164,20 @@
     sheet.querySelector('.fit-close').addEventListener('click', close);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && sheet.classList.contains('open')) close(); });
 
-    var startY = 0, startTop = 0, dragged = false, down = false;
+    var startX = 0, startLeft = 0, dragged = false, down = false;
     fab.addEventListener('pointerdown', function (e) {
-      down = true; dragged = false; startY = e.clientY; startTop = fab.getBoundingClientRect().top;
+      down = true; dragged = false; startX = e.clientX; var r = fab.getBoundingClientRect(); startLeft = r.left + r.width / 2;
       try { fab.setPointerCapture(e.pointerId); } catch (err) {}
     });
     fab.addEventListener('pointermove', function (e) {
       if (!down) return;
-      var dy = e.clientY - startY;
-      if (!dragged && Math.abs(dy) < 6) return;
+      var dx = e.clientX - startX;
+      if (!dragged && Math.abs(dx) < 6) return;
       dragged = true;
-      var top = Math.max(8, Math.min(window.innerHeight - fab.offsetHeight - 8, startTop + dy));
-      doc.style.setProperty('--fab-y', top + 'px');
-      try { localStorage.setItem('proto.fabY', String(Math.round(top))); } catch (err) {}
+      var half = fab.offsetWidth / 2 + 4;
+      var x = Math.max(half, Math.min(window.innerWidth - half, startLeft + dx));
+      doc.style.setProperty('--fab-x', x + 'px');
+      try { localStorage.setItem('proto.fabX', String(Math.round(x))); } catch (err) {}
     });
     fab.addEventListener('pointerup', function () { down = false; });
     fab.addEventListener('pointercancel', function () { down = false; });
@@ -419,6 +424,17 @@
     if (inner && a.contains(inner)) return;
     var what = a.getAttribute('data-proto-todo');
     protoToast((what ? what + ' isn’t' : 'This isn’t') + ' part of this prototype yet');
+  }, true);
+
+  // Tabs and "close" links swap the current screen instead of stacking history, so Back never
+  // bounces between a screen's own tabs or reopens a story you just closed.
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest && e.target.closest('#dc-root a[data-replace="true"]');
+    if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    var href = a.getAttribute('href');
+    if (!href || href === '#') return;
+    e.preventDefault();
+    location.replace(href);
   }, true);
 
   // Back controls return to the screen the student came from, like a real app.

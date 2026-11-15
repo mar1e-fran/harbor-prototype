@@ -252,9 +252,6 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
       <img src="assets/c30d9.svg" alt="" class="harbor-swirl" style="width:112px;height:112px;display:block">
       <p role="status" style="margin:0;font-size:14px;color:#fff">Checking the tides…</p>
     </div>
-    <div class="harbor-enter" style="position:absolute;inset:0">
-      <dc-import name="Main" hint-size="390px,844px"></dc-import>
-    </div>
   </sc-if>
 </div>
 </x-dc>
@@ -276,7 +273,8 @@ class Component extends DCLogic {
   armTimer() {
     clearTimeout(this._t);
     const step = this.state.step;
-
+    // After "Checking the tides…", open the real Home page (so it fits the phone like every other screen).
+    if (step === 'tides') this._t = setTimeout(() => { try { window.location.replace('Main.dc.html'); } catch (e) {} }, 1900);
   }
   save(f) {
     const { password, ...rest } = f;
@@ -344,7 +342,12 @@ class Component extends DCLogic {
       goals, socials, pickedGoals, pickedSocials, noGoals: pickedGoals.length === 0, noSocials: pickedSocials.length === 0, isStudent,
       show: { name: f.name || '—', email: f.email || '—', role: f.role || '—', grade: f.grade || '—' },
       edit: { signup: editTo('signup'), role: editTo('role'), grade: editTo('grade'), goals: editTo('goals'), socials: editTo('socials') },
-      confirm: () => this.setState({ step: 'tides', returnToReview: false, enter: false }),
+      confirm: () => {
+        // Opened from Profile → Edit profile: save and go back to the profile instead of re-running onboarding.
+        let fromProfile = false; try { fromProfile = new URLSearchParams(window.location.search).get('from') === 'profile'; } catch (e) {}
+        if (fromProfile) { try { window.location.replace('Profile.dc.html'); } catch (e) {} return; }
+        this.setState({ step: 'tides', returnToReview: false, enter: false });
+      },
     };
   }
 }

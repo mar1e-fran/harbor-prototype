@@ -128,7 +128,14 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"startTab": {"editor": "enum", "options": ["events", "notes"], "default": "events"}, "$preview": {"width": 390, "height": 844}}'>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { tab: props.startTab || 'events', q: '', draft: '', saved: [], crew: [], who: '', ev: '', kind: '', open: null }; this._load = () => this.load(); }
+  constructor(props) {
+    super(props);
+    // ?tab=notes&ev=<event> opens the Notes tab already filtered (used by the event recap).
+    let qs = null; try { qs = new URLSearchParams(window.location.search); } catch (e) {}
+    const qTab = qs && qs.get('tab'), qEv = (qs && qs.get('ev')) || '';
+    this.state = { tab: qTab || props.startTab || 'events', q: '', draft: '', saved: [], crew: [], who: '', ev: qEv, kind: '', open: null };
+    this._load = () => this.load();
+  }
   componentDidMount() { this.load(); try { window.addEventListener('harbor-notes', this._load); window.addEventListener('storage', this._load); } catch (e) {} }
   componentWillUnmount() { try { window.removeEventListener('harbor-notes', this._load); window.removeEventListener('storage', this._load); } catch (e) {} }
   load() { let l = [], c = []; try { l = JSON.parse(window.localStorage.getItem('harbor.notes') || '[]'); } catch (e) {} try { c = JSON.parse(window.localStorage.getItem('harbor.crew.jordan') || '[]'); } catch (e) {} this.setState({ saved: Array.isArray(l) ? l : [], crew: Array.isArray(c) ? c : [] }); }
@@ -136,7 +143,7 @@ class Component extends DCLogic {
     const { tab, q, draft, saved, crew, who, ev, kind, open } = this.state;
     const isNotes = tab === 'notes';
     const groups = [
-      { h: 'Today', items: [{ title: 'SCAD Career Fair', date: 'November 18, 2:00PM - 4:00pm', place: 'Poetter Hall', img: 'assets/h-fair.png', href: 'Wrapped.dc.html' }] },
+      { h: 'Today', items: [{ title: 'SCAD Career Fair', date: 'November 18, 2:00PM - 4:00pm', place: 'Poetter Hall', img: 'assets/h-fair.png', href: 'EventRecap.dc.html' }] },
       { h: 'This Month', items: [
         { title: 'Winter Game Jam: 48 Hours', date: 'Nov. 13 6 p.m. to Nov. 15 at 6 p.m.', place: 'Studio 121, Savannah', img: 'assets/h-gamejam.png', href: '#' },
         { title: 'Coffee With Creative Directors', date: 'Nov. 11 from 9 a.m. to 10:30 a.m.', place: 'Poetter Gallery, Savannah', img: 'assets/h-coffee.png', href: '#' },

@@ -20,25 +20,25 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
       <img src="assets/p-cover.png" alt="" style="width:390px;height:170px;box-sizing:border-box;border:1px solid #c9c9c9;object-fit:cover;display:block">
       <a href="EventRecap.dc.html" aria-label="Back" style="position:absolute;left:16px;top:52px;width:44px;height:44px;box-sizing:border-box;border:1px solid #c9c9c9;border-radius:22px;background:#fff;display:flex;align-items:center;justify-content:center"><img src="assets/p-back.svg" alt="" style="width:22px;height:22px;display:block"></a>
       <button type="button" aria-label="More options" style="position:absolute;left:330px;top:52px;width:44px;height:44px;box-sizing:border-box;border:1px solid #c9c9c9;border-radius:22px;background:#fff;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer"><img src="assets/p-more.svg" alt="" style="width:20px;height:20px;display:block"></button>
-      <span style="position:absolute;left:24px;top:118px;width:104px;height:104px;box-sizing:border-box;border:4px solid #fff;border-radius:52px;background:#dcdcdc;overflow:hidden"><img src="assets/p-jordan.png" alt="" style="position:absolute;left:-2px;top:-5px;width:102px;height:102px;border-radius:999px;object-fit:cover;display:block"></span>
+      <span style="position:absolute;left:24px;top:118px;width:104px;height:104px;box-sizing:border-box;border:4px solid #fff;border-radius:52px;background:#dcdcdc;overflow:hidden"><img src="{{ who.photo }}" alt="" style="position:absolute;left:-2px;top:-5px;width:102px;height:102px;object-position:{{ who.pos }};border-radius:999px;object-fit:cover;display:block"></span>
     </div>
     <div style="box-sizing:border-box;padding:8px 24px 48px;display:flex;flex-direction:column;gap:24px">
       <div style="display:flex;flex-direction:column;gap:14px">
         <div style="display:flex;justify-content:space-between;align-items:flex-start">
           <span style="display:flex;flex-direction:column">
-            <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:24px;line-height:normal">Jordan Newman</h1>
-            <span style="padding-top:2px;font-size:16px;color:#6b6b6b">UX Researcher @ Target</span>
+            <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:24px;line-height:normal">{{ who.name }}</h1>
+            <span style="padding-top:2px;font-size:16px;color:#6b6b6b">{{ who.role }}</span>
           </span>
           <span style="margin-top:6px;height:26px;padding:0 10px;border-radius:13px;background:#004256;color:#fff;display:flex;align-items:center;font-weight:600;font-size:12px;white-space:nowrap">In your crew</span>
         </div>
-        <p style="margin:0;font-size:16px;line-height:normal">“I study how people actually use products, then help designers fix what gets in their way.”</p>
-        <p style="margin:-6px 0 0;font-size:14px;color:#6b6b6b">Met at SCAD Career Fair · Nov 18 · 86% like you</p>
-        <a href="Chat.dc.html?p=jordan" style="height:48px;border-radius:8px;background:#004256;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px">Message</a>
+        <p style="margin:0;font-size:16px;line-height:normal">“{{ who.quote }}”</p>
+        <p style="margin:-6px 0 0;font-size:14px;color:#6b6b6b">Met at SCAD Career Fair · Nov 18 · {{ who.match }}% like you</p>
+        <a href="{{ who.chat }}" style="height:48px;border-radius:8px;background:#004256;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px">Message</a>
       </div>
       <section style="display:flex;flex-direction:column;gap:10px">
         <div style="display:flex;justify-content:space-between;align-items:center">
           <span style="font-size:16px"><b style="font-weight:600">Crew 24</b><span style="color:#6b6b6b"> · 4 mutual</span></span>
-          <a href="Crewmate.dc.html" aria-label="See all crewmates" style="width:44px;height:44px;display:flex;align-items:center;justify-content:flex-end"><img src="assets/p-arrow.svg" alt="" style="width:20px;height:20px;display:block"></a>
+          <a href="#" data-proto-todo="The crew list" aria-label="See all crewmates" style="width:44px;height:44px;display:flex;align-items:center;justify-content:flex-end"><img src="assets/p-arrow.svg" alt="" style="width:20px;height:20px;display:block"></a>
         </div>
         <div style="display:flex;padding-left:10px">
           <sc-for list="{{ crew }}" as="c" hint-placeholder-count="4"><img src="{{ c }}" alt="" style="width:40px;height:40px;border-radius:20px;object-fit:cover;margin-left:-10px;display:block"></sc-for>
@@ -56,12 +56,12 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
       </section>
       <section style="padding:16px;border-radius:12px;background:#26b2dc;color:#fff;display:flex;flex-direction:column;gap:12px">
         <h2 style="margin:0;font-weight:600;font-size:14px;line-height:18px">I’m here for…</h2>
-        <p style="margin:0;font-size:20px">Mentoring &amp; hiring</p>
+        <p style="margin:0;font-size:20px">{{ who.here }}</p>
       </section>
       <section style="padding:16px;border-radius:12px;background:#feace8;display:flex;flex-direction:column;gap:12px">
         <h2 style="margin:0;font-weight:600;font-size:14px;line-height:18px;color:#6b6b6b">Talk to me about…</h2>
         <img src="assets/p-talk.png" alt="" style="width:307px;height:180px;border-radius:8px;object-fit:cover;display:block">
-        <p style="margin:0;font-size:20px;line-height:normal">How to be a curious candidate</p>
+        <p style="margin:0;font-size:20px;line-height:normal">{{ who.talk }}</p>
       </section>
       <section style="display:flex;flex-direction:column;gap:8px">
         <h2 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px;color:#202124">Cross paths again</h2>
@@ -72,7 +72,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
             <span style="display:flex;flex-direction:column"><span style="font-size:16px">{{ x.title }}</span><span style="font-size:14px;color:#6b6b6b">{{ x.date }}</span></span>
           </a>
         </sc-for>
-        <a href="VoyageLogbook.dc.html" style="height:44px;display:flex;gap:6px;align-items:center;font-size:16px;color:#1a1a1a">Show all<img src="assets/p-showall.svg" alt="" style="width:18px;height:18px;display:block"></a>
+        <a href="Search.dc.html" style="height:44px;display:flex;gap:6px;align-items:center;font-size:16px;color:#1a1a1a">Show all<img src="assets/p-showall.svg" alt="" style="width:18px;height:18px;display:block"></a>
       </section>
     </div>
   </div>
@@ -80,17 +80,43 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 844}}'>
 class Component extends DCLogic {
+  // Everyone you can open from the recap, chat and logbook. ?p=<key> picks the person.
+  static PEOPLE = {
+    jordan: { name: 'Jordan Newman', role: 'UX Researcher @ Target', photo: 'assets/p-jordan.png', pos: 'center', match: 86,
+      quote: 'I study how people actually use products, then help designers fix what gets in their way.', here: 'Mentoring & hiring', talk: 'How to be a curious candidate',
+      common: ['You both want a job in product design', 'User research, Portfolio reviews, Design systems', 'You both went to Portfolio Day', 'You both know Emily Stuart +3'] },
+    jenna: { name: 'Jenna Caldwell', role: 'Senior Graphic Designer @ Gucci', photo: 'assets/r-jenna.png', pos: 'center', match: 78,
+      quote: 'I design prints and campaigns for luxury apparel, and I love a bold pattern.', here: 'Finding junior designers', talk: 'Patterns that sell on TikTok Shop',
+      common: ['You both care about visual storytelling', 'Luxury apparel, Patterns, Branding', 'You were both in Room 204', 'You both know Bella Jean +1'] },
+    adam: { name: 'Adam Crews', role: 'Recruiter @ Google', photo: 'assets/r-adam.png', pos: '30% center', match: 71,
+      quote: 'I hire curious people. Show me how you think, not just what you made.', here: 'Hiring for spring internships', talk: 'What makes a portfolio stand out',
+      common: ['You both want to talk about internships', 'AI, Curious applicants, Mobile', 'You were both in Room 204', 'You both know Jordan Newman'] },
+    bella: { name: 'Bella Jean', role: 'UX Designer @ Uber', photo: 'assets/r-bella.png', pos: 'center top', match: 82,
+      quote: 'I switched careers into UX three years ago and I love helping others do the same.', here: 'Mentoring career switchers', talk: 'Running your first designathon',
+      common: ['You both want a job in product design', 'Career switching, Designathons', 'You both went to the Keynote', 'You both know Jenna Caldwell'] },
+    bradie: { name: 'Bradie Blue', role: 'UX Researcher @ Amazon', photo: 'assets/r-bradie.png', pos: 'center top', match: 74,
+      quote: 'I research how robots and people share warehouses safely.', here: 'Meeting research students', talk: 'Designing for robotics',
+      common: ['You both like user research', 'Robotics, Optimization, Parcels', 'You were both in Room 112', 'You both know Adam Crews'] },
+    gracie: { name: 'Gracie Neue', role: 'Product Manager · Freelance', photo: 'assets/r-gracie.png', pos: 'center top', match: 69,
+      quote: 'I help small creative teams ship their first product.', here: 'Finding collaborators', talk: 'Motion design on a budget',
+      common: ['You both want to build products', 'Adobe, Motion, Hair styling', 'You were both at the Mixer', 'You both know Bradie Blue'] },
+  };
+  constructor(props) {
+    super(props);
+    let key = 'jordan';
+    try { key = new URLSearchParams(window.location.search).get('p') || 'jordan'; } catch (e) {}
+    this.key = Component.PEOPLE[key] ? key : 'jordan';
+  }
   renderVals() {
+    const p = Component.PEOPLE[this.key];
+    const icons = ['assets/p-goals.svg', 'assets/p-interests.svg', 'assets/p-events.svg', 'assets/p-people.svg'];
+    const keys = ['Goals', 'Interests', 'Events', 'People'];
     return {
-      crew: ['assets/p-crew1.png', 'assets/p-crew2.png', 'assets/p-crew3.png', 'assets/p-jordan.png'],
-      common: [
-        { icon: 'assets/p-goals.svg', k: 'Goals', v: 'You both want a job in product design' },
-        { icon: 'assets/p-interests.svg', k: 'Interests', v: 'User research, Portfolio reviews, Design systems' },
-        { icon: 'assets/p-events.svg', k: 'Events', v: 'You both went to Portfolio Day' },
-        { icon: 'assets/p-people.svg', k: 'People', v: 'You both know Emily Stuart +3' },
-      ],
+      who: { ...p, chat: 'Chat.dc.html?p=' + this.key },
+      crew: ['assets/p-crew1.png', 'assets/p-crew2.png', 'assets/p-crew3.png', p.photo],
+      common: p.common.map((v, i) => ({ icon: icons[i], k: keys[i], v })),
       cross: [
-        { img: 'assets/p-talk.png', title: 'Hiring Manager Meet & Greet', date: 'Nov 20', href: 'EventRecap.dc.html' },
+        { img: 'assets/p-talk.png', title: 'Hiring Manager Meet & Greet', date: 'Nov 20', href: '#' },
         { img: 'assets/p-alumni.png', title: 'Alumni Panel', date: 'Nov 16', href: 'EventAlumniPanel.dc.html' },
       ],
     };

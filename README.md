@@ -34,10 +34,12 @@ These screens had no Hi-Fi frame in Figma, so they were built from the
 mid-fi user-test versions in the Hi-Fi style:
 
 - History tab → `VoyageLogbook` (Events and Notes tabs, search, new entry)
-- SCAD Career Fair in the logbook → `Wrapped` (tap through 4 slides, then the
-  share card) → close → `EventRecap`
-- `EventRecap` → Details tab (`EventPast`), follow-up cards → `Chat` and
-  `Crewmate` → `CrewmateProfile`
+- SCAD Career Fair in the logbook → `EventRecap`; its banner replays `Wrapped`
+  (tap through 4 slides, then the share card) → close → back to `EventRecap`
+- `EventRecap` → Details tab (`EventPast`), follow-up cards → `Chat`, every
+  person → `CrewmateProfile?p=<name>`, note topics → History's Notes tab
+  filtered to the fair
+- Profile tab → `Profile` (your onboarding answers; Edit profile → review and back)
 
 The transcript-style Logbook variant was intentionally left out.
 
