@@ -115,7 +115,7 @@ class Component extends DCLogic {
         : { text: m.text, justify: 'flex-start', max: '212px', radius: '16px 16px 16px 4px', bg: '#bce7f3', fg: '#1a1a1a', font: 'Inter,sans-serif', size: '15px', lh: '21px' }),
       showChips: !composing && !typing,
       who: this.who,
-      profileHref: 'CrewmateProfile.dc.html?p=' + this.key, profileLabel: 'View ' + this.who.name + '’s profile',
+      profileHref: this.who.profile, profileLabel: 'View ' + this.who.name + '’s profile',
       chips: this.who.chips.filter((c) => !sent.includes(c)).map((c) => ({ text: c, send: () => this.push(c) })),
       onDraft: (e) => this.setState({ draft: e.target.value }),
       onKey: (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.push(draft); } },
