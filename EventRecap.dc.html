@@ -47,14 +47,14 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
           <sc-for list="{{ follow }}" as="p" hint-placeholder-count="3">
             <article style="scroll-snap-align:start;width:324px;box-sizing:border-box;padding:16px;border-radius:16px;background:{{ p.bg }};color:{{ p.fg }};display:flex;flex-direction:column;gap:24px">
               <div style="display:flex;flex-direction:column;gap:12px">
-                <div style="display:flex;gap:12px;align-items:center">
+                <a href="{{ p.profile }}" style="display:flex;gap:12px;align-items:center;color:inherit">
                   <img src="{{ p.photo }}" alt="" style="width:60px;height:60px;border-radius:999px;object-fit:cover;object-position:{{ p.pos }};display:block;flex-shrink:0">
                   <div style="display:flex;flex-direction:column;gap:2px">
                     <span style="font-weight:600;font-size:16px">{{ p.who }}</span>
                     <span style="font-size:12px">{{ p.role }}</span>
                     <span style="display:flex;gap:6px;align-items:center;font-size:12px"><img src="{{ p.boat }}" alt="" style="width:15px;height:15px;display:block">{{ p.where }}</span>
                   </div>
-                </div>
+                </a>
                 <img src="{{ p.line }}" alt="" style="width:292px;height:1px;display:block">
                 <div style="display:flex;flex-direction:column;gap:6px">
                   <span style="font-weight:600;font-size:12px">Interests</span>
