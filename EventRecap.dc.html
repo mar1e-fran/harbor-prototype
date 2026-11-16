@@ -62,8 +62,6 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
                     <sc-for list="{{ p.chips }}" as="c" hint-placeholder-count="3"><span style="background:#fff;border:1px solid #004256;border-radius:999px;padding:3px 10px;font-size:12px;color:#004256;white-space:nowrap">{{ c }}</span></sc-for>
                   </span>
                 </div>
-                <div style="display:flex;justify-content:space-between;font-size:12px"><span style="font-weight:600">AI-drafted message</span><a href="{{ p.chat }}" style="color:inherit;text-decoration:underline;padding:4px 0 4px 8px">Edit</a></div>
-                <div style="background:#fff;border:1.5px dashed #004256;border-radius:10px;padding:12px;font-size:{{ p.draftSize }};line-height:normal;color:#202124">{{ p.draft }}</div>
               </div>
               <div style="display:flex;flex-direction:column;gap:10px;align-self:stretch">
                 <a href="{{ p.chat }}" style="height:48px;box-sizing:border-box;border-radius:10px;border:1.5px solid #004256;background:#004256;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;line-height:20px">Message</a>
