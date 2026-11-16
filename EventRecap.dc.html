@@ -93,21 +93,21 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
       <section style="display:flex;flex-direction:column;gap:16px">
         <h2 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px">People you met</h2>
         <div class="ns" style="width:366px;margin-right:-24px;overflow-x:auto">
-          <div style="display:flex;gap:7px;width:max-content;padding-right:24px;align-items:stretch">
+          <div style="display:flex;gap:12px;width:max-content;padding-right:24px;align-items:stretch">
             <sc-for list="{{ met }}" as="m" hint-placeholder-count="3">
-              <a href="{{ m.href }}" style="width:185px;min-height:211px;box-sizing:border-box;padding:9px;border-radius:9px;background:{{ m.bg }};color:{{ m.fg }};display:flex;flex-direction:column;justify-content:space-between;gap:14px">
-                <span style="display:flex;flex-direction:column;gap:7px;align-items:center;text-align:center">
-                  <img src="{{ m.photo }}" alt="" style="width:68px;height:68px;border-radius:999px;object-fit:cover;object-position:center top;display:block">
-                  <span style="font-weight:600;font-size:9px">{{ m.who }}</span>
-                  <span style="font-size:7px;margin-top:-6px">{{ m.role }}</span>
-                  <span style="display:flex;gap:3px;align-items:center;font-size:7px;margin-top:-4px"><img src="{{ m.boat }}" alt="" style="width:8.58px;height:8.58px;display:block">{{ m.where }}</span>
-                  <img src="assets/r-line-sm.svg" alt="" style="width:167px;height:0.57px;display:block">
-                  <span style="align-self:flex-start;font-weight:600;font-size:7px">Interests</span>
-                  <span style="align-self:flex-start;display:flex;flex-wrap:wrap;gap:3px 2px;margin-top:-3px">
-                    <sc-for list="{{ m.chips }}" as="c" hint-placeholder-count="2"><span style="background:#fff;border:0.6px solid #004256;border-radius:999px;padding:2px 6px;font-size:7px;color:#004256;white-space:nowrap">{{ c }}</span></sc-for>
+              <a href="{{ m.href }}" style="width:260px;min-height:300px;box-sizing:border-box;padding:16px;border-radius:12px;background:{{ m.bg }};color:{{ m.fg }};display:flex;flex-direction:column;justify-content:space-between;gap:16px">
+                <span style="display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center">
+                  <img src="{{ m.photo }}" alt="" style="width:96px;height:96px;border-radius:999px;object-fit:cover;object-position:center top;display:block;margin-bottom:4px">
+                  <span style="font-weight:600;font-size:17px;line-height:22px">{{ m.who }}</span>
+                  <span style="font-size:13px;line-height:17px">{{ m.role }}</span>
+                  <span style="display:flex;gap:5px;align-items:center;font-size:13px;line-height:17px"><img src="{{ m.boat }}" alt="" style="width:14px;height:14px;display:block">{{ m.where }}</span>
+                  <span aria-hidden="true" style="align-self:stretch;height:1px;background:currentColor;opacity:.35;margin:6px 0"></span>
+                  <span style="align-self:flex-start;font-weight:600;font-size:13px">Interests</span>
+                  <span style="align-self:flex-start;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-start">
+                    <sc-for list="{{ m.chips }}" as="c" hint-placeholder-count="2"><span style="background:#fff;border:1px solid #004256;border-radius:999px;padding:4px 10px;font-size:13px;line-height:17px;color:#004256;white-space:nowrap">{{ c }}</span></sc-for>
                   </span>
                 </span>
-                <span style="align-self:flex-start;height:25px;box-sizing:border-box;padding:0 9px;border:0.86px solid #004256;border-radius:6px;display:flex;align-items:center;font-weight:600;font-size:8px;color:#004256">View profile</span>
+                <span style="align-self:stretch;height:44px;box-sizing:border-box;padding:0 16px;border:1.5px solid #004256;border-radius:10px;background:rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:15px;color:#004256">View profile</span>
               </a>
             </sc-for>
           </div>
