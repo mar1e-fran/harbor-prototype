@@ -37,7 +37,7 @@ mid-fi user-test versions in the Hi-Fi style:
 - SCAD Career Fair in the logbook → `EventRecap`; its banner replays `Wrapped`
   (tap through 4 slides, then the share card) → close → back to `EventRecap`
 - `EventRecap` → Details tab (`EventPast`), follow-up cards → `Chat`, every
-  person → `CrewmateProfile?p=<name>`, note topics → History's Notes tab
+  person → `Crewmate?p=<name>`, note topics → History's Notes tab
   filtered to the fair
 - Profile tab → `Profile` (your onboarding answers; Edit profile → review and back)
 

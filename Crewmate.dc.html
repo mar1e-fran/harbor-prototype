@@ -16,39 +16,41 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 </helmet>
 <div style="position:relative;width:390px;height:844px;overflow:hidden;background:#fafeff;font-family:Poppins,sans-serif;color:#004256">
   <div class="ns" style="position:absolute;inset:0;overflow-y:auto;overflow-x:hidden">
-    <div style="box-sizing:border-box;padding:52px 24px 40px;display:flex;flex-direction:column;gap:22px">
+    <div style="box-sizing:border-box;padding:52px 24px 48px;display:flex;flex-direction:column;gap:22px">
       <div style="height:44px;display:flex;justify-content:space-between;margin:0 -10px">
         <a href="EventRecap.dc.html" aria-label="Back" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><img src="assets/c-back.svg" alt="" style="width:22px;height:22px;display:block"></a>
         <button type="button" aria-label="More options" style="width:44px;height:44px;border:none;background:none;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer"><img src="assets/c-more.svg" alt="" style="width:22px;height:22px;display:block"></button>
       </div>
-      <a href="CrewmateProfile.dc.html" aria-label="Open Jordan Newman’s full profile" style="display:flex;gap:16px;align-items:center">
-        <img src="assets/c-jordan.png" alt="" style="width:80px;height:80px;border-radius:999px;object-fit:cover;display:block;flex-shrink:0">
-        <span style="display:flex;flex-direction:column">
-          <span style="font-family:'DM Sans',sans-serif;font-weight:600;font-size:24px;line-height:normal;color:#1a1a1a">Jordan Newman</span>
-          <span style="font-size:14px;color:#6b6b6b">UX Researcher @ Target</span>
-        </span>
-      </a>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;gap:16px;align-items:center">
+          <img src="{{ who.photo }}" alt="" style="width:80px;height:80px;border-radius:999px;object-fit:cover;object-position:{{ who.pos }};display:block;flex-shrink:0;background:#dcdcdc">
+          <span style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:2px">
+            <h1 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:24px;line-height:normal;color:#1a1a1a">{{ who.name }}</h1>
+            <span style="font-size:14px;color:#6b6b6b">{{ who.role }}</span>
+            <span style="margin-top:4px;height:24px;padding:0 10px;border-radius:12px;background:#004256;color:#fff;display:flex;align-items:center;font-weight:600;font-size:12px;white-space:nowrap">In your crew · {{ who.match }}% like you</span>
+          </span>
+        </div>
+        <p style="margin:0;font-size:16px;line-height:normal;color:#1a1a1a">“{{ who.quote }}”</p>
+        <a href="{{ chatHref }}" style="height:48px;border-radius:10px;background:#004256;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px">Message</a>
+      </div>
       <div style="display:flex;flex-direction:column;gap:20px">
-        <a href="CrewmateProfile.dc.html" style="min-height:52px;box-sizing:border-box;margin-top:3px;padding:8px 12px;border-radius:12px;background:#bce7f3;display:flex;gap:12px;align-items:center">
+        <a href="#" data-proto-todo="The crew list" style="min-height:52px;box-sizing:border-box;padding:8px 12px;border-radius:12px;background:#bce7f3;display:flex;gap:12px;align-items:center">
           <span style="display:flex;padding-left:8px">
             <sc-for list="{{ mutuals }}" as="m" hint-placeholder-count="3"><img src="{{ m }}" alt="" style="width:30px;height:30px;border-radius:15px;object-fit:cover;margin-left:-8px;display:block"></sc-for>
           </span>
           <span style="flex:1;min-width:0;display:flex;flex-direction:column">
-            <span style="font-weight:600;font-size:14px;line-height:18px;color:#1a1a1a">4 mutual crewmates</span>
-            <span style="font-size:14px;color:#6b6b6b">Emily Stuart, Bowen Neue +2</span>
+            <span style="font-weight:600;font-size:14px;line-height:18px;color:#1a1a1a">{{ who.mutual }}</span>
+            <span style="font-size:14px;color:#6b6b6b">{{ who.mutualNames }}</span>
           </span>
           <img src="assets/c-chev.svg" alt="" style="width:18px;height:18px;display:block">
         </a>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;gap:8px">
-            <sc-for list="{{ socials }}" as="s" hint-placeholder-count="4">
-              <button type="button" onClick="{{ s.tap }}" style="flex:1;padding:10px 0;border:none;border-radius:10px;background:#26b2dc;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;font:inherit">
-                <img src="{{ s.icon }}" alt="" style="width:22px;height:22px;margin:1px;display:block">
-                <span style="font-weight:600;font-size:12px;color:#004256">{{ s.label }}</span>
-              </button>
-            </sc-for>
-          </div>
-          <a href="CrewmateProfile.dc.html?p=jordan" style="height:48px;box-sizing:border-box;border:1.5px solid #004256;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;color:#004256">View profile</a>
+        <div style="display:flex;gap:8px">
+          <sc-for list="{{ socials }}" as="s" hint-placeholder-count="4">
+            <button type="button" onClick="{{ s.tap }}" style="flex:1;padding:10px 0;border:none;border-radius:10px;background:#26b2dc;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;font:inherit">
+              <img src="{{ s.icon }}" alt="" style="width:22px;height:22px;margin:1px;display:block">
+              <span style="font-weight:600;font-size:12px;color:#004256">{{ s.label }}</span>
+            </button>
+          </sc-for>
         </div>
         <section>
           <h2 style="margin:0;font-weight:600;font-size:16px">Met at</h2>
@@ -61,23 +63,52 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
             </sc-for>
           </div>
         </section>
-        <section style="background:#fff">
+        <section>
           <div style="display:flex;justify-content:space-between;font-weight:600;font-size:16px"><h2 style="margin:0;font:inherit">Notes</h2><span>{{ count }}</span></div>
           <sc-for list="{{ notes }}" as="n" hint-placeholder-count="3">
             <div style="padding:12px 0;display:flex;flex-direction:column;gap:4px">
               <p style="margin:0;font-size:16px;line-height:normal">
-                <sc-if value="{{ n.mention }}" hint-placeholder-val="{{ false }}">Met <span style="display:inline-block;background:#26b2dc;border-radius:4px;padding:0 6px;font-weight:600">@Jordan Newman</span> </sc-if>{{ n.text }}
+                <sc-if value="{{ n.mention }}" hint-placeholder-val="{{ false }}">Met <span style="display:inline-block;background:#26b2dc;border-radius:4px;padding:0 6px;font-weight:600">@{{ who.name }}</span> </sc-if>{{ n.text }}
               </p>
               <span style="font-size:12px;color:#166a83">{{ n.where }}</span>
             </div>
           </sc-for>
           <label style="height:48px;box-sizing:border-box;border:1.5px dashed #26b2dc;border-radius:8px;background:#ebfeff;display:flex;align-items:center;padding:0 12px;gap:4px">
             <span aria-hidden="true" style="font-size:16px">+</span>
-            <input value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onKey }}" placeholder="Note about Jordan" aria-label="Add a note about Jordan" enterkeyhint="send" style="flex:1;min-width:0;border:none;outline:none;background:none;font-family:Poppins,sans-serif;font-size:16px;color:#004256">
+            <input value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onKey }}" placeholder="{{ notePh }}" aria-label="{{ noteLabel }}" enterkeyhint="send" style="flex:1;min-width:0;border:none;outline:none;background:none;font-family:Poppins,sans-serif;font-size:16px;color:#004256">
             <sc-if value="{{ hasDraft }}" hint-placeholder-val="{{ false }}">
               <button type="button" class="cs-pop" onClick="{{ addNote }}" aria-label="Save note" style="width:36px;height:36px;margin-right:-6px;flex-shrink:0;border:none;border-radius:8px;background:#004256;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0"><img src="assets/ch-send.svg" alt="" style="width:16px;height:16px;display:block"></button>
             </sc-if>
           </label>
+        </section>
+        <section style="padding:16px;border-radius:12px;background:#c6fed4;color:#1a1a1a">
+          <h2 style="margin:0 0 4px;font-weight:600;font-size:14px;line-height:18px;color:#004256">What you have in common</h2>
+          <sc-for list="{{ common }}" as="c" hint-placeholder-count="4">
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0">
+              <span style="width:32px;height:32px;border-radius:8px;background:#004256;display:flex;align-items:center;justify-content:center;flex-shrink:0"><img src="{{ c.icon }}" alt="" style="width:16px;height:16px;display:block"></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column"><span style="padding-bottom:2px;font-weight:600;font-size:12px;color:#004256">{{ c.k }}</span><span style="font-size:16px;line-height:normal">{{ c.v }}</span></span>
+            </div>
+          </sc-for>
+        </section>
+        <section style="padding:16px;border-radius:12px;background:#26b2dc;color:#fff;display:flex;flex-direction:column;gap:12px">
+          <h2 style="margin:0;font-weight:600;font-size:14px;line-height:18px">I’m here for…</h2>
+          <p style="margin:0;font-size:20px">{{ who.here }}</p>
+        </section>
+        <section style="padding:16px;border-radius:12px;background:#feace8;color:#1a1a1a;display:flex;flex-direction:column;gap:12px">
+          <h2 style="margin:0;font-weight:600;font-size:14px;line-height:18px;color:#6b6b6b">Talk to me about…</h2>
+          <img src="assets/p-talk.png" alt="" style="width:100%;height:180px;border-radius:8px;object-fit:cover;display:block">
+          <p style="margin:0;font-size:20px;line-height:normal">{{ who.talk }}</p>
+        </section>
+        <section style="display:flex;flex-direction:column;gap:8px">
+          <h2 style="margin:0;font-family:'DM Sans',sans-serif;font-weight:600;font-size:20px;color:#202124">Cross paths again</h2>
+          <p style="margin:0;font-size:12px;color:#5f6368">Voyages {{ who.first }} is joining next</p>
+          <sc-for list="{{ cross }}" as="x" hint-placeholder-count="2">
+            <a href="{{ x.href }}" data-proto-todo="{{ x.todo }}" style="height:56px;display:flex;gap:12px;align-items:center;color:#1a1a1a">
+              <img src="{{ x.img }}" alt="" style="width:56px;height:56px;border-radius:8px;object-fit:cover;display:block">
+              <span style="display:flex;flex-direction:column"><span style="font-size:16px">{{ x.title }}</span><span style="font-size:14px;color:#6b6b6b">{{ x.date }}</span></span>
+            </a>
+          </sc-for>
+          <a href="Search.dc.html" style="height:44px;display:flex;gap:6px;align-items:center;font-size:16px;color:#1a1a1a">Show all<img src="assets/p-showall.svg" alt="" style="width:18px;height:18px;display:block"></a>
         </section>
       </div>
     </div>
@@ -89,32 +120,85 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview": {"width": 390, "height": 844}}'>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { draft: '', extra: Component.loadNotes(), toast: '' }; }
-  // Notes the user adds are kept in localStorage so they survive leaving to Chat or a reload.
-  static loadNotes() {
-    try { const v = JSON.parse(window.localStorage.getItem('harbor.crew.jordan') || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+  // One profile for everyone you meet. ?p=<key> picks the person (defaults to Jordan).
+  static FAIR = 'assets/c-ev-fair.png';
+  static PEOPLE = {
+    jordan: { name: 'Jordan Newman', role: 'UX Researcher @ Target', photo: 'assets/c-jordan.png', pos: 'center', match: 86,
+      quote: 'I study how people actually use products, then help designers fix what gets in their way.', here: 'Mentoring & hiring', talk: 'How to be a curious candidate',
+      mutual: '4 mutual crewmates', mutualNames: 'Emily Stuart, Bowen Neue +2',
+      metAt: [['SCAD Career Fair', 'Nov 18 · Mixer', 'assets/c-ev-fair.png'], ['Portfolio Day', 'Oct 8 · both attended', 'assets/c-ev-portfolio.png']],
+      notes: [
+        { mention: true, text: 'at the coffee line, hiring in January', where: 'SCAD Career Fair › Mixer' },
+        { mention: false, text: 'Talked about design internships at Target and how research shapes product decisions. Open to reviewing your portfolio.', where: 'SCAD Career Fair › Mixer' },
+        { mention: false, text: 'Asked a sharp question about portfolio depth during Q&A', where: 'Portfolio Day › Panel Q&A' }],
+      common: ['You both want a job in product design', 'User research, Portfolio reviews, Design systems', 'You both went to Portfolio Day', 'You both know Emily Stuart +3'] },
+    jenna: { name: 'Jenna Caldwell', role: 'Senior Graphic Designer @ Gucci', photo: 'assets/r-jenna.png', pos: 'center', match: 78,
+      quote: 'I design prints and campaigns for luxury apparel, and I love a bold pattern.', here: 'Finding junior designers', talk: 'Patterns that sell on TikTok Shop',
+      mutual: '2 mutual crewmates', mutualNames: 'Bella Jean, Adam Crews',
+      metAt: [['SCAD Career Fair', 'Nov 18 · Room 204', 'assets/c-ev-fair.png']],
+      notes: [{ mention: true, text: 'in Room 204, looking for junior print designers', where: 'SCAD Career Fair › Room 204' }],
+      common: ['You both care about visual storytelling', 'Luxury apparel, Patterns, Branding', 'You were both in Room 204', 'You both know Bella Jean +1'] },
+    adam: { name: 'Adam Crews', role: 'Recruiter @ Google', photo: 'assets/r-adam.png', pos: '30% center', match: 71,
+      quote: 'I hire curious people. Show me how you think, not just what you made.', here: 'Hiring for spring internships', talk: 'What makes a portfolio stand out',
+      mutual: '3 mutual crewmates', mutualNames: 'Jordan Newman, Jenna Caldwell +1',
+      metAt: [['SCAD Career Fair', 'Nov 18 · Room 204', 'assets/c-ev-fair.png']],
+      notes: [{ mention: true, text: 'after the session, spring internship applications open in December', where: 'SCAD Career Fair › Room 204' }],
+      common: ['You both want to talk about internships', 'AI, Curious applicants, Mobile', 'You were both in Room 204', 'You both know Jordan Newman'] },
+    bella: { name: 'Bella Jean', role: 'UX Designer @ Uber', photo: 'assets/r-bella.png', pos: 'center top', match: 82,
+      quote: 'I switched careers into UX three years ago and I love helping others do the same.', here: 'Mentoring career switchers', talk: 'Running your first designathon',
+      mutual: '2 mutual crewmates', mutualNames: 'Jenna Caldwell, Emily Stuart',
+      metAt: [['SCAD Career Fair', 'Nov 18 · Keynote', 'assets/c-ev-fair.png']],
+      notes: [{ mention: true, text: 'after the keynote, offered tips on a first case study', where: 'SCAD Career Fair › Keynote' }],
+      common: ['You both want a job in product design', 'Career switching, Designathons', 'You both went to the Keynote', 'You both know Jenna Caldwell'] },
+    bradie: { name: 'Bradie Blue', role: 'UX Researcher @ Amazon', photo: 'assets/r-bradie.png', pos: 'center top', match: 74,
+      quote: 'I research how robots and people share warehouses safely.', here: 'Meeting research students', talk: 'Designing for robotics',
+      mutual: '1 mutual crewmate', mutualNames: 'Adam Crews',
+      metAt: [['SCAD Career Fair', 'Nov 18 · Design · Room 112', 'assets/c-ev-fair.png']],
+      notes: [{ mention: true, text: 'in Room 112, researches robots in warehouses', where: 'SCAD Career Fair › Room 112' }],
+      common: ['You both like user research', 'Robotics, Optimization, Parcels', 'You were both in Room 112', 'You both know Adam Crews'] },
+    gracie: { name: 'Gracie Neue', role: 'Product Manager · Freelance', photo: 'assets/r-gracie.png', pos: 'center top', match: 69,
+      quote: 'I help small creative teams ship their first product.', here: 'Finding collaborators', talk: 'Motion design on a budget',
+      mutual: '1 mutual crewmate', mutualNames: 'Bradie Blue',
+      metAt: [['SCAD Career Fair', 'Nov 18 · Mixer · Room 302', 'assets/c-ev-fair.png']],
+      notes: [{ mention: true, text: 'at the mixer, looking for a motion designer', where: 'SCAD Career Fair › Mixer' }],
+      common: ['You both want to build products', 'Adobe, Motion, Hair styling', 'You were both at the Mixer', 'You both know Bradie Blue'] },
+  };
+  constructor(props) {
+    super(props);
+    let key = 'jordan';
+    try { key = new URLSearchParams(window.location.search).get('p') || 'jordan'; } catch (e) {}
+    this.key = Component.PEOPLE[key] ? key : 'jordan';
+    this.state = { draft: '', extra: this.loadNotes(), toast: '' };
   }
-  saveNotes(list) { try { window.localStorage.setItem('harbor.crew.jordan', JSON.stringify(list)); } catch (e) {} }
+  // Notes the user adds are kept in localStorage so they survive leaving to Chat or a reload.
+  loadNotes() {
+    try { const v = JSON.parse(window.localStorage.getItem('harbor.crew.' + this.key) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+  }
+  saveNotes(list) { try { window.localStorage.setItem('harbor.crew.' + this.key, JSON.stringify(list)); } catch (e) {} }
   flash(msg) { this.setState({ toast: msg }); clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: '' }), 1800); }
   renderVals() {
     const { draft, extra, toast } = this.state;
-    const base = [
-      { mention: true, text: 'at the coffee line, hiring in January', where: 'SCAD Career Fair › Mixer' },
-      { mention: false, text: 'Talked about design internships at Target and how research shapes product decisions. Open to reviewing your portfolio.', where: 'SCAD Career Fair › Mixer' },
-      { mention: false, text: 'Asked a sharp question about portfolio depth during Q&A', where: 'Portfolio Day › Panel Q&A' },
-    ];
-    const notes = [...extra, ...base];
+    const p = Component.PEOPLE[this.key];
+    const first = p.name.split(' ')[0];
+    const notes = [...extra, ...p.notes];
     const add = () => { const t = draft.trim(); if (!t) return; const next = [{ mention: false, text: t, where: 'Added by you' }, ...extra]; this.setState({ draft: '', extra: next }); this.saveNotes(next); this.flash('Note saved'); };
     const soc = (label, icon) => ({ label, icon, tap: () => this.flash(label + ' opened') });
+    const icons = ['assets/p-goals.svg', 'assets/p-interests.svg', 'assets/p-events.svg', 'assets/p-people.svg'];
+    const keys = ['Goals', 'Interests', 'Events', 'People'];
     return {
       toast,
+      who: { ...p, first },
+      chatHref: 'Chat.dc.html?p=' + this.key,
       mutuals: ['assets/c-mut1.png', 'assets/c-mut2.png', 'assets/c-mut3.png'],
       socials: [soc('LinkedIn', 'assets/c-linkedin.svg'), soc('Instagram', 'assets/c-instagram.svg'), soc('X', 'assets/c-x.svg'), soc('Email', 'assets/c-email.svg')],
-      metAt: [
-        { img: 'assets/c-ev-fair.png', title: 'SCAD Career Fair', sub: 'Nov 18 · Mixer', border: '1px solid #ececec' },
-        { img: 'assets/c-ev-portfolio.png', title: 'Portfolio Day', sub: 'Oct 8 · both attended', border: 'none' },
+      metAt: p.metAt.map(([title, sub, img], i) => ({ title, sub, img, border: i < p.metAt.length - 1 ? '1px solid #ececec' : 'none' })),
+      common: p.common.map((v, i) => ({ icon: icons[i], k: keys[i], v })),
+      cross: [
+        { img: 'assets/p-talk.png', title: 'Hiring Manager Meet & Greet', date: 'Nov 20', href: '#', todo: 'The Meet & Greet' },
+        { img: 'assets/p-alumni.png', title: 'Alumni Panel', date: 'Nov 16', href: 'EventAlumniPanel.dc.html', todo: '' },
       ],
       notes, count: notes.length, draft, hasDraft: !!draft.trim(), addNote: add,
+      notePh: 'Note about ' + first, noteLabel: 'Add a note about ' + p.name,
       onDraft: (e) => this.setState({ draft: e.target.value }),
       onKey: (e) => { if (e.key === 'Enter') add(); },
     };
