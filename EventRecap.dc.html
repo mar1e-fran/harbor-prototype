@@ -45,7 +45,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
       <div class="ns" style="width:366px;margin-right:-24px;overflow-x:auto;scroll-snap-type:x mandatory">
         <div style="display:flex;gap:12px;padding-right:24px;width:max-content;align-items:flex-start">
           <sc-for list="{{ follow }}" as="p" hint-placeholder-count="3">
-            <article style="scroll-snap-align:start;width:324px;box-sizing:border-box;padding:16px;border-radius:16px;background:{{ p.bg }};color:{{ p.fg }};display:flex;flex-direction:column;gap:24px">
+            <article onClick="{{ p.open }}" style="cursor:pointer;scroll-snap-align:start;width:324px;box-sizing:border-box;padding:16px;border-radius:16px;background:{{ p.bg }};color:{{ p.fg }};display:flex;flex-direction:column;gap:24px">
               <div style="display:flex;flex-direction:column;gap:12px">
                 <a href="{{ p.profile }}" style="display:flex;gap:12px;align-items:center;color:inherit">
                   <img src="{{ p.photo }}" alt="" style="width:60px;height:60px;border-radius:999px;object-fit:cover;object-position:{{ p.pos }};display:block;flex-shrink:0">
@@ -167,6 +167,8 @@ class Component extends DCLogic {
       return { ...x, label: on ? 'Going' : 'Register', pressed: on ? 'true' : 'false', bg: on ? '#004256' : '#ffffff', fg: on ? '#ffffff' : '#202124',
         toggle: () => this.setState({ reg: { ...reg, [x.id]: !on } }) };
     });
+    // Tapping anywhere on a follow-up card opens that person's profile; its own links and buttons keep working.
+    follow.forEach((f) => { f.open = (e) => { if (e && e.target && e.target.closest && e.target.closest('a,button,textarea,input')) return; window.location.href = f.profile; }; });
     return { follow, topics, met, cross, toast,
       share: () => { this.setState({ toast: true }); clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: false }), 1800); } };
   }
