@@ -62,6 +62,10 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
                     <sc-for list="{{ p.chips }}" as="c" hint-placeholder-count="3"><span style="background:#fff;border:1px solid #004256;border-radius:999px;padding:3px 10px;font-size:12px;color:#004256;white-space:nowrap">{{ c }}</span></sc-for>
                   </span>
                 </div>
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <span style="font-weight:600;font-size:12px">You talked about</span>
+                  <p style="margin:0;font-size:14px;line-height:20px">{{ p.talked }}</p>
+                </div>
               </div>
               <div style="display:flex;flex-direction:column;gap:10px;align-self:stretch">
                 <a href="{{ p.chat }}" style="height:48px;box-sizing:border-box;border-radius:10px;border:1.5px solid #004256;background:#004256;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;line-height:20px">Message</a>
@@ -142,9 +146,9 @@ class Component extends DCLogic {
     const { reg, toast } = this.state;
     const dark = { fg: '#004256', boat: 'assets/r-boat-dark.svg', line: 'assets/r-line-dark.svg', draftSize: '12px' };
     const follow = [
-      { ...dark, bg: '#8cd69e', who: 'Jordan Newman', role: 'UX Researcher · Target', where: 'In your session · Room 204', photo: 'assets/r-jordan.png', pos: 'center', chips: ['Study HCI', 'Accessibility', 'Startup Panel'], draft: 'Hi Jordan, great meeting you at the career fair! Here’s the case study we talked about. Would love to hear more about the product designer role…', draftSize: '14px', chat: 'Chat.dc.html?p=jordan', profile: 'Crewmate.dc.html?p=jordan' },
-      { bg: '#1f92b4', fg: '#ebfeff', boat: 'assets/r-boat-light.svg', line: 'assets/r-line-light.svg', draftSize: '12px', who: 'Jenna Caldwell', role: 'Senior Graphic Designer · Gucci', where: 'In your session · Room 204', photo: 'assets/r-jenna.png', pos: 'center', chips: ['Luxury Apparel', 'Patterns', 'TikTok Shop'], draft: 'Hi Jenna it was lovely to talk about your project. I’ve looked into it and have a few suggestions, would you mind if we schedule a one on one?', chat: 'Chat.dc.html?p=jenna', profile: 'Crewmate.dc.html?p=jenna' },
-      { ...dark, bg: '#feace8', who: 'Adam Crews', role: 'Recruiter · Google', where: 'In your session · Room 204', photo: 'assets/r-adam.png', pos: '30% center', chips: ['Curious Applicants', 'IOS Slander', 'AI'], draft: 'Curiosity is my strong suit.', chat: 'Chat.dc.html?p=adam', profile: 'Crewmate.dc.html?p=adam' },
+      { ...dark, bg: '#8cd69e', who: 'Jordan Newman', talked: 'Design internships at Target and how research shapes product decisions. Hiring in January, and offered to review your portfolio.', role: 'UX Researcher · Target', where: 'In your session · Room 204', photo: 'assets/r-jordan.png', pos: 'center', chips: ['Study HCI', 'Accessibility', 'Startup Panel'], draft: 'Hi Jordan, great meeting you at the career fair! Here’s the case study we talked about. Would love to hear more about the product designer role…', draftSize: '14px', chat: 'Chat.dc.html?p=jordan', profile: 'Crewmate.dc.html?p=jordan' },
+      { bg: '#1f92b4', fg: '#ebfeff', boat: 'assets/r-boat-light.svg', line: 'assets/r-line-light.svg', draftSize: '12px', who: 'Jenna Caldwell', talked: 'Print campaigns for Gucci and your pattern project. Looking for junior designers and keen to hear your suggestions.', role: 'Senior Graphic Designer · Gucci', where: 'In your session · Room 204', photo: 'assets/r-jenna.png', pos: 'center', chips: ['Luxury Apparel', 'Patterns', 'TikTok Shop'], draft: 'Hi Jenna it was lovely to talk about your project. I’ve looked into it and have a few suggestions, would you mind if we schedule a one on one?', chat: 'Chat.dc.html?p=jenna', profile: 'Crewmate.dc.html?p=jenna' },
+      { ...dark, bg: '#feace8', who: 'Adam Crews', talked: 'Google’s spring internships and what makes a portfolio stand out. Applications open in December.', role: 'Recruiter · Google', where: 'In your session · Room 204', photo: 'assets/r-adam.png', pos: '30% center', chips: ['Curious Applicants', 'IOS Slander', 'AI'], draft: 'Curiosity is my strong suit.', chat: 'Chat.dc.html?p=adam', profile: 'Crewmate.dc.html?p=adam' },
     ];
     const topics = [
       { n: 6, name: 'Career advice', sub: 'Lead with one in-depth case study' },
