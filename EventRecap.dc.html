@@ -65,9 +65,9 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
                 <div style="display:flex;justify-content:space-between;font-size:12px"><span style="font-weight:600">AI-drafted message</span><a href="{{ p.chat }}" style="color:inherit;text-decoration:underline;padding:4px 0 4px 8px">Edit</a></div>
                 <div style="background:#fff;border:1.5px dashed #004256;border-radius:10px;padding:12px;font-size:{{ p.draftSize }};line-height:normal;color:#202124">{{ p.draft }}</div>
               </div>
-              <div style="display:flex;gap:8px">
-                <a href="{{ p.chat }}" style="height:44px;padding:0 16px;border-radius:10px;background:#004256;color:#fff;display:flex;align-items:center;font-weight:600;font-size:14px;line-height:18px">Message</a>
-                <a href="{{ p.profile }}" style="height:44px;box-sizing:border-box;padding:0 16px;border-radius:10px;border:1.5px solid #004256;color:#004256;display:flex;align-items:center;font-weight:600;font-size:14px;line-height:18px">View profile</a>
+              <div style="display:flex;gap:10px;align-self:stretch">
+                <a href="{{ p.chat }}" style="flex:1;height:50px;padding:0 12px;border-radius:12px;background:#004256;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;line-height:20px;white-space:nowrap">Message</a>
+                <a href="{{ p.profile }}" style="flex:1;height:50px;box-sizing:border-box;padding:0 12px;border-radius:12px;border:1.5px solid #004256;color:#004256;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;line-height:20px;white-space:nowrap">View profile</a>
               </div>
             </article>
           </sc-for>
