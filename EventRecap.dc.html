@@ -62,10 +62,10 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
                     <sc-for list="{{ p.chips }}" as="c" hint-placeholder-count="3"><span style="background:#fff;border:1px solid #004256;border-radius:999px;padding:3px 10px;font-size:12px;color:#004256;white-space:nowrap">{{ c }}</span></sc-for>
                   </span>
                 </div>
-                <div style="display:flex;flex-direction:column;gap:6px">
-                  <span style="font-weight:600;font-size:12px">You talked about</span>
+                <a href="{{ p.noteHref }}" style="display:flex;flex-direction:column;gap:6px;color:inherit">
+                  <span style="font-weight:600;font-size:12px;display:flex;justify-content:space-between;align-items:center">You talked about<span style="font-weight:400;text-decoration:underline">See note</span></span>
                   <p style="margin:0;font-size:14px;line-height:20px">{{ p.talked }}</p>
-                </div>
+                </a>
               </div>
               <div style="display:flex;flex-direction:column;gap:10px;align-self:stretch">
                 <a href="{{ p.chat }}" style="height:48px;box-sizing:border-box;border-radius:10px;border:1.5px solid #004256;background:#004256;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;line-height:20px">Message</a>
@@ -170,6 +170,7 @@ class Component extends DCLogic {
         toggle: () => this.setState({ reg: { ...reg, [x.id]: !on } }) };
     });
     // Tapping anywhere on a follow-up card opens that person's profile; its own links and buttons keep working.
+    follow.forEach((f) => { f.noteHref = f.profile + '&note=' + (f.profile.endsWith('jordan') ? 1 : 0); });
     follow.forEach((f) => { f.open = (e) => { if (e && e.target && e.target.closest && e.target.closest('a,button,textarea,input')) return; window.location.href = f.profile; }; });
     return { follow, topics, met, cross, toast,
       share: () => { this.setState({ toast: true }); clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: false }), 1800); } };

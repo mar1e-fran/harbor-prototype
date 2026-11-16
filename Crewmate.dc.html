@@ -73,7 +73,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
             </sc-if>
           </label>
           <sc-for list="{{ notes }}" as="n" hint-placeholder-count="3">
-            <div style="padding:12px 0;display:flex;flex-direction:column;gap:4px">
+            <div data-hl="{{ n.hl }}" style="padding:12px;margin:0 -12px;border-radius:10px;background:{{ n.bg }};transition:background-color 1.2s ease;display:flex;flex-direction:column;gap:4px">
               <p style="margin:0;font-size:16px;line-height:normal">
                 <sc-if value="{{ n.mention }}" hint-placeholder-val="{{ false }}">Met <span style="display:inline-block;background:#26b2dc;border-radius:4px;padding:0 6px;font-weight:600">@{{ who.name }}</span> </sc-if>{{ n.text }}
               </p>
@@ -168,6 +168,10 @@ class Component extends DCLogic {
     let key = 'jordan';
     try { key = new URLSearchParams(window.location.search).get('p') || 'jordan'; } catch (e) {}
     this.key = Component.PEOPLE[key] ? key : 'jordan';
+    // ?note=<n> opens the profile scrolled to that note (index into this person's notes) and highlights it.
+    this.noteHl = -1;
+    try { const n = new URLSearchParams(window.location.search).get('note'); if (n !== null && n !== '') this.noteHl = parseInt(n, 10); } catch (e) {}
+    if (this.noteHl >= 0) setTimeout(() => { const el = document.querySelector('[data-hl="true"]'); if (el) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 400);
     this.state = { draft: '', extra: this.loadNotes(), toast: '' };
   }
   // Notes the user adds are kept in localStorage so they survive leaving to Chat or a reload.
@@ -180,7 +184,7 @@ class Component extends DCLogic {
     const { draft, extra, toast } = this.state;
     const p = Component.PEOPLE[this.key];
     const first = p.name.split(' ')[0];
-    const notes = [...extra, ...p.notes];
+    const notes = [...extra.map((n) => ({ ...n, hl: 'false', bg: 'transparent' })), ...p.notes.map((n, i) => { const on = i === this.noteHl; return { ...n, hl: on ? 'true' : 'false', bg: on ? '#d7f6ff' : 'transparent' }; })];
     const add = () => { const t = draft.trim(); if (!t) return; const next = [{ mention: false, text: t, where: 'Added by you' }, ...extra]; this.setState({ draft: '', extra: next }); this.saveNotes(next); this.flash('Note saved'); };
     const soc = (label, icon) => ({ label, icon, tap: () => this.flash(label + ' opened') });
     const icons = ['assets/p-goals.svg', 'assets/p-interests.svg', 'assets/p-events.svg', 'assets/p-people.svg'];
