@@ -19,8 +19,7 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
     <div style="position:sticky;top:0;z-index:3;height:269px">
       <dc-import name="LiveHeader" tab="overview" wellness-href="{{ wellnessHref }}" hint-size="390px,273px"></dc-import>
     </div>
-    <div style="padding:24px 0;display:flex;flex-direction:column;gap:24px;align-items:center">
-      <dc-import name="SessionHero" variant="current" hint-size="358px,200px"></dc-import>
+    <div style="padding:24px 0;display:flex;flex-direction:column;gap:40px;align-items:center">
       <dc-import name="MoodPicker" selected="{{ mood }}" on-pick="{{ pick }}" hint-size="358px,70px"></dc-import>
       <sc-if value="{{ hasMood }}" hint-placeholder-val="{{ false }}">
         <dc-import name="AnchorCard" kind="{{ recKind }}" hint-size="358px,200px"></dc-import>
