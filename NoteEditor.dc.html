@@ -18,18 +18,23 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
   <sc-if value="{{ isDraft }}" hint-placeholder-val="{{ true }}">
     <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between">
       <div style="display:flex;flex-direction:column;gap:24px;align-items:center">
-        <div style="width:390px;box-sizing:border-box;background:#fafeff;padding:44px 16px 16px;display:flex;align-items:center;justify-content:space-between">
+        <div style="width:390px;box-sizing:border-box;background:#d4e4e8;padding:44px 16px 16px;display:flex;align-items:center;justify-content:space-between">
           <a href="LiveNotes.dc.html" onClick="{{ leave }}" aria-label="Back to notes" style="display:flex;align-items:center;gap:4px;color:#004256">
             <img src="assets/545f3.svg" alt="" style="width:27.5px;height:27.5px">
             <span style="font-size:17.5px">{{ title }}</span>
           </a>
+          <div style="display:flex;gap:12px">
+            <button type="button" onClick="{{ openCamera }}" aria-label="Take a photo" style="border:none;background:none;padding:0;cursor:pointer;display:block"><img src="assets/ne-camera.svg" alt="" width="32.5" height="32.5" style="display:block"></button>
+            <button type="button" onClick="{{ draftRecord }}" aria-label="Record a voice memo" style="border:none;background:none;padding:0;cursor:pointer;display:block"><img src="assets/ne-record.svg" alt="" width="32.85" height="32.5" style="display:block"></button>
+            <button type="button" onClick="{{ pickUpload }}" aria-label="Upload a photo" style="border:none;background:none;padding:0;cursor:pointer;display:block"><img src="assets/ne-upload.svg" alt="" width="32.5" height="32.5" style="display:block"></button>
+          </div>
         </div>
         <sc-if value="{{ hasPhoto }}" hint-placeholder-val="{{ false }}">
           <img src="assets/5014d.webp" alt="Photo from the Product design panel" style="width:358px;height:477.333px;object-fit:cover;display:block">
         </sc-if>
         <button type="button" onClick="{{ startEditing }}" style="width:390px;box-sizing:border-box;padding:0 16px;border:none;background:none;text-align:left;cursor:text;font:inherit;font-size:{{ draftSize }};line-height:1.45;white-space:pre-wrap;color:{{ draftColor }}">{{ draftText }}</button>
       </div>
-      <div style="width:390px;box-sizing:border-box;background:#fafeff;border-top:1px solid #e2eef1;padding:12px 16px 40px;display:flex;align-items:center;justify-content:space-between">
+      <div style="width:390px;box-sizing:border-box;background:#d4e4e8;padding:12px 16px 40px;display:flex;align-items:center;justify-content:space-between">
         <button type="button" aria-label="Previous tab" style="border:none;background:none;padding:0;cursor:pointer;display:block"><img src="assets/763a2.svg" alt="" style="width:22px;height:22px;display:block"></button>
         <div style="width:134px;display:flex;flex-direction:column;align-items:center;gap:4px;color:#004256">
           <span style="display:flex;align-items:center;gap:7px"><img src="assets/76f77.svg" alt="" style="width:24px;height:24px"><span style="font-weight:600;font-size:16px;white-space:nowrap">{{ title }}</span></span>
@@ -254,6 +259,7 @@ class Component extends DCLogic {
       pauseLabel: rec === 'paused' ? 'Resume recording' : 'Pause recording', clock: fmt(secs),
       wave: WAVE.map((h, i) => ({ h: h + 'px', d: (i * 0.09).toFixed(2) + 's' })), waveClass: rec === 'rec' ? 'rec-wave' : '',
       memos, hasMemos: memos.length > 0,
+      draftRecord: () => { this.setState({ step: 'write', rec: 'rec', secs: 0, menu: false }); this.startTick(); },
       record: () => { this.setState({ rec: 'rec', secs: 0, menu: false }); this.startTick(); },
       togglePause: () => { if (rec === 'paused') { this.setState({ rec: 'rec' }); this.startTick(); } else { clearInterval(this._tick); this.setState({ rec: 'paused' }); } },
       stop: () => { clearInterval(this._tick); this.edit({ rec: 'idle', memos: [...memos, 'Voice memo · ' + fmt(secs)], secs: 0 }); },

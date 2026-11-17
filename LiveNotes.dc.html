@@ -20,10 +20,49 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
       <dc-import name="LiveHeader" tab="notes" notes-href="{{ selfHref }}" hint-size="390px,273px"></dc-import>
     </div>
     <div style="padding:24px 16px 24px;display:flex;flex-direction:column;gap:24px">
-      <a href="NoteEditor.dc.html" onClick="{{ newEntry }}" aria-label="New entry" style="display:flex;flex-direction:column;padding:14px;border:2px solid #1f92b4;border-radius:16px;background:#ebfeff;box-sizing:border-box">
-        <span style="font-weight:600;font-size:12px;color:#004256">New entry</span>
-        <span style="height:150px;box-sizing:border-box;padding:10px 0;font-size:14px;line-height:normal;color:#80a0aa">Drop a quick entry… who, company, what to remember</span>
-      </a>
+      <div style="display:flex;flex-direction:column;padding:14px;border:2px solid #1f92b4;border-radius:16px;background:#ebfeff;box-sizing:border-box">
+        <a href="NoteEditor.dc.html" onClick="{{ newEntry }}" aria-label="New entry" style="display:flex;flex-direction:column">
+          <span style="font-weight:600;font-size:12px;color:#004256">New entry</span>
+          <span style="height:150px;box-sizing:border-box;padding:10px 0;font-size:14px;line-height:normal;color:#80a0aa">Drop a quick entry… who, company, what to remember</span>
+        </a>
+        <div style="height:36px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;padding:6px 12px;border-radius:8px;background:#004256">
+          <div style="display:flex;align-items:center;gap:20px">
+            <a href="NoteEditorCrop.dc.html" aria-label="Upload a photo" style="display:flex"><img src="assets/nt-upload.svg" alt="" width="20" height="20" style="display:block"></a>
+            <a href="NoteEditorCamera.dc.html" aria-label="Take a photo" style="display:flex"><img src="assets/nt-camera.svg" alt="" width="20" height="17.69" style="display:block"></a>
+          </div>
+          <sc-if value="{{ recOn }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;align-items:center;gap:12px">
+              <span role="timer" aria-label="{{ recLabel }}" style="width:34px;text-align:right;font-size:12px;color:#80fdff;font-variant-numeric:tabular-nums">{{ recTime }}</span>
+              <div aria-hidden="true" style="display:flex;align-items:center;gap:3px;height:20px;padding-left:2px">
+                <sc-for list="{{ bars }}" as="h" hint-placeholder-count="10">
+                  <span class="{{ barClass }}" style="width:3px;height:{{ h.h }}px;border-radius:2px;background:#fafeff;animation-delay:{{ h.d }}s"></span>
+                </sc-for>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <button type="button" onClick="{{ togglePause }}" aria-label="{{ pauseLabel }}" style="width:24px;height:24px;border:none;border-radius:18px;background:#d4e4e8;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer">
+                  <sc-if value="{{ recPaused }}" hint-placeholder-val="{{ false }}"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.2v7.6L9.8 6z" fill="#004256"/></svg></sc-if>
+                  <sc-if value="{{ recRunning }}" hint-placeholder-val="{{ true }}"><img src="assets/nt-pause.svg" alt="" width="14" height="14" style="display:block"></sc-if>
+                </button>
+                <button type="button" onClick="{{ stopRec }}" aria-label="Stop recording" style="width:24px;height:24px;border:none;border-radius:18px;background:#d4e4e8;padding:0;display:flex;align-items:center;justify-content:center;cursor:pointer"><img src="assets/nt-stop.svg" alt="" width="12" height="12" style="display:block"></button>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ recOff }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ startRec }}" style="height:24px;border:none;border-radius:18px;background:#d4e4e8;padding:0 10px;display:flex;align-items:center;gap:6px;cursor:pointer;font-family:Poppins,sans-serif;font-size:12px;color:#004256">
+              <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#004256" stroke-width="2.4" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Record
+            </button>
+          </sc-if>
+        </div>
+      </div>
+      <section style="display:flex;flex-direction:column;gap:12px">
+        <h2 style="margin:0;font-weight:600;font-size:14px;line-height:18px;color:#004256">Gallery</h2>
+        <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px">
+          <a href="NoteEditorCamera.dc.html" aria-label="Add photo" style="height:64px;display:block"><img src="assets/e0b60.svg" alt="" style="width:100%;height:64px;display:block"></a>
+          <sc-for list="{{ photos }}" as="p" hint-placeholder-count="3">
+            <span style="position:relative;display:block;height:64px;box-sizing:border-box;border:1.5px solid #1f92b4;border-radius:8px;overflow:hidden"><img src="{{ p.src }}" alt="" style="position:absolute;left:{{ p.l }};top:{{ p.t }};width:{{ p.w }};height:{{ p.h }};max-width:none;object-fit:cover;display:block"></span>
+          </sc-for>
+        </div>
+      </section>
       <section style="display:flex;flex-direction:column;gap:12px;align-items:center">
         <div style="width:358px;display:flex;align-items:center;justify-content:space-between;color:#004256">
           <h2 style="margin:0;font-weight:600;font-size:14px;line-height:18px">Recent entries</h2>
@@ -36,15 +75,6 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
         </div>
         <a href="LogbookNotes.dc.html" style="font-size:12px;text-decoration:underline;color:#004256">View all</a>
       </section>
-      <section style="display:flex;flex-direction:column;gap:12px">
-        <h2 style="margin:0;font-weight:600;font-size:14px;line-height:18px;color:#004256">Gallery</h2>
-        <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:8px">
-          <a href="NoteEditorCamera.dc.html" aria-label="Add photo" style="height:64px;display:block"><img src="assets/e0b60.svg" alt="" style="width:100%;height:64px;display:block"></a>
-          <sc-for list="{{ photos }}" as="p" hint-placeholder-count="3">
-            <img src="{{ p }}" alt="" style="width:100%;height:64px;box-sizing:border-box;border:1.5px solid #1f92b4;border-radius:8px;object-fit:cover;display:block">
-          </sc-for>
-        </div>
-      </section>
     </div>
   </div>
   <div style="position:absolute;left:0;bottom:0;width:390px;height:78px">
@@ -54,9 +84,9 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"withNew": {"editor": "boolean", "default": false}, "$preview": {"width": 390, "height": 844}}'>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { saved: [] }; this._load = () => this.load(); }
-  componentDidMount() { this.load(); try { window.addEventListener('harbor-notes', this._load); window.addEventListener('storage', this._load); } catch (e) {} }
-  componentWillUnmount() { try { window.removeEventListener('harbor-notes', this._load); window.removeEventListener('storage', this._load); } catch (e) {} }
+  constructor(props) { super(props); this.state = { saved: [], rec: 'on', secs: 724 }; this._load = () => this.load(); }
+  componentDidMount() { this._tick = setInterval(() => { if (this.state.rec === 'on') this.setState({ secs: this.state.secs + 1 }); }, 1000); this.load(); try { window.addEventListener('harbor-notes', this._load); window.addEventListener('storage', this._load); } catch (e) {} }
+  componentWillUnmount() { clearInterval(this._tick); try { window.removeEventListener('harbor-notes', this._load); window.removeEventListener('storage', this._load); } catch (e) {} }
   load() { let l = []; try { l = JSON.parse(window.localStorage.getItem('harbor.notes') || '[]'); } catch (e) {} this.setState({ saved: Array.isArray(l) ? l : [] }); }
   renderVals() {
     const withNew = !!this.props.withNew;
@@ -72,12 +102,24 @@ class Component extends DCLogic {
       { kind: 'followup', title: 'Jordan N. · UX Researcher, Target', time: '1:35 PM', body: 'Follow up: Ask about how to be a curious candidate. Send portfolio link.', meta: 'Transcribed · Coffee Talk · Room 107' },
     ];
     const fresh = { kind: 'photo', title: 'Product design photo', time: '2:23 PM', body: '', meta: 'Photo Grab · Product design panel · Room 204', href: 'NoteEditorTitled.dc.html' };
-    const gallery = ['assets/eb0b1.webp', 'assets/b1505.webp', 'assets/47b4a.webp'];
+    const full = (src) => ({ src, l: '0', t: '0', w: '100%', h: '100%' });
+    // Crops match the Figma gallery tiles.
+    const gallery = [full('assets/eb0b1.webp'), { src: 'assets/b1505.webp', l: '-16.56%', t: '-5.75%', w: '120.67%', h: '111.5%' }, { src: 'assets/47b4a.webp', l: '-16.98%', t: '-25.23%', w: '137.05%', h: '149.64%' }];
+    const rec = this.state.rec, secs = this.state.secs;
+    const mm = Math.floor(secs / 60), ss = String(secs % 60).padStart(2, '0');
+    const bars = [6, 12, 18, 10, 16, 8, 14, 20, 10, 6].map((h, i) => ({ h, d: (i % 5) * -0.18 }));
     return {
+      recOn: rec !== 'off', recOff: rec === 'off', recPaused: rec === 'paused', recRunning: rec === 'on',
+      recTime: mm + ':' + ss, recLabel: (rec === 'paused' ? 'Paused at ' : 'Recording ') + mm + ' minutes ' + (secs % 60) + ' seconds',
+      bars, barClass: rec === 'on' ? 'rec-wave' : '',
+      pauseLabel: rec === 'paused' ? 'Resume recording' : 'Pause recording',
+      togglePause: () => this.setState({ rec: rec === 'paused' ? 'on' : 'paused' }),
+      stopRec: () => this.setState({ rec: 'off' }),
+      startRec: () => this.setState({ rec: 'on', secs: 0 }),
       entries: [...mine, ...(withNew ? [fresh, ...base] : base)],
       total: ((withNew ? 18 : 17) + mine.length) + ' total',
       newEntry: () => { try { window.localStorage.removeItem('harbor.notes.open'); } catch (e) {} },
-      photos: withNew ? ['assets/5014d.webp', ...gallery] : gallery,
+      photos: withNew ? [full('assets/5014d.webp'), ...gallery] : gallery,
       selfHref: withNew ? 'LiveNotesNew.dc.html' : 'LiveNotes.dc.html',
     };
   }
