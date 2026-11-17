@@ -17,17 +17,34 @@ body{margin:0}a{color:#004256;text-decoration:none}a:hover{color:#166a83}.ns{scr
 <section aria-labelledby="cs-title" style="width:362px;display:flex;flex-direction:column;gap:12px;font-family:Poppins,sans-serif;color:#004256">
   <div style="height:18px;display:flex;align-items:center;justify-content:space-between">
     <h2 id="cs-title" style="margin:0;font-weight:600;font-size:14px;line-height:18px;color:#004256">Conversation starters</h2>
-    <button type="button" onClick="{{ openAll }}" aria-haspopup="dialog" style="border:none;background:none;padding:0;cursor:pointer;font-family:Poppins,sans-serif;font-size:12px;line-height:18px;color:#004256;text-decoration:underline">See all</button>
+    <button type="button" onClick="{{ openAll }}" aria-haspopup="dialog" style="border:none;background:none;padding:0;cursor:pointer;font-family:Poppins,sans-serif;font-size:12px;line-height:18px;color:#004256;text-decoration:underline">View more</button>
   </div>
   <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));column-gap:16px;row-gap:17px">
-    <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="5">
-      <button type="button" onClick="{{ t.pick }}" aria-haspopup="dialog" style="height:100px;box-sizing:border-box;border:none;border-radius:8px;background:{{ t.bg }};cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 16px;font-family:Poppins,sans-serif;font-weight:600;font-size:14px;line-height:18px;color:#fff;text-align:center;white-space:pre-line">{{ t.label }}</button>
-    </sc-for>
-    <button type="button" onClick="{{ openAll }}" aria-haspopup="dialog" style="height:100px;box-sizing:border-box;border:1.5px solid #004256;border-radius:8px;background:#fafeff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:Poppins,sans-serif;font-weight:600;font-size:14px;line-height:18px;color:#004256;text-decoration:underline">See more</button>
+    <button type="button" onClick="{{ pickWork }}" aria-haspopup="dialog" style="position:relative;overflow:hidden;height:100px;box-sizing:border-box;border:none;border-radius:8px;background:#1f92b4;cursor:pointer;padding:0;font-family:Poppins,sans-serif;font-weight:600;font-size:14px;line-height:18px;color:#fff;text-align:center">
+      <img alt="" src="assets/cs-work-wave.svg" style="position:absolute;left:-42px;top:78px;width:221px;height:24.24px;max-width:none;pointer-events:none">
+      <img alt="" src="assets/cs-work-boat.svg" style="position:absolute;left:63.1px;top:6.54px;width:79.04px;height:90.4px;max-width:none;pointer-events:none;transform:rotate(5.43deg)">
+      <img alt="" src="assets/cs-work-wave2.svg" style="position:absolute;left:-8px;top:84px;width:223px;height:28px;max-width:none;pointer-events:none">
+      <span style="position:relative;display:block;padding:0 12px">Workplace<br>Environment</span>
+    </button>
+    <button type="button" onClick="{{ pickInterview }}" aria-haspopup="dialog" style="position:relative;overflow:hidden;height:100px;box-sizing:border-box;border:none;border-radius:8px;background:#fe8ee0;cursor:pointer;padding:0;font-family:Poppins,sans-serif;font-weight:600;font-size:14px;line-height:18px;color:#fff;text-align:center">
+      <img alt="" src="assets/cs-int-a.svg" style="position:absolute;left:111px;top:14px;width:85px;height:102px;max-width:none;pointer-events:none">
+      <img alt="" src="assets/cs-int-b.svg" style="position:absolute;left:-18.66px;top:21.68px;width:101.99px;height:116.69px;max-width:none;pointer-events:none;transform:rotate(-150deg)">
+      <img alt="" src="assets/cs-int-c.svg" style="position:absolute;left:54px;top:29px;width:87px;height:84px;max-width:none;pointer-events:none">
+      <span style="position:relative;display:block;padding:0 12px">Interview Tips</span>
+    </button>
+    <button type="button" onClick="{{ pickPitch }}" aria-haspopup="dialog" style="position:relative;overflow:hidden;height:100px;box-sizing:border-box;border:none;border-radius:8px;background:#e2a200;cursor:pointer;padding:0;font-family:Poppins,sans-serif;font-weight:600;font-size:14px;line-height:18px;color:#fff;text-align:center">
+      <img alt="" src="assets/cs-pitch.svg" style="position:absolute;left:0px;top:7px;width:173px;height:98.57px;max-width:none;pointer-events:none">
+      <span style="position:relative;display:block;padding:0 12px">Pitch Yourself</span>
+    </button>
+    <button type="button" onClick="{{ pickCulture }}" aria-haspopup="dialog" style="position:relative;overflow:hidden;height:100px;box-sizing:border-box;border:none;border-radius:8px;background:#298d60;cursor:pointer;padding:0;font-family:Poppins,sans-serif;font-weight:600;font-size:14px;line-height:18px;color:#fff;text-align:center">
+      <img alt="" src="assets/cs-cult-a.svg" style="position:absolute;left:9.14px;top:5px;width:57.72px;height:91.87px;max-width:none;pointer-events:none">
+      <img alt="" src="assets/cs-cult-b.svg" style="position:absolute;left:81px;top:27px;width:84.42px;height:70px;max-width:none;pointer-events:none">
+      <span style="position:relative;display:block;padding:0 12px">Company<br>Culture</span>
+    </button>
   </div>
 </section>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"onOpen": {"editor": null}, "$preview": {"width": 362, "height": 364}}'>
+<script type="text/x-dc" data-dc-script data-props='{"onOpen": {"editor": null}, "$preview": {"width": 362, "height": 247}}'>
 class Component extends DCLogic {
   renderVals() {
     const CATS = [
@@ -53,7 +70,7 @@ class Component extends DCLogic {
         'What’s the strangest thing in your design toolkit?'] },
     ];
     const open = (id) => () => { if (typeof this.props.onOpen === 'function') this.props.onOpen(id); };
-    return { tiles: CATS.map((c) => ({ ...c, pick: open(c.id) })), openAll: open('all') };
+    return { pickWork: open('workplace'), pickCulture: open('culture'), pickInterview: open('interview'), pickPitch: open('pitch'), openAll: open('all') };
   }
 }
 </script>
